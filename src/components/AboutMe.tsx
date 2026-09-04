@@ -34,10 +34,10 @@ const ScrollWord: React.FC<ScrollWordProps> = ({ children, progress, range, isAc
 };
 
 const RAW_PARAGRAPHS = [
-  "I come from West Bengal, a land bordered by the Himalayas in the north and the Bay of Bengal in the south, cradled by fertile river silts where food is not merely sustenance—it is language, season, and sentiment.",
-  "My cooking is rooted in what I grew up eating: the crackle of nigella seeds in golden mustard oil on rainy July afternoons, the scent of seasonal Gobindobhog rice steaming on brass plates, the quiet genius of my grandmother’s kitchen diaries where no peel, stem, or seed was ever wasted.",
-  "Living outside India, I found myself constantly navigating a familiar frustration. Whenever people spoke of “Indian food,” the conversation inevitably condensed into butter chicken, garlic naan, samosas, and biryani. While those have their rightful place in celebratory dining, they are only a tiny fraction of what travelled—not the vast, nuanced reality of what billions eat daily across our micro-regions.",
-  "Travel has broadened my worldview, but home is the anchor that holds my palate true. Pichhutaaney is my love letter to that anchor—an intimate space where you are invited not just to taste dishes, but to hear the personal histories, women’s kitchen notebooks, and hyper-regional terroirs that gave them life.",
+  "I come from West Bengal, where food was never merely sustenance—it was language, season, memory, and sentiment.",
+  "I do not cook from rigid formulas. I cook from raw instincts: the sizzle of mustard oil heated to its golden smoking point, the intuitive pinch of spice, the rhythm of a simmering hearth, and the wisdom of women who cooked purely by feel.",
+  "My palate has been shaped by wanderlust—by all the places I have lived in, the landscapes I have traveled through, and the diverse tables where I broke bread with strangers who became friends.",
+  "Travel has expanded my worldview, but home remains the emotional anchor that holds my cooking true. Pichhutaaney is my tribute to that anchor—an intimate space where intuition, travel-shaped recipes, and the pull of home gather around one shared table.",
 ];
 
 export const AboutMe: React.FC = () => {
@@ -59,20 +59,20 @@ export const AboutMe: React.FC = () => {
   const pillars = [
     {
       number: '01',
-      title: 'Hyper-Regional',
-      desc: 'Uncompromising celebration of micro-climates, soil varieties, and community heritage.',
+      title: 'Instinct & Feel',
+      desc: 'Cooking by intuition, aroma, and rhythm rather than standardized or rigid rules.',
       isDark: false,
     },
     {
       number: '02',
-      title: 'Kitchen Diaries',
-      desc: 'Hand-penned techniques, grandmotherly notes, and oral histories brought to table.',
+      title: 'Shaped by Travel',
+      desc: 'Recipes layered with memories, landscapes, and every city and kitchen I’ve called home.',
       isDark: false,
     },
     {
       number: '03',
-      title: 'Intimacy First',
-      desc: 'Small, unhurried tables where guests arrive as strangers and leave as dinner companions.',
+      title: 'The Anchor of Home',
+      desc: 'Intimate, unhurried dinners celebrating the tender pull of where we come from.',
       isDark: true,
     },
   ];
@@ -89,13 +89,13 @@ export const AboutMe: React.FC = () => {
           className="max-w-3xl text-left mb-16"
         >
           <span className="block font-sans text-[10px] tracking-[0.25em] uppercase font-bold text-[#853724] mb-2">
-            THE CULINARY ARCHIVIST
+            THE INTUITIVE COOK & STORYTELLER
           </span>
           <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl font-normal text-[#18181B] tracking-tight">
             About Me, <span className="italic text-[#853724]">Enakshi</span>
           </h2>
           <p className="mt-4 text-base sm:text-lg text-[#52525B] font-light leading-relaxed">
-            A cook, storyteller, and archivist of the quieter, hyper-regional dining traditions of Bengal and beyond.
+            A cook guided by instinct, sensory memory, and recipes shaped by all the places I have lived and traveled to.
           </p>
         </motion.div>
 

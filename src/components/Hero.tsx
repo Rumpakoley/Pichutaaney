@@ -26,24 +26,24 @@ export const Hero: React.FC = () => {
           <div className="md:col-span-7 flex flex-col justify-between text-left">
             <div>
               <h1 className="font-serif text-4xl sm:text-5xl md:text-[46px] lg:text-[62px] xl:text-[72px] leading-[1.05] font-normal text-[#18181B] tracking-tight">
-                Preserving the<br />
-                <span className="italic text-[#853724] font-normal">Legacy</span> of the<br />
-                Regional Table.
+                Cooking from<br />
+                <span className="italic text-[#853724] font-normal">Instinct</span>, Shaped by<br />
+                Memory & Travel.
               </h1>
 
               <p className="mt-4 sm:mt-6 font-serif text-sm sm:text-base lg:text-[17px] leading-[1.65] text-[#3F3F46] font-normal max-w-xl">
-                Indian food is not one cuisine; it is a vast, layered map of memory and soil. From the mustard oils of West Bengal to the coconut groves of the South, I invite you to discover the quieter stories that rarely travel beyond the village kitchen.
+                My food is not bound by rigid formulas. It is an intuitive tapestry of memory, rhythm, and feel—rooted in where I come from in West Bengal, and shaped by all the landscapes, cities, and kitchens I have lived in and traveled to.
               </p>
             </div>
 
-            {/* Geometric Two-Column Balance Sub-grid (Direct match to 1.png) */}
+            {/* Geometric Two-Column Balance Sub-grid */}
             <div className="mt-8 sm:mt-10 lg:mt-12 grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
               <div className="space-y-1.5">
                 <span className="block font-sans text-[11px] tracking-[0.22em] uppercase font-bold text-[#853724]">
                   ENAKSHI
                 </span>
                 <p className="font-sans text-xs sm:text-[13px] text-[#52525B] leading-relaxed font-light">
-                  A cook rooted in heritage, travel-shaped but home-anchored. Curator of kitchen diaries and handwritten legacy.
+                  A cook guided by instinct and rhythm. Shaped by wandering, anchored in memory, and archivist of living kitchen notes.
                 </p>
               </div>
 
@@ -52,7 +52,7 @@ export const Hero: React.FC = () => {
                   THE PHILOSOPHY
                 </span>
                 <p className="font-sans text-xs sm:text-[13px] text-[#52525B] leading-relaxed font-light">
-                  Pichhutaaney—the pull of the roots. Bringing hyper-regional flavors to the contemporary table through intentional dining.
+                  Pichhutaaney—the pull of the roots. Intuitive, travel-inspired dining connecting where we wander with where we come from.
                 </p>
               </div>
             </div>
@@ -70,7 +70,7 @@ export const Hero: React.FC = () => {
                   The Seasonal Waitlist
                 </h2>
                 <p className="mt-2 font-sans text-xs sm:text-[12.5px] text-[#52525B] leading-relaxed font-light">
-                  Our dining experiences are intimate and rare. Be the first to receive invitations to our upcoming regional pop ups and secret table sessions.
+                  Our dining experiences are intimate and unhurried. Be the first to receive invitations to upcoming pop-ups and secret table sessions.
                 </p>
               </div>
 

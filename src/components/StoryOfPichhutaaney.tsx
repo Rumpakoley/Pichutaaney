@@ -55,12 +55,12 @@ const StoryWord: React.FC<StoryWordProps> = ({
 
 const ETYMOLOGY_PARAGRAPHS = [
   "In Bengali, Pichhutan describes that quiet anchor—the backward glance, the lingering scent of mother’s mustard tempering, the subtle gravitational pull of home that stays with you no matter how far across oceans you travel.",
-  "Pichhutaaney was born out of honoring that pull. It is an intentional rejection of the commercialization that reduces subcontinental cooking to three dishes.",
+  "Pichhutaaney honors that pull through food cooked from pure instinct—unfettered by rigid rules, infused with the stories of places lived in and journeys taken.",
 ];
 
 const MANIFESTO_PARAGRAPHS = [
   "Outside India, Indian food is too often treated as a monolith: heavy cream, generic curry powder, and restaurant shortcuts.",
-  "Yet India encompasses over 28 states, distinct agro-climatic belts, and thousands of grandmotherly kitchens. In Bengal alone, a change in wind brings five seasonal variations of a single stew. Pichhutaaney is dedicated to restoring that reverence, course by course.",
+  "My cooking honors the quiet wisdom of instinct. From the river silts of Bengal to every city, mountain, and coast I’ve called home, each dish is a personal translation of wandering, remembering, and returning.",
 ];
 
 export const StoryOfPichhutaaney: React.FC = () => {
@@ -99,7 +99,7 @@ export const StoryOfPichhutaaney: React.FC = () => {
             The Story of <span className="italic text-[#853724]">Pichhutaaney</span>
           </h2>
           <p className="mt-3 text-base sm:text-lg text-[#52525B] font-light leading-relaxed">
-            The tender pull of roots, the geography of memory, and why quieter culinary stories matter.
+            The tender pull of roots, the geography of memory, and intuitive cooking shaped by life and travel.
           </p>
         </div>
 
@@ -166,11 +166,11 @@ export const StoryOfPichhutaaney: React.FC = () => {
             <div className="space-y-6">
               <div className="inline-flex items-center space-x-2 text-[10px] uppercase tracking-[0.25em] text-[#853724] font-sans font-bold">
                 <ScrollText className="w-3.5 h-3.5" />
-                <span>THE REGIONAL MANIFESTO</span>
+                <span>THE COOKING MANIFESTO</span>
               </div>
               
               <blockquote className="font-serif text-2xl sm:text-3xl font-light italic leading-snug text-white">
-                “Preserving culture isn’t just about monuments. It lives in kitchen diaries, in handwritten recipes, in the way something is tempered or plated. That, too, is legacy.”
+                “Food is not a rigid formula. It lives in raw instinct, in the sensory memories of places traveled, and in the warmth of the home hearth.”
               </blockquote>
 
               <div className="space-y-4">
@@ -186,7 +186,7 @@ export const StoryOfPichhutaaney: React.FC = () => {
                         const end = (globalIdx + 1) / manifestoTotal;
 
                         const cleanWord = word.replace(/[^a-zA-Z]/g, '');
-                        const isAccent = ['Bengal', 'Pichhutaaney', '28'].includes(cleanWord);
+                        const isAccent = ['Bengal', 'Pichhutaaney', 'instinct'].includes(cleanWord);
 
                         return (
                           <StoryWord
@@ -209,31 +209,31 @@ export const StoryOfPichhutaaney: React.FC = () => {
             <div className="mt-8 pt-6 border-t border-white/15 flex flex-wrap items-center gap-4 text-xs font-sans text-white/90">
               <span className="flex items-center space-x-1.5">
                 <CheckCircle2 className="w-3.5 h-3.5 text-[#853724]" />
-                <span className="text-white text-[11px] uppercase tracking-wider">Zero Commercial Pastes</span>
+                <span className="text-white text-[11px] uppercase tracking-wider">Cooked by Instinct</span>
               </span>
               <span className="flex items-center space-x-1.5">
                 <CheckCircle2 className="w-3.5 h-3.5 text-[#853724]" />
-                <span className="text-white text-[11px] uppercase tracking-wider">Single-Hearth Handcrafting</span>
+                <span className="text-white text-[11px] uppercase tracking-wider">Shaped by Travel</span>
               </span>
               <span className="flex items-center space-x-1.5">
                 <CheckCircle2 className="w-3.5 h-3.5 text-[#853724]" />
-                <span className="text-white text-[11px] uppercase tracking-wider">Micro-Seasonal Integrity</span>
+                <span className="text-white text-[11px] uppercase tracking-wider">Anchored in Memory</span>
               </span>
             </div>
           </div>
         </div>
 
-        {/* Part 2: Interactive Regional Terroir Explorer */}
+        {/* Part 2: Interactive Travel & Landscape Explorer */}
         <div className="mt-12 bg-white border border-[#E4E4E7] p-6 sm:p-10 text-left">
           <div className="max-w-2xl mb-8">
             <span className="text-[10px] uppercase tracking-[0.25em] font-sans text-[#853724] font-bold block mb-1">
-              THE LIVING LANDSCAPE
+              GEOGRAPHIES OF INSPIRATION
             </span>
             <h3 className="font-serif text-3xl font-normal text-[#18181B]">
-              “Every few hundred kilometers, everything shifts...”
+              “Every journey leaves its imprint on the kitchen...”
             </h3>
             <p className="text-xs sm:text-sm text-[#52525B] mt-1.5 font-sans font-light">
-              Explore how climate, soil, and technique shape diverse regional Indian culinary identities.
+              Explore the landscapes, travels, and home memories that shape Enakshi’s intuitive cooking style.
             </p>
           </div>
 

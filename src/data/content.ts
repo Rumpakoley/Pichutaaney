@@ -1,37 +1,37 @@
 import { MenuCourse, RegionalFlavourPillar } from '../types';
 
 export const MANIFESTO_TEXT = {
-  hook: "Outside India, “Indian food” often gets reduced to naan, butter chicken, dal, and biryani. But that’s just what travelled—not the whole story.",
-  core: "Because there isn’t one Indian cuisine. Every few hundred kilometers, everything shifts—the language, the climate, the soil—and the food follows. Mustard oil in the east, coconut and curry leaves in the south, slow-cooked gravies in the north. It’s vast. It’s layered.",
-  roots: "I come from West Bengal, and my cooking is rooted in what I grew up eating. Travel has shaped me, but home is the anchor. And even that is hyper-regional—tied to memory, to seasons, to a specific kitchen.",
-  purpose: "That’s why spaces like ours matter. To bring these quieter, regional stories to the table. Because if we don’t share them, who will?",
-  legacy: "Preserving culture isn’t just about monuments or heirlooms. It lives in kitchen diaries, in handwritten recipes, in the way something is tempered or plated. That, too, is legacy."
+  hook: "Food to me has never been about rigid regional rules or culinary formulas. I cook from instincts, memory, and the rhythm of the moment.",
+  core: "My recipes are living tapestries shaped by all the places I have lived and traveled to. From the mustard oils of the Bengal delta to the coastal winds, mountain markets, and diverse kitchens I’ve called home—every journey leaves its imprint on my palate.",
+  roots: "I come from West Bengal, and home will always remain my emotional anchor. But travel has broadened my kitchen beyond borders. Pichhutaaney is that gentle, nostalgic pull of where you came from, expressed through meals created with raw intuition and wanderlust.",
+  purpose: "I invite you to an unhurried table where dishes are not standardized recipes, but personal stories—born of wanderlust, intuition, and heartfelt memory.",
+  legacy: "Preserving culture isn’t about museum exhibits. It lives in the way we cook by instinct, in kitchen notebooks, and in the memories we bring back from our travels. That is the soul of Pichhutaaney."
 };
 
 export const REGIONAL_PILLARS: RegionalFlavourPillar[] = [
   {
-    region: "The East & Bengal Delta",
-    anchorIngredient: "Pungent cold-pressed Mustard Oil, Posto & Panch Phoron",
-    description: "Bitter greens to start, poppy seed pastes, mustard fish, and subtle sweet-sour finishes shaped by rivers and silt.",
-    nuance: "Where a single pinch of nigella seed (kalo jeere) transforms freshly picked winter cauliflower into poetry."
+    region: "The Bengal Anchor & River Silts",
+    anchorIngredient: "Mustard Oil, Poppy Seed (Posto) & Nigella",
+    description: "The emotional foundation: pungent cold-pressed mustard oil, silken poppy seed pastes, and fragrant tempered spices that sparked my lifelong love for cooking.",
+    nuance: "The childhood memories and grandmother's kitchen notebooks that anchor my palate."
   },
   {
-    region: "The Coastal South & Western Ghats",
-    anchorIngredient: "Freshly grated Coconut, Curry Leaves & Tamarind",
-    description: "Crisp temperings in cold coconut oil, fermentations, peppery broths, and deep souring kokum and kodampuli.",
-    nuance: "A universe far removed from heavy restaurant creams, centered on lightness, acidity, and aromatic crackle."
+    region: "Coastal Journeys & Southern Wanderings",
+    anchorIngredient: "Fresh Coconut, Curry Leaves & Kokum",
+    description: "Inspirations drawn from living and traveling along coastal belts: fragrant coconut broths, tangy tamarind temperings, and the freshness of sea breezes.",
+    nuance: "Lightness, acidity, and aromatic crackles that found their way into my everyday instincts."
   },
   {
-    region: "The Rugged Deccan & Central Soil",
-    anchorIngredient: "Toasted Sesame, Peanuts, Black Pepper & Dried Goda Masalas",
-    description: "Fiery dry gravies, pearl millet flatbreads, smoked garlic, and rich earthiness born of dry climates and endurance.",
-    nuance: "Hearty, unpretentious cooking celebrating rustic grains and dry-roasted spice craftsmanship."
+    region: "Wanderings through Mountain & Plateau Terroirs",
+    anchorIngredient: "Slow-reduced Stocks, Himalayan Spices & Roasted Seeds",
+    description: "Memories of misty mountain kitchens, rustic hearths, and the warmth of slow simmered broths shared with strangers on long travels.",
+    nuance: "Hearty, unpretentious cooking that taught me patience and the power of simple ingredients."
   },
   {
-    region: "The Valleys & Northern Terroirs",
-    anchorIngredient: "Mustard Greens, Fennel, Asafoetida & Slow-reduced Stocks",
-    description: "Rich layered doughs, slow dum-cooked broths, wild mountain herbs, and distinct warming brass-pot stews.",
-    nuance: "Layered regional histories spanning Himalayan valleys, Awadh court kitchens, and rustic village hearths."
+    region: "Global Migrations & Cross-Cultural Kitchens",
+    anchorIngredient: "Heirloom Produce, Contemporary Ferments & Wild Aromatics",
+    description: "Living across different cities abroad and weaving unexpected local seasonal harvests into traditional flavor memories.",
+    nuance: "Where intuition meets wanderlust—creating soulful dishes that belong to a traveler's heart."
   }
 ];
 
@@ -41,15 +41,15 @@ export const SAMPLE_SEASONAL_MENU: MenuCourse[] = [
     courseTitle: "The Awakening Bite",
     bengaliName: "Aam-Kasundi Shonket",
     description: "Crisp seasonal heirloom cucumber and green raw mango infused with sharp artisanal stone-ground mustard relish (kasundi) and toasted nigella crisps.",
-    heirloomElement: "The palate opener: Traditional Bengali meals honor the sequence of tastes, beginning with subtle bitter or sharp notes to awaken digestion.",
+    heirloomElement: "Cooked from instinct: awakening the palate with refreshing sharpness and childhood summer memories.",
     pairingNote: "Infused coriander water & roasted cumin spritz"
   },
   {
     courseNumber: "02",
     courseTitle: "The Hearth & Soil",
     bengaliName: "Posto Bora & Sheuli Phul Bhaja",
-    description: "Silken white poppy seeds ground on a traditional shil-nora stone, pan-crisped in cold-pressed mustard oil with tender night-flowering jasmine greens and spiced dal fritters.",
-    heirloomElement: "From grandmother's afternoon kitchen diary: Posto (poppy seed) is the serene heart of rural Rarh Bengal cooking.",
+    description: "Silken white poppy seeds ground on a traditional stone, pan-crisped in cold-pressed mustard oil with tender seasonal greens and spiced dal fritters.",
+    heirloomElement: "A tribute to my grandmother’s kitchen notes and the comforting textures of Rarh Bengal.",
     pairingNote: "Darjeeling first-flush chilled tea with citrus peel"
   },
   {
@@ -57,7 +57,7 @@ export const SAMPLE_SEASONAL_MENU: MenuCourse[] = [
     courseTitle: "The Gentle Coconut Tide",
     bengaliName: "Chhanar Paturi / Golda Chingri",
     description: "Fresh hand-split cottage paneer or river prawns marinated in grated fresh coconut, yellow mustard, and green bird's-eye chilies, wrapped in charred banana leaves and slow-steamed.",
-    heirloomElement: "The art of 'Paturi'—cooking within fragrant green banana leaves seals moisture and imparts an unmistakable smoky, verdant perfume.",
+    heirloomElement: "The art of 'Paturi'—steaming in fragrant banana leaves, a technique carried through all my coastal travels.",
     pairingNote: "Smoked green cardamom and tender coconut water"
   },
   {
@@ -65,7 +65,7 @@ export const SAMPLE_SEASONAL_MENU: MenuCourse[] = [
     courseTitle: "The Scented Anchor",
     bengaliName: "Gobindobhog Rice & Niramish Dalna",
     description: "Short-grain heirloom Gobindobhog rice scented with aromatic cow ghee, accompanied by slow-cooked baby potatoes, pointed gourd, and ginger-cumin broth tempered with panch phoron.",
-    heirloomElement: "Gobindobhog rice is inherently aromatic—sweet and buttery—traditionally offered in Bengal temples and reserved for revered family gatherings.",
+    heirloomElement: "Gobindobhog rice is buttery and inherently fragrant—the soul of family feasts and nostalgic homecomings.",
     pairingNote: "Crisp bitter gourd chips & charred sweet lime"
   },
   {
@@ -73,7 +73,7 @@ export const SAMPLE_SEASONAL_MENU: MenuCourse[] = [
     courseTitle: "The Transition of Sunlight",
     bengaliName: "Aamsotto-Khejur Chutney & Papad",
     description: "Sun-dried mango pulp (aamsotto) stewed gently with Medjool dates, ginger juliennes, and roasted five-spice dust, served with crisp lentil papad.",
-    heirloomElement: "The ceremonial palate cleanser before dessert—sweet, tangy, and deeply nostalgic of Kolkata rooftop drying trays.",
+    heirloomElement: "A sweet-tart palate transition reminiscent of rooftop jars drying in the afternoon sun.",
     pairingNote: "Light sparkling cider or mineral soda"
   },
   {
@@ -81,7 +81,7 @@ export const SAMPLE_SEASONAL_MENU: MenuCourse[] = [
     courseTitle: "The Winter Gold Epilogue",
     bengaliName: "Nolen Gurer Bhapa Doi",
     description: "Velvety steamed hung yogurt gently sweetened with wild date-palm jaggery (nolen gur) harvested at dawn, topped with crushed pistachio dust.",
-    heirloomElement: "Date-palm jaggery is harvested only in winter months from Bengal's date palms—earthy, butterscotch-like, and ephemeral.",
+    heirloomElement: "Date-palm jaggery is an ephemeral winter gift—warm, butterscotch-scented, and deeply comforting.",
     pairingNote: "Spiced cinnamon-ginger kahwa infusion"
   }
 ];
@@ -90,27 +90,27 @@ export const KITCHEN_DIARY_SNIPPETS = [
   {
     season: "Hemanta to Sheet (Early Winter)",
     title: "The First Tap of the Date Palm",
-    excerpt: "Before the sun cuts through the Bengal morning mist, the 'shiuli' climbers descend from tall date palm trunks with terracotta pots filled with fresh sap. Cooking with fresh nolen gur is not just a technique; it is a brief, tender window of time.",
+    excerpt: "Before the sun cuts through the morning mist, the 'shiuli' climbers descend with terracotta pots filled with fresh date-palm sap. Cooking with fresh nolen gur is not about recipes; it’s an intuitive, tender window of time.",
     note: "Recipe #42, Hand-penned in Ma’s 1984 red cloth diary."
   },
   {
     season: "Barsha (The Monsoons)",
     title: "The Sound of Sputtering Mustard Oil",
-    excerpt: "When the sky turns slate-grey and the rain lashes against the wooden shutters, the kitchen smells of pungent golden mustard oil heating to smoke point. A handful of kalo jeere (nigella) goes in with green chilies. The sound is an immediate comfort.",
-    note: "Memory of Nadia district, monsoon afternoons."
+    excerpt: "When the sky turns slate-grey and the rain lashes against the shutters, the kitchen smells of pungent golden mustard oil heating to smoke point. A pinch of kalo jeere (nigella) and green chilies. The rhythm is entirely by instinct.",
+    note: "Memory of Nadia district & rainy travel afternoons."
   },
   {
     season: "Grishma (Mid-Summer)",
-    title: "The Wisdom of Bitters",
-    excerpt: "In the dry heat, our meals never began with rich curries. They began with 'shukto'—a delicate simmer of bitter gourd, green banana, drumstick, and sweet potato with wild celery seeds (radhuni). It cools the blood and teaches patience.",
-    note: "The sacred order of a traditional Bengali course."
+    title: "The Wisdom of Bitters & Travel Notes",
+    excerpt: "In the dry heat, meals begin with 'shukto'—a cooling, delicate simmer of bitter gourd, green banana, and wild celery seeds. A rhythm of cooking by feel that I carry with me everywhere in the world.",
+    note: "Intuitive notes from Bengal to every city lived in."
   }
 ];
 
 export const FAQ_ITEMS = [
   {
     question: "What is a supper club experience at Pichhutaaney like?",
-    answer: "An intimate, communal gathering of 10 to 14 guests around one table. Rather than a formal restaurant setting, each evening feels like stepping into a warm personal kitchen. Enakshi introduces each regional course, sharing the handwritten kitchen diaries, cultural history, and specific tempering techniques behind what is on your plate."
+    answer: "An intimate, communal gathering of 10 to 14 guests around one table. Rather than a formal restaurant setting, each evening feels like stepping into a warm personal kitchen. Enakshi introduces each course, sharing the travel memories, personal kitchen notes, and intuitive instincts behind each dish."
   },
   {
     question: "How does the waitlist work?",
@@ -118,10 +118,11 @@ export const FAQ_ITEMS = [
   },
   {
     question: "Can dietary preferences and allergies be accommodated?",
-    answer: "Yes. While regional Bengali cooking celebrates diverse river fish and slow-simmered dishes, hyper-regional Indian food possesses an equally vast vegetarian and plant-forward lineage. When booking, please detail your preferences and we curate tailored preparations."
+    answer: "Yes. Cooking by instinct allows fluid adaptation for vegetarian, pescatarian, plant-forward, and gluten-free guests. When booking, please detail your preferences and we curate tailored preparations."
   },
   {
     question: "What formats do you offer for private events and celebrations?",
-    answer: "We curate bespoke in-home dinners, milestone celebrations, brand salon dining, and culinary storytelling circles. Each private event features a custom multi-course tasting menu crafted around your vision and seasonal terroir."
+    answer: "We curate bespoke in-home dinners, milestone celebrations, brand salon dining, and culinary storytelling circles. Each private event features a custom multi-course tasting menu crafted around your story, intuitive flavors, and seasonal inspirations."
   }
 ];
+

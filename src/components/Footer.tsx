@@ -26,11 +26,11 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLedger }) => {
             </div>
 
             <p className="text-xs sm:text-sm text-[#A1A1AA] leading-relaxed max-w-md font-light">
-              A hyper-regional Indian table, communal supper club, and archive of kitchen diaries founded by Enakshi. Rooted in the seasons, silt, and hearths of West Bengal.
+              An intuitive Indian table, communal supper club, and living archive of kitchen memories founded by Enakshi. Cooked by instinct, shaped by travel, and rooted in the warmth of West Bengal.
             </p>
 
             <div className="pt-2 text-xs italic font-serif text-[#853724]">
-              “Preserving culture lives in the way something is tempered or plated. That, too, is legacy.”
+              “Food is not a rigid formula. It lives in instinct, wanderlust, and the warmth of home.”
             </div>
           </div>
 
