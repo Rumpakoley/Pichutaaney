@@ -1,9 +1,84 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { REGIONAL_PILLARS, MANIFESTO_TEXT } from '../data/content';
 import { Feather, Flame, Sparkles, ScrollText, CheckCircle2, ChevronRight } from 'lucide-react';
+import { motion, useScroll, useTransform, MotionValue } from 'motion/react';
+
+interface StoryWordProps {
+  children: React.ReactNode;
+  progress: MotionValue<number>;
+  range: [number, number];
+  theme?: 'light' | 'dark';
+  isAccent?: boolean;
+}
+
+const StoryWord: React.FC<StoryWordProps> = ({
+  children,
+  progress,
+  range,
+  theme = 'light',
+  isAccent = false,
+}) => {
+  const opacity = useTransform(progress, range, [0.18, 1]);
+
+  const lightDefault = 'rgba(24, 24, 27, 0.22)';
+  const lightActive = '#18181B';
+  const lightAccentDefault = 'rgba(133, 55, 36, 0.28)';
+  const lightAccentActive = '#853724';
+
+  const darkDefault = 'rgba(255, 255, 255, 0.22)';
+  const darkActive = '#FFFFFF';
+  const darkAccentDefault = 'rgba(243, 148, 126, 0.3)';
+  const darkAccentActive = '#F3947E';
+
+  const initialColor = theme === 'dark'
+    ? (isAccent ? darkAccentDefault : darkDefault)
+    : (isAccent ? lightAccentDefault : lightDefault);
+
+  const activeColor = theme === 'dark'
+    ? (isAccent ? darkAccentActive : darkActive)
+    : (isAccent ? lightAccentActive : lightActive);
+
+  const color = useTransform(progress, range, [initialColor, activeColor]);
+  const y = useTransform(progress, range, [2.5, 0]);
+
+  return (
+    <motion.span
+      style={{ opacity, color, y }}
+      className={`inline-block mr-[0.28em] select-none md:select-auto ${
+        isAccent ? 'font-medium' : ''
+      }`}
+    >
+      {children}
+    </motion.span>
+  );
+};
+
+const ETYMOLOGY_PARAGRAPHS = [
+  "In Bengali, Pichhutan describes that quiet anchor—the backward glance, the lingering scent of mother’s mustard tempering, the subtle gravitational pull of home that stays with you no matter how far across oceans you travel.",
+  "Pichhutaaney was born out of honoring that pull. It is an intentional rejection of the commercialization that reduces subcontinental cooking to three dishes.",
+];
+
+const MANIFESTO_PARAGRAPHS = [
+  "Outside India, Indian food is too often treated as a monolith: heavy cream, generic curry powder, and restaurant shortcuts.",
+  "Yet India encompasses over 28 states, distinct agro-climatic belts, and thousands of grandmotherly kitchens. In Bengal alone, a change in wind brings five seasonal variations of a single stew. Pichhutaaney is dedicated to restoring that reverence, course by course.",
+];
 
 export const StoryOfPichhutaaney: React.FC = () => {
   const [activePillarIndex, setActivePillarIndex] = useState<number>(0);
+  const part1ContainerRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: part1ContainerRef,
+    offset: ['start 0.85', 'end 0.35'],
+  });
+
+  const etymologyWords = ETYMOLOGY_PARAGRAPHS.map((p) => p.split(' '));
+  const etymologyTotal = etymologyWords.reduce((acc, w) => acc + w.length, 0);
+  let etymologyAcc = 0;
+
+  const manifestoWords = MANIFESTO_PARAGRAPHS.map((p) => p.split(' '));
+  const manifestoTotal = manifestoWords.reduce((acc, w) => acc + w.length, 0);
+  let manifestoAcc = 0;
 
   return (
     <section id="story-of-pichhutaaney" className="py-20 sm:py-28 bg-[#FAFAF9] border-b border-[#E4E4E7] relative overflow-hidden">
@@ -28,36 +103,66 @@ export const StoryOfPichhutaaney: React.FC = () => {
           </p>
         </div>
 
-        {/* Part 1: The Meaning of the Word & The Manifesto */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch mb-16">
+        {/* Part 1: The Meaning of the Word & The Manifesto with Scroll Word Illumination */}
+        <div
+          ref={part1ContainerRef}
+          className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch mb-16"
+        >
           {/* Card 1: Linguistic Meaning */}
-          <div className="lg:col-span-5 bg-white p-8 border border-[#E4E4E7] flex flex-col justify-between text-left">
-            <div className="space-y-4">
+          <div className="lg:col-span-5 bg-white p-8 border border-[#E4E4E7] flex flex-col justify-between text-left shadow-xs">
+            <div className="space-y-6">
               <div className="flex items-center justify-between border-b border-[#E4E4E7] pb-4">
                 <span className="text-[10px] uppercase tracking-[0.2em] text-[#52525B] font-sans font-semibold">
                   BENGALI ETYMOLOGY
                 </span>
                 <span className="font-bengali text-2xl font-medium text-[#853724]">পিছুটান</span>
               </div>
+
               <h3 className="font-serif text-2xl sm:text-3xl font-normal text-[#18181B] leading-snug">
                 “The gentle, irresistible tug toward where you came from.”
               </h3>
-              <p className="text-xs sm:text-sm text-[#52525B] leading-relaxed font-sans font-light">
-                In Bengali, <strong className="font-medium text-[#18181B]">Pichhutan</strong> describes that quiet anchor—the backward glance, the lingering scent of mother’s mustard tempering, the subtle gravitational pull of home that stays with you no matter how far across oceans you travel.
-              </p>
-              <p className="text-xs sm:text-sm text-[#52525B] leading-relaxed font-sans font-light">
-                Pichhutaaney was born out of honoring that pull. It is an intentional rejection of the commercialization that reduces subcontinental cooking to three dishes.
-              </p>
+
+              <div className="space-y-4">
+                {etymologyWords.map((words, pIdx) => {
+                  return (
+                    <p
+                      key={pIdx}
+                      className="flex flex-wrap text-xs sm:text-sm leading-relaxed font-sans font-light"
+                    >
+                      {words.map((word, wIdx) => {
+                        const globalIdx = etymologyAcc++;
+                        const start = globalIdx / etymologyTotal;
+                        const end = (globalIdx + 1) / etymologyTotal;
+
+                        const cleanWord = word.replace(/[^a-zA-Z]/g, '');
+                        const isAccent = ['Pichhutan', 'Pichhutaaney'].includes(cleanWord);
+
+                        return (
+                          <StoryWord
+                            key={`etym-${pIdx}-${wIdx}`}
+                            progress={scrollYProgress}
+                            range={[start, end]}
+                            theme="light"
+                            isAccent={isAccent}
+                          >
+                            {word}
+                          </StoryWord>
+                        );
+                      })}
+                    </p>
+                  );
+                })}
+              </div>
             </div>
 
-            <div className="mt-6 pt-4 border-t border-[#E4E4E7] flex items-center space-x-3 text-xs text-[#52525B]">
-              <Feather className="w-4 h-4 text-[#853724]" />
+            <div className="mt-8 pt-4 border-t border-[#E4E4E7] flex items-center space-x-3 text-xs text-[#52525B]">
+              <Feather className="w-4 h-4 text-[#853724] shrink-0" />
               <span className="font-serif italic text-sm text-[#18181B]">“If we don’t bring these quieter stories to the table, who will?”</span>
             </div>
           </div>
 
           {/* Card 2: The Manifesto */}
-          <div className="lg:col-span-7 bg-[#18181B] text-white p-8 sm:p-10 border border-[#18181B] flex flex-col justify-between text-left">
+          <div className="lg:col-span-7 bg-[#18181B] text-white p-8 sm:p-10 border border-[#18181B] flex flex-col justify-between text-left shadow-md">
             <div className="space-y-6">
               <div className="inline-flex items-center space-x-2 text-[10px] uppercase tracking-[0.25em] text-[#853724] font-sans font-bold">
                 <ScrollText className="w-3.5 h-3.5" />
@@ -68,12 +173,37 @@ export const StoryOfPichhutaaney: React.FC = () => {
                 “Preserving culture isn’t just about monuments. It lives in kitchen diaries, in handwritten recipes, in the way something is tempered or plated. That, too, is legacy.”
               </blockquote>
 
-              <p className="text-xs sm:text-sm text-white/80 leading-relaxed font-sans font-light">
-                Outside India, Indian food is too often treated as a monolith: heavy cream, generic curry powder, and restaurant shortcuts. 
-                <br /><br />
-                Yet India encompasses over 28 states, distinct agro-climatic belts, and thousands of grandmotherly kitchens. 
-                In Bengal alone, a change in wind brings five seasonal variations of a single stew. Pichhutaaney is dedicated to restoring that reverence, course by course.
-              </p>
+              <div className="space-y-4">
+                {manifestoWords.map((words, pIdx) => {
+                  return (
+                    <p
+                      key={pIdx}
+                      className="flex flex-wrap text-xs sm:text-sm leading-relaxed font-sans font-light"
+                    >
+                      {words.map((word, wIdx) => {
+                        const globalIdx = manifestoAcc++;
+                        const start = globalIdx / manifestoTotal;
+                        const end = (globalIdx + 1) / manifestoTotal;
+
+                        const cleanWord = word.replace(/[^a-zA-Z]/g, '');
+                        const isAccent = ['Bengal', 'Pichhutaaney', '28'].includes(cleanWord);
+
+                        return (
+                          <StoryWord
+                            key={`manif-${pIdx}-${wIdx}`}
+                            progress={scrollYProgress}
+                            range={[start, end]}
+                            theme="dark"
+                            isAccent={isAccent}
+                          >
+                            {word}
+                          </StoryWord>
+                        );
+                      })}
+                    </p>
+                  );
+                })}
+              </div>
             </div>
 
             <div className="mt-8 pt-6 border-t border-white/15 flex flex-wrap items-center gap-4 text-xs font-sans text-white/90">
