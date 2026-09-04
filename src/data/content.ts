@@ -35,56 +35,212 @@ export const REGIONAL_PILLARS: RegionalFlavourPillar[] = [
   }
 ];
 
-export const SAMPLE_SEASONAL_MENU: MenuCourse[] = [
+export interface TastingMenuTheme {
+  id: string;
+  title: string;
+  subtitle: string;
+  tag: string;
+  bengaliTitle: string;
+  description: string;
+  imageUrl: string;
+  courses: {
+    courseNumber: string;
+    courseTitle: string;
+    bengaliName: string;
+    description: string;
+    tag?: string;
+    heirloomElement?: string;
+    pairingNote?: string;
+  }[];
+  drinkPairing?: string;
+}
+
+export const CLIENT_MENU_COLLECTION: TastingMenuTheme[] = [
   {
-    courseNumber: "01",
-    courseTitle: "The Awakening Bite",
-    bengaliName: "Aam-Kasundi Shonket",
-    description: "Crisp seasonal heirloom cucumber and green raw mango infused with sharp artisanal stone-ground mustard relish (kasundi) and toasted nigella crisps.",
-    heirloomElement: "Cooked from instinct: awakening the palate with refreshing sharpness and childhood summer memories.",
-    pairingNote: "Infused coriander water & roasted cumin spritz"
+    id: 'calcutta-kiss',
+    title: 'Calcutta Kiss',
+    subtitle: 'Modern intuitive culinary interpretations of Kolkata memories',
+    tag: 'POP-UP MENU • CALCUTTA KISS',
+    bengaliTitle: 'ক্যালকাটা কিস',
+    description: 'An elevated, instinct-led journey that bridges street-food nostalgia, rich dairy notes, and sharp river mustard with global cross-cultural touches.',
+    imageUrl: 'https://res.cloudinary.com/dpdtsaalf/image/upload/v1788550859/WhatsApp_Image_2026-09-05_at_12.50.22_AM_dzhiyz.jpg',
+    courses: [
+      {
+        courseNumber: '01',
+        courseTitle: 'Burrata Ghugni Chaat',
+        bengaliName: 'ঘুঘনি চাট ও বুরাটা',
+        description: 'Creamy burrata layered over street-style yellow pea ghoogni, finished with a gentle drizzle of chili oil.',
+        tag: 'Street Food • Creamy • Spiced',
+        heirloomElement: 'Warm street-side memory elevated with Italian burrata richness.',
+      },
+      {
+        courseNumber: '02',
+        courseTitle: 'Mango & Tamarind Ceviche',
+        bengaliName: 'আম ও তেঁতুল সেভিচে',
+        description: 'Chilled scallops or sweet crisp pear, cured in citrusy mango pulp, balanced with tangy tamarind and mustardy artisanal kashundi.',
+        tag: 'Scallop / Pear Option • Tangy & Mustard',
+        heirloomElement: 'Citrus and green mango acid balance derived from delta summers.',
+      },
+      {
+        courseNumber: '03',
+        courseTitle: 'Gondhoraj Chicken / Paneer',
+        bengaliName: 'গন্ধরাজ চিকেন / পনির',
+        description: 'Fragrant chicken or succulent cottage paneer kissed with Bengal’s beloved king of limes—gondhoraj, served alongside a kashundi-marinated mango salad.',
+        tag: 'Gondhoraj Citrus • Aromatic',
+        heirloomElement: 'The intoxicating floral aroma of fresh Gondhoraj lime leaves.',
+      },
+      {
+        courseNumber: '04',
+        courseTitle: 'Jau Bhaat & Maach / Begun Bhaja',
+        bengaliName: 'জাউ ভাত ও মাছ / বেগুন ভাজা',
+        description: 'Warm comfort rice gruel with spicy miso-flavoured crispy pan-fried fish or charred eggplant, finished with sharp doi-kashundi.',
+        tag: 'Comfort Gruel • Umami Miso • Mustard Yogurt',
+        heirloomElement: 'The childhood staple of sickbeds and stormy afternoons, given savory depth.',
+      },
+      {
+        courseNumber: '05',
+        courseTitle: 'Carrot Halwa with Rasmalai Foam',
+        bengaliName: 'গাজরের হালুয়া ও রসমলাই ফোম',
+        description: 'Rich slow-simmered carrot halwa crowned with light, aerated saffron milk foam and hand-chopped roasted pistachio and almond slivers.',
+        tag: 'Saffron Foam • Warm & Velvety',
+        heirloomElement: 'Classic winter confection married with delicate Bengali rasmalai.',
+      },
+    ],
   },
   {
-    courseNumber: "02",
-    courseTitle: "The Hearth & Soil",
-    bengaliName: "Posto Bora & Sheuli Phul Bhaja",
-    description: "Silken white poppy seeds ground on a traditional stone, pan-crisped in cold-pressed mustard oil with tender seasonal greens and spiced dal fritters.",
-    heirloomElement: "A tribute to my grandmother’s kitchen notes and the comforting textures of Rarh Bengal.",
-    pairingNote: "Darjeeling first-flush chilled tea with citrus peel"
+    id: 'zero-waste-heirloom',
+    title: 'Zero-Waste & Heirloom Notes',
+    subtitle: 'Root-to-stem cooking and vegetable stories from the ancestral pantry',
+    tag: 'TASTING NIGHTS • HEIRLOOM & ZERO-WASTE',
+    bengaliTitle: 'শাকসবজি ও খোসা ভাজা',
+    description: 'A tribute to the frugality and deep care of home kitchens—where peels, stems, and wild greens take center stage and nothing is wasted.',
+    imageUrl: 'https://res.cloudinary.com/dpdtsaalf/image/upload/v1788550859/WhatsApp_Image_2026-09-05_at_12.49.29_AM_f1smhc.jpg',
+    courses: [
+      {
+        courseNumber: '01',
+        courseTitle: 'Neem Begun Chokha with Posto Sauce',
+        bengaliName: 'নিম বেগুন চোখা ও পোস্ত সস',
+        description: 'Fire-roasted eggplant mashed with tender bitter young neem leaves, cushioned in a silken, stone-ground white poppy seed sauce.',
+        tag: 'Bitter & Silken • Posto Backbone',
+        heirloomElement: 'The traditional Ayurvedic bitters that awaken digestion and senses.',
+      },
+      {
+        courseNumber: '02',
+        courseTitle: 'Dhone Pata & Aloor Khosha Chat',
+        bengaliName: 'ধনে পাতা ও আলুর খোসা চাট',
+        description: 'Crispy pan-roasted potato peels tossed with vibrant coriander leaf emulsion, roasted spice rub, and sweet-tart reductions.',
+        tag: 'Zero-Waste • Crispy Peels • Fresh Herbs',
+        heirloomElement: 'Turning humble vegetable skins into an addictive savory delight.',
+      },
+      {
+        courseNumber: '03',
+        courseTitle: 'Enchor & Gola Ruti Taco',
+        bengaliName: 'এঁচোড় ও গোলা রুটি ট্যাকো',
+        description: 'Tender spiced green jackfruit (enchor) slow-braised to a meat-like tenderness, folded inside a traditional Bengali lacy pan crepe (gola ruti) taco.',
+        tag: 'Tree Mutton (Jackfruit) • Lacy Roti',
+        heirloomElement: 'Bengal’s legendary ‘gachh-paatha’ (tree mutton) in a handheld street vessel.',
+      },
+      {
+        courseNumber: '04',
+        courseTitle: 'Miso Glazed Maach / Paneer Bhaja & Lau Ghonto & Bhaat',
+        bengaliName: 'মিসো গ্লেজড মাছ / পনির ভাজা, লাউ ঘণ্ট ও ভাত',
+        description: 'Crispy river fish or paneer glazed with savoury fermented miso, accompanied by slow-simmered delicate bottle gourd with bori lentil dumplings and hot steamed rice.',
+        tag: 'Fermented Umami • Slow Bottle Gourd • Rice',
+        heirloomElement: 'Lau ghonto cooked with tender stem fibers and fragrant cumin tempering.',
+      },
+      {
+        courseNumber: '05',
+        courseTitle: 'Daab Malai Kheer & Malpua',
+        bengaliName: 'ডাব মালাই ক্ষীর ও মালপোয়া',
+        description: 'Silken tender green coconut cream pudding paired with warm, fennel-perfumed golden Bengali malpua pancakes.',
+        tag: 'Tender Coconut • Warm Spiced Malpua',
+        heirloomElement: 'Tender coconut scooped straight from green pods in the delta breeze.',
+      },
+    ],
+    drinkPairing: 'Drink: Gondhoraj Lebu R Ghol (Churned yogurt buttermilk with aromatic Gondhoraj lime)',
   },
   {
-    courseNumber: "03",
-    courseTitle: "The Gentle Coconut Tide",
-    bengaliName: "Chhanar Paturi / Golda Chingri",
-    description: "Fresh hand-split cottage paneer or river prawns marinated in grated fresh coconut, yellow mustard, and green bird's-eye chilies, wrapped in charred banana leaves and slow-steamed.",
-    heirloomElement: "The art of 'Paturi'—steaming in fragrant banana leaves, a technique carried through all my coastal travels.",
-    pairingNote: "Smoked green cardamom and tender coconut water"
+    id: 'heritage-fermentation',
+    title: 'Heritage Nostalgia & Pantaa Bhaat',
+    subtitle: 'Fermented comfort, Anglo-Indian archives, and winter date palm jaggery',
+    tag: 'TASTING NIGHTS • FERMENTATION & MEMORY',
+    bengaliTitle: 'পান্তা ভাত ও স্মৃতির শহর',
+    description: 'An evocative voyage through Kolkata’s colonial culinary archives, ancient rice fermentation techniques, and celebratory jaggery confections.',
+    imageUrl: 'https://res.cloudinary.com/dpdtsaalf/image/upload/v1788550859/WhatsApp_Image_2026-09-05_at_12.49.14_AM_uwvgz4.jpg',
+    courses: [
+      {
+        courseNumber: '01',
+        courseTitle: 'Mango Tamarind Ceviche',
+        bengaliName: 'আম তেঁতুল সেভিচে',
+        description: 'Fresh chilled scallops or crisp autumn pears cured in tangy mango puree, tamarind water, and tempered wild radhuni spices.',
+        tag: 'Scallops / Pears • Tangy Citric Start',
+        heirloomElement: 'The tart edge of raw mangoes and sun-aged tamarind pulp.',
+      },
+      {
+        courseNumber: '02',
+        courseTitle: 'Dirty Brioche with Anglo Indian Vindaloo',
+        bengaliName: 'ব্রায়োশ ও অ্যাংলো ইন্ডিয়ান ভিন্দালু',
+        description: 'Rich butter-toasted brioche soaked in the spicy, vinegar-tinged reduction of historic Anglo-Indian vindaloo (choice of Pork or Wild Forest Mushrooms).',
+        tag: 'Pork / Mushroom Option • Tangy Vinegar Stew',
+        heirloomElement: 'The fiery, vinegar-matured meat stews of Bow Barracks and vintage Calcutta clubs.',
+      },
+      {
+        courseNumber: '03',
+        courseTitle: 'Pantaa Bhaat Feast',
+        bengaliName: 'পান্তা ভাত ও পঞ্চ ব্যঞ্জন',
+        description: 'Overnight naturally fermented probiotic rice served with aloo chokha (potatoes mashed with fried shallots), Aloor khosha bhaja (potato peel fritters), peyaji (crunchy onion fritters), and Kumro Kurkure (spiced pumpkin fry) or Maach bhaja (crisp river fish fry).',
+        tag: 'Overnight Fermented Rice • Fritters Platter',
+        heirloomElement: 'The ancient delta tradition of fermented rice cooling the blood in tropical heat.',
+      },
+      {
+        courseNumber: '04',
+        courseTitle: 'Paati Shapta on Nolen Gur Croutons',
+        bengaliName: 'পাটিসাপটা ও নলেন গুড় ক্রুটন',
+        description: 'Delicate rolled rice crepes stuffed with jaggery-laced coconut shavings, served alongside vanilla ice cream on a bed of toasted Nolen Gur date-palm croutons.',
+        tag: 'Winter Epilogue • Nolen Gur • Cold Ice Cream',
+        heirloomElement: 'Hand-rolled on cast iron during the winter harvest festival (Poush Sankranti).',
+      },
+    ],
+    drinkPairing: 'Signature Drink: Tamarind Kiwi Spritz (Sparkling kiwi nectar with tangy tamarind & Himalayan salt)',
   },
   {
-    courseNumber: "04",
-    courseTitle: "The Scented Anchor",
-    bengaliName: "Gobindobhog Rice & Niramish Dalna",
-    description: "Short-grain heirloom Gobindobhog rice scented with aromatic cow ghee, accompanied by slow-cooked baby potatoes, pointed gourd, and ginger-cumin broth tempered with panch phoron.",
-    heirloomElement: "Gobindobhog rice is buttery and inherently fragrant—the soul of family feasts and nostalgic homecomings.",
-    pairingNote: "Crisp bitter gourd chips & charred sweet lime"
+    id: 'tasting-philosophy',
+    title: 'The Philosophy of Tasting Nights',
+    subtitle: 'An intimate letter on memory, frugality, and cooking with intention',
+    tag: 'ESSAY & NOTE • BY ENAKSHI',
+    bengaliTitle: 'পিছুটানের কথা',
+    description: 'Pichhutaaney is a quiet pull of nostalgia, a gentle tug from everything we leave behind yet carry within us.',
+    imageUrl: 'https://res.cloudinary.com/dpdtsaalf/image/upload/v1788550859/WhatsApp_Image_2026-09-05_at_12.49.39_AM_lq60g7.jpg',
+    courses: [
+      {
+        courseNumber: 'I',
+        courseTitle: 'The Quiet Pull of Nostalgia',
+        bengaliName: 'স্মৃতির টান',
+        description: 'Pichhutaaney is that gentle tug from everything we leave behind yet carry within us across continents and years.',
+      },
+      {
+        courseNumber: 'II',
+        courseTitle: 'Valuing Every Part',
+        bengaliName: 'খোসা ও ডাটা',
+        description: 'Shaped by home kitchens where vegetables weren’t just ingredients, but stories of seasons, of frugality, of care. Peels, stems, and the everyday.',
+      },
+      {
+        courseNumber: 'III',
+        courseTitle: 'Rendition of a Living Meal',
+        bengaliName: 'খাওয়ার ছন্দ',
+        description: 'Layered, balanced, and deeply personal, coming together with intention and an instinct to make the most of what we have.',
+      },
+      {
+        courseNumber: 'IV',
+        courseTitle: 'Remembrance & Quiet Celebration',
+        bengaliName: 'উদযাপন',
+        description: 'At its heart, this menu reflects a way of cooking where every part is valued, nothing is wasted, and food brings us together.',
+      },
+    ],
   },
-  {
-    courseNumber: "05",
-    courseTitle: "The Transition of Sunlight",
-    bengaliName: "Aamsotto-Khejur Chutney & Papad",
-    description: "Sun-dried mango pulp (aamsotto) stewed gently with Medjool dates, ginger juliennes, and roasted five-spice dust, served with crisp lentil papad.",
-    heirloomElement: "A sweet-tart palate transition reminiscent of rooftop jars drying in the afternoon sun.",
-    pairingNote: "Light sparkling cider or mineral soda"
-  },
-  {
-    courseNumber: "06",
-    courseTitle: "The Winter Gold Epilogue",
-    bengaliName: "Nolen Gurer Bhapa Doi",
-    description: "Velvety steamed hung yogurt gently sweetened with wild date-palm jaggery (nolen gur) harvested at dawn, topped with crushed pistachio dust.",
-    heirloomElement: "Date-palm jaggery is an ephemeral winter gift—warm, butterscotch-scented, and deeply comforting.",
-    pairingNote: "Spiced cinnamon-ginger kahwa infusion"
-  }
 ];
+
+export const SAMPLE_SEASONAL_MENU = CLIENT_MENU_COLLECTION[0].courses;
 
 export const KITCHEN_DIARY_SNIPPETS = [
   {
