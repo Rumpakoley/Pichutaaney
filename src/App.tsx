@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
+import { CinematicVideoReel } from './components/CinematicVideoReel';
 import { AboutMe } from './components/AboutMe';
 import { StoryOfPichhutaaney } from './components/StoryOfPichhutaaney';
 import { SupperClubWaitlist } from './components/SupperClubWaitlist';
@@ -147,6 +148,9 @@ export default function App() {
         <main className="flex-1">
           {/* Hero Section */}
           <Hero />
+
+          {/* Cinematic Kitchen Atmosphere Video Reel */}
+          <CinematicVideoReel />
 
           {/* Section 1: About Me */}
           <AboutMe />
