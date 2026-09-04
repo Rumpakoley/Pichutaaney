@@ -1,6 +1,11 @@
 @import "tailwindcss";
 
 @layer base {
+  html, body {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+
   body {
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     background-color: #FAFAF9;
@@ -8,12 +13,16 @@
   }
 
   h1, h2, h3, h4, .font-serif, .font-display {
-    font-family: 'Cormorant Garamond', Georgia, Cambria, serif;
+    font-family: 'Cormorant Garamond', 'Noto Serif Bengali', Georgia, Cambria, serif;
   }
 }
 
 .font-serif-cormorant {
-  font-family: 'Cormorant Garamond', Georgia, Cambria, serif;
+  font-family: 'Cormorant Garamond', 'Noto Serif Bengali', Georgia, Cambria, serif;
+}
+
+.font-bengali {
+  font-family: 'Noto Serif Bengali', 'Cormorant Garamond', Georgia, serif;
 }
 
 .font-sans-body {

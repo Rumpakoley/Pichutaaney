@@ -131,7 +131,7 @@ export const KitchenDiaries: React.FC = () => {
                       <span className={`text-[10px] uppercase tracking-widest font-sans font-bold ${roleColor}`}>
                         {staple.role}
                       </span>
-                      <span className={`font-serif text-xl ${bengaliColor}`}>
+                      <span className={`font-bengali text-xl ${bengaliColor}`}>
                         {staple.bengali}
                       </span>
                     </div>

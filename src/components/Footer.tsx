@@ -20,7 +20,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLedger }) => {
               <span className="font-serif text-3xl font-light text-[#FAFAF9] tracking-tight">
                 Pichhutaaney
               </span>
-              <span className="text-xs font-serif italic text-[#853724] px-2 py-0.5 border border-[#853724]/40 bg-[#853724]/10">
+              <span className="text-xs font-bengali font-medium text-[#853724] px-2 py-0.5 border border-[#853724]/40 bg-[#853724]/10">
                 পিছুটান
               </span>
             </div>

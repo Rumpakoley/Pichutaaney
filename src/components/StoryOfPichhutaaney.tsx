@@ -7,9 +7,11 @@ export const StoryOfPichhutaaney: React.FC = () => {
 
   return (
     <section id="story-of-pichhutaaney" className="py-20 sm:py-28 bg-[#FAFAF9] border-b border-[#E4E4E7] relative overflow-hidden">
-      {/* Subtle organic watermark */}
-      <div className="absolute right-[-20px] top-8 font-serif text-[160px] font-light text-[#18181B]/5 select-none pointer-events-none -z-0">
-        পিছুটান
+      {/* Subtle organic watermark - restrained, properly layered and responsive */}
+      <div className="absolute right-0 top-6 select-none pointer-events-none z-0 overflow-hidden opacity-[0.035] pr-4 sm:pr-8 hidden sm:block">
+        <span className="font-bengali text-7xl md:text-8xl lg:text-[120px] font-normal leading-none text-[#18181B] tracking-normal">
+          পিছুটান
+        </span>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -35,7 +37,7 @@ export const StoryOfPichhutaaney: React.FC = () => {
                 <span className="text-[10px] uppercase tracking-[0.2em] text-[#52525B] font-sans font-semibold">
                   BENGALI ETYMOLOGY
                 </span>
-                <span className="font-serif text-2xl italic text-[#853724]">পিছুটান</span>
+                <span className="font-bengali text-2xl font-medium text-[#853724]">পিছুটান</span>
               </div>
               <h3 className="font-serif text-2xl sm:text-3xl font-normal text-[#18181B] leading-snug">
                 “The gentle, irresistible tug toward where you came from.”

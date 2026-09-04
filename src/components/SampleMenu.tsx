@@ -37,7 +37,7 @@ export const SampleMenu: React.FC = () => {
                     <span className="font-mono text-[11px] font-bold text-[#18181B] bg-[#FAFAF9] px-2.5 py-0.5 border border-[#E4E4E7]">
                       Course {course.courseNumber}
                     </span>
-                    <span className="font-serif italic text-sm font-semibold text-[#853724]">
+                    <span className="font-bengali text-sm font-semibold text-[#853724]">
                       {course.bengaliName}
                     </span>
                   </div>
