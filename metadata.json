@@ -1,0 +1,7 @@
+{
+  "name": "Pichhutaaney",
+  "description": "Regional Indian culinary storytelling, intimate supper clubs, and private dining rooted in West Bengal by Enakshi.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

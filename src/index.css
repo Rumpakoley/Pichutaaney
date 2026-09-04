@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #FAFAF9;
+    color: #18181B;
+  }
+
+  h1, h2, h3, h4, .font-serif, .font-display {
+    font-family: 'Cormorant Garamond', Georgia, Cambria, serif;
+  }
+}
+
+.font-serif-cormorant {
+  font-family: 'Cormorant Garamond', Georgia, Cambria, serif;
+}
+
+.font-sans-body {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Geometric balance styling helpers */
+.bg-terracotta {
+  background-color: #853724;
+}
+
+.text-terracotta {
+  color: #853724;
+}
+
+.border-terracotta {
+  border-color: #853724;
+}
+
+.bg-charcoal {
+  background-color: #18181B;
+}
+
+.border-hairline {
+  border-color: #E4E4E7;
+}
