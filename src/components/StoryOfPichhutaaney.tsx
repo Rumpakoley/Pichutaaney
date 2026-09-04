@@ -7,9 +7,9 @@ export const StoryOfPichhutaaney: React.FC = () => {
 
   return (
     <section id="story-of-pichhutaaney" className="py-20 sm:py-28 bg-[#FAFAF9] border-b border-[#E4E4E7] relative overflow-hidden">
-      {/* Subtle organic watermark - restrained, properly layered and responsive */}
-      <div className="absolute right-0 top-6 select-none pointer-events-none z-0 overflow-hidden opacity-[0.035] pr-4 sm:pr-8 hidden sm:block">
-        <span className="font-bengali text-7xl md:text-8xl lg:text-[120px] font-normal leading-none text-[#18181B] tracking-normal">
+      {/* Organic Bengali Watermark - Full glyph height preserved without clipping */}
+      <div className="absolute right-4 sm:right-8 lg:right-12 top-2 sm:top-4 select-none pointer-events-none z-0 opacity-[0.06]">
+        <span className="font-bengali text-5xl sm:text-7xl md:text-8xl lg:text-[105px] font-normal leading-normal text-[#18181B] tracking-normal inline-block py-2">
           পিছুটান
         </span>
       </div>
