@@ -1,42 +1,60 @@
-import React from 'react';
-import { BookMarked, MapPin, ArrowRight } from 'lucide-react';
-import { motion } from 'motion/react';
+import React, { useRef } from 'react';
+import { BookMarked, MapPin, ArrowRight, Sparkles } from 'lucide-react';
+import { motion, useScroll, useTransform, MotionValue } from 'motion/react';
+
+interface ScrollWordProps {
+  children: React.ReactNode;
+  progress: MotionValue<number>;
+  range: [number, number];
+  isAccent?: boolean;
+}
+
+const ScrollWord: React.FC<ScrollWordProps> = ({ children, progress, range, isAccent }) => {
+  const opacity = useTransform(progress, range, [0.18, 1]);
+  const color = useTransform(
+    progress,
+    range,
+    [
+      isAccent ? 'rgba(133, 55, 36, 0.22)' : 'rgba(24, 24, 27, 0.18)',
+      isAccent ? '#853724' : '#18181B',
+    ]
+  );
+  const y = useTransform(progress, range, [2.5, 0]);
+
+  return (
+    <motion.span
+      style={{ opacity, color, y }}
+      className={`inline-block mr-[0.28em] select-none md:select-auto ${
+        isAccent ? 'font-medium' : ''
+      }`}
+    >
+      {children}
+    </motion.span>
+  );
+};
+
+const RAW_PARAGRAPHS = [
+  "I come from West Bengal, a land bordered by the Himalayas in the north and the Bay of Bengal in the south, cradled by fertile river silts where food is not merely sustenance—it is language, season, and sentiment.",
+  "My cooking is rooted in what I grew up eating: the crackle of nigella seeds in golden mustard oil on rainy July afternoons, the scent of seasonal Gobindobhog rice steaming on brass plates, the quiet genius of my grandmother’s kitchen diaries where no peel, stem, or seed was ever wasted.",
+  "Living outside India, I found myself constantly navigating a familiar frustration. Whenever people spoke of “Indian food,” the conversation inevitably condensed into butter chicken, garlic naan, samosas, and biryani. While those have their rightful place in celebratory dining, they are only a tiny fraction of what travelled—not the vast, nuanced reality of what billions eat daily across our micro-regions.",
+  "Travel has broadened my worldview, but home is the anchor that holds my palate true. Pichhutaaney is my love letter to that anchor—an intimate space where you are invited not just to taste dishes, but to hear the personal histories, women’s kitchen notebooks, and hyper-regional terroirs that gave them life.",
+];
 
 export const AboutMe: React.FC = () => {
-  const storyParagraphs = [
-    {
-      id: 'p1',
-      content: (
-        <>
-          I come from <strong className="font-medium text-[#18181B]">West Bengal</strong>, a land bordered by the Himalayas in the north and the Bay of Bengal in the south, cradled by fertile river silts where food is not merely sustenance—it is language, season, and sentiment.
-        </>
-      ),
-    },
-    {
-      id: 'p2',
-      content: (
-        <>
-          My cooking is rooted in what I grew up eating: the crackle of nigella seeds in golden mustard oil on rainy July afternoons, the scent of seasonal Gobindobhog rice steaming on brass plates, the quiet genius of my grandmother’s kitchen diaries where no peel, stem, or seed was ever wasted.
-        </>
-      ),
-    },
-    {
-      id: 'p3',
-      content: (
-        <>
-          Living outside India, I found myself constantly navigating a familiar frustration. Whenever people spoke of “Indian food,” the conversation inevitably condensed into butter chicken, garlic naan, samosas, and biryani. While those have their rightful place in celebratory dining, they are only a tiny fraction of what travelled—not the vast, nuanced reality of what billions eat daily across our micro-regions.
-        </>
-      ),
-    },
-    {
-      id: 'p4',
-      content: (
-        <>
-          Travel has broadened my worldview, but home is the anchor that holds my palate true. Pichhutaaney is my love letter to that anchor—an intimate space where you are invited not just to taste dishes, but to hear the personal histories, women’s kitchen notebooks, and hyper-regional terroirs that gave them life.
-        </>
-      ),
-    },
-  ];
+  const storyContainerRef = useRef<HTMLDivElement>(null);
+  
+  const { scrollYProgress } = useScroll({
+    target: storyContainerRef,
+    offset: ['start 0.85', 'end 0.35'],
+  });
+
+  const progressHeight = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
+
+  // Calculate global word distribution across all 4 paragraphs
+  const allParagraphWords = RAW_PARAGRAPHS.map((p) => p.split(' '));
+  const totalWordsCount = allParagraphWords.reduce((acc, words) => acc + words.length, 0);
+
+  let accumulatedWordIndex = 0;
 
   const pillars = [
     {
@@ -81,14 +99,14 @@ export const AboutMe: React.FC = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          {/* Left Column: Portrait & Visual Note */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+          {/* Left Column: Portrait & Visual Note (Sticky during scroll) */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: '-60px' }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="lg:col-span-5 space-y-4"
+            className="lg:col-span-5 space-y-4 lg:sticky lg:top-28"
           >
             <div className="border border-[#E4E4E7] bg-white p-3 shadow-xs">
               <div className="relative overflow-hidden bg-[#FAFAF9] group">
@@ -125,30 +143,54 @@ export const AboutMe: React.FC = () => {
             </div>
           </motion.div>
 
-          {/* Right Column: Personal Story & Journey with Scrolling Transitions */}
-          <div className="lg:col-span-7 space-y-8 text-left">
-            {/* Story Paragraphs with Staggered Scroll-triggered Transitions */}
-            <div className="space-y-6 text-[#52525B] text-base sm:text-lg leading-relaxed font-sans font-light">
-              {storyParagraphs.map((item, idx) => (
+          {/* Right Column: Personal Story with Word-by-Word Scroll Scrubber Transition */}
+          <div className="lg:col-span-7 space-y-10 text-left">
+            {/* Scroll Scrubber Container */}
+            <div
+              ref={storyContainerRef}
+              className="relative pl-6 sm:pl-8 space-y-8"
+            >
+              {/* Vertical Scroll Progress Track Line */}
+              <div className="absolute left-0 top-1 bottom-1 w-[2px] bg-[#E4E4E7]">
                 <motion.div
-                  key={item.id}
-                  initial={{ opacity: 0, y: 28 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-40px' }}
-                  transition={{
-                    duration: 0.7,
-                    delay: idx * 0.12,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
-                  className="relative pl-5 border-l-2 border-[#E4E4E7] hover:border-[#853724] transition-colors duration-300"
-                >
-                  <p>{item.content}</p>
-                </motion.div>
-              ))}
+                  style={{ height: progressHeight }}
+                  className="w-full bg-[#853724] transition-all origin-top"
+                />
+              </div>
+
+              {/* Word-by-word Illuminated Paragraphs */}
+              {allParagraphWords.map((words, pIdx) => {
+                return (
+                  <p
+                    key={pIdx}
+                    className="flex flex-wrap text-base sm:text-lg lg:text-[19px] leading-[1.8] font-sans font-light"
+                  >
+                    {words.map((word, wIdx) => {
+                      const wordGlobalIdx = accumulatedWordIndex++;
+                      const start = wordGlobalIdx / totalWordsCount;
+                      const end = (wordGlobalIdx + 1) / totalWordsCount;
+
+                      const cleanWord = word.replace(/[^a-zA-Z]/g, '');
+                      const isAccent = ['Bengal', 'West', 'Pichhutaaney'].includes(cleanWord);
+
+                      return (
+                        <ScrollWord
+                          key={`${pIdx}-${wIdx}`}
+                          progress={scrollYProgress}
+                          range={[start, end]}
+                          isAccent={isAccent}
+                        >
+                          {word}
+                        </ScrollWord>
+                      );
+                    })}
+                  </p>
+                );
+              })}
             </div>
 
             {/* Guiding Principles Cards matching Geometric Balance */}
-            <div className="pt-2 grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="pt-4 grid grid-cols-1 sm:grid-cols-3 gap-4">
               {pillars.map((pillar, idx) => (
                 <motion.div
                   key={pillar.number}
@@ -212,4 +254,5 @@ export const AboutMe: React.FC = () => {
     </section>
   );
 };
+
 
