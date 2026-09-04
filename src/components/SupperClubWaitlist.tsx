@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { WaitlistEntry } from '../types';
+import { motion } from 'motion/react';
+import { RevealHeading, RevealText, StaggerContainer, StaggerItem } from './TextTransitions';
 import { 
   Users, 
   Calendar, 
@@ -12,7 +14,7 @@ import {
   Phone, 
   Download, 
   Copy, 
-  Check,
+  Check, 
   HelpCircle 
 } from 'lucide-react';
 
@@ -97,93 +99,104 @@ export const SupperClubWaitlist: React.FC<SupperClubWaitlistProps> = ({ onAddEnt
   };
 
   return (
-    <section id="supper-club" className="py-20 sm:py-28 bg-[#FAFAF9] border-b border-[#E4E4E7]">
+    <section id="supper-club" className="py-20 sm:py-28 bg-[#FAFAF9] border-b border-[#E4E4E7] overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="max-w-3xl text-left mb-16">
-          <span className="block font-sans text-[10px] tracking-[0.25em] uppercase font-bold text-[#853724] mb-2">
-            INTIMATE DINING EXPERIENCE
-          </span>
-          <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl font-normal text-[#18181B] tracking-tight">
-            Supper Club <span className="italic text-[#853724]">Waitlist</span>
-          </h2>
-          <p className="mt-3 text-base sm:text-lg text-[#52525B] font-light leading-relaxed">
-            Ten to fourteen seats. One communal table. Six seasonal courses crafted around memory and Bengal terroir.
-          </p>
+          <RevealHeading>
+            <span className="block font-sans text-[10px] tracking-[0.25em] uppercase font-bold text-[#853724] mb-2">
+              INTIMATE DINING EXPERIENCE
+            </span>
+            <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl font-normal text-[#18181B] tracking-tight">
+              Supper Club <span className="italic text-[#853724]">Waitlist</span>
+            </h2>
+          </RevealHeading>
+          
+          <RevealText delay={0.15}>
+            <p className="mt-3 text-base sm:text-lg text-[#52525B] font-light leading-relaxed">
+              Ten to fourteen seats. One communal table. Six seasonal courses crafted around memory and Bengal terroir.
+            </p>
+          </RevealText>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           {/* Left Column: What to Expect & Rituals */}
           <div className="lg:col-span-5 space-y-6 text-left">
-            <div className="bg-white border border-[#E4E4E7] p-6 sm:p-8 space-y-6">
-              <h3 className="font-serif text-2xl sm:text-3xl font-normal text-[#18181B]">
-                How the Supper Club Works
-              </h3>
+            <RevealText delay={0.1}>
+              <div className="bg-white border border-[#E4E4E7] p-6 sm:p-8 space-y-6 shadow-2xs">
+                <h3 className="font-serif text-2xl sm:text-3xl font-normal text-[#18181B]">
+                  How the Supper Club Works
+                </h3>
 
-              <ul className="space-y-4 text-xs sm:text-sm text-[#52525B] font-sans">
-                <li className="flex items-start space-x-3">
-                  <span className="w-6 h-6 border border-[#E4E4E7] bg-[#FAFAF9] text-[#18181B] flex items-center justify-center font-serif text-xs shrink-0 mt-0.5 font-bold">
-                    1
+                <ul className="space-y-4 text-xs sm:text-sm text-[#52525B] font-sans">
+                  <li className="flex items-start space-x-3">
+                    <span className="w-6 h-6 border border-[#E4E4E7] bg-[#FAFAF9] text-[#18181B] flex items-center justify-center font-serif text-xs shrink-0 mt-0.5 font-bold">
+                      1
+                    </span>
+                    <div>
+                      <strong className="font-medium text-[#18181B] block">Exclusive Waitlist Drops</strong>
+                      <span className="text-[#52525B] font-light">Dates and seasonal themes are released to the waitlist community in private batches before public announcements.</span>
+                    </div>
+                  </li>
+
+                  <li className="flex items-start space-x-3">
+                    <span className="w-6 h-6 border border-[#E4E4E7] bg-[#FAFAF9] text-[#18181B] flex items-center justify-center font-serif text-xs shrink-0 mt-0.5 font-bold">
+                      2
+                    </span>
+                    <div>
+                      <strong className="font-medium text-[#18181B] block">Communal Table & Stories</strong>
+                      <span className="text-[#52525B] font-light">Guests dine together at a single long table. Enakshi personally introduces each dish, sharing the kitchen diary notes and heirloom techniques.</span>
+                    </div>
+                  </li>
+
+                  <li className="flex items-start space-x-3">
+                    <span className="w-6 h-6 border border-[#E4E4E7] bg-[#FAFAF9] text-[#18181B] flex items-center justify-center font-serif text-xs shrink-0 mt-0.5 font-bold">
+                      3
+                    </span>
+                    <div>
+                      <strong className="font-medium text-[#18181B] block">Ever-Shifting Seasonal Menus</strong>
+                      <span className="text-[#52525B] font-light">Menus evolve continuously around Bengal’s traditional agricultural cycles and the best local harvest.</span>
+                    </div>
+                  </li>
+                </ul>
+
+                <div className="pt-4 border-t border-[#E4E4E7] flex items-center justify-between text-xs text-[#52525B] font-sans">
+                  <span className="flex items-center space-x-1.5">
+                    <Users className="w-4 h-4 text-[#853724]" />
+                    <span className="uppercase tracking-wider text-[10px]">Max 14 Guests per seating</span>
                   </span>
-                  <div>
-                    <strong className="font-medium text-[#18181B] block">Exclusive Waitlist Drops</strong>
-                    <span className="text-[#52525B] font-light">Dates and seasonal themes are released to the waitlist community in private batches before public announcements.</span>
-                  </div>
-                </li>
-
-                <li className="flex items-start space-x-3">
-                  <span className="w-6 h-6 border border-[#E4E4E7] bg-[#FAFAF9] text-[#18181B] flex items-center justify-center font-serif text-xs shrink-0 mt-0.5 font-bold">
-                    2
+                  <span className="flex items-center space-x-1.5">
+                    <Clock className="w-4 h-4 text-[#853724]" />
+                    <span className="uppercase tracking-wider text-[10px]">~3 Hours Experience</span>
                   </span>
-                  <div>
-                    <strong className="font-medium text-[#18181B] block">Communal Table & Stories</strong>
-                    <span className="text-[#52525B] font-light">Guests dine together at a single long table. Enakshi personally introduces each dish, sharing the kitchen diary notes and heirloom techniques.</span>
-                  </div>
-                </li>
-
-                <li className="flex items-start space-x-3">
-                  <span className="w-6 h-6 border border-[#E4E4E7] bg-[#FAFAF9] text-[#18181B] flex items-center justify-center font-serif text-xs shrink-0 mt-0.5 font-bold">
-                    3
-                  </span>
-                  <div>
-                    <strong className="font-medium text-[#18181B] block">Ever-Shifting Seasonal Menus</strong>
-                    <span className="text-[#52525B] font-light">Menus evolve continuously around Bengal’s traditional agricultural cycles and the best local harvest.</span>
-                  </div>
-                </li>
-              </ul>
-
-              <div className="pt-4 border-t border-[#E4E4E7] flex items-center justify-between text-xs text-[#52525B] font-sans">
-                <span className="flex items-center space-x-1.5">
-                  <Users className="w-4 h-4 text-[#853724]" />
-                  <span className="uppercase tracking-wider text-[10px]">Max 14 Guests per seating</span>
-                </span>
-                <span className="flex items-center space-x-1.5">
-                  <Clock className="w-4 h-4 text-[#853724]" />
-                  <span className="uppercase tracking-wider text-[10px]">~3 Hours Experience</span>
-                </span>
+                </div>
               </div>
-            </div>
+            </RevealText>
 
             {/* Quote testimonial box */}
-            <div className="border-l-2 border-[#853724] pl-5 py-2">
-              <p className="font-serif italic text-lg sm:text-xl text-[#18181B] leading-snug">
-                “It felt less like a ticketed dinner and more like being welcomed into an ancestral dining room where every course unlocked a story.”
-              </p>
-              <span className="text-[10px] uppercase tracking-[0.2em] text-[#853724] mt-2 block font-sans font-bold">
-                — Past Supper Club Guest
-              </span>
-            </div>
+            <RevealText delay={0.2}>
+              <div className="border-l-2 border-[#853724] pl-5 py-2">
+                <p className="font-serif italic text-lg sm:text-xl text-[#18181B] leading-snug">
+                  “It felt less like a ticketed dinner and more like being welcomed into an ancestral dining room where every course unlocked a story.”
+                </p>
+                <span className="text-[10px] uppercase tracking-[0.2em] text-[#853724] mt-2 block font-sans font-bold">
+                  — Past Supper Club Guest
+                </span>
+              </div>
+            </RevealText>
 
             {/* Waitlist stats badge */}
-            <div className="p-4 bg-white border border-[#E4E4E7] flex items-center justify-between text-xs text-[#52525B] font-sans">
-              <span className="flex items-center space-x-2">
-                <span className="w-2 h-2 bg-[#853724] rounded-full animate-pulse" />
-                <span>Waitlist active for upcoming seasonal drops</span>
-              </span>
-              <span className="font-semibold uppercase tracking-wider text-[11px] text-[#18181B]">
-                {existingEntriesCount > 0 ? `${existingEntriesCount} on list` : 'Early access open'}
-              </span>
-            </div>
+            <RevealText delay={0.25}>
+              <div className="p-4 bg-white border border-[#E4E4E7] flex items-center justify-between text-xs text-[#52525B] font-sans">
+                <span className="flex items-center space-x-2">
+                  <span className="w-2 h-2 bg-[#853724] rounded-full animate-pulse" />
+                  <span>Waitlist active for upcoming seasonal drops</span>
+                </span>
+                <span className="font-semibold uppercase tracking-wider text-[11px] text-[#18181B]">
+                  {existingEntriesCount > 0 ? `${existingEntriesCount} on list` : 'Early access open'}
+                </span>
+              </div>
+            </RevealText>
           </div>
 
           {/* Right Column: Waitlist Submission Form / Confirmation */}

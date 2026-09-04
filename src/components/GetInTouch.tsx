@@ -2,12 +2,15 @@ import React, { useState } from 'react';
 import { ContactMessage } from '../types';
 import { FAQ_ITEMS } from '../data/content';
 import { Mail, MessageSquare, Send, CheckCircle2, ChevronDown, ChevronUp, Instagram, MapPin, Sparkles } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
+import { RevealHeading, RevealText, StaggerContainer, StaggerItem } from './TextTransitions';
 
 interface GetInTouchProps {
   onAddMessage: (msg: ContactMessage) => void;
 }
 
-export const GetInTouch: React.FC<GetInTouchProps> = ({ onAddMessage }) => {
+export const GetInTouch: React.FC<GetInTouchProps> = ({ onAddInquiry, onAddMessage }: any) => {
+  const addMessageFn = onAddMessage || onAddInquiry;
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -35,107 +38,124 @@ export const GetInTouch: React.FC<GetInTouchProps> = ({ onAddMessage }) => {
         submittedAt: new Date().toISOString(),
       };
 
-      onAddMessage(newMsg);
+      if (addMessageFn) addMessageFn(newMsg);
       setSubmitted(true);
       setIsSubmitting(false);
     }, 400);
   };
 
   return (
-    <section id="contact" className="py-20 sm:py-28 bg-[#FAFAF9] border-b border-[#E4E4E7]">
+    <section id="contact" className="py-20 sm:py-28 bg-[#FAFAF9] border-b border-[#E4E4E7] overflow-hidden">
       <div id="get-in-touch" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="max-w-3xl text-left mb-16">
-          <span className="block font-sans text-[10px] tracking-[0.25em] uppercase font-bold text-[#853724] mb-2">
-            OPEN TABLE & DIALOGUE
-          </span>
-          <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl font-normal text-[#18181B] tracking-tight">
-            Get in <span className="italic text-[#853724]">Touch</span>
-          </h2>
-          <p className="mt-3 text-base sm:text-lg text-[#52525B] font-light leading-relaxed">
-            An open invitation for collaborations, culinary partnerships, food writing, ideas, or simply to say hello.
-          </p>
+          <RevealHeading>
+            <span className="block font-sans text-[10px] tracking-[0.25em] uppercase font-bold text-[#853724] mb-2">
+              OPEN TABLE & DIALOGUE
+            </span>
+            <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl font-normal text-[#18181B] tracking-tight">
+              Get in <span className="italic text-[#853724]">Touch</span>
+            </h2>
+          </RevealHeading>
+
+          <RevealText delay={0.15}>
+            <p className="mt-3 text-base sm:text-lg text-[#52525B] font-light leading-relaxed">
+              An open invitation for collaborations, culinary partnerships, food writing, ideas, or simply to say hello.
+            </p>
+          </RevealText>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           {/* Left Column: Direct Invitation & FAQ */}
           <div className="lg:col-span-5 space-y-8 text-left">
-            <div className="bg-white border border-[#E4E4E7] p-6 sm:p-7 space-y-5">
-              <h3 className="font-serif text-2xl sm:text-3xl font-normal text-[#18181B]">
-                Conversations Over Chai
-              </h3>
-              <p className="text-xs sm:text-sm text-[#52525B] font-sans leading-relaxed font-light">
-                Whether you are a fellow cook, an archivist of oral food histories, a venue host, a food journalist, or simply someone who misses the taste of home-tempered dal, I would love to connect.
-              </p>
+            <RevealText delay={0.1}>
+              <div className="bg-white border border-[#E4E4E7] p-6 sm:p-7 space-y-5 shadow-2xs">
+                <h3 className="font-serif text-2xl sm:text-3xl font-normal text-[#18181B]">
+                  Conversations Over Chai
+                </h3>
+                <p className="text-xs sm:text-sm text-[#52525B] font-sans leading-relaxed font-light">
+                  Whether you are a fellow cook, an archivist of oral food histories, a venue host, a food journalist, or simply someone who misses the taste of home-tempered dal, I would love to connect.
+                </p>
 
-              <div className="pt-2 space-y-3 text-xs text-[#52525B] font-sans">
-                <div className="flex items-center space-x-3">
-                  <div className="w-8 h-8 border border-[#E4E4E7] bg-[#FAFAF9] flex items-center justify-center text-[#853724]">
-                    <Mail className="w-4 h-4" />
+                <div className="pt-2 space-y-3 text-xs text-[#52525B] font-sans">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-8 h-8 border border-[#E4E4E7] bg-[#FAFAF9] flex items-center justify-center text-[#853724]">
+                      <Mail className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <span className="block font-bold text-[#18181B]">Direct Correspondence</span>
+                      <a href="mailto:hello@pichhutaaney.com" className="text-[#853724] hover:underline font-medium">
+                        hello@pichhutaaney.com
+                      </a>
+                    </div>
                   </div>
-                  <div>
-                    <span className="block font-bold text-[#18181B]">Direct Correspondence</span>
-                    <a href="mailto:hello@pichhutaaney.com" className="text-[#853724] hover:underline font-medium">
-                      hello@pichhutaaney.com
-                    </a>
-                  </div>
-                </div>
 
-                <div className="flex items-center space-x-3">
-                  <div className="w-8 h-8 border border-[#E4E4E7] bg-[#FAFAF9] flex items-center justify-center text-[#853724]">
-                    <Instagram className="w-4 h-4" />
+                  <div className="flex items-center space-x-3">
+                    <div className="w-8 h-8 border border-[#E4E4E7] bg-[#FAFAF9] flex items-center justify-center text-[#853724]">
+                      <Instagram className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <span className="block font-bold text-[#18181B]">Kitchen Notes & Updates</span>
+                      <span className="text-[#52525B]">@pichhutaaney</span>
+                    </div>
                   </div>
-                  <div>
-                    <span className="block font-bold text-[#18181B]">Kitchen Notes & Updates</span>
-                    <span className="text-[#52525B]">@pichhutaaney</span>
-                  </div>
-                </div>
 
-                <div className="flex items-center space-x-3">
-                  <div className="w-8 h-8 border border-[#E4E4E7] bg-[#FAFAF9] flex items-center justify-center text-[#853724]">
-                    <MapPin className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <span className="block font-bold text-[#18181B]">Base of Operations</span>
-                    <span className="text-[#52525B]">Rotating Pop-ups & Private Residences</span>
+                  <div className="flex items-center space-x-3">
+                    <div className="w-8 h-8 border border-[#E4E4E7] bg-[#FAFAF9] flex items-center justify-center text-[#853724]">
+                      <MapPin className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <span className="block font-bold text-[#18181B]">Base of Operations</span>
+                      <span className="text-[#52525B]">Rotating Pop-ups & Private Residences</span>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </RevealText>
 
             {/* Quick FAQ Section */}
             <div className="space-y-3">
-              <h4 className="font-serif text-2xl font-normal text-[#18181B]">
-                Common Curiosities
-              </h4>
-              <div className="space-y-2 font-sans">
+              <RevealHeading delay={0.15}>
+                <h4 className="font-serif text-2xl font-normal text-[#18181B]">
+                  Common Curiosities
+                </h4>
+              </RevealHeading>
+
+              <StaggerContainer staggerDelay={0.07} className="space-y-2 font-sans">
                 {FAQ_ITEMS.map((faq, idx) => {
                   const isOpen = openFaqIndex === idx;
                   return (
-                    <div
-                      key={faq.question}
-                      className="border border-[#E4E4E7] bg-white overflow-hidden"
-                    >
-                      <button
-                        onClick={() => setOpenFaqIndex(isOpen ? null : idx)}
-                        className="w-full px-4 py-3 text-left flex items-center justify-between text-xs sm:text-sm font-medium text-[#18181B] hover:bg-[#FAFAF9] transition-colors"
-                      >
-                        <span>{faq.question}</span>
-                        {isOpen ? (
-                          <ChevronUp className="w-4 h-4 text-[#853724] shrink-0" />
-                        ) : (
-                          <ChevronDown className="w-4 h-4 text-[#A1A1AA] shrink-0" />
-                        )}
-                      </button>
-                      {isOpen && (
-                        <div className="px-4 pb-4 pt-1 text-xs text-[#52525B] font-light leading-relaxed border-t border-[#E4E4E7] bg-[#FAFAF9]">
-                          {faq.answer}
-                        </div>
-                      )}
-                    </div>
+                    <StaggerItem key={faq.question}>
+                      <div className="border border-[#E4E4E7] bg-white overflow-hidden transition-all duration-200 hover:border-[#853724]/40">
+                        <button
+                          onClick={() => setOpenFaqIndex(isOpen ? null : idx)}
+                          className="w-full px-4 py-3 text-left flex items-center justify-between text-xs sm:text-sm font-medium text-[#18181B] hover:bg-[#FAFAF9] transition-colors cursor-pointer"
+                        >
+                          <span>{faq.question}</span>
+                          {isOpen ? (
+                            <ChevronUp className="w-4 h-4 text-[#853724] shrink-0" />
+                          ) : (
+                            <ChevronDown className="w-4 h-4 text-[#A1A1AA] shrink-0" />
+                          )}
+                        </button>
+                        <AnimatePresence>
+                          {isOpen && (
+                            <motion.div
+                              initial={{ opacity: 0, height: 0 }}
+                              animate={{ opacity: 1, height: 'auto' }}
+                              exit={{ opacity: 0, height: 0 }}
+                              transition={{ duration: 0.25, ease: 'easeInOut' }}
+                              className="px-4 pb-4 pt-1 text-xs text-[#52525B] font-light leading-relaxed border-t border-[#E4E4E7] bg-[#FAFAF9]"
+                            >
+                              {faq.answer}
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    </StaggerItem>
                   );
                 })}
-              </div>
+              </StaggerContainer>
             </div>
           </div>
 

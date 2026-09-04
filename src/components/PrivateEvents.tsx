@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { PrivateEventInquiry } from '../types';
 import { Wine, Sparkles, CheckCircle2, Calendar, MapPin, User, Mail, Phone, Clock, FileText } from 'lucide-react';
+import { motion } from 'motion/react';
+import { RevealHeading, RevealText, StaggerContainer, StaggerItem } from './TextTransitions';
 
 interface PrivateEventsProps {
   onAddInquiry: (inquiry: PrivateEventInquiry) => void;
@@ -53,86 +55,101 @@ export const PrivateEvents: React.FC<PrivateEventsProps> = ({ onAddInquiry }) =>
   };
 
   return (
-    <section id="private-events" className="py-20 sm:py-28 bg-[#FAFAF9] border-b border-[#E4E4E7]">
+    <section id="private-events" className="py-20 sm:py-28 bg-[#FAFAF9] border-b border-[#E4E4E7] overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="max-w-3xl text-left mb-16">
-          <span className="block font-sans text-[10px] tracking-[0.25em] uppercase font-bold text-[#853724] mb-2">
-            BESPOKE GATHERINGS
-          </span>
-          <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl font-normal text-[#18181B] tracking-tight">
-            Private Dining & <span className="italic text-[#853724]">Events</span>
-          </h2>
-          <p className="mt-3 text-base sm:text-lg text-[#52525B] font-light leading-relaxed">
-            Invite Enakshi to host an intimate, story-driven regional culinary experience for your celebration or gathering.
-          </p>
+          <RevealHeading>
+            <span className="block font-sans text-[10px] tracking-[0.25em] uppercase font-bold text-[#853724] mb-2">
+              BESPOKE GATHERINGS
+            </span>
+            <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl font-normal text-[#18181B] tracking-tight">
+              Private Dining & <span className="italic text-[#853724]">Events</span>
+            </h2>
+          </RevealHeading>
+
+          <RevealText delay={0.15}>
+            <p className="mt-3 text-base sm:text-lg text-[#52525B] font-light leading-relaxed">
+              Invite Enakshi to host an intimate, story-driven regional culinary experience for your celebration or gathering.
+            </p>
+          </RevealText>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           {/* Left Column: Event Archetypes & Visual Editorial */}
           <div className="lg:col-span-5 space-y-6 text-left">
-            <div className="space-y-4">
-              <h3 className="font-serif text-2xl sm:text-3xl font-normal text-[#18181B]">
-                Tailored Regional Experiences
-              </h3>
-              <p className="text-sm text-[#52525B] leading-relaxed font-sans font-light">
-                Whether you are marking a landmark birthday, hosting a curated salon for creative thinkers, or celebrating an intimate wedding rehearsal, we handle every detail—from the bespoke multi-course menu design to the tablescape and historical storytelling.
-              </p>
-            </div>
+            <RevealText delay={0.1}>
+              <div className="space-y-4">
+                <h3 className="font-serif text-2xl sm:text-3xl font-normal text-[#18181B]">
+                  Tailored Regional Experiences
+                </h3>
+                <p className="text-sm text-[#52525B] leading-relaxed font-sans font-light">
+                  Whether you are marking a landmark birthday, hosting a curated salon for creative thinkers, or celebrating an intimate wedding rehearsal, we handle every detail—from the bespoke multi-course menu design to the tablescape and historical storytelling.
+                </p>
+              </div>
+            </RevealText>
 
             {/* Event Formats Grid */}
-            <div className="space-y-4">
-              <div className="p-5 bg-white border border-[#E4E4E7]">
-                <div className="flex items-center justify-between mb-1.5">
-                  <h4 className="font-serif text-xl font-normal text-[#18181B]">
-                    Intimate In-Home Dinners
-                  </h4>
-                  <span className="text-[10px] uppercase tracking-[0.2em] text-[#853724] font-sans font-bold">6 – 16 Guests</span>
+            <StaggerContainer staggerDelay={0.1} className="space-y-4">
+              <StaggerItem>
+                <div className="p-5 bg-white border border-[#E4E4E7] transition-all duration-300 hover:border-[#853724]/50 hover:shadow-xs">
+                  <div className="flex items-center justify-between mb-1.5">
+                    <h4 className="font-serif text-xl font-normal text-[#18181B]">
+                      Intimate In-Home Dinners
+                    </h4>
+                    <span className="text-[10px] uppercase tracking-[0.2em] text-[#853724] font-sans font-bold">6 – 16 Guests</span>
+                  </div>
+                  <p className="text-xs text-[#52525B] font-sans leading-relaxed font-light">
+                    Enakshi transforms your home kitchen into a warm sanctuary of aromas, with unhurried course-by-course presentation.
+                  </p>
                 </div>
-                <p className="text-xs text-[#52525B] font-sans leading-relaxed font-light">
-                  Enakshi transforms your home kitchen into a warm sanctuary of aromas, with unhurried course-by-course presentation.
-                </p>
-              </div>
+              </StaggerItem>
 
-              <div className="p-5 bg-white border border-[#E4E4E7]">
-                <div className="flex items-center justify-between mb-1.5">
-                  <h4 className="font-serif text-xl font-normal text-[#18181B]">
-                    Milestones & Celebrations
-                  </h4>
-                  <span className="text-[10px] uppercase tracking-[0.2em] text-[#853724] font-sans font-bold">Up to 35 Guests</span>
+              <StaggerItem>
+                <div className="p-5 bg-white border border-[#E4E4E7] transition-all duration-300 hover:border-[#853724]/50 hover:shadow-xs">
+                  <div className="flex items-center justify-between mb-1.5">
+                    <h4 className="font-serif text-xl font-normal text-[#18181B]">
+                      Milestones & Celebrations
+                    </h4>
+                    <span className="text-[10px] uppercase tracking-[0.2em] text-[#853724] font-sans font-bold">Up to 35 Guests</span>
+                  </div>
+                  <p className="text-xs text-[#52525B] font-sans leading-relaxed font-light">
+                    Curated family feasts celebrating specific regional delicacies (such as an authentic Kolkata feast or Awadhi court dinner).
+                  </p>
                 </div>
-                <p className="text-xs text-[#52525B] font-sans leading-relaxed font-light">
-                  Curated family feasts celebrating specific regional delicacies (such as an authentic Kolkata feast or Awadhi court dinner).
-                </p>
-              </div>
+              </StaggerItem>
 
-              <div className="p-5 bg-[#853724] text-white border border-[#853724]">
-                <div className="flex items-center justify-between mb-1.5">
-                  <h4 className="font-serif text-xl font-normal text-white">
-                    Interactive Cooking Circles
-                  </h4>
-                  <span className="text-[10px] uppercase tracking-[0.2em] text-white/80 font-sans font-bold">Small Groups</span>
+              <StaggerItem>
+                <div className="p-5 bg-[#853724] text-white border border-[#853724] transition-all duration-300 hover:shadow-md">
+                  <div className="flex items-center justify-between mb-1.5">
+                    <h4 className="font-serif text-xl font-normal text-white">
+                      Interactive Cooking Circles
+                    </h4>
+                    <span className="text-[10px] uppercase tracking-[0.2em] text-white/80 font-sans font-bold">Small Groups</span>
+                  </div>
+                  <p className="text-xs text-white/85 font-sans leading-relaxed font-light">
+                    Hands-on mastery of whole spices, stone grinding techniques, and the art of the Bengali *phoron* tempering, followed by a feast.
+                  </p>
                 </div>
-                <p className="text-xs text-white/85 font-sans leading-relaxed font-light">
-                  Hands-on mastery of whole spices, stone grinding techniques, and the art of the Bengali *phoron* tempering, followed by a feast.
-                </p>
-              </div>
-            </div>
+              </StaggerItem>
+            </StaggerContainer>
 
             {/* Image accent */}
-            <div className="relative overflow-hidden border border-[#E4E4E7] bg-white p-2">
-              <img
-                src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80"
-                alt="Intimate candlelit dining table ready for a private supper"
-                referrerPolicy="no-referrer"
-                className="w-full h-48 object-cover filter contrast-[1.02]"
-              />
-              <div className="p-3 bg-[#FAFAF9] border-t border-[#E4E4E7]">
-                <span className="text-xs text-[#52525B] font-serif italic">
-                  “Every table is curated uniquely; no two private menus are ever identical.”
-                </span>
+            <RevealText delay={0.25}>
+              <div className="relative overflow-hidden border border-[#E4E4E7] bg-white p-2">
+                <img
+                  src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80"
+                  alt="Intimate candlelit dining table ready for a private supper"
+                  referrerPolicy="no-referrer"
+                  className="w-full h-48 object-cover filter contrast-[1.02] hover:scale-105 transition-transform duration-700"
+                />
+                <div className="p-3 bg-[#FAFAF9] border-t border-[#E4E4E7]">
+                  <span className="text-xs text-[#52525B] font-serif italic">
+                    “Every table is curated uniquely; no two private menus are ever identical.”
+                  </span>
+                </div>
               </div>
-            </div>
+            </RevealText>
           </div>
 
           {/* Right Column: Private Event Inquiry Form */}
