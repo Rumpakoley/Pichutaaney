@@ -35,56 +35,49 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenLedger: _onOpenLedger, wai
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          {/* Brand Logo */}
-          <a href="#" className="flex items-center text-left group">
-            <span className="font-serif text-2xl sm:text-[26px] font-bold tracking-[0.14em] uppercase text-[#18181B] group-hover:text-[#853724] transition-colors">
-              PICHHUTAANEY
-            </span>
-          </a>
-
-          {/* Desktop Floating Pill / Capsule Navbar (Matches Reference Image 2) */}
-          <nav className="hidden lg:flex items-center bg-[#EFE8DC] border border-[#DCD3C5] rounded-full p-1.5 pl-7 pr-1.5 shadow-sm text-xs font-mono tracking-widest text-[#18181B]">
-            <div className="flex items-center space-x-7">
-              {primaryLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  className="hover:text-[#853724] font-medium transition-colors duration-150 py-1"
-                >
-                  {link.name}
-                </a>
-              ))}
-            </div>
-
-            {/* Encased Dark Pill Button for CONTACT */}
-            <a
-              href="#get-in-touch"
-              className="ml-6 bg-[#18181B] text-white px-6 py-2.5 rounded-full font-bold uppercase tracking-widest text-[11px] hover:bg-[#853724] hover:shadow-md transition-all duration-200"
-            >
-              CONTACT
+          {/* Left: Brand Logo */}
+          <div className="flex-shrink-0 min-w-[200px] text-left">
+            <a href="#" className="inline-block group">
+              <span className="font-serif text-2xl sm:text-[25px] font-bold tracking-[0.14em] uppercase text-[#18181B] group-hover:text-[#853724] transition-colors">
+                PICHHUTAANEY
+              </span>
             </a>
-          </nav>
+          </div>
 
-          {/* Tablet (md to lg) compact version */}
-          <nav className="hidden md:flex lg:hidden items-center bg-[#EFE8DC] border border-[#DCD3C5] rounded-full p-1 pl-5 pr-1 shadow-sm text-[11px] font-mono tracking-wider text-[#18181B]">
-            <div className="flex items-center space-x-4">
-              {primaryLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  className="hover:text-[#853724] font-medium transition-colors py-1"
-                >
-                  {link.name}
-                </a>
-              ))}
-            </div>
+          {/* Center: Floating Pill / Capsule Navbar */}
+          <div className="hidden md:flex flex-1 justify-center items-center px-4">
+            <nav className="flex items-center bg-[#EFE8DC] border border-[#DCD3C5] rounded-full p-1.5 pl-7 pr-1.5 shadow-sm text-xs font-mono tracking-widest text-[#18181B]">
+              <div className="flex items-center space-x-6 lg:space-x-8">
+                {primaryLinks.map((link) => (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    className="hover:text-[#853724] font-medium transition-colors duration-150 py-1"
+                  >
+                    {link.name}
+                  </a>
+                ))}
+              </div>
+
+              {/* Encased Dark Pill Button for CONTACT */}
+              <a
+                href="#get-in-touch"
+                className="ml-6 lg:ml-8 bg-[#18181B] text-white px-6 py-2.5 rounded-full font-bold uppercase tracking-widest text-[11px] hover:bg-[#853724] hover:shadow-md transition-all duration-200"
+              >
+                CONTACT
+              </a>
+            </nav>
+          </div>
+
+          {/* Right: Balance spacer / Desk Shortcut */}
+          <div className="hidden md:flex flex-shrink-0 min-w-[200px] justify-end items-center">
             <a
-              href="#get-in-touch"
-              className="ml-4 bg-[#18181B] text-white px-4 py-2 rounded-full font-bold uppercase tracking-wider text-[10px] hover:bg-[#853724] transition-colors"
+              href="#supper-club"
+              className="text-[11px] font-sans uppercase tracking-[0.2em] font-semibold text-[#853724] hover:text-[#18181B] transition-colors"
             >
-              CONTACT
+              JOIN WAITLIST →
             </a>
-          </nav>
+          </div>
 
           {/* Mobile menu toggle */}
           <div className="flex items-center md:hidden">
