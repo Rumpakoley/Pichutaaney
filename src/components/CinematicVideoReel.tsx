@@ -13,11 +13,19 @@ export interface ClientVideo {
 
 export const CLIENT_VIDEOS: ClientVideo[] = [
   {
+    id: 'vid-intro',
+    title: 'The Essence of Pichhutaaney',
+    subtitle: 'Wandering, memory, and instinct-led cooking in full motion',
+    url: 'https://res.cloudinary.com/dpdtsaalf/video/upload/v1788549931/WhatsApp_Video_2026-09-05_at_12.42.00_AM_4_k3o720.mp4',
+    tag: 'REEL 01 • THE ESSENCE',
+    quote: '“Cooking not by formula, but by the quiet pull of memory and instinct.”',
+  },
+  {
     id: 'vid-1',
     title: 'The Hearth & The Flame',
     subtitle: 'Golden mustard oil heating to smoke point and the rhythm of the pan',
     url: 'https://res.cloudinary.com/dpdtsaalf/video/upload/v1788549950/WhatsApp_Video_2026-09-05_at_12.47.22_AM_udyrd8.mp4',
-    tag: 'REEL 01 • THE HEARTH',
+    tag: 'REEL 02 • THE HEARTH',
     quote: '“No timers, no strict formulas—just the crackle in the oil and the aroma in the air.”',
   },
   {
@@ -25,7 +33,7 @@ export const CLIENT_VIDEOS: ClientVideo[] = [
     title: 'Intuitive Tempering',
     subtitle: 'Panch phoron, whole spices, and raw instinct guiding the pan',
     url: 'https://res.cloudinary.com/dpdtsaalf/video/upload/v1788549943/WhatsApp_Video_2026-09-05_at_12.42.00_AM_jkldp2.mp4',
-    tag: 'REEL 02 • INSTINCT',
+    tag: 'REEL 03 • INSTINCT',
     quote: '“Cooking by touch, aroma, and the generational memory carried in our hands.”',
   },
   {
@@ -33,7 +41,7 @@ export const CLIENT_VIDEOS: ClientVideo[] = [
     title: 'Handcrafted Heritage',
     subtitle: 'Steaming in banana leaves and slow simmered earthen textures',
     url: 'https://res.cloudinary.com/dpdtsaalf/video/upload/v1788549942/WhatsApp_Video_2026-09-05_at_12.42.00_AM_3_lm4akh.mp4',
-    tag: 'REEL 03 • HANDCRAFT',
+    tag: 'REEL 04 • HANDCRAFT',
     quote: '“Every course is an intimate story from home, shaped by everywhere I’ve lived.”',
   },
   {
@@ -41,7 +49,7 @@ export const CLIENT_VIDEOS: ClientVideo[] = [
     title: 'The Communal Table',
     subtitle: 'Strangers gathering around shared plates and warm conversations',
     url: 'https://res.cloudinary.com/dpdtsaalf/video/upload/v1788549941/WhatsApp_Video_2026-09-05_at_12.42.00_AM_2_w12jyr.mp4',
-    tag: 'REEL 04 • THE GATHERING',
+    tag: 'REEL 05 • THE GATHERING',
     quote: '“A three-hour unhurried communion of wandering, nostalgia, and belonging.”',
   },
   {
@@ -49,7 +57,7 @@ export const CLIENT_VIDEOS: ClientVideo[] = [
     title: 'Kitchen Notes in Motion',
     subtitle: 'Atmospheric glimpses into Enakshi’s private kitchen studio',
     url: 'https://res.cloudinary.com/dpdtsaalf/video/upload/v1788549936/WhatsApp_Video_2026-09-05_at_12.42.00_AM_1_hoycwv.mp4',
-    tag: 'REEL 05 • THE ARCHIVE',
+    tag: 'REEL 06 • THE ARCHIVE',
     quote: '“Pichhutaaney is that tender pull toward where you came from, alive in every bite.”',
   },
 ];
@@ -199,18 +207,18 @@ export const CinematicVideoReel: React.FC = () => {
           </div>
         </motion.div>
 
-        {/* 5-Video Reel Selector Strip */}
+        {/* 6-Video Reel Selector Strip */}
         <div className="mt-8 sm:mt-10">
           <div className="flex items-center justify-between mb-4">
             <span className="text-[10px] uppercase font-mono tracking-[0.25em] text-[#A1A1AA]">
-              SELECT A KITCHEN REEL (5 CLIPS)
+              SELECT A KITCHEN REEL ({CLIENT_VIDEOS.length} CLIPS)
             </span>
             <span className="text-[10px] font-mono text-[#F3947E]">
               CLIP {activeIndex + 1} OF {CLIENT_VIDEOS.length}
             </span>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
             {CLIENT_VIDEOS.map((video, idx) => {
               const isActive = activeIndex === idx;
               return (
