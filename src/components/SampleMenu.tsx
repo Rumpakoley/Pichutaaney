@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { CLIENT_MENU_COLLECTION, TastingMenuTheme } from '../data/content';
-import { Sparkles, Utensils, GlassWater, Leaf, Eye, X, ZoomIn, BookOpen, Layers } from 'lucide-react';
+import { CLIENT_MENU_COLLECTION } from '../data/content';
+import { Utensils, GlassWater, Leaf, X, ZoomIn, Eye } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { RevealHeading, RevealText, StaggerContainer, StaggerItem } from './TextTransitions';
+import { RevealHeading, RevealText } from './TextTransitions';
 
 export const SampleMenu: React.FC = () => {
   const [activeMenuIndex, setActiveMenuIndex] = useState(0);
@@ -11,255 +11,170 @@ export const SampleMenu: React.FC = () => {
   const currentMenu = CLIENT_MENU_COLLECTION[activeMenuIndex];
 
   return (
-    <section id="sample-menu" className="py-20 sm:py-28 bg-[#FAFAF9] border-b border-[#E4E4E7] overflow-hidden">
+    <section id="sample-menu" className="py-16 sm:py-24 bg-[#FAFAF9] border-b border-[#E4E4E7] overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="max-w-3xl text-left mb-12 sm:mb-16">
+        <div className="max-w-3xl text-left mb-10 sm:mb-12">
           <RevealHeading>
-            <div className="inline-flex items-center space-x-2 text-[10px] tracking-[0.25em] uppercase font-bold text-[#853724] font-sans mb-2">
-              <Utensils className="w-3.5 h-3.5" />
-              <span>THE TASTING MENUS & PRINTED EDITIONS</span>
-            </div>
-            <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl font-normal text-[#18181B] tracking-tight">
-              Curated Seasonal <span className="italic text-[#853724]">Tasting Menus</span>
+            <span className="block font-sans text-[10px] tracking-[0.25em] uppercase font-bold text-[#853724] mb-2">
+              THE TASTING MENUS
+            </span>
+            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-normal text-[#18181B] tracking-tight">
+              Curated <span className="italic text-[#853724]">Tasting Editions</span>
             </h2>
           </RevealHeading>
 
-          <RevealText delay={0.15}>
-            <p className="mt-3 text-base sm:text-lg text-[#52525B] font-light leading-relaxed">
-              Explore the authentic printed menu editions designed for Pichhutaaney tasting nights. Each card represents a unique regional mood, from Calcutta street-food reimaginations to zero-waste root-to-stem feasts.
+          <RevealText delay={0.1}>
+            <p className="mt-2 text-sm sm:text-base text-[#52525B] font-light leading-relaxed">
+              Seasonal tasting menus shaped by memory, instinct, and the printed editions designed for our private dining nights.
             </p>
           </RevealText>
         </div>
 
-        {/* 4-Menu Interactive Tabs Strip */}
-        <div className="mb-10 sm:mb-12">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
-            {CLIENT_MENU_COLLECTION.map((menu, idx) => {
-              const isActive = activeMenuIndex === idx;
-              return (
-                <button
-                  key={menu.id}
-                  onClick={() => setActiveMenuIndex(idx)}
-                  className={`p-4 sm:p-5 text-left border rounded-xl transition-all duration-300 cursor-pointer ${
-                    isActive
-                      ? 'bg-[#853724] text-white border-[#853724] shadow-md ring-1 ring-[#853724]'
-                      : 'bg-white border-[#E4E4E7] text-[#18181B] hover:border-[#853724]/50'
-                  }`}
-                >
-                  <span
-                    className={`block text-[9.5px] font-mono uppercase tracking-widest mb-1 ${
-                      isActive ? 'text-white/80' : 'text-[#853724]'
-                    }`}
-                  >
-                    EDITION 0{idx + 1}
-                  </span>
-                  <h3 className="font-serif text-base sm:text-lg font-normal leading-snug">
-                    {menu.title}
-                  </h3>
-                  <span
-                    className={`block font-bengali text-xs mt-1 ${
-                      isActive ? 'text-white/90' : 'text-[#853724]'
-                    }`}
-                  >
-                    {menu.bengaliTitle}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
+        {/* Minimalist 4-Edition Selector Bar */}
+        <div className="flex items-center space-x-2 sm:space-x-3 overflow-x-auto pb-4 mb-8 sm:mb-12 scrollbar-none text-left">
+          {CLIENT_MENU_COLLECTION.map((menu, idx) => {
+            const isActive = activeMenuIndex === idx;
+            return (
+              <button
+                key={menu.id}
+                onClick={() => setActiveMenuIndex(idx)}
+                className={`px-4 sm:px-5 py-2.5 rounded-full text-xs font-sans whitespace-nowrap transition-all duration-200 cursor-pointer border ${
+                  isActive
+                    ? 'bg-[#853724] text-white border-[#853724] shadow-xs'
+                    : 'bg-white text-[#52525B] border-[#E4E4E7] hover:border-[#853724]/40 hover:text-[#18181B]'
+                }`}
+              >
+                <span className="font-medium">{menu.title}</span>
+                <span className="ml-1.5 opacity-70 font-bengali text-[11px]">({menu.bengaliTitle})</span>
+              </button>
+            );
+          })}
         </div>
 
-        {/* Hero Spotlight: Visual Menu Card & Course Breakdown Side-by-Side */}
+        {/* Spotlight Showcase: Printed Card Image & Clean Course Flow Side-by-Side */}
         <AnimatePresence mode="wait">
           <motion.div
             key={currentMenu.id}
-            initial={{ opacity: 0, y: 18 }}
+            initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -18 }}
-            transition={{ duration: 0.45, ease: 'easeOut' }}
-            className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start"
+            exit={{ opacity: 0, y: -14 }}
+            transition={{ duration: 0.35, ease: 'easeOut' }}
+            className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start text-left"
           >
-            {/* Left: Prominently Visible Printed Menu Card Image */}
-            <div className="lg:col-span-5 flex flex-col space-y-4 text-left">
+            {/* Left: Beautiful Printed Menu Card */}
+            <div className="lg:col-span-5">
               <div
                 onClick={() => setLightboxImage(currentMenu.imageUrl)}
-                className="group relative rounded-2xl overflow-hidden bg-white p-3 border border-[#E4E4E7] shadow-xl hover:shadow-2xl transition-all duration-500 cursor-zoom-in"
+                className="group relative rounded-xl overflow-hidden bg-white p-2.5 border border-[#E4E4E7] shadow-lg hover:shadow-xl transition-all duration-300 cursor-zoom-in"
               >
-                <div className="relative aspect-[3/4.2] w-full rounded-xl overflow-hidden bg-[#F5F1EB]">
+                <div className="relative aspect-[3/4.2] w-full rounded-lg overflow-hidden bg-[#F5F1EB]">
                   <img
                     src={currentMenu.imageUrl}
-                    alt={`${currentMenu.title} Printed Menu Card`}
-                    className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-700"
+                    alt={`${currentMenu.title} Printed Card`}
+                    className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
-                    <span className="opacity-0 group-hover:opacity-100 transition-opacity bg-black/75 text-white px-4 py-2 rounded-full text-xs font-mono tracking-wider flex items-center space-x-1.5 shadow-lg">
+                    <span className="opacity-0 group-hover:opacity-100 transition-opacity bg-black/80 text-white px-3.5 py-1.5 rounded-full text-[11px] font-mono tracking-wider flex items-center space-x-1.5 shadow-md">
                       <ZoomIn className="w-3.5 h-3.5" />
-                      <span>Click to Enlarge Card</span>
+                      <span>Click to Enlarge</span>
                     </span>
                   </div>
                 </div>
 
-                <div className="pt-3 pb-1 px-1 flex items-center justify-between text-xs text-[#52525B] font-sans">
-                  <span className="font-semibold text-[#18181B] font-serif text-sm">
-                    {currentMenu.title}
-                  </span>
-                  <span className="text-[10.5px] font-mono text-[#853724] uppercase tracking-wider flex items-center space-x-1">
-                    <Eye className="w-3 h-3" />
-                    <span>Original Card</span>
-                  </span>
+                <div className="pt-2 px-1 flex items-center justify-between text-xs text-[#52525B]">
+                  <span className="font-serif text-sm text-[#18181B]">{currentMenu.title}</span>
+                  <span className="text-[10px] font-mono text-[#853724] uppercase tracking-wider">Original Printed Card</span>
                 </div>
               </div>
-
-              {/* Quick Card Action */}
-              <button
-                onClick={() => setLightboxImage(currentMenu.imageUrl)}
-                className="w-full py-2.5 px-4 bg-white border border-[#E4E4E7] hover:border-[#853724] text-[#18181B] hover:text-[#853724] text-xs font-sans font-semibold uppercase tracking-widest transition-colors flex items-center justify-center space-x-2 rounded-lg cursor-pointer"
-              >
-                <ZoomIn className="w-4 h-4" />
-                <span>Open Full-Screen Card</span>
-              </button>
             </div>
 
-            {/* Right: Detailed Course Breakdown & Editorial Story */}
-            <div className="lg:col-span-7 flex flex-col space-y-6 text-left">
-              {/* Menu Intro Box */}
-              <div className="bg-white border border-[#E4E4E7] p-6 sm:p-8 rounded-xl shadow-2xs space-y-2.5">
-                <div className="flex items-center justify-between flex-wrap gap-2">
-                  <span className="inline-block px-2.5 py-0.5 text-[10px] font-mono uppercase tracking-widest bg-[#FAFAF9] border border-[#E4E4E7] text-[#853724] font-semibold">
-                    {currentMenu.tag}
-                  </span>
-                  <span className="font-bengali text-sm font-semibold text-[#853724]">
-                    {currentMenu.bengaliTitle}
-                  </span>
-                </div>
-                <h3 className="font-serif text-3xl sm:text-4xl text-[#18181B] font-normal tracking-tight">
+            {/* Right: Clean, Minimalist Course List */}
+            <div className="lg:col-span-7 flex flex-col justify-between space-y-6">
+              {/* Short Intro */}
+              <div className="border-b border-[#E4E4E7] pb-4">
+                <span className="text-[10px] font-mono uppercase tracking-widest text-[#853724] font-semibold block mb-1">
+                  {currentMenu.tag}
+                </span>
+                <h3 className="font-serif text-2xl sm:text-3xl text-[#18181B] font-normal">
                   {currentMenu.title}
                 </h3>
-                <p className="text-xs sm:text-sm text-[#52525B] font-sans font-light leading-relaxed">
+                <p className="mt-1 text-xs sm:text-sm text-[#52525B] font-light leading-relaxed">
                   {currentMenu.description}
                 </p>
               </div>
 
-              {/* Courses List */}
-              <div className="space-y-4">
-                {currentMenu.courses.map((course, idx) => {
-                  const isHighlight = idx === 0;
-                  return (
-                    <div
-                      key={course.courseNumber + course.courseTitle}
-                      className={`border p-5 sm:p-6 rounded-xl transition-all duration-300 hover:shadow-md ${
-                        isHighlight
-                          ? 'bg-white border-[#853724]'
-                          : 'bg-white border-[#E4E4E7] hover:border-[#853724]/40'
-                      }`}
-                    >
-                      <div className="flex items-center justify-between border-b border-[#E4E4E7] pb-2.5 mb-3">
-                        <span className="font-mono text-[11px] font-bold text-[#18181B] bg-[#FAFAF9] px-2.5 py-0.5 border border-[#E4E4E7] rounded-xs">
-                          Course {course.courseNumber}
+              {/* Minimal Course Rows */}
+              <div className="divide-y divide-[#E4E4E7]/70">
+                {currentMenu.courses.map((course) => (
+                  <div key={course.courseNumber + course.courseTitle} className="py-3.5 first:pt-0 last:pb-0">
+                    <div className="flex items-baseline justify-between gap-4">
+                      <div className="flex items-baseline space-x-2">
+                        <span className="font-mono text-[11px] text-[#853724] font-semibold">
+                          {course.courseNumber}
                         </span>
-                        <span className="font-bengali text-sm font-semibold text-[#853724]">
-                          {course.bengaliName}
-                        </span>
+                        <h4 className="font-serif text-lg sm:text-xl text-[#18181B] font-normal">
+                          {course.courseTitle}
+                        </h4>
                       </div>
-
-                      <h4 className="font-serif text-xl sm:text-2xl font-normal text-[#18181B] mb-1.5 leading-snug">
-                        {course.courseTitle}
-                      </h4>
-
-                      <p className="text-xs sm:text-sm text-[#52525B] leading-relaxed font-sans font-light">
-                        {course.description}
-                      </p>
-
-                      {course.tag && (
-                        <div className="mt-3 inline-block text-[10px] uppercase font-mono tracking-wider text-[#853724] bg-[#853724]/10 px-2 py-0.5 border border-[#853724]/20 rounded-xs">
-                          {course.tag}
-                        </div>
-                      )}
+                      <span className="font-bengali text-xs text-[#853724] shrink-0 font-medium opacity-80">
+                        {course.bengaliName}
+                      </span>
                     </div>
-                  );
-                })}
+
+                    <p className="mt-1 font-serif italic text-xs sm:text-sm text-[#52525B] font-normal leading-relaxed pl-5">
+                      {course.description}
+                    </p>
+                  </div>
+                ))}
               </div>
 
-              {/* Drink Pairing if available */}
+              {/* Drink Pairing Highlight */}
               {currentMenu.drinkPairing && (
-                <div className="bg-[#853724] text-white p-5 rounded-xl border border-[#853724] flex items-center space-x-3 text-left shadow-xs">
-                  <GlassWater className="w-5 h-5 text-white/90 shrink-0" />
-                  <p className="text-xs sm:text-sm font-sans font-light">
-                    <strong className="font-medium text-white">{currentMenu.drinkPairing}</strong>
-                  </p>
+                <div className="pt-2">
+                  <div className="inline-flex items-center space-x-2 px-3.5 py-2 bg-[#853724]/10 border border-[#853724]/20 rounded-md text-xs text-[#853724]">
+                    <GlassWater className="w-3.5 h-3.5 shrink-0" />
+                    <span className="font-sans font-medium">{currentMenu.drinkPairing}</span>
+                  </div>
                 </div>
               )}
             </div>
           </motion.div>
         </AnimatePresence>
 
-        {/* All 4 Printed Menu Cards Gallery Strip */}
-        <div className="mt-20 pt-16 border-t border-[#E4E4E7] text-left">
-          <div className="flex items-center justify-between mb-8">
-            <div>
-              <div className="inline-flex items-center space-x-2 text-[10px] tracking-[0.25em] uppercase font-bold text-[#853724] font-sans mb-1">
-                <Layers className="w-3.5 h-3.5" />
-                <span>ARCHIVAL PRINTED CARDS</span>
-              </div>
-              <h3 className="font-serif text-2xl sm:text-3xl font-normal text-[#18181B]">
-                All Four Tasting Menu Cards
-              </h3>
-            </div>
-            <span className="text-xs text-[#52525B] font-sans hidden sm:block">
-              Click any card to inspect in high resolution
+        {/* Archival Printed Cards Row */}
+        <div className="mt-16 pt-10 border-t border-[#E4E4E7] text-left">
+          <div className="flex items-center justify-between mb-5">
+            <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#853724] font-bold">
+              ALL 4 PRINTED MENU CARDS
+            </span>
+            <span className="text-[11px] text-[#71717A] font-sans">
+              Click any card to preview full size
             </span>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
             {CLIENT_MENU_COLLECTION.map((menu, idx) => (
-              <div
+              <button
                 key={menu.id}
                 onClick={() => {
                   setActiveMenuIndex(idx);
                   setLightboxImage(menu.imageUrl);
                 }}
-                className="group relative rounded-xl overflow-hidden bg-white p-2.5 border border-[#E4E4E7] shadow-sm hover:shadow-xl hover:border-[#853724] transition-all duration-300 cursor-pointer"
+                className="group p-2 bg-white border border-[#E4E4E7] hover:border-[#853724] rounded-lg transition-all duration-200 text-left cursor-pointer"
               >
-                <div className="relative aspect-[3/4.2] w-full rounded-lg overflow-hidden bg-[#F5F1EB] mb-2.5">
+                <div className="aspect-[3/4.2] w-full rounded overflow-hidden bg-[#F5F1EB] mb-2">
                   <img
                     src={menu.imageUrl}
                     alt={menu.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-300"
                   />
-                  <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                    <div className="p-2 rounded-full bg-white text-[#18181B] shadow-md">
-                      <ZoomIn className="w-4 h-4" />
-                    </div>
-                  </div>
                 </div>
-
-                <span className="block text-[9px] font-mono uppercase tracking-widest text-[#853724] mb-0.5">
-                  EDITION 0{idx + 1}
-                </span>
-                <h4 className="font-serif text-sm font-normal text-[#18181B] truncate">
-                  {menu.title}
-                </h4>
-              </div>
+                <span className="block text-[9px] font-mono text-[#853724] uppercase">0{idx + 1}</span>
+                <span className="block font-serif text-xs text-[#18181B] truncate">{menu.title}</span>
+              </button>
             ))}
           </div>
-        </div>
-
-        {/* Note on adaptability & CTA */}
-        <div className="mt-16 bg-white p-6 sm:p-8 rounded-xl border border-[#E4E4E7] flex flex-col sm:flex-row items-center justify-between gap-4 text-left shadow-2xs">
-          <div className="flex items-center space-x-3">
-            <Leaf className="w-5 h-5 text-[#853724] shrink-0" />
-            <p className="text-xs sm:text-sm text-[#52525B] font-sans font-light">
-              <strong className="text-[#18181B] font-medium">Seasonal & Dietary Curation:</strong> All courses are adapted with equal reverence for vegetarian, pescatarian, and plant-forward guests during private seating drops.
-            </p>
-          </div>
-
-          <a
-            href="#supper-club"
-            className="shrink-0 px-6 py-3 bg-[#853724] text-white hover:bg-[#18181B] text-xs font-sans font-semibold uppercase tracking-widest transition-colors duration-200 rounded-lg"
-          >
-            Join Supper Club Waitlist
-          </a>
         </div>
       </div>
 
@@ -270,36 +185,29 @@ export const SampleMenu: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm p-4 sm:p-6 md:p-10 flex items-center justify-center"
+            className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm p-4 sm:p-6 flex items-center justify-center"
             onClick={() => setLightboxImage(null)}
           >
             <div
-              className="relative max-w-2xl max-h-[92vh] bg-white rounded-2xl overflow-hidden shadow-2xl p-3 sm:p-5 flex flex-col"
+              className="relative max-w-lg max-h-[92vh] bg-white rounded-xl overflow-hidden shadow-2xl p-3 sm:p-4 flex flex-col"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="flex items-center justify-between pb-3 border-b border-[#E4E4E7]">
-                <span className="font-serif text-lg text-[#18181B] font-normal">
-                  Authentic Pichhutaaney Menu Card
-                </span>
+              <div className="flex items-center justify-between pb-2 border-b border-[#E4E4E7]">
+                <span className="font-serif text-base text-[#18181B]">Pichhutaaney Menu Card</span>
                 <button
                   onClick={() => setLightboxImage(null)}
-                  className="p-1.5 rounded-full bg-[#FAFAF9] hover:bg-[#E4E4E7] text-[#18181B] transition-colors cursor-pointer"
-                  aria-label="Close modal"
+                  className="p-1 rounded bg-[#FAFAF9] hover:bg-[#E4E4E7] text-[#18181B] transition-colors cursor-pointer"
                 >
-                  <X className="w-5 h-5" />
+                  <X className="w-4 h-4" />
                 </button>
               </div>
 
-              <div className="max-h-[78vh] overflow-y-auto rounded-lg mt-3">
+              <div className="max-h-[78vh] overflow-y-auto rounded mt-2">
                 <img
                   src={lightboxImage}
-                  alt="Original Printed Menu Card"
+                  alt="Original Menu Card"
                   className="w-full h-auto object-contain mx-auto"
                 />
-              </div>
-
-              <div className="pt-3 text-center font-sans text-xs text-[#52525B]">
-                Click anywhere outside or ✕ to return to the site
               </div>
             </div>
           </motion.div>
