@@ -134,8 +134,8 @@ export const SupperClubWaitlist: React.FC<SupperClubWaitlistProps> = ({ onAddEnt
                       1
                     </span>
                     <div>
-                      <strong className="font-medium text-[#18181B] block">Exclusive Waitlist Drops</strong>
-                      <span className="text-[#52525B] font-light">Dates and seasonal themes are released to the waitlist community in private batches before public announcements.</span>
+                      <strong className="font-medium text-[#18181B] block">Private Batch Releases</strong>
+                      <span className="text-[#52525B] font-light">Dates and menus are shared with the waitlist before public announcements.</span>
                     </div>
                   </li>
 
@@ -144,8 +144,8 @@ export const SupperClubWaitlist: React.FC<SupperClubWaitlistProps> = ({ onAddEnt
                       2
                     </span>
                     <div>
-                      <strong className="font-medium text-[#18181B] block">Communal Table & Stories</strong>
-                      <span className="text-[#52525B] font-light">Guests dine together at a single long table. Enakshi personally introduces each dish, sharing the kitchen diary notes and heirloom techniques.</span>
+                      <strong className="font-medium text-[#18181B] block">One Communal Table</strong>
+                      <span className="text-[#52525B] font-light">Guests dine together intimately, sharing stories and courses cooked from instinct.</span>
                     </div>
                   </li>
 
@@ -154,8 +154,8 @@ export const SupperClubWaitlist: React.FC<SupperClubWaitlistProps> = ({ onAddEnt
                       3
                     </span>
                     <div>
-                      <strong className="font-medium text-[#18181B] block">Ever-Shifting Seasonal Menus</strong>
-                      <span className="text-[#52525B] font-light">Menus evolve continuously around Bengal’s traditional agricultural cycles and the best local harvest.</span>
+                      <strong className="font-medium text-[#18181B] block">Seasonal & Travel-Shaped</strong>
+                      <span className="text-[#52525B] font-light">Menus evolve with local harvests and memories of places lived in.</span>
                     </div>
                   </li>
                 </ul>

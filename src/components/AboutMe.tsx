@@ -34,10 +34,8 @@ const ScrollWord: React.FC<ScrollWordProps> = ({ children, progress, range, isAc
 };
 
 const RAW_PARAGRAPHS = [
-  "I come from West Bengal, where food was never merely sustenance—it was language, season, memory, and sentiment.",
-  "I do not cook from rigid formulas. I cook from raw instincts: the sizzle of mustard oil heated to its golden smoking point, the intuitive pinch of spice, the rhythm of a simmering hearth, and the wisdom of women who cooked purely by feel.",
-  "My palate has been shaped by wanderlust—by all the places I have lived in, the landscapes I have traveled through, and the diverse tables where I broke bread with strangers who became friends.",
-  "Travel has expanded my worldview, but home remains the emotional anchor that holds my cooking true. Pichhutaaney is my tribute to that anchor—an intimate space where intuition, travel-shaped recipes, and the pull of home gather around one shared table.",
+  "I cook from raw instinct and memory—guided by the sizzle of golden mustard oil, the intuitive pinch of spice, and the warmth of the hearth.",
+  "My recipes are shaped by all the places I have lived and traveled to, rooted always in the quiet emotional anchor of West Bengal.",
 ];
 
 export const AboutMe: React.FC = () => {

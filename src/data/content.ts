@@ -231,20 +231,16 @@ export const KITCHEN_DIARY_SNIPPETS = [
 
 export const FAQ_ITEMS = [
   {
-    question: "What is a supper club experience at Pichhutaaney like?",
-    answer: "An intimate, communal gathering of 10 to 14 guests around one table. Rather than a formal restaurant setting, each evening feels like stepping into a warm personal kitchen. Enakshi introduces each course, sharing the travel memories, personal kitchen notes, and intuitive instincts behind each dish."
+    question: "What is a supper club experience like?",
+    answer: "An intimate gathering of 10 to 14 guests around one communal table. Enakshi presents each course with stories of travel, memory, and instinct."
   },
   {
     question: "How does the waitlist work?",
-    answer: "Due to limited seats and seasonal menu curations, dates and menus are released in private seasonal drops to the waitlist community first. Once you join, you will receive an invitation email with upcoming dates, dietary preview, and booking links before public announcement."
+    answer: "Seating dates and themes are released in private batches directly to waitlist members before public announcement."
   },
   {
-    question: "Can dietary preferences and allergies be accommodated?",
-    answer: "Yes. Cooking by instinct allows fluid adaptation for vegetarian, pescatarian, plant-forward, and gluten-free guests. When booking, please detail your preferences and we curate tailored preparations."
-  },
-  {
-    question: "What formats do you offer for private events and celebrations?",
-    answer: "We curate bespoke in-home dinners, milestone celebrations, brand salon dining, and culinary storytelling circles. Each private event features a custom multi-course tasting menu crafted around your story, intuitive flavors, and seasonal inspirations."
+    question: "Can dietary preferences be accommodated?",
+    answer: "Yes. Menus are intuitively adapted for vegetarian, pescatarian, plant-forward, and gluten-free guests when requested in advance."
   }
 ];
 

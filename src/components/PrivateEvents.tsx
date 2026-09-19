@@ -81,10 +81,10 @@ export const PrivateEvents: React.FC<PrivateEventsProps> = ({ onAddInquiry }) =>
             <RevealText delay={0.1}>
               <div className="space-y-4">
                 <h3 className="font-serif text-2xl sm:text-3xl font-normal text-[#18181B]">
-                  Tailored Regional Experiences
+                  Tailored Experiences
                 </h3>
                 <p className="text-sm text-[#52525B] leading-relaxed font-sans font-light">
-                  Whether you are marking a landmark birthday, hosting a curated salon for creative thinkers, or celebrating an intimate wedding rehearsal, we handle every detail—from the bespoke multi-course menu design to the tablescape and historical storytelling.
+                  From custom multi-course menus to tablescapes and stories, Enakshi hosts bespoke dining experiences for private celebrations and gatherings.
                 </p>
               </div>
             </RevealText>
@@ -100,7 +100,7 @@ export const PrivateEvents: React.FC<PrivateEventsProps> = ({ onAddInquiry }) =>
                     <span className="text-[10px] uppercase tracking-[0.2em] text-[#853724] font-sans font-bold">6 – 16 Guests</span>
                   </div>
                   <p className="text-xs text-[#52525B] font-sans leading-relaxed font-light">
-                    Enakshi transforms your home kitchen into a warm sanctuary of aromas, with unhurried course-by-course presentation.
+                    A warm sanctuary of aromas with unhurried course-by-course presentation.
                   </p>
                 </div>
               </StaggerItem>
@@ -109,12 +109,12 @@ export const PrivateEvents: React.FC<PrivateEventsProps> = ({ onAddInquiry }) =>
                 <div className="p-5 bg-white border border-[#E4E4E7] transition-all duration-300 hover:border-[#853724]/50 hover:shadow-xs">
                   <div className="flex items-center justify-between mb-1.5">
                     <h4 className="font-serif text-xl font-normal text-[#18181B]">
-                      Milestones & Celebrations
+                      Milestones & Gatherings
                     </h4>
                     <span className="text-[10px] uppercase tracking-[0.2em] text-[#853724] font-sans font-bold">Up to 35 Guests</span>
                   </div>
                   <p className="text-xs text-[#52525B] font-sans leading-relaxed font-light">
-                    Curated family feasts celebrating specific regional delicacies (such as an authentic Kolkata feast or Awadhi court dinner).
+                    Curated family feasts celebrating cherished recipes and festive traditions.
                   </p>
                 </div>
               </StaggerItem>
@@ -128,7 +128,7 @@ export const PrivateEvents: React.FC<PrivateEventsProps> = ({ onAddInquiry }) =>
                     <span className="text-[10px] uppercase tracking-[0.2em] text-white/80 font-sans font-bold">Small Groups</span>
                   </div>
                   <p className="text-xs text-white/85 font-sans leading-relaxed font-light">
-                    Hands-on mastery of whole spices, stone grinding techniques, and the art of the Bengali *phoron* tempering, followed by a feast.
+                    Hands-on exploration of spice tempering, sensory cooking, and shared dining.
                   </p>
                 </div>
               </StaggerItem>

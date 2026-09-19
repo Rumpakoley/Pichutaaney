@@ -9,28 +9,28 @@ export const KitchenDiaries: React.FC = () => {
 
   const pantryStaples = [
     {
-      name: "Cold-Pressed Mustard Oil (Kachi Ghani)",
+      name: "Cold-Pressed Mustard Oil",
       bengali: "সর্ষের তেল",
-      role: "The Pungent Backbone",
-      note: "Heated to the exact smoking point to release its signature sinus-clearing warmth, defining eastern cooking."
+      role: "The Backbone",
+      note: "Heated to its smoking point to release sinus-clearing warmth and golden aroma."
     },
     {
-      name: "Panch Phoron (The Five-Spice)",
+      name: "Panch Phoron (Five-Spice)",
       bengali: "পাঁচ ফোড়ন",
-      role: "The Tempered Symphony",
-      note: "An equal blend of fenugreek, nigella, cumin, black mustard, and wild celery seed (radhuni). Never ground; tempered whole."
+      role: "The Tempering",
+      note: "Fenugreek, nigella, cumin, black mustard, and radhuni bloomed whole in hot oil."
     },
     {
       name: "White Poppy Seed (Posto)",
       bengali: "পোস্ত",
       role: "The Silken Calm",
-      note: "Crushed on stone into a velvety, cooling paste that lends nutty richness to vegetables without a single drop of dairy."
+      note: "Crushed on stone into a velvety paste lending cooling richness to vegetables."
     },
     {
-      name: "Fresh Date Palm Jaggery (Nolen Gur)",
+      name: "Date Palm Jaggery (Nolen Gur)",
       bengali: "নলেন গুড়",
       role: "The Winter Epilogue",
-      note: "Tapped fresh from date palms at dawn between December and February. Unrefined, butterscotch-scented, and irreplaceable."
+      note: "Tapped fresh at dawn in winter—unrefined, butterscotch-scented, and irreplaceable."
     }
   ];
 
