@@ -24,12 +24,12 @@ export const ScrollWord: React.FC<ScrollWordProps> = ({
     [
       isAccent
         ? isDark
-          ? 'rgba(243, 148, 126, 0.25)'
-          : 'rgba(133, 55, 36, 0.22)'
+          ? 'rgba(232, 157, 136, 0.3)'
+          : 'rgba(139, 58, 38, 0.25)'
         : isDark
-        ? 'rgba(255, 255, 255, 0.2)'
-        : 'rgba(24, 24, 27, 0.18)',
-      isAccent ? (isDark ? '#F3947E' : '#853724') : isDark ? '#FFFFFF' : '#18181B',
+        ? 'rgba(250, 246, 240, 0.2)'
+        : 'rgba(36, 30, 26, 0.2)',
+      isAccent ? (isDark ? '#E89D88' : '#8B3A26') : isDark ? '#FAF6F0' : '#241E1A',
     ]
   );
   const y = useTransform(progress, range, [3, 0]);

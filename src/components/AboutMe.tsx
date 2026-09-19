@@ -15,8 +15,8 @@ const ScrollWord: React.FC<ScrollWordProps> = ({ children, progress, range, isAc
     progress,
     range,
     [
-      isAccent ? 'rgba(133, 55, 36, 0.22)' : 'rgba(24, 24, 27, 0.18)',
-      isAccent ? '#853724' : '#18181B',
+      isAccent ? 'rgba(139, 58, 38, 0.25)' : 'rgba(36, 30, 26, 0.20)',
+      isAccent ? '#8B3A26' : '#241E1A',
     ]
   );
   const y = useTransform(progress, range, [2.5, 0]);
@@ -48,7 +48,7 @@ export const AboutMe: React.FC = () => {
 
   const progressHeight = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
 
-  // Calculate global word distribution across all 4 paragraphs
+  // Calculate global word distribution across all paragraphs
   const allParagraphWords = RAW_PARAGRAPHS.map((p) => p.split(' '));
   const totalWordsCount = allParagraphWords.reduce((acc, words) => acc + words.length, 0);
 
@@ -76,7 +76,7 @@ export const AboutMe: React.FC = () => {
   ];
 
   return (
-    <section id="about-me" className="py-20 sm:py-28 bg-[#FAFAF9] border-b border-[#E4E4E7] overflow-hidden">
+    <section id="about-me" className="py-20 sm:py-28 bg-[#F4ECE1] border-b border-[#E4D7C8] overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
@@ -86,13 +86,13 @@ export const AboutMe: React.FC = () => {
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="max-w-3xl text-left mb-16"
         >
-          <span className="block font-sans text-[10px] tracking-[0.25em] uppercase font-bold text-[#853724] mb-2">
+          <span className="block font-sans text-[10px] tracking-[0.25em] uppercase font-bold text-[#8B3A26] mb-2">
             THE INTUITIVE COOK & STORYTELLER
           </span>
-          <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl font-normal text-[#18181B] tracking-tight">
-            About Me, <span className="italic text-[#853724]">Enakshi</span>
+          <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl font-normal text-[#241E1A] tracking-tight">
+            About Me, <span className="italic text-[#8B3A26]">Enakshi</span>
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-[#52525B] font-light leading-relaxed">
+          <p className="mt-4 text-base sm:text-lg text-[#6E6258] font-light leading-relaxed">
             A cook guided by instinct, sensory memory, and recipes shaped by all the places I have lived and traveled to.
           </p>
         </motion.div>
@@ -106,8 +106,8 @@ export const AboutMe: React.FC = () => {
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             className="lg:col-span-5 space-y-4 lg:sticky lg:top-28"
           >
-            <div className="border border-[#E4E4E7] bg-white p-3 shadow-xs">
-              <div className="relative overflow-hidden bg-[#FAFAF9] group">
+            <div className="border border-[#DECFC0] bg-[#FAF6F0] p-3 shadow-xs">
+              <div className="relative overflow-hidden bg-[#F4ECE1] group">
                 <img
                   src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=900&q=80"
                   alt="Enakshi, founder and culinary host of Pichhutaaney"
@@ -116,11 +116,11 @@ export const AboutMe: React.FC = () => {
                 />
                 
                 {/* Overlay quote with clean hairline border */}
-                <div className="absolute bottom-0 inset-x-0 bg-[#18181B]/95 p-5 text-white text-left border-t border-[#18181B]">
+                <div className="absolute bottom-0 inset-x-0 bg-[#1F1A16]/95 p-5 text-[#FAF6F0] text-left border-t border-[#1F1A16]">
                   <p className="font-serif text-lg italic leading-snug">
                     “Travel has shaped me, but home is always the anchor.”
                   </p>
-                  <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-[#853724] mt-2 font-bold">
+                  <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-[#8B3A26] mt-2 font-bold">
                     Enakshi • West Bengal to the World
                   </p>
                 </div>
@@ -128,15 +128,15 @@ export const AboutMe: React.FC = () => {
             </div>
 
             {/* Micro details strip */}
-            <div className="bg-white border border-[#E4E4E7] p-4 flex items-center justify-between text-xs text-[#52525B]">
+            <div className="bg-[#FAF6F0] border border-[#DECFC0] p-4 flex items-center justify-between text-xs text-[#6E6258]">
               <div className="flex items-center space-x-2">
-                <MapPin className="w-3.5 h-3.5 text-[#853724]" />
-                <span className="font-sans text-[11px] uppercase tracking-wider font-medium">Roots in West Bengal</span>
+                <MapPin className="w-3.5 h-3.5 text-[#8B3A26]" />
+                <span className="font-sans text-[11px] uppercase tracking-wider font-medium text-[#241E1A]">Roots in West Bengal</span>
               </div>
-              <span className="text-[#E4E4E7]">/</span>
+              <span className="text-[#DECFC0]">/</span>
               <div className="flex items-center space-x-2">
-                <BookMarked className="w-3.5 h-3.5 text-[#853724]" />
-                <span className="font-sans text-[11px] uppercase tracking-wider font-medium">Heirloom Recipe Collector</span>
+                <BookMarked className="w-3.5 h-3.5 text-[#8B3A26]" />
+                <span className="font-sans text-[11px] uppercase tracking-wider font-medium text-[#241E1A]">Heirloom Recipe Collector</span>
               </div>
             </div>
           </motion.div>
@@ -149,10 +149,10 @@ export const AboutMe: React.FC = () => {
               className="relative pl-6 sm:pl-8 space-y-8"
             >
               {/* Vertical Scroll Progress Track Line */}
-              <div className="absolute left-0 top-1 bottom-1 w-[2px] bg-[#E4E4E7]">
+              <div className="absolute left-0 top-1 bottom-1 w-[2px] bg-[#DECFC0]">
                 <motion.div
                   style={{ height: progressHeight }}
-                  className="w-full bg-[#853724] transition-all origin-top"
+                  className="w-full bg-[#8B3A26] transition-all origin-top"
                 />
               </div>
 
@@ -202,27 +202,27 @@ export const AboutMe: React.FC = () => {
                   }}
                   className={`p-5 text-left border transition-all duration-300 hover:-translate-y-1 ${
                     pillar.isDark
-                      ? 'bg-[#853724] text-white border-[#853724] shadow-xs'
-                      : 'bg-white border-[#E4E4E7] hover:border-[#853724]'
+                      ? 'bg-[#8B3A26] text-[#FAF6F0] border-[#8B3A26] shadow-xs'
+                      : 'bg-[#FAF6F0] border-[#DECFC0] hover:border-[#8B3A26]'
                   }`}
                 >
                   <span
                     className={`block text-[10px] uppercase tracking-[0.25em] font-sans font-bold mb-1 ${
-                      pillar.isDark ? 'text-white/70' : 'text-[#853724]'
+                      pillar.isDark ? 'text-white/80' : 'text-[#8B3A26]'
                     }`}
                   >
                     PILLAR {pillar.number}
                   </span>
                   <h4
                     className={`font-serif text-xl font-normal ${
-                      pillar.isDark ? 'text-white' : 'text-[#18181B]'
+                      pillar.isDark ? 'text-white' : 'text-[#241E1A]'
                     }`}
                   >
                     {pillar.title}
                   </h4>
                   <p
                     className={`mt-2 text-xs font-sans leading-relaxed font-light ${
-                      pillar.isDark ? 'text-white/85' : 'text-[#52525B]'
+                      pillar.isDark ? 'text-white/90' : 'text-[#6E6258]'
                     }`}
                   >
                     {pillar.desc}
@@ -240,7 +240,7 @@ export const AboutMe: React.FC = () => {
             >
               <a
                 href="#story-of-pichhutaaney"
-                className="inline-flex items-center space-x-2 font-sans text-xs uppercase tracking-[0.2em] text-[#18181B] hover:text-[#853724] transition-colors font-semibold group"
+                className="inline-flex items-center space-x-2 font-sans text-xs uppercase tracking-[0.2em] text-[#241E1A] hover:text-[#8B3A26] transition-colors font-semibold group"
               >
                 <span>Read the regional manifesto</span>
                 <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1" />

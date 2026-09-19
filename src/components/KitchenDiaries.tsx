@@ -32,21 +32,21 @@ export const KitchenDiaries: React.FC = () => {
   ];
 
   return (
-    <section id="kitchen-diaries" className="py-20 sm:py-24 bg-[#FAFAF9] border-b border-[#E4E4E7] overflow-hidden">
+    <section id="kitchen-diaries" className="py-20 sm:py-24 bg-[#F4ECE1] border-b border-[#E4D7C8] overflow-hidden">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="max-w-2xl text-left mb-12">
           <RevealHeading>
-            <span className="block font-sans text-[10px] tracking-[0.25em] uppercase font-bold text-[#853724] mb-2">
+            <span className="block font-sans text-[10px] tracking-[0.25em] uppercase font-bold text-[#8B3A26] mb-2">
               HISTORICAL CHRONICLES
             </span>
-            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-normal text-[#18181B] tracking-tight">
-              Kitchen Diaries & <span className="italic text-[#853724]">Heirloom Notes</span>
+            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-normal text-[#241E1A] tracking-tight">
+              Kitchen Diaries & <span className="italic text-[#8B3A26]">Heirloom Notes</span>
             </h2>
           </RevealHeading>
 
           <RevealText delay={0.1}>
-            <p className="mt-2 text-sm sm:text-base text-[#52525B] font-light leading-relaxed">
+            <p className="mt-2 text-sm sm:text-base text-[#6E6258] font-light leading-relaxed">
               “Culture lives in handwritten recipes and sensory memory. That, too, is legacy.”
             </p>
           </RevealText>
@@ -57,22 +57,22 @@ export const KitchenDiaries: React.FC = () => {
           {KITCHEN_DIARY_SNIPPETS.map((snippet, idx) => (
             <div
               key={snippet.title}
-              className="bg-white border border-[#E4E4E7] p-6 flex flex-col justify-between shadow-2xs hover:border-[#853724]/40 transition-all duration-300"
+              className="bg-[#FAF6F0] border border-[#DECFC0] p-6 flex flex-col justify-between shadow-2xs hover:border-[#8B3A26]/40 transition-all duration-300"
             >
               <div className="space-y-3">
-                <div className="flex items-center justify-between text-[10px] uppercase tracking-widest text-[#853724] font-sans font-bold">
+                <div className="flex items-center justify-between text-[10px] uppercase tracking-widest text-[#8B3A26] font-sans font-bold">
                   <span>{snippet.season.split(' (')[0]}</span>
-                  <BookOpen className="w-3.5 h-3.5 text-[#A1A1AA]" />
+                  <BookOpen className="w-3.5 h-3.5 text-[#9E8E81]" />
                 </div>
-                <h3 className="font-serif text-xl font-normal text-[#18181B]">
+                <h3 className="font-serif text-xl font-normal text-[#241E1A]">
                   {snippet.title}
                 </h3>
-                <p className="font-serif italic text-base text-[#52525B] leading-relaxed">
+                <p className="font-serif italic text-base text-[#6E6258] leading-relaxed">
                   “{snippet.excerpt}”
                 </p>
               </div>
 
-              <div className="mt-6 pt-3 border-t border-[#E4E4E7] text-[10px] uppercase font-sans tracking-wider text-[#A1A1AA]">
+              <div className="mt-6 pt-3 border-t border-[#DECFC0] text-[10px] uppercase font-sans tracking-wider text-[#9E8E81]">
                 {snippet.note}
               </div>
             </div>
@@ -86,12 +86,12 @@ export const KitchenDiaries: React.FC = () => {
               key={staple.name}
               className={`p-4 border transition-all ${
                 idx === 0
-                  ? 'bg-[#853724] text-white border-[#853724]'
-                  : 'bg-white text-[#18181B] border-[#E4E4E7]'
+                  ? 'bg-[#8B3A26] text-[#FAF6F0] border-[#8B3A26]'
+                  : 'bg-[#FAF6F0] text-[#241E1A] border-[#DECFC0]'
               }`}
             >
               <div className="flex justify-between items-baseline mb-1">
-                <span className={`text-[9px] uppercase tracking-widest font-sans font-bold ${idx === 0 ? 'text-white/80' : 'text-[#853724]'}`}>
+                <span className={`text-[9px] uppercase tracking-widest font-sans font-bold ${idx === 0 ? 'text-[#FAF6F0]/80' : 'text-[#8B3A26]'}`}>
                   {staple.role}
                 </span>
                 <span className="font-bengali text-base">{staple.bengali}</span>
@@ -99,7 +99,7 @@ export const KitchenDiaries: React.FC = () => {
               <h4 className="font-serif text-base font-normal leading-snug mb-1">
                 {staple.name}
               </h4>
-              <p className={`text-xs font-sans font-light leading-relaxed ${idx === 0 ? 'text-white/85' : 'text-[#52525B]'}`}>
+              <p className={`text-xs font-sans font-light leading-relaxed ${idx === 0 ? 'text-[#FAF6F0]/85' : 'text-[#6E6258]'}`}>
                 {staple.note}
               </p>
             </div>

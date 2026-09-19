@@ -135,9 +135,9 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#09090B] p-0 sm:p-3 md:p-4 lg:p-6 text-[#18181B] font-serif selection:bg-[#853724] selection:text-white antialiased">
-      {/* Framed Geometric Canvas (Matches Template Screen & 1.png) */}
-      <div className="min-h-full max-w-[1536px] mx-auto bg-[#FAFAF9] rounded-none sm:rounded-[28px] lg:rounded-[36px] overflow-hidden shadow-2xl flex flex-col border border-[#27272A]/30">
+    <div className="min-h-screen bg-[#1F1A16] p-0 sm:p-3 md:p-4 lg:p-6 text-[#241E1A] font-serif selection:bg-[#8B3A26] selection:text-white antialiased">
+      {/* Framed Geometric Canvas (Matches Parchment & Terracotta Menu Styling) */}
+      <div className="min-h-full max-w-[1536px] mx-auto bg-[#F4ECE1] rounded-none sm:rounded-[28px] lg:rounded-[36px] overflow-hidden shadow-2xl flex flex-col border border-[#DECFC0]/40">
         {/* Navigation Header */}
         <Navbar
           onOpenLedger={() => setIsLedgerOpen(true)}

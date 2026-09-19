@@ -106,20 +106,20 @@ export const CinematicVideoReel: React.FC = () => {
   };
 
   return (
-    <section id="kitchen-reels" className="py-16 sm:py-20 md:py-24 bg-[#18181B] text-white relative overflow-hidden border-b border-[#27272A]">
+    <section id="kitchen-reels" className="py-16 sm:py-20 md:py-24 bg-[#1F1A16] text-[#FAF6F0] relative overflow-hidden border-b border-[#332A24]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12 text-left gap-4">
           <div>
-            <div className="inline-flex items-center space-x-2 text-[10px] tracking-[0.25em] uppercase font-bold text-[#F3947E] font-sans mb-2">
+            <div className="inline-flex items-center space-x-2 text-[10px] tracking-[0.25em] uppercase font-bold text-[#E89D88] font-sans mb-2">
               <Film className="w-3.5 h-3.5" />
               <span>THE LIVING KITCHEN IN MOTION</span>
             </div>
-            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-normal tracking-tight text-white">
-              Scent, Sizzle & <span className="italic text-[#F3947E]">The Hearth</span>
+            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-normal tracking-tight text-[#FAF6F0]">
+              Scent, Sizzle & <span className="italic text-[#E89D88]">The Hearth</span>
             </h2>
           </div>
-          <p className="max-w-md text-xs sm:text-sm text-[#A1A1AA] font-light leading-relaxed font-sans">
+          <p className="max-w-md text-xs sm:text-sm text-[#C9B9A6] font-light leading-relaxed font-sans">
             Glimpses from Enakshi’s private kitchen—where spices crackle in golden mustard oil and recipes come alive through raw instinct.
           </p>
         </div>
@@ -130,7 +130,7 @@ export const CinematicVideoReel: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-50px' }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="relative rounded-2xl sm:rounded-3xl overflow-hidden bg-black border border-white/15 shadow-2xl group"
+          className="relative rounded-2xl sm:rounded-3xl overflow-hidden bg-black border border-[#3E342D] shadow-2xl group"
         >
           <div className="relative aspect-video sm:aspect-[21/9] w-full overflow-hidden bg-black">
             <video
@@ -148,7 +148,7 @@ export const CinematicVideoReel: React.FC = () => {
 
             {/* Top Tag Bar */}
             <div className="absolute top-4 sm:top-6 left-4 sm:left-6 flex items-center space-x-2">
-              <span className="bg-[#18181B]/80 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-mono tracking-widest uppercase border border-white/20 text-[#F3947E]">
+              <span className="bg-[#1F1A16]/80 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-mono tracking-widest uppercase border border-white/20 text-[#E89D88]">
                 {activeVideo.tag}
               </span>
             </div>
@@ -156,22 +156,22 @@ export const CinematicVideoReel: React.FC = () => {
             {/* Bottom Overlay Info & Controls */}
             <div className="absolute bottom-0 inset-x-0 p-4 sm:p-6 md:p-8 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4">
               <div className="text-left space-y-1.5 max-w-xl">
-                <span className="text-[10px] uppercase tracking-[0.25em] text-[#F3947E] font-bold font-sans">
+                <span className="text-[10px] uppercase tracking-[0.25em] text-[#E89D88] font-bold font-sans">
                   {activeVideo.title}
                 </span>
                 <p className="font-serif italic text-lg sm:text-2xl text-white leading-snug">
                   {activeVideo.quote}
                 </p>
-                <p className="text-xs text-[#A1A1AA] font-sans font-light hidden sm:block">
+                <p className="text-xs text-[#C9B9A6] font-sans font-light hidden sm:block">
                   {activeVideo.subtitle}
                 </p>
               </div>
 
               {/* Floating Controls Bar */}
-              <div className="flex items-center space-x-3 bg-[#18181B]/85 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 text-xs text-white">
+              <div className="flex items-center space-x-3 bg-[#1F1A16]/85 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 text-xs text-white">
                 <button
                   onClick={togglePlay}
-                  className="flex items-center space-x-1.5 hover:text-[#F3947E] transition-colors p-1"
+                  className="flex items-center space-x-1.5 hover:text-[#E89D88] transition-colors p-1"
                   aria-label={isPlaying ? "Pause video" : "Play video"}
                 >
                   {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4 fill-current" />}
@@ -184,7 +184,7 @@ export const CinematicVideoReel: React.FC = () => {
 
                 <button
                   onClick={toggleMute}
-                  className="flex items-center space-x-1.5 hover:text-[#F3947E] transition-colors p-1"
+                  className="flex items-center space-x-1.5 hover:text-[#E89D88] transition-colors p-1"
                   aria-label={isMuted ? "Unmute audio" : "Mute audio"}
                 >
                   {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
@@ -197,7 +197,7 @@ export const CinematicVideoReel: React.FC = () => {
 
                 <button
                   onClick={handleFullScreen}
-                  className="hover:text-[#F3947E] transition-colors p-1"
+                  className="hover:text-[#E89D88] transition-colors p-1"
                   aria-label="Fullscreen"
                 >
                   <Maximize className="w-4 h-4" />
@@ -210,10 +210,10 @@ export const CinematicVideoReel: React.FC = () => {
         {/* 6-Video Reel Selector Strip */}
         <div className="mt-8 sm:mt-10">
           <div className="flex items-center justify-between mb-4">
-            <span className="text-[10px] uppercase font-mono tracking-[0.25em] text-[#A1A1AA]">
+            <span className="text-[10px] uppercase font-mono tracking-[0.25em] text-[#C9B9A6]">
               SELECT A KITCHEN REEL ({CLIENT_VIDEOS.length} CLIPS)
             </span>
-            <span className="text-[10px] font-mono text-[#F3947E]">
+            <span className="text-[10px] font-mono text-[#E89D88]">
               CLIP {activeIndex + 1} OF {CLIENT_VIDEOS.length}
             </span>
           </div>
@@ -227,8 +227,8 @@ export const CinematicVideoReel: React.FC = () => {
                   onClick={() => setActiveIndex(idx)}
                   className={`group relative rounded-xl sm:rounded-2xl overflow-hidden p-3 text-left border transition-all duration-300 ${
                     isActive
-                      ? 'bg-[#27272A] border-[#F3947E] shadow-md ring-1 ring-[#F3947E]'
-                      : 'bg-[#18181B] border-white/10 hover:border-white/30'
+                      ? 'bg-[#2E2721] border-[#E89D88] shadow-md ring-1 ring-[#E89D88]'
+                      : 'bg-[#1F1A16] border-[#3E342D] hover:border-white/30'
                   }`}
                 >
                   {/* Thumbnail Video Preview */}
@@ -240,19 +240,19 @@ export const CinematicVideoReel: React.FC = () => {
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-                      <div className={`p-1.5 rounded-full ${isActive ? 'bg-[#F3947E] text-[#18181B]' : 'bg-white/30 text-white'}`}>
+                      <div className={`p-1.5 rounded-full ${isActive ? 'bg-[#E89D88] text-[#1F1A16]' : 'bg-white/30 text-white'}`}>
                         <Play className="w-3.5 h-3.5 fill-current" />
                       </div>
                     </div>
                   </div>
 
-                  <span className="block text-[9.5px] font-mono uppercase tracking-widest text-[#F3947E] mb-0.5">
+                  <span className="block text-[9.5px] font-mono uppercase tracking-widest text-[#E89D88] mb-0.5">
                     REEL 0{idx + 1}
                   </span>
                   <h4 className="font-serif text-sm sm:text-base font-normal text-white truncate">
                     {video.title}
                   </h4>
-                  <p className="text-[10.5px] text-[#A1A1AA] font-sans font-light line-clamp-1 mt-0.5">
+                  <p className="text-[10.5px] text-[#C9B9A6] font-sans font-light line-clamp-1 mt-0.5">
                     {video.subtitle}
                   </p>
                 </button>
