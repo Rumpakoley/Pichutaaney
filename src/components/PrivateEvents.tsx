@@ -75,81 +75,54 @@ export const PrivateEvents: React.FC<PrivateEventsProps> = ({ onAddInquiry }) =>
           </RevealText>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          {/* Left Column: Event Archetypes & Visual Editorial */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+          {/* Left Column: Event Archetypes */}
           <div className="lg:col-span-5 space-y-6 text-left">
-            <RevealText delay={0.1}>
-              <div className="space-y-4">
-                <h3 className="font-serif text-2xl sm:text-3xl font-normal text-[#18181B]">
-                  Tailored Experiences
-                </h3>
-                <p className="text-sm text-[#52525B] leading-relaxed font-sans font-light">
-                  From custom multi-course menus to tablescapes and stories, Enakshi hosts bespoke dining experiences for private celebrations and gatherings.
-                </p>
+            <div className="space-y-4">
+              <h3 className="font-serif text-2xl sm:text-3xl font-normal text-[#18181B]">
+                Tailored Gatherings
+              </h3>
+              <p className="text-sm text-[#52525B] leading-relaxed font-sans font-light">
+                From custom multi-course tasting menus to tablescapes and stories, Enakshi hosts bespoke dining experiences for private celebrations.
+              </p>
+            </div>
+
+            {/* Event Formats */}
+            <div className="space-y-3">
+              <div className="p-4 bg-white border border-[#E4E4E7] flex items-center justify-between">
+                <div>
+                  <h4 className="font-serif text-lg font-normal text-[#18181B]">Intimate In-Home Dinners</h4>
+                  <p className="text-xs text-[#52525B] font-sans font-light">Unhurried course-by-course presentation in your home.</p>
+                </div>
+                <span className="text-[10px] uppercase tracking-wider text-[#853724] font-bold shrink-0 ml-3">6–16 Guests</span>
               </div>
-            </RevealText>
 
-            {/* Event Formats Grid */}
-            <StaggerContainer staggerDelay={0.1} className="space-y-4">
-              <StaggerItem>
-                <div className="p-5 bg-white border border-[#E4E4E7] transition-all duration-300 hover:border-[#853724]/50 hover:shadow-xs">
-                  <div className="flex items-center justify-between mb-1.5">
-                    <h4 className="font-serif text-xl font-normal text-[#18181B]">
-                      Intimate In-Home Dinners
-                    </h4>
-                    <span className="text-[10px] uppercase tracking-[0.2em] text-[#853724] font-sans font-bold">6 – 16 Guests</span>
-                  </div>
-                  <p className="text-xs text-[#52525B] font-sans leading-relaxed font-light">
-                    A warm sanctuary of aromas with unhurried course-by-course presentation.
-                  </p>
+              <div className="p-4 bg-white border border-[#E4E4E7] flex items-center justify-between">
+                <div>
+                  <h4 className="font-serif text-lg font-normal text-[#18181B]">Milestones & Celebrations</h4>
+                  <p className="text-xs text-[#52525B] font-sans font-light">Curated feasts celebrating cherished family recipes.</p>
                 </div>
-              </StaggerItem>
-
-              <StaggerItem>
-                <div className="p-5 bg-white border border-[#E4E4E7] transition-all duration-300 hover:border-[#853724]/50 hover:shadow-xs">
-                  <div className="flex items-center justify-between mb-1.5">
-                    <h4 className="font-serif text-xl font-normal text-[#18181B]">
-                      Milestones & Gatherings
-                    </h4>
-                    <span className="text-[10px] uppercase tracking-[0.2em] text-[#853724] font-sans font-bold">Up to 35 Guests</span>
-                  </div>
-                  <p className="text-xs text-[#52525B] font-sans leading-relaxed font-light">
-                    Curated family feasts celebrating cherished recipes and festive traditions.
-                  </p>
-                </div>
-              </StaggerItem>
-
-              <StaggerItem>
-                <div className="p-5 bg-[#853724] text-white border border-[#853724] transition-all duration-300 hover:shadow-md">
-                  <div className="flex items-center justify-between mb-1.5">
-                    <h4 className="font-serif text-xl font-normal text-white">
-                      Interactive Cooking Circles
-                    </h4>
-                    <span className="text-[10px] uppercase tracking-[0.2em] text-white/80 font-sans font-bold">Small Groups</span>
-                  </div>
-                  <p className="text-xs text-white/85 font-sans leading-relaxed font-light">
-                    Hands-on exploration of spice tempering, sensory cooking, and shared dining.
-                  </p>
-                </div>
-              </StaggerItem>
-            </StaggerContainer>
-
-            {/* Image accent */}
-            <RevealText delay={0.25}>
-              <div className="relative overflow-hidden border border-[#E4E4E7] bg-white p-2">
-                <img
-                  src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80"
-                  alt="Intimate candlelit dining table ready for a private supper"
-                  referrerPolicy="no-referrer"
-                  className="w-full h-48 object-cover filter contrast-[1.02] hover:scale-105 transition-transform duration-700"
-                />
-                <div className="p-3 bg-[#FAFAF9] border-t border-[#E4E4E7]">
-                  <span className="text-xs text-[#52525B] font-serif italic">
-                    “Every table is curated uniquely; no two private menus are ever identical.”
-                  </span>
-                </div>
+                <span className="text-[10px] uppercase tracking-wider text-[#853724] font-bold shrink-0 ml-3">Up to 35</span>
               </div>
-            </RevealText>
+
+              <div className="p-4 bg-[#853724] text-white border border-[#853724] flex items-center justify-between">
+                <div>
+                  <h4 className="font-serif text-lg font-normal text-white">Interactive Cooking Circles</h4>
+                  <p className="text-xs text-white/85 font-sans font-light">Sensory cooking, spice tempering, and shared feast.</p>
+                </div>
+                <span className="text-[10px] uppercase tracking-wider text-white/80 font-bold shrink-0 ml-3">Small Groups</span>
+              </div>
+            </div>
+
+            {/* Atmosphere photo */}
+            <div className="relative overflow-hidden border border-[#E4E4E7] bg-white p-2">
+              <img
+                src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80"
+                alt="Intimate candlelit dining table ready for a private supper"
+                referrerPolicy="no-referrer"
+                className="w-full h-40 object-cover filter contrast-[1.02]"
+              />
+            </div>
           </div>
 
           {/* Right Column: Private Event Inquiry Form */}
@@ -161,7 +134,7 @@ export const PrivateEvents: React.FC<PrivateEventsProps> = ({ onAddInquiry }) =>
                   <CheckCircle2 className="w-8 h-8 text-[#853724]" />
                   <div>
                     <h3 className="font-serif text-2xl sm:text-3xl font-normal text-[#18181B]">
-                      Private Event Inquiry Received
+                      Inquiry Received
                     </h3>
                     <p className="text-xs text-[#52525B] font-sans">
                       Thank you, {submittedInquiry.fullName}. Enakshi will review your gathering details.
@@ -171,7 +144,7 @@ export const PrivateEvents: React.FC<PrivateEventsProps> = ({ onAddInquiry }) =>
 
                 <div className="bg-[#FAFAF9] border border-[#E4E4E7] p-5 space-y-2.5 font-sans text-xs">
                   <div className="flex justify-between items-center border-b border-[#E4E4E7] pb-2">
-                    <span className="text-[#853724] uppercase font-bold tracking-wider text-[10px]">Inquiry Reference</span>
+                    <span className="text-[#853724] uppercase font-bold tracking-wider text-[10px]">Reference</span>
                     <span className="font-mono font-bold text-[#18181B] bg-white px-2 py-0.5 border border-[#E4E4E7]">
                       {submittedInquiry.id}
                     </span>
@@ -188,20 +161,8 @@ export const PrivateEvents: React.FC<PrivateEventsProps> = ({ onAddInquiry }) =>
                       <span className="text-[#A1A1AA] block text-[10px] uppercase tracking-wider">Guests</span>
                       <span className="font-medium text-[#18181B]">{submittedInquiry.guestCount} Guests</span>
                     </div>
-                    <div>
-                      <span className="text-[#A1A1AA] block text-[10px] uppercase tracking-wider">Target Date</span>
-                      <span className="font-medium text-[#18181B]">{submittedInquiry.preferredDate}</span>
-                    </div>
-                    <div>
-                      <span className="text-[#A1A1AA] block text-[10px] uppercase tracking-wider">Location</span>
-                      <span className="font-medium text-[#18181B]">{submittedInquiry.locationOrVenue}</span>
-                    </div>
                   </div>
                 </div>
-
-                <p className="text-xs text-[#52525B] font-sans leading-relaxed font-light">
-                  Enakshi will reach out via email or phone within <strong>24 to 48 hours</strong> to discuss date availability, custom seasonal menu possibilities, and dietary curation.
-                </p>
 
                 <div className="pt-2">
                   <button
@@ -227,23 +188,23 @@ export const PrivateEvents: React.FC<PrivateEventsProps> = ({ onAddInquiry }) =>
                 </div>
               </div>
             ) : (
-              /* The Private Event Inquiry Form */
+              /* Clean Private Event Inquiry Form */
               <form
                 onSubmit={handleSubmit}
                 id="private-events-inquiry-form"
-                className="bg-white border border-[#E4E4E7] p-6 sm:p-8 text-left space-y-5 font-sans"
+                className="bg-white border border-[#E4E4E7] p-6 sm:p-8 text-left space-y-4 font-sans"
               >
                 <div className="border-b border-[#E4E4E7] pb-4">
                   <h3 className="font-serif text-2xl sm:text-3xl font-normal text-[#18181B]">
                     Inquire About a Private Dining Experience
                   </h3>
                   <p className="text-xs text-[#52525B] font-sans mt-1 font-light">
-                    Share your vision, preferred timeline, and guest size. We’ll design an unforgettable table.
+                    Share your vision, preferred timeline, and guest count. We’ll design an unforgettable table.
                   </p>
                 </div>
 
-                {/* Name, Email, Phone */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                {/* Name, Email */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-[10px] font-sans font-bold uppercase tracking-widest text-[#18181B] mb-1.5">
                       Your Name <span className="text-[#853724]">*</span>
@@ -254,40 +215,56 @@ export const PrivateEvents: React.FC<PrivateEventsProps> = ({ onAddInquiry }) =>
                       placeholder="e.g. Rohan Sen"
                       value={formData.fullName}
                       onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                      className="w-full px-3 py-2.5 bg-white border border-[#E4E4E7] text-sm text-[#18181B] placeholder:text-[#A1A1AA] focus:outline-none focus:border-[#18181B]"
+                      className="w-full px-3.5 py-2.5 bg-white border border-[#E4E4E7] text-sm text-[#18181B] placeholder:text-[#A1A1AA] focus:outline-none focus:border-[#18181B]"
                     />
                   </div>
 
                   <div>
                     <label className="block text-[10px] font-sans font-bold uppercase tracking-widest text-[#18181B] mb-1.5">
-                      Email <span className="text-[#853724]">*</span>
+                      Email Address <span className="text-[#853724]">*</span>
                     </label>
                     <input
                       type="email"
                       required
-                      placeholder="rohan@example.com"
+                      placeholder="you@example.com"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full px-3 py-2.5 bg-white border border-[#E4E4E7] text-sm text-[#18181B] placeholder:text-[#A1A1AA] focus:outline-none focus:border-[#18181B]"
+                      className="w-full px-3.5 py-2.5 bg-white border border-[#E4E4E7] text-sm text-[#18181B] placeholder:text-[#A1A1AA] focus:outline-none focus:border-[#18181B]"
+                    />
+                  </div>
+                </div>
+
+                {/* Phone & Date */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-[10px] font-sans font-bold uppercase tracking-widest text-[#18181B] mb-1.5">
+                      Phone / WhatsApp <span className="text-[#853724]">*</span>
+                    </label>
+                    <input
+                      type="tel"
+                      required
+                      placeholder="+1 (555) 000-0000"
+                      value={formData.phone}
+                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                      className="w-full px-3.5 py-2.5 bg-white border border-[#E4E4E7] text-sm text-[#18181B] placeholder:text-[#A1A1AA] focus:outline-none focus:border-[#18181B]"
                     />
                   </div>
 
                   <div>
                     <label className="block text-[10px] font-sans font-bold uppercase tracking-widest text-[#18181B] mb-1.5">
-                      Phone Number <span className="text-[#853724]">*</span>
+                      Estimated Date & Location
                     </label>
                     <input
-                      type="tel"
-                      required
-                      placeholder="+1 (555) 234-5678"
-                      value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full px-3 py-2.5 bg-white border border-[#E4E4E7] text-sm text-[#18181B] placeholder:text-[#A1A1AA] focus:outline-none focus:border-[#18181B]"
+                      type="text"
+                      placeholder="e.g. Nov 2026, San Francisco"
+                      value={formData.preferredDate}
+                      onChange={(e) => setFormData({ ...formData, preferredDate: e.target.value })}
+                      className="w-full px-3.5 py-2.5 bg-white border border-[#E4E4E7] text-sm text-[#18181B] placeholder:text-[#A1A1AA] focus:outline-none focus:border-[#18181B]"
                     />
                   </div>
                 </div>
 
-                {/* Event Type & Guests */}
+                {/* Event Format & Guest Count */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-[10px] font-sans font-bold uppercase tracking-widest text-[#18181B] mb-1.5">
@@ -296,90 +273,41 @@ export const PrivateEvents: React.FC<PrivateEventsProps> = ({ onAddInquiry }) =>
                     <select
                       value={formData.eventType}
                       onChange={(e) => setFormData({ ...formData, eventType: e.target.value as any })}
-                      className="w-full px-3 py-2.5 bg-white border border-[#E4E4E7] text-sm text-[#18181B] focus:outline-none focus:border-[#18181B]"
+                      className="w-full px-3.5 py-2.5 bg-white border border-[#E4E4E7] text-sm text-[#18181B] focus:outline-none focus:border-[#18181B]"
                     >
-                      <option value="intimate_dinner">Intimate In-Home Dinner (6-16 guests)</option>
-                      <option value="celebration">Milestone Celebration / Birthday / Anniversary</option>
+                      <option value="intimate_dinner">Intimate In-Home Dinner (6–16 guests)</option>
+                      <option value="celebration">Milestone / Birthday / Anniversary</option>
                       <option value="curated_gathering">Brand / Salon Dining Gathering</option>
-                      <option value="workshop">Interactive Cooking Circle & Tasting</option>
-                      <option value="other">Other Bespoke Collaboration</option>
+                      <option value="workshop">Interactive Cooking Circle</option>
                     </select>
                   </div>
 
                   <div>
                     <label className="block text-[10px] font-sans font-bold uppercase tracking-widest text-[#18181B] mb-1.5">
-                      Estimated Guest Count: <span className="font-bold text-[#853724]">{formData.guestCount}</span>
+                      Approximate Guests
                     </label>
                     <input
-                      type="range"
-                      min={4}
-                      max={40}
-                      step={1}
+                      type="number"
+                      min={2}
+                      max={50}
                       value={formData.guestCount}
                       onChange={(e) => setFormData({ ...formData, guestCount: Number(e.target.value) })}
-                      className="w-full accent-[#853724] h-2 bg-[#E4E4E7] cursor-pointer mt-3"
-                    />
-                    <div className="flex justify-between text-[10px] text-[#A1A1AA] mt-1 uppercase tracking-wider">
-                      <span>4 Guests</span>
-                      <span>20 Guests</span>
-                      <span>40 Guests</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Date and Location */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-[10px] font-sans font-bold uppercase tracking-widest text-[#18181B] mb-1.5">
-                      Target Date / Timeframe
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="e.g. October 18 or 'Mid-November weekend'"
-                      value={formData.preferredDate}
-                      onChange={(e) => setFormData({ ...formData, preferredDate: e.target.value })}
-                      className="w-full px-3 py-2.5 bg-white border border-[#E4E4E7] text-sm text-[#18181B] placeholder:text-[#A1A1AA] focus:outline-none focus:border-[#18181B]"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-[10px] font-sans font-bold uppercase tracking-widest text-[#18181B] mb-1.5">
-                      Location / City / Venue
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="e.g. Private residence in Marin County / London / Kolkata"
-                      value={formData.locationOrVenue}
-                      onChange={(e) => setFormData({ ...formData, locationOrVenue: e.target.value })}
-                      className="w-full px-3 py-2.5 bg-white border border-[#E4E4E7] text-sm text-[#18181B] placeholder:text-[#A1A1AA] focus:outline-none focus:border-[#18181B]"
+                      className="w-full px-3.5 py-2.5 bg-white border border-[#E4E4E7] text-sm text-[#18181B] focus:outline-none focus:border-[#18181B]"
                     />
                   </div>
                 </div>
 
-                {/* Dietary and Storytelling Vision */}
+                {/* Vision Notes */}
                 <div>
                   <label className="block text-[10px] font-sans font-bold uppercase tracking-widest text-[#18181B] mb-1.5">
-                    Dietary Framework or Specific Requests
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="e.g. 8 omnivores, 2 pescatarians, 1 shellfish allergy"
-                    value={formData.dietaryRestrictions}
-                    onChange={(e) => setFormData({ ...formData, dietaryRestrictions: e.target.value })}
-                    className="w-full px-3 py-2.5 bg-white border border-[#E4E4E7] text-sm text-[#18181B] placeholder:text-[#A1A1AA] focus:outline-none focus:border-[#18181B]"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-[10px] font-sans font-bold uppercase tracking-widest text-[#18181B] mb-1.5">
-                    Tell us about the occasion & culinary vision
+                    Tell us about the occasion <span className="font-normal text-[#A1A1AA]">(Optional)</span>
                   </label>
                   <textarea
-                    rows={3}
-                    placeholder="What kind of mood or narrative are you hoping to evoke? Any specific regional dishes or memories you would love to highlight?"
+                    rows={2}
+                    placeholder="Any specific dishes, memories, or dietary preferences you'd like to include..."
                     value={formData.storytellingNotes}
                     onChange={(e) => setFormData({ ...formData, storytellingNotes: e.target.value })}
-                    className="w-full px-3 py-2.5 bg-white border border-[#E4E4E7] text-sm text-[#18181B] placeholder:text-[#A1A1AA] focus:outline-none focus:border-[#18181B]"
+                    className="w-full px-3.5 py-2.5 bg-white border border-[#E4E4E7] text-sm text-[#18181B] placeholder:text-[#A1A1AA] focus:outline-none focus:border-[#18181B]"
                   />
                 </div>
 
@@ -388,13 +316,10 @@ export const PrivateEvents: React.FC<PrivateEventsProps> = ({ onAddInquiry }) =>
                     type="submit"
                     disabled={isSubmitting}
                     id="submit-private-event-btn"
-                    className="w-full py-3.5 bg-[#853724] text-white hover:bg-[#18181B] font-sans text-xs font-semibold uppercase tracking-widest transition-colors disabled:opacity-50"
+                    className="w-full py-3.5 bg-[#853724] text-white hover:bg-[#18181B] font-sans text-xs font-semibold uppercase tracking-widest transition-colors disabled:opacity-50 cursor-pointer"
                   >
                     {isSubmitting ? 'Sending inquiry...' : 'Send Private Event Inquiry'}
                   </button>
-                  <p className="text-center text-[10px] font-sans text-[#A1A1AA] mt-2 uppercase tracking-wider">
-                    Enakshi reviews each inquiry personally and will respond with menu concepts and date options.
-                  </p>
                 </div>
               </form>
             )}

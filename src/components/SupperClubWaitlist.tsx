@@ -119,84 +119,57 @@ export const SupperClubWaitlist: React.FC<SupperClubWaitlistProps> = ({ onAddEnt
           </RevealText>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          {/* Left Column: What to Expect & Rituals */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+          {/* Left Column: Essential Details */}
           <div className="lg:col-span-5 space-y-6 text-left">
-            <RevealText delay={0.1}>
-              <div className="bg-white border border-[#E4E4E7] p-6 sm:p-8 space-y-6 shadow-2xs">
-                <h3 className="font-serif text-2xl sm:text-3xl font-normal text-[#18181B]">
-                  How the Supper Club Works
-                </h3>
+            <div className="bg-white border border-[#E4E4E7] p-6 sm:p-8 space-y-6 shadow-2xs">
+              <h3 className="font-serif text-2xl sm:text-3xl font-normal text-[#18181B]">
+                The Supper Club Experience
+              </h3>
 
-                <ul className="space-y-4 text-xs sm:text-sm text-[#52525B] font-sans">
-                  <li className="flex items-start space-x-3">
-                    <span className="w-6 h-6 border border-[#E4E4E7] bg-[#FAFAF9] text-[#18181B] flex items-center justify-center font-serif text-xs shrink-0 mt-0.5 font-bold">
-                      1
-                    </span>
-                    <div>
-                      <strong className="font-medium text-[#18181B] block">Private Batch Releases</strong>
-                      <span className="text-[#52525B] font-light">Dates and menus are shared with the waitlist before public announcements.</span>
-                    </div>
-                  </li>
-
-                  <li className="flex items-start space-x-3">
-                    <span className="w-6 h-6 border border-[#E4E4E7] bg-[#FAFAF9] text-[#18181B] flex items-center justify-center font-serif text-xs shrink-0 mt-0.5 font-bold">
-                      2
-                    </span>
-                    <div>
-                      <strong className="font-medium text-[#18181B] block">One Communal Table</strong>
-                      <span className="text-[#52525B] font-light">Guests dine together intimately, sharing stories and courses cooked from instinct.</span>
-                    </div>
-                  </li>
-
-                  <li className="flex items-start space-x-3">
-                    <span className="w-6 h-6 border border-[#E4E4E7] bg-[#FAFAF9] text-[#18181B] flex items-center justify-center font-serif text-xs shrink-0 mt-0.5 font-bold">
-                      3
-                    </span>
-                    <div>
-                      <strong className="font-medium text-[#18181B] block">Seasonal & Travel-Shaped</strong>
-                      <span className="text-[#52525B] font-light">Menus evolve with local harvests and memories of places lived in.</span>
-                    </div>
-                  </li>
-                </ul>
-
-                <div className="pt-4 border-t border-[#E4E4E7] flex items-center justify-between text-xs text-[#52525B] font-sans">
-                  <span className="flex items-center space-x-1.5">
-                    <Users className="w-4 h-4 text-[#853724]" />
-                    <span className="uppercase tracking-wider text-[10px]">Max 14 Guests per seating</span>
+              <ul className="space-y-4 text-xs sm:text-sm text-[#52525B] font-sans">
+                <li className="flex items-start space-x-3">
+                  <span className="w-6 h-6 border border-[#E4E4E7] bg-[#FAFAF9] text-[#853724] flex items-center justify-center font-serif text-xs shrink-0 mt-0.5 font-bold">
+                    01
                   </span>
-                  <span className="flex items-center space-x-1.5">
-                    <Clock className="w-4 h-4 text-[#853724]" />
-                    <span className="uppercase tracking-wider text-[10px]">~3 Hours Experience</span>
+                  <div>
+                    <strong className="font-medium text-[#18181B] block">Private Batch Releases</strong>
+                    <span className="text-[#52525B] font-light">Dates and menus are shared with waitlist members before public announcements.</span>
+                  </div>
+                </li>
+
+                <li className="flex items-start space-x-3">
+                  <span className="w-6 h-6 border border-[#E4E4E7] bg-[#FAFAF9] text-[#853724] flex items-center justify-center font-serif text-xs shrink-0 mt-0.5 font-bold">
+                    02
                   </span>
-                </div>
-              </div>
-            </RevealText>
+                  <div>
+                    <strong className="font-medium text-[#18181B] block">One Communal Table</strong>
+                    <span className="text-[#52525B] font-light">Guests dine together intimately, sharing stories and courses cooked from instinct.</span>
+                  </div>
+                </li>
 
-            {/* Quote testimonial box */}
-            <RevealText delay={0.2}>
-              <div className="border-l-2 border-[#853724] pl-5 py-2">
-                <p className="font-serif italic text-lg sm:text-xl text-[#18181B] leading-snug">
-                  “It felt less like a ticketed dinner and more like being welcomed into an ancestral dining room where every course unlocked a story.”
-                </p>
-                <span className="text-[10px] uppercase tracking-[0.2em] text-[#853724] mt-2 block font-sans font-bold">
-                  — Past Supper Club Guest
-                </span>
-              </div>
-            </RevealText>
+                <li className="flex items-start space-x-3">
+                  <span className="w-6 h-6 border border-[#E4E4E7] bg-[#FAFAF9] text-[#853724] flex items-center justify-center font-serif text-xs shrink-0 mt-0.5 font-bold">
+                    03
+                  </span>
+                  <div>
+                    <strong className="font-medium text-[#18181B] block">Seasonal & Travel-Shaped</strong>
+                    <span className="text-[#52525B] font-light">Menus evolve with local harvests and memories of places lived in.</span>
+                  </div>
+                </li>
+              </ul>
 
-            {/* Waitlist stats badge */}
-            <RevealText delay={0.25}>
-              <div className="p-4 bg-white border border-[#E4E4E7] flex items-center justify-between text-xs text-[#52525B] font-sans">
-                <span className="flex items-center space-x-2">
-                  <span className="w-2 h-2 bg-[#853724] rounded-full animate-pulse" />
-                  <span>Waitlist active for upcoming seasonal drops</span>
+              <div className="pt-4 border-t border-[#E4E4E7] flex items-center justify-between text-xs text-[#52525B] font-sans">
+                <span className="flex items-center space-x-1.5">
+                  <Users className="w-4 h-4 text-[#853724]" />
+                  <span className="uppercase tracking-wider text-[10px]">10–14 Guests</span>
                 </span>
-                <span className="font-semibold uppercase tracking-wider text-[11px] text-[#18181B]">
-                  {existingEntriesCount > 0 ? `${existingEntriesCount} on list` : 'Early access open'}
+                <span className="flex items-center space-x-1.5">
+                  <Clock className="w-4 h-4 text-[#853724]" />
+                  <span className="uppercase tracking-wider text-[10px]">~3 Hours Dining</span>
                 </span>
               </div>
-            </RevealText>
+            </div>
           </div>
 
           {/* Right Column: Waitlist Submission Form / Confirmation */}
@@ -242,22 +215,10 @@ export const SupperClubWaitlist: React.FC<SupperClubWaitlistProps> = ({ onAddEnt
                       <span className="text-[#A1A1AA] block text-[10px] uppercase tracking-wider">Party Size</span>
                       <span className="font-medium text-[#18181B]">{submittedEntry.partySize} {submittedEntry.partySize === 1 ? 'Guest' : 'Guests'}</span>
                     </div>
-                    <div>
-                      <span className="text-[#A1A1AA] block text-[10px] uppercase tracking-wider">City</span>
-                      <span className="font-medium text-[#18181B]">{submittedEntry.city}</span>
-                    </div>
-                    <div>
-                      <span className="text-[#A1A1AA] block text-[10px] uppercase tracking-wider">Dietary</span>
-                      <span className="font-medium text-[#18181B]">{submittedEntry.dietaryPreferences.join(', ')}</span>
-                    </div>
                   </div>
                 </div>
 
-                <p className="text-xs text-[#52525B] font-sans leading-relaxed font-light">
-                  As soon as the next seasonal dates are finalized, Enakshi will send a private booking link directly to <strong>{submittedEntry.email}</strong> before open release.
-                </p>
-
-                <div className="pt-2 flex flex-wrap gap-3">
+                <div className="pt-2">
                   <button
                     onClick={() => {
                       setSubmittedEntry(null);
@@ -275,17 +236,10 @@ export const SupperClubWaitlist: React.FC<SupperClubWaitlistProps> = ({ onAddEnt
                   >
                     Add Another Party
                   </button>
-
-                  <a
-                    href="#story-of-pichhutaaney"
-                    className="px-6 py-3 text-[11px] font-sans uppercase tracking-widest text-[#18181B] border border-[#E4E4E7] hover:border-[#18181B] transition-colors"
-                  >
-                    Explore Philosophy
-                  </a>
                 </div>
               </div>
             ) : (
-              /* The Waitlist Form */
+              /* Clean Minimal Waitlist Form */
               <form
                 onSubmit={handleSubmit}
                 id="supper-club-waitlist-form"
@@ -296,7 +250,7 @@ export const SupperClubWaitlist: React.FC<SupperClubWaitlistProps> = ({ onAddEnt
                     Join the Priority Waitlist
                   </h3>
                   <p className="text-xs text-[#52525B] font-sans mt-1 font-light">
-                    First notice on upcoming intimate seatings, seasonal menus, and private guest invitations.
+                    Receive first notice on upcoming seatings, seasonal menus, and private invitations.
                   </p>
                 </div>
 
@@ -309,7 +263,7 @@ export const SupperClubWaitlist: React.FC<SupperClubWaitlistProps> = ({ onAddEnt
                     <input
                       type="text"
                       required
-                      placeholder="e.g. Sreya Mukherjee"
+                      placeholder="Your name"
                       value={formData.fullName}
                       onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                       className="w-full px-3.5 py-2.5 bg-white border border-[#E4E4E7] text-sm text-[#18181B] placeholder:text-[#A1A1AA] focus:outline-none focus:border-[#18181B] transition-colors font-sans"
@@ -348,11 +302,11 @@ export const SupperClubWaitlist: React.FC<SupperClubWaitlistProps> = ({ onAddEnt
 
                   <div>
                     <label className="block text-[10px] font-sans font-semibold uppercase tracking-widest text-[#18181B] mb-1.5">
-                      City / Primary Area
+                      City / Area
                     </label>
                     <input
                       type="text"
-                      placeholder="e.g. San Francisco Bay Area / London"
+                      placeholder="e.g. San Francisco / London"
                       value={formData.city}
                       onChange={(e) => setFormData({ ...formData, city: e.target.value })}
                       className="w-full px-3.5 py-2.5 bg-white border border-[#E4E4E7] text-sm text-[#18181B] placeholder:text-[#A1A1AA] focus:outline-none focus:border-[#18181B] transition-colors font-sans"
@@ -363,10 +317,10 @@ export const SupperClubWaitlist: React.FC<SupperClubWaitlistProps> = ({ onAddEnt
                 {/* Party Size */}
                 <div>
                   <label className="block text-[10px] font-sans font-semibold uppercase tracking-widest text-[#18181B] mb-1.5">
-                    Typical Party Size
+                    Party Size
                   </label>
-                  <div className="grid grid-cols-5 gap-2">
-                    {[1, 2, 3, 4, 6].map((size) => (
+                  <div className="grid grid-cols-4 gap-2">
+                    {[1, 2, 4, 6].map((size) => (
                       <button
                         type="button"
                         key={size}
@@ -383,48 +337,30 @@ export const SupperClubWaitlist: React.FC<SupperClubWaitlistProps> = ({ onAddEnt
                   </div>
                 </div>
 
-                {/* Dietary Profile */}
+                {/* Dietary Profile Pills */}
                 <div>
                   <label className="block text-[10px] font-sans font-semibold uppercase tracking-widest text-[#18181B] mb-1.5">
-                    Dietary Framework & Preferences
+                    Dietary Preference
                   </label>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  <div className="flex flex-wrap gap-2">
                     {DIETARY_OPTIONS.map((option) => {
                       const isChecked = formData.dietaryPreferences.includes(option);
                       return (
-                        <label
+                        <button
+                          type="button"
                           key={option}
-                          className={`flex items-center space-x-2.5 p-2.5 border text-xs cursor-pointer transition-colors font-sans ${
+                          onClick={() => handleDietaryToggle(option)}
+                          className={`px-3 py-1.5 border text-xs cursor-pointer transition-colors font-sans ${
                             isChecked
-                              ? 'bg-[#853724]/10 border-[#853724] text-[#853724] font-medium'
+                              ? 'bg-[#853724] text-white border-[#853724] font-medium'
                               : 'bg-white border-[#E4E4E7] text-[#52525B] hover:border-[#18181B]'
                           }`}
                         >
-                          <input
-                            type="checkbox"
-                            checked={isChecked}
-                            onChange={() => handleDietaryToggle(option)}
-                            className="text-[#853724] focus:ring-[#853724] border-[#E4E4E7]"
-                          />
-                          <span className="truncate">{option}</span>
-                        </label>
+                          {option.split(' (')[0]}
+                        </button>
                       );
                     })}
                   </div>
-                </div>
-
-                {/* Curiosity / Notes */}
-                <div>
-                  <label className="block text-[10px] font-sans font-semibold uppercase tracking-widest text-[#18181B] mb-1.5">
-                    What excites you about regional Indian food? <span className="font-normal text-[#A1A1AA]">(Optional)</span>
-                  </label>
-                  <textarea
-                    rows={2}
-                    placeholder="Tell Enakshi about a culinary memory, a dish you've wanted to taste, or how you discovered Pichhutaaney..."
-                    value={formData.notes}
-                    onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-                    className="w-full px-3.5 py-2.5 bg-white border border-[#E4E4E7] text-sm text-[#18181B] placeholder:text-[#A1A1AA] focus:outline-none focus:border-[#18181B] transition-colors font-sans"
-                  />
                 </div>
 
                 <div className="pt-2">
@@ -432,13 +368,10 @@ export const SupperClubWaitlist: React.FC<SupperClubWaitlistProps> = ({ onAddEnt
                     type="submit"
                     disabled={isSubmitting}
                     id="submit-waitlist-btn"
-                    className="w-full py-3.5 bg-[#853724] text-white hover:bg-[#18181B] font-sans text-xs font-semibold uppercase tracking-widest transition-colors disabled:opacity-50"
+                    className="w-full py-3.5 bg-[#853724] text-white hover:bg-[#18181B] font-sans text-xs font-semibold uppercase tracking-widest transition-colors disabled:opacity-50 cursor-pointer"
                   >
                     {isSubmitting ? 'Securing your spot...' : 'Join Supper Club Waitlist'}
                   </button>
-                  <p className="text-center text-[10px] font-sans text-[#A1A1AA] mt-2 uppercase tracking-wider">
-                    We never spam. You will only receive personal notifications for upcoming seatings and private drops.
-                  </p>
                 </div>
               </form>
             )}
