@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { motion } from 'motion/react';
-import { Utensils, Heart, Compass, Mail, Check, Sparkles, MapPin } from 'lucide-react';
+import { Mail, Check, MapPin } from 'lucide-react';
 
 export const UniqueManifestoBio: React.FC = () => {
   const [copied, setCopied] = useState(false);
@@ -64,44 +63,7 @@ export const UniqueManifestoBio: React.FC = () => {
               </p>
             </div>
 
-            {/* 3 Foundational Pillars */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 pt-2">
-              <div className="p-5 bg-[#F7F3EC] rounded-2xl border border-[#D5CBBD] shadow-xs space-y-1.5">
-                <span className="font-mono text-[9.5px] text-[#B58D59] uppercase font-bold block">
-                  TENET 01
-                </span>
-                <h4 className="font-marcellus text-lg font-normal text-[#28221D]">
-                  Instinct & Aroma
-                </h4>
-                <p className="font-sans text-xs text-[#655B51] leading-relaxed font-light">
-                  Cooking by sensory feel and sputtering oil rather than rigid standardized scales.
-                </p>
-              </div>
 
-              <div className="p-5 bg-[#F7F3EC] rounded-2xl border border-[#D5CBBD] shadow-xs space-y-1.5">
-                <span className="font-mono text-[9.5px] text-[#B58D59] uppercase font-bold block">
-                  TENET 02
-                </span>
-                <h4 className="font-marcellus text-lg font-normal text-[#28221D]">
-                  Shaped by Travel
-                </h4>
-                <p className="font-sans text-xs text-[#655B51] leading-relaxed font-light">
-                  Recipes layered with coastal tamarinds, mountain broths, and unexpected ferments.
-                </p>
-              </div>
-
-              <div className="p-5 bg-[#28221D] text-[#ECE5DA] rounded-2xl border border-[#28221D] shadow-xs space-y-1.5">
-                <span className="font-mono text-[9.5px] text-[#B58D59] uppercase font-bold block">
-                  TENET 03
-                </span>
-                <h4 className="font-marcellus text-lg font-normal text-white">
-                  The Bengal Anchor
-                </h4>
-                <p className="font-sans text-xs text-[#ECE5DA]/85 leading-relaxed font-light">
-                  Honoring the childhood hearth, mustard oils, and grandmother’s kitchen notebooks.
-                </p>
-              </div>
-            </div>
 
             {/* Action CTAs */}
             <div className="flex flex-wrap items-center gap-3 pt-2">
