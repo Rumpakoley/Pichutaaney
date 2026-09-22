@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import { WaitlistEntry, PrivateEventInquiry } from '../types';
-import { Mail, Phone, Instagram, Send, CheckCircle2, Check, ExternalLink, Calendar, Users, Utensils } from 'lucide-react';
+import { Mail, Phone, Instagram, Send, CheckCircle2, Check, ExternalLink, Calendar, Users, Utensils, Link2 } from 'lucide-react';
 import { motion } from 'motion/react';
 
 interface UniqueTableConciergeProps {
   onAddWaitlist: (entry: WaitlistEntry) => void;
   onAddInquiry: (inquiry: PrivateEventInquiry) => void;
+  onOpenReservationHub?: () => void;
   recentEntries: (WaitlistEntry | PrivateEventInquiry)[];
 }
 
 export const UniqueTableConcierge: React.FC<UniqueTableConciergeProps> = ({
   onAddWaitlist,
   onAddInquiry,
+  onOpenReservationHub,
   recentEntries,
 }) => {
   const [formData, setFormData] = useState({
@@ -158,6 +160,40 @@ export const UniqueTableConcierge: React.FC<UniqueTableConciergeProps> = ({
                     </a>
                     <span className="font-mono text-[9px] text-[#655B51] block mt-0.5">
                       Follow kitchen reels & seat releases
+                    </span>
+                  </div>
+                </div>
+
+                {/* Linktree & Official Reservation Hub */}
+                <div className="flex items-center gap-4 bg-[#ECE5DA] border border-[#D5CBBD] p-4 rounded-2xl group">
+                  <div className="w-10 h-10 bg-[#28221D] text-[#ECE5DA] flex items-center justify-center shrink-0 rounded-xl shadow-xs">
+                    <Link2 className="w-4 h-4 text-[#B58D59]" />
+                  </div>
+                  <div className="text-left flex-1">
+                    <span className="font-mono text-[9px] uppercase tracking-wider text-[#655B51] block font-bold">
+                      Linktree & Reservation Links
+                    </span>
+                    {onOpenReservationHub ? (
+                      <button
+                        onClick={onOpenReservationHub}
+                        className="font-marcellus text-sm font-normal text-[#28221D] hover:text-[#B58D59] hover:underline flex items-center gap-1 text-left block cursor-pointer"
+                      >
+                        <span>linktr.ee/EnakshiP</span>
+                        <ExternalLink className="w-3 h-3 text-[#B58D59]" />
+                      </button>
+                    ) : (
+                      <a
+                        href="https://linktr.ee/EnakshiP"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-marcellus text-sm font-normal text-[#28221D] hover:text-[#B58D59] hover:underline flex items-center gap-1 block"
+                      >
+                        <span>linktr.ee/EnakshiP</span>
+                        <ExternalLink className="w-3 h-3 text-[#B58D59]" />
+                      </a>
+                    )}
+                    <span className="font-mono text-[9px] text-[#B58D59] block mt-0.5 font-bold">
+                      Click to open reservation & link popup
                     </span>
                   </div>
                 </div>

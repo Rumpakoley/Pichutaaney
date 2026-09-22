@@ -10,6 +10,7 @@ import { UniqueCuratorDialogues } from './components/UniqueCuratorDialogues';
 import { UniqueTableConcierge } from './components/UniqueTableConcierge';
 import { UniqueFooter } from './components/UniqueFooter';
 import { HostLedgerModal } from './components/HostLedgerModal';
+import { ReservationLinktreeModal } from './components/ReservationLinktreeModal';
 import { WaitlistEntry, PrivateEventInquiry, ContactMessage } from './types';
 
 const INITIAL_WAITLIST: WaitlistEntry[] = [
@@ -84,6 +85,7 @@ export default function App() {
   });
 
   const [isLedgerOpen, setIsLedgerOpen] = useState(false);
+  const [isReservationHubOpen, setIsReservationHubOpen] = useState(false);
 
   useEffect(() => {
     try {
@@ -129,17 +131,25 @@ export default function App() {
     );
   };
 
+  const scrollToTableConcierge = () => {
+    const el = document.getElementById('table-concierge');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#ECE5DA] text-[#28221D] font-sans selection:bg-[#B58D59] selection:text-white antialiased">
       {/* Bespoke Floating Concierge Navigation */}
       <UniqueNavbar
         onOpenLedger={() => setIsLedgerOpen(true)}
+        onOpenReservationHub={() => setIsReservationHubOpen(true)}
         reservationCount={waitlist.length + inquiries.length}
       />
 
       <main className="w-full">
         {/* Section 01: Chef Atelier Signature Hero */}
-        <UniqueHero />
+        <UniqueHero onOpenReservationHub={() => setIsReservationHubOpen(true)} />
 
         {/* Continuous Marquee Ticker */}
         <MarqueeBanner />
@@ -163,6 +173,7 @@ export default function App() {
         <UniqueTableConcierge
           onAddWaitlist={handleAddWaitlist}
           onAddInquiry={handleAddInquiry}
+          onOpenReservationHub={() => setIsReservationHubOpen(true)}
           recentEntries={[...waitlist, ...inquiries]}
         />
       </main>
@@ -180,6 +191,14 @@ export default function App() {
         onUpdateWaitlistStatus={handleUpdateWaitlistStatus}
         onUpdateInquiryStatus={handleUpdateInquiryStatus}
       />
+
+      {/* Linktree & Official Reservation Links Pop-up Modal */}
+      <ReservationLinktreeModal
+        isOpen={isReservationHubOpen}
+        onClose={() => setIsReservationHubOpen(false)}
+        onScrollToConcierge={scrollToTableConcierge}
+      />
     </div>
   );
 }
+
