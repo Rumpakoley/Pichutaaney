@@ -45,21 +45,21 @@ export const GetInTouch: React.FC<GetInTouchProps> = ({ onAddInquiry, onAddMessa
   };
 
   return (
-    <section id="contact" className="py-20 sm:py-28 bg-[#F4ECE1] border-b border-[#E4D7C8] overflow-hidden">
+    <section id="contact" className="py-20 sm:py-28 bg-[#E9E4DD] border-b border-[#DED8CF] overflow-hidden text-[#2D2D2A]">
       <div id="get-in-touch" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="max-w-3xl text-left mb-16">
           <RevealHeading>
-            <span className="block font-sans text-[10px] tracking-[0.25em] uppercase font-bold text-[#8B3A26] mb-2">
+            <span className="inline-block px-3 py-1 rounded-full text-[11px] font-sans font-medium tracking-[0.2em] uppercase bg-white/80 border border-[#DED8CF] text-[#2D2D2A] mb-4">
               OPEN TABLE & DIALOGUE
             </span>
-            <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl font-normal text-[#241E1A] tracking-tight">
-              Get in <span className="italic text-[#8B3A26]">Touch</span>
+            <h2 className="font-marcellus text-4xl sm:text-5xl md:text-6xl font-normal text-[#171716] tracking-tight">
+              Get in <span className="font-pt-serif italic">Touch</span>
             </h2>
           </RevealHeading>
 
           <RevealText delay={0.15}>
-            <p className="mt-3 text-base sm:text-lg text-[#6E6258] font-light leading-relaxed">
+            <p className="mt-3 text-base sm:text-lg text-[#55524E] font-sans font-light leading-relaxed">
               An open invitation for collaborations, culinary partnerships, food writing, ideas, or simply to say hello.
             </p>
           </RevealText>
@@ -69,44 +69,44 @@ export const GetInTouch: React.FC<GetInTouchProps> = ({ onAddInquiry, onAddMessa
           {/* Left Column: Direct Invitation & FAQ */}
           <div className="lg:col-span-5 space-y-8 text-left">
             <RevealText delay={0.1}>
-              <div className="bg-[#FAF6F0] border border-[#DECFC0] p-6 sm:p-7 space-y-5 shadow-2xs">
-                <h3 className="font-serif text-2xl sm:text-3xl font-normal text-[#241E1A]">
+              <div className="bg-white rounded-3xl border border-[#DED8CF] p-8 space-y-6 shadow-md">
+                <h3 className="font-marcellus text-2xl sm:text-3xl font-normal text-[#171716]">
                   Conversations Over Chai
                 </h3>
-                <p className="text-xs sm:text-sm text-[#6E6258] font-sans leading-relaxed font-light">
+                <p className="text-xs sm:text-sm text-[#55524E] font-sans leading-relaxed font-light">
                   Whether you are a fellow cook, an archivist of oral food histories, a venue host, a food journalist, or simply someone who misses the taste of home-tempered dal, I would love to connect.
                 </p>
 
-                <div className="pt-2 space-y-3 text-xs text-[#6E6258] font-sans">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-8 h-8 border border-[#DECFC0] bg-[#F4ECE1] flex items-center justify-center text-[#8B3A26]">
+                <div className="pt-2 space-y-3.5 text-xs text-[#55524E] font-sans">
+                  <div className="flex items-center space-x-3.5">
+                    <div className="w-9 h-9 rounded-full border border-[#DED8CF] bg-[#E9E4DD] flex items-center justify-center text-[#171716]">
                       <Mail className="w-4 h-4" />
                     </div>
                     <div>
-                      <span className="block font-bold text-[#241E1A]">Direct Correspondence</span>
-                      <a href="mailto:hello@pichhutaaney.com" className="text-[#8B3A26] hover:underline font-medium">
+                      <span className="block font-medium text-[#171716]">Direct Correspondence</span>
+                      <a href="mailto:hello@pichhutaaney.com" className="text-[#2D2D2A] hover:underline font-medium">
                         hello@pichhutaaney.com
                       </a>
                     </div>
                   </div>
 
-                  <div className="flex items-center space-x-3">
-                    <div className="w-8 h-8 border border-[#DECFC0] bg-[#F4ECE1] flex items-center justify-center text-[#8B3A26]">
+                  <div className="flex items-center space-x-3.5">
+                    <div className="w-9 h-9 rounded-full border border-[#DED8CF] bg-[#E9E4DD] flex items-center justify-center text-[#171716]">
                       <Instagram className="w-4 h-4" />
                     </div>
                     <div>
-                      <span className="block font-bold text-[#241E1A]">Kitchen Notes & Updates</span>
-                      <span className="text-[#6E6258]">@pichhutaaney</span>
+                      <span className="block font-medium text-[#171716]">Kitchen Notes & Updates</span>
+                      <span className="text-[#55524E]">@pichhutaaney</span>
                     </div>
                   </div>
 
-                  <div className="flex items-center space-x-3">
-                    <div className="w-8 h-8 border border-[#DECFC0] bg-[#F4ECE1] flex items-center justify-center text-[#8B3A26]">
+                  <div className="flex items-center space-x-3.5">
+                    <div className="w-9 h-9 rounded-full border border-[#DED8CF] bg-[#E9E4DD] flex items-center justify-center text-[#171716]">
                       <MapPin className="w-4 h-4" />
                     </div>
                     <div>
-                      <span className="block font-bold text-[#241E1A]">Base of Operations</span>
-                      <span className="text-[#6E6258]">Rotating Pop-ups & Private Residences</span>
+                      <span className="block font-medium text-[#171716]">Base of Operations</span>
+                      <span className="text-[#55524E]">Rotating Pop-ups & Private Residences</span>
                     </div>
                   </div>
                 </div>
@@ -114,28 +114,28 @@ export const GetInTouch: React.FC<GetInTouchProps> = ({ onAddInquiry, onAddMessa
             </RevealText>
 
             {/* Quick FAQ Section */}
-            <div className="space-y-3">
+            <div className="space-y-4">
               <RevealHeading delay={0.15}>
-                <h4 className="font-serif text-2xl font-normal text-[#241E1A]">
+                <h4 className="font-marcellus text-2xl font-normal text-[#171716]">
                   Common Curiosities
                 </h4>
               </RevealHeading>
 
-              <StaggerContainer staggerDelay={0.07} className="space-y-2 font-sans">
+              <StaggerContainer staggerDelay={0.07} className="space-y-2.5 font-sans">
                 {FAQ_ITEMS.map((faq, idx) => {
                   const isOpen = openFaqIndex === idx;
                   return (
                     <StaggerItem key={faq.question}>
-                      <div className="border border-[#DECFC0] bg-[#FAF6F0] overflow-hidden transition-all duration-200 hover:border-[#8B3A26]/40">
+                      <div className="border border-[#DED8CF] bg-white rounded-2xl overflow-hidden transition-all duration-200 hover:border-[#2D2D2A] shadow-xs">
                         <button
                           onClick={() => setOpenFaqIndex(isOpen ? null : idx)}
-                          className="w-full px-4 py-3 text-left flex items-center justify-between text-xs sm:text-sm font-medium text-[#241E1A] hover:bg-[#F4ECE1] transition-colors cursor-pointer"
+                          className="w-full px-5 py-3.5 text-left flex items-center justify-between text-xs sm:text-sm font-medium text-[#171716] hover:bg-[#FAF8F5] transition-colors cursor-pointer"
                         >
                           <span>{faq.question}</span>
                           {isOpen ? (
-                            <ChevronUp className="w-4 h-4 text-[#8B3A26] shrink-0" />
+                            <ChevronUp className="w-4 h-4 text-[#171716] shrink-0" />
                           ) : (
-                            <ChevronDown className="w-4 h-4 text-[#9E8E81] shrink-0" />
+                            <ChevronDown className="w-4 h-4 text-[#8C867D] shrink-0" />
                           )}
                         </button>
                         <AnimatePresence>
@@ -145,7 +145,7 @@ export const GetInTouch: React.FC<GetInTouchProps> = ({ onAddInquiry, onAddMessa
                               animate={{ opacity: 1, height: 'auto' }}
                               exit={{ opacity: 0, height: 0 }}
                               transition={{ duration: 0.25, ease: 'easeInOut' }}
-                              className="px-4 pb-4 pt-1 text-xs text-[#6E6258] font-light leading-relaxed border-t border-[#DECFC0] bg-[#F4ECE1]"
+                              className="px-5 pb-4 pt-1 text-xs text-[#55524E] font-light leading-relaxed border-t border-[#DED8CF] bg-[#FAF8F5]"
                             >
                               {faq.answer}
                             </motion.div>
@@ -162,19 +162,19 @@ export const GetInTouch: React.FC<GetInTouchProps> = ({ onAddInquiry, onAddMessa
           {/* Right Column: Contact Message Form */}
           <div className="lg:col-span-7">
             {submitted ? (
-              <div className="bg-[#FAF6F0] border border-[#DECFC0] p-8 sm:p-10 text-left space-y-6">
-                <div className="flex items-center space-x-3 text-[#241E1A]">
-                  <CheckCircle2 className="w-8 h-8 text-[#8B3A26]" />
+              <div className="bg-white rounded-3xl border border-[#DED8CF] p-8 sm:p-10 text-left space-y-6 shadow-md">
+                <div className="flex items-center space-x-3 text-[#171716]">
+                  <CheckCircle2 className="w-8 h-8 text-[#2D2D2A]" />
                   <div>
-                    <h3 className="font-serif text-2xl sm:text-3xl font-normal text-[#241E1A]">
+                    <h3 className="font-marcellus text-2xl sm:text-3xl font-normal text-[#171716]">
                       Message Received
                     </h3>
-                    <p className="text-xs text-[#6E6258] font-sans">
+                    <p className="text-xs text-[#55524E] font-sans">
                       Thank you for reaching out, {formData.name}.
                     </p>
                   </div>
                 </div>
-                <p className="text-sm text-[#6E6258] font-sans leading-relaxed font-light">
+                <p className="text-sm text-[#55524E] font-sans leading-relaxed font-light">
                   Enakshi reads every personal note and proposal. You will hear back at <strong>{formData.email}</strong> shortly.
                 </p>
                 <div>
@@ -188,7 +188,7 @@ export const GetInTouch: React.FC<GetInTouchProps> = ({ onAddInquiry, onAddMessa
                         message: '',
                       });
                     }}
-                    className="px-6 py-3 text-[11px] font-sans font-semibold uppercase tracking-widest bg-[#8B3A26] text-[#FAF6F0] hover:bg-[#1F1A16] transition-colors cursor-pointer"
+                    className="px-6 py-3 rounded-full text-xs font-sans font-medium uppercase tracking-widest bg-[#2D2D2A] text-white hover:bg-[#171716] transition-colors cursor-pointer shadow-sm"
                   >
                     Send Another Note
                   </button>
@@ -198,21 +198,21 @@ export const GetInTouch: React.FC<GetInTouchProps> = ({ onAddInquiry, onAddMessa
               <form
                 onSubmit={handleSubmit}
                 id="contact-form"
-                className="bg-[#FAF6F0] border border-[#DECFC0] p-6 sm:p-8 text-left space-y-5 font-sans"
+                className="bg-white rounded-3xl border border-[#DED8CF] p-8 sm:p-10 text-left space-y-5 font-sans shadow-md"
               >
-                <div className="border-b border-[#DECFC0] pb-4">
-                  <h3 className="font-serif text-2xl sm:text-3xl font-normal text-[#241E1A]">
+                <div className="border-b border-[#DED8CF] pb-4">
+                  <h3 className="font-marcellus text-2xl sm:text-3xl font-normal text-[#171716]">
                     Send a Note to Enakshi
                   </h3>
-                  <p className="text-xs text-[#6E6258] font-sans mt-1 font-light">
+                  <p className="text-xs text-[#55524E] font-sans mt-1 font-light">
                     Have an idea, want to collaborate on a culinary project, or simply want to talk regional food?
                   </p>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-[10px] font-sans font-bold uppercase tracking-widest text-[#241E1A] mb-1.5">
-                      Your Name <span className="text-[#8B3A26]">*</span>
+                    <label className="block text-[11px] font-sans font-semibold uppercase tracking-widest text-[#171716] mb-2">
+                      Your Name <span className="text-[#171716]">*</span>
                     </label>
                     <input
                       type="text"
@@ -220,13 +220,13 @@ export const GetInTouch: React.FC<GetInTouchProps> = ({ onAddInquiry, onAddMessa
                       placeholder="Your name"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full px-3.5 py-2.5 bg-[#FAF6F0] border border-[#DECFC0] text-sm text-[#241E1A] placeholder:text-[#9E8E81] focus:outline-none focus:border-[#8B3A26]"
+                      className="w-full px-5 py-3 rounded-full bg-[#FAF8F5] border border-[#DED8CF] text-sm text-[#171716] placeholder:text-[#8C867D] focus:outline-none focus:border-[#2D2D2A] focus:bg-white transition-all"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-[10px] font-sans font-bold uppercase tracking-widest text-[#241E1A] mb-1.5">
-                      Your Email <span className="text-[#8B3A26]">*</span>
+                    <label className="block text-[11px] font-sans font-semibold uppercase tracking-widest text-[#171716] mb-2">
+                      Your Email <span className="text-[#171716]">*</span>
                     </label>
                     <input
                       type="email"
@@ -234,19 +234,19 @@ export const GetInTouch: React.FC<GetInTouchProps> = ({ onAddInquiry, onAddMessa
                       placeholder="you@domain.com"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full px-3.5 py-2.5 bg-[#FAF6F0] border border-[#DECFC0] text-sm text-[#241E1A] placeholder:text-[#9E8E81] focus:outline-none focus:border-[#8B3A26]"
+                      className="w-full px-5 py-3 rounded-full bg-[#FAF8F5] border border-[#DED8CF] text-sm text-[#171716] placeholder:text-[#8C867D] focus:outline-none focus:border-[#2D2D2A] focus:bg-white transition-all"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-[10px] font-sans font-bold uppercase tracking-widest text-[#241E1A] mb-1.5">
+                  <label className="block text-[11px] font-sans font-semibold uppercase tracking-widest text-[#171716] mb-2">
                     What is on your mind?
                   </label>
                   <select
                     value={formData.purpose}
                     onChange={(e) => setFormData({ ...formData, purpose: e.target.value as any })}
-                    className="w-full px-3.5 py-2.5 bg-[#FAF6F0] border border-[#DECFC0] text-sm text-[#241E1A] focus:outline-none focus:border-[#8B3A26]"
+                    className="w-full px-5 py-3 rounded-full bg-[#FAF8F5] border border-[#DED8CF] text-sm text-[#171716] focus:outline-none focus:border-[#2D2D2A] focus:bg-white transition-all"
                   >
                     <option value="collaboration">Collaborative Pop-up or Chef Exchange</option>
                     <option value="partnership">Brand / Venue / Producer Partnership</option>
@@ -257,8 +257,8 @@ export const GetInTouch: React.FC<GetInTouchProps> = ({ onAddInquiry, onAddMessa
                 </div>
 
                 <div>
-                  <label className="block text-[10px] font-sans font-bold uppercase tracking-widest text-[#241E1A] mb-1.5">
-                    Your Message <span className="text-[#8B3A26]">*</span>
+                  <label className="block text-[11px] font-sans font-semibold uppercase tracking-widest text-[#171716] mb-2">
+                    Your Message <span className="text-[#171716]">*</span>
                   </label>
                   <textarea
                     rows={4}
@@ -266,7 +266,7 @@ export const GetInTouch: React.FC<GetInTouchProps> = ({ onAddInquiry, onAddMessa
                     placeholder="Write your thoughts here..."
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full px-3.5 py-2.5 bg-[#FAF6F0] border border-[#DECFC0] text-sm text-[#241E1A] placeholder:text-[#9E8E81] focus:outline-none focus:border-[#8B3A26]"
+                    className="w-full px-5 py-3 rounded-2xl bg-[#FAF8F5] border border-[#DED8CF] text-sm text-[#171716] placeholder:text-[#8C867D] focus:outline-none focus:border-[#2D2D2A] focus:bg-white transition-all"
                   />
                 </div>
 
@@ -275,9 +275,9 @@ export const GetInTouch: React.FC<GetInTouchProps> = ({ onAddInquiry, onAddMessa
                     type="submit"
                     disabled={isSubmitting}
                     id="submit-contact-btn"
-                    className="w-full py-3.5 bg-[#8B3A26] text-[#FAF6F0] hover:bg-[#1F1A16] font-sans text-xs font-semibold uppercase tracking-widest transition-colors disabled:opacity-50 flex items-center justify-center space-x-2 cursor-pointer shadow-xs"
+                    className="w-full py-4 rounded-full bg-[#2D2D2A] text-white hover:bg-[#171716] font-sans text-xs font-medium uppercase tracking-widest transition-all disabled:opacity-50 flex items-center justify-center space-x-2 cursor-pointer shadow-md hover:shadow-lg"
                   >
-                    <Send className="w-3.5 h-3.5" />
+                    <Send className="w-3.5 h-3.5 text-[#EED485]" />
                     <span>{isSubmitting ? 'Sending...' : 'Send Message'}</span>
                   </button>
                 </div>

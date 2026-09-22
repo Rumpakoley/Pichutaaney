@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { BookMarked, MapPin, ArrowRight, Sparkles } from 'lucide-react';
+import { BookMarked, MapPin, ArrowRight, Sparkles, Utensils, Compass, Heart } from 'lucide-react';
 import { motion, useScroll, useTransform, MotionValue } from 'motion/react';
 
 interface ScrollWordProps {
@@ -10,16 +10,16 @@ interface ScrollWordProps {
 }
 
 const ScrollWord: React.FC<ScrollWordProps> = ({ children, progress, range, isAccent }) => {
-  const opacity = useTransform(progress, range, [0.18, 1]);
+  const opacity = useTransform(progress, range, [0.2, 1]);
   const color = useTransform(
     progress,
     range,
     [
-      isAccent ? 'rgba(139, 58, 38, 0.25)' : 'rgba(36, 30, 26, 0.20)',
-      isAccent ? '#8B3A26' : '#241E1A',
+      isAccent ? 'rgba(45, 45, 42, 0.3)' : 'rgba(45, 45, 42, 0.25)',
+      isAccent ? '#171716' : '#2D2D2A',
     ]
   );
-  const y = useTransform(progress, range, [2.5, 0]);
+  const y = useTransform(progress, range, [2, 0]);
 
   return (
     <motion.span
@@ -76,7 +76,7 @@ export const AboutMe: React.FC = () => {
   ];
 
   return (
-    <section id="about-me" className="py-20 sm:py-28 bg-[#F4ECE1] border-b border-[#E4D7C8] overflow-hidden">
+    <section id="about-me" className="py-20 sm:py-28 bg-[#E9E4DD] border-b border-[#DED8CF] overflow-hidden text-[#2D2D2A]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
@@ -86,19 +86,19 @@ export const AboutMe: React.FC = () => {
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="max-w-3xl text-left mb-16"
         >
-          <span className="block font-sans text-[10px] tracking-[0.25em] uppercase font-bold text-[#8B3A26] mb-2">
-            THE INTUITIVE COOK & STORYTELLER
+          <span className="inline-block px-3 py-1 rounded-full text-[11px] font-sans font-medium tracking-[0.2em] uppercase bg-white/80 border border-[#DED8CF] text-[#2D2D2A] mb-4">
+            A Note From The Founder
           </span>
-          <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl font-normal text-[#241E1A] tracking-tight">
-            About Me, <span className="italic text-[#8B3A26]">Enakshi</span>
+          <h2 className="font-marcellus text-4xl sm:text-5xl md:text-6xl font-normal text-[#171716] tracking-tight">
+            About Me, <span className="font-pt-serif italic">Enakshi</span>
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-[#6E6258] font-light leading-relaxed">
+          <p className="mt-4 text-base sm:text-lg text-[#55524E] font-sans font-light leading-relaxed">
             A cook guided by instinct, sensory memory, and recipes shaped by all the places I have lived and traveled to.
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          {/* Left Column: Portrait & Visual Note (Sticky during scroll) */}
+          {/* Left Column: Portrait & Visual Note */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -106,8 +106,8 @@ export const AboutMe: React.FC = () => {
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             className="lg:col-span-5 space-y-4 lg:sticky lg:top-28"
           >
-            <div className="border border-[#DECFC0] bg-[#FAF6F0] p-3 shadow-xs">
-              <div className="relative overflow-hidden bg-[#F4ECE1] group">
+            <div className="rounded-3xl border border-[#DED8CF] bg-white p-3 shadow-md overflow-hidden">
+              <div className="relative rounded-2xl overflow-hidden bg-[#E9E4DD] group">
                 <img
                   src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=900&q=80"
                   alt="Enakshi, founder and culinary host of Pichhutaaney"
@@ -115,12 +115,12 @@ export const AboutMe: React.FC = () => {
                   className="w-full h-[420px] sm:h-[460px] object-cover filter contrast-[1.02] brightness-[0.98] transition-transform duration-700 ease-out group-hover:scale-105"
                 />
                 
-                {/* Overlay quote with clean hairline border */}
-                <div className="absolute bottom-0 inset-x-0 bg-[#1F1A16]/95 p-5 text-[#FAF6F0] text-left border-t border-[#1F1A16]">
-                  <p className="font-serif text-lg italic leading-snug">
+                {/* Overlay quote with clean rounded frame */}
+                <div className="absolute bottom-0 inset-x-0 bg-[#171716]/90 backdrop-blur-sm p-6 text-white text-left border-t border-white/10">
+                  <p className="font-pt-serif text-lg sm:text-xl italic leading-snug">
                     “Travel has shaped me, but home is always the anchor.”
                   </p>
-                  <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-[#8B3A26] mt-2 font-bold">
+                  <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-[#EED485] mt-2 font-medium">
                     Enakshi • West Bengal to the World
                   </p>
                 </div>
@@ -128,15 +128,15 @@ export const AboutMe: React.FC = () => {
             </div>
 
             {/* Micro details strip */}
-            <div className="bg-[#FAF6F0] border border-[#DECFC0] p-4 flex items-center justify-between text-xs text-[#6E6258]">
+            <div className="bg-white rounded-full border border-[#DED8CF] px-6 py-3.5 flex items-center justify-between text-xs text-[#55524E] shadow-sm">
               <div className="flex items-center space-x-2">
-                <MapPin className="w-3.5 h-3.5 text-[#8B3A26]" />
-                <span className="font-sans text-[11px] uppercase tracking-wider font-medium text-[#241E1A]">Roots in West Bengal</span>
+                <MapPin className="w-3.5 h-3.5 text-[#2D2D2A]" />
+                <span className="font-sans text-[11px] uppercase tracking-wider font-medium text-[#171716]">Roots in West Bengal</span>
               </div>
-              <span className="text-[#DECFC0]">/</span>
+              <span className="text-[#DED8CF]">/</span>
               <div className="flex items-center space-x-2">
-                <BookMarked className="w-3.5 h-3.5 text-[#8B3A26]" />
-                <span className="font-sans text-[11px] uppercase tracking-wider font-medium text-[#241E1A]">Heirloom Recipe Collector</span>
+                <BookMarked className="w-3.5 h-3.5 text-[#2D2D2A]" />
+                <span className="font-sans text-[11px] uppercase tracking-wider font-medium text-[#171716]">Heirloom Collector</span>
               </div>
             </div>
           </motion.div>
@@ -149,10 +149,10 @@ export const AboutMe: React.FC = () => {
               className="relative pl-6 sm:pl-8 space-y-8"
             >
               {/* Vertical Scroll Progress Track Line */}
-              <div className="absolute left-0 top-1 bottom-1 w-[2px] bg-[#DECFC0]">
+              <div className="absolute left-0 top-1 bottom-1 w-[2px] bg-[#DED8CF]">
                 <motion.div
                   style={{ height: progressHeight }}
-                  className="w-full bg-[#8B3A26] transition-all origin-top"
+                  className="w-full bg-[#171716] transition-all origin-top"
                 />
               </div>
 
@@ -161,7 +161,7 @@ export const AboutMe: React.FC = () => {
                 return (
                   <p
                     key={pIdx}
-                    className="flex flex-wrap text-base sm:text-lg lg:text-[19px] leading-[1.8] font-sans font-light"
+                    className="flex flex-wrap text-lg sm:text-xl lg:text-[22px] leading-[1.8] font-pt-serif"
                   >
                     {words.map((word, wIdx) => {
                       const wordGlobalIdx = accumulatedWordIndex++;
@@ -187,7 +187,7 @@ export const AboutMe: React.FC = () => {
               })}
             </div>
 
-            {/* Guiding Principles Cards matching Geometric Balance */}
+            {/* Guiding Principles Cards */}
             <div className="pt-4 grid grid-cols-1 sm:grid-cols-3 gap-4">
               {pillars.map((pillar, idx) => (
                 <motion.div
@@ -200,29 +200,29 @@ export const AboutMe: React.FC = () => {
                     delay: 0.2 + idx * 0.1,
                     ease: [0.22, 1, 0.36, 1],
                   }}
-                  className={`p-5 text-left border transition-all duration-300 hover:-translate-y-1 ${
+                  className={`p-6 rounded-2xl text-left border transition-all duration-300 hover:-translate-y-1 shadow-sm ${
                     pillar.isDark
-                      ? 'bg-[#8B3A26] text-[#FAF6F0] border-[#8B3A26] shadow-xs'
-                      : 'bg-[#FAF6F0] border-[#DECFC0] hover:border-[#8B3A26]'
+                      ? 'bg-[#171716] text-white border-[#171716]'
+                      : 'bg-white border-[#DED8CF] hover:border-[#2D2D2A]'
                   }`}
                 >
                   <span
-                    className={`block text-[10px] uppercase tracking-[0.25em] font-sans font-bold mb-1 ${
-                      pillar.isDark ? 'text-white/80' : 'text-[#8B3A26]'
+                    className={`block text-[10px] uppercase tracking-[0.25em] font-sans font-bold mb-2 ${
+                      pillar.isDark ? 'text-[#EED485]' : 'text-[#8C867D]'
                     }`}
                   >
                     PILLAR {pillar.number}
                   </span>
                   <h4
-                    className={`font-serif text-xl font-normal ${
-                      pillar.isDark ? 'text-white' : 'text-[#241E1A]'
+                    className={`font-marcellus text-xl font-normal ${
+                      pillar.isDark ? 'text-white' : 'text-[#171716]'
                     }`}
                   >
                     {pillar.title}
                   </h4>
                   <p
                     className={`mt-2 text-xs font-sans leading-relaxed font-light ${
-                      pillar.isDark ? 'text-white/90' : 'text-[#6E6258]'
+                      pillar.isDark ? 'text-white/80' : 'text-[#55524E]'
                     }`}
                   >
                     {pillar.desc}
@@ -240,10 +240,10 @@ export const AboutMe: React.FC = () => {
             >
               <a
                 href="#story-of-pichhutaaney"
-                className="inline-flex items-center space-x-2 font-sans text-xs uppercase tracking-[0.2em] text-[#241E1A] hover:text-[#8B3A26] transition-colors font-semibold group"
+                className="inline-flex items-center space-x-2 px-6 py-3 rounded-full bg-[#2D2D2A] text-white hover:bg-[#171716] font-sans text-xs uppercase tracking-[0.2em] font-medium transition-all shadow-sm hover:shadow-md group"
               >
-                <span>Read the regional manifesto</span>
-                <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1" />
+                <span>Read the regional story</span>
+                <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1 text-[#EED485]" />
               </a>
             </motion.div>
           </div>
@@ -252,5 +252,3 @@ export const AboutMe: React.FC = () => {
     </section>
   );
 };
-
-

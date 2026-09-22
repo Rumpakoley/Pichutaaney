@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
+import { MarqueeBanner } from './components/MarqueeBanner';
 import { CinematicVideoReel } from './components/CinematicVideoReel';
 import { AboutMe } from './components/AboutMe';
 import { StoryOfPichhutaaney } from './components/StoryOfPichhutaaney';
@@ -135,9 +136,9 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#1F1A16] p-0 sm:p-3 md:p-4 lg:p-6 text-[#241E1A] font-serif selection:bg-[#8B3A26] selection:text-white antialiased">
-      {/* Framed Geometric Canvas (Matches Parchment & Terracotta Menu Styling) */}
-      <div className="min-h-full max-w-[1536px] mx-auto bg-[#F4ECE1] rounded-none sm:rounded-[28px] lg:rounded-[36px] overflow-hidden shadow-2xl flex flex-col border border-[#DECFC0]/40">
+    <div className="min-h-screen bg-[#171716] text-[#2D2D2A] font-sans selection:bg-[#2D2D2A] selection:text-[#FAF8F5] antialiased">
+      {/* Framed Canvas */}
+      <div className="min-h-full max-w-[1600px] mx-auto bg-[#E9E4DD] overflow-hidden flex flex-col">
         {/* Navigation Header */}
         <Navbar
           onOpenLedger={() => setIsLedgerOpen(true)}
@@ -148,6 +149,9 @@ export default function App() {
         <main className="flex-1">
           {/* Hero Section */}
           <Hero />
+
+          {/* Infinite Marquee Banner (Matches Previous Site: "For the wanderers *") */}
+          <MarqueeBanner />
 
           {/* Cinematic Kitchen Atmosphere Video Reel */}
           <CinematicVideoReel />
@@ -170,7 +174,7 @@ export default function App() {
           {/* Expansion: Kitchen Diaries & Lore */}
           <KitchenDiaries />
 
-          {/* Expansion: Sample 6-Course Tasting Journey */}
+          {/* Expansion: Sample Tasting Editions */}
           <SampleMenu />
 
           {/* Section 5: Get in Touch */}
