@@ -126,10 +126,10 @@ export const PortfolioBookingContact: React.FC<PortfolioBookingContactProps> = (
                     Email address
                   </span>
                   <button
-                    onClick={() => handleCopy('hello@pichhutaaney.com', 'email')}
+                    onClick={() => handleCopy('pichhutaaney@gmail.com', 'email')}
                     className="font-marcellus text-sm font-normal text-black hover:text-[#8B3A26] hover:underline text-left block cursor-pointer"
                   >
-                    hello@pichhutaaney.com
+                    pichhutaaney@gmail.com
                   </button>
                   <span className="font-mono text-[9px] text-[#8B3A26] block mt-0.5 font-bold">
                     {copiedType === 'email' ? '✓ Copied Address' : 'Click to copy email'}

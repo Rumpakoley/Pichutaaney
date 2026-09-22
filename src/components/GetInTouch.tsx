@@ -84,8 +84,8 @@ export const GetInTouch: React.FC<GetInTouchProps> = ({ onAddInquiry, onAddMessa
                     </div>
                     <div>
                       <span className="block font-medium text-[#171716]">Direct Correspondence</span>
-                      <a href="mailto:hello@pichhutaaney.com" className="text-[#2D2D2A] hover:underline font-medium">
-                        hello@pichhutaaney.com
+                      <a href="mailto:pichhutaaney@gmail.com" className="text-[#2D2D2A] hover:underline font-medium">
+                        pichhutaaney@gmail.com
                       </a>
                     </div>
                   </div>

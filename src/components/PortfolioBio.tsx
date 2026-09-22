@@ -6,7 +6,7 @@ export const PortfolioBio: React.FC = () => {
   const [copied, setCopied] = useState(false);
 
   const handleCopyEmail = () => {
-    navigator.clipboard.writeText('hello@pichhutaaney.com');
+    navigator.clipboard.writeText('pichhutaaney@gmail.com');
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
   };

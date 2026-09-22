@@ -127,10 +127,10 @@ export const UniqueTableConcierge: React.FC<UniqueTableConciergeProps> = ({
                       Direct Correspondence
                     </span>
                     <button
-                      onClick={() => handleCopy('hello@pichhutaaney.com', 'email')}
+                      onClick={() => handleCopy('pichhutaaney@gmail.com', 'email')}
                       className="font-marcellus text-sm font-normal text-[#28221D] hover:text-[#B58D59] hover:underline text-left block cursor-pointer"
                     >
-                      hello@pichhutaaney.com
+                      pichhutaaney@gmail.com
                     </button>
                     <span className="font-mono text-[9px] text-[#B58D59] block mt-0.5 font-bold">
                       {copiedType === 'email' ? '✓ Copied Address' : 'Click to copy email'}

@@ -104,7 +104,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLedger }) => {
 
             <RevealText delay={0.2}>
               <div className="space-y-2 text-xs text-[#DED8CF] font-light">
-                <p>Direct inquiries: <a href="mailto:hello@pichhutaaney.com" className="text-white underline hover:text-[#EED485]">hello@pichhutaaney.com</a></p>
+                <p>Direct inquiries: <a href="mailto:pichhutaaney@gmail.com" className="text-white underline hover:text-[#EED485]">pichhutaaney@gmail.com</a></p>
                 <p>Instagram: <span className="text-white">@pichhutaaney</span></p>
                 <p>Pop-ups & Seatings: Announced via Private Waitlist</p>
               </div>

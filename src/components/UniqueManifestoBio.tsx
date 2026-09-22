@@ -6,7 +6,7 @@ export const UniqueManifestoBio: React.FC = () => {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
-    navigator.clipboard.writeText('hello@pichhutaaney.com');
+    navigator.clipboard.writeText('pichhutaaney@gmail.com');
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
   };
@@ -119,7 +119,7 @@ export const UniqueManifestoBio: React.FC = () => {
                 {copied ? (
                   <>
                     <Check className="w-3.5 h-3.5 text-emerald-600 font-bold" />
-                    <span className="text-emerald-700">✓ hello@pichhutaaney.com copied</span>
+                    <span className="text-emerald-700">✓ pichhutaaney@gmail.com copied</span>
                   </>
                 ) : (
                   <>
