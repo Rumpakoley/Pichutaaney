@@ -104,9 +104,9 @@ export const UniqueKitchenHearthReels: React.FC = () => {
               ref={videoRef}
               src={activeReel.url}
               autoPlay
-              loop
               muted={isMuted}
               playsInline
+              onEnded={() => setActiveIdx((prev) => (prev + 1) % CLIENT_VIDEOS.length)}
               className="w-full h-full object-cover filter contrast-[1.04] brightness-95"
             />
 
