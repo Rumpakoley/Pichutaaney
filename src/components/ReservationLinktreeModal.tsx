@@ -42,33 +42,36 @@ export const ReservationLinktreeModal: React.FC<ReservationLinktreeModalProps> =
 
         {/* Modal Link Cards List */}
         <div className="p-6 space-y-3.5">
-          {/* Primary Option: Official Google Form Reservation */}
-          <a
-            href="https://docs.google.com/forms/d/e/1FAIpQLScDwv-8Iz8bmI62V4s_Ybbfma1ZBNYfiZo2TyPH4TkaDofueQ/viewform?usp=header"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-4 sm:p-5 rounded-2xl bg-[#28221D] text-[#ECE5DA] border border-[#28221D] hover:bg-[#1C1713] transition-all flex items-center justify-between group shadow-sm cursor-pointer"
+          {/* Primary Option: Smart Reservation Concierge (Dual Email & Instant Shortlist) */}
+          <button
+            onClick={() => {
+              onClose();
+              onScrollToConcierge();
+            }}
+            className="w-full p-4 sm:p-5 rounded-2xl bg-[#28221D] text-[#ECE5DA] border border-[#28221D] hover:bg-[#1C1713] transition-all flex items-center justify-between group shadow-md cursor-pointer text-left"
           >
             <div className="flex items-center space-x-3.5">
-              <div className="w-10 h-10 rounded-xl bg-[#B58D59] text-[#1C1713] flex items-center justify-center shrink-0 font-bold">
+              <div className="w-10 h-10 rounded-xl bg-[#B58D59] text-[#1C1713] flex items-center justify-center shrink-0 font-bold shadow-xs">
                 <Calendar className="w-5 h-5" />
               </div>
               <div className="text-left">
                 <div className="flex items-center space-x-2">
                   <span className="font-marcellus text-base sm:text-lg font-normal text-white">
-                    Official Reservation Form
+                    Smart Reservation Concierge
                   </span>
                   <span className="text-[9px] uppercase tracking-widest font-mono bg-[#B58D59] text-[#1C1713] px-2 py-0.5 rounded-full font-bold">
-                    GOOGLE FORM
+                    INSTANT CONFIRMATION
                   </span>
                 </div>
                 <p className="text-xs text-[#ECE5DA]/80 font-light mt-0.5">
-                  Direct tasting seats & private event intake questionnaire
+                  Direct supper club waitlist & bespoke dinners with automatic email confirmation
                 </p>
               </div>
             </div>
-            <ExternalLink className="w-4 h-4 text-[#B58D59] group-hover:translate-x-0.5 transition-transform shrink-0" />
-          </a>
+            <span className="font-mono text-xs text-[#B58D59] font-bold group-hover:translate-x-0.5 transition-transform shrink-0">
+              Book Now →
+            </span>
+          </button>
 
           {/* Secondary Option: Official Linktree Profile */}
           <a
@@ -97,37 +100,6 @@ export const ReservationLinktreeModal: React.FC<ReservationLinktreeModalProps> =
             </div>
             <ExternalLink className="w-4 h-4 text-[#655B51] group-hover:text-[#28221D] group-hover:translate-x-0.5 transition-transform shrink-0" />
           </a>
-
-          {/* Option 3: Instant Interactive Web Concierge */}
-          <button
-            onClick={() => {
-              onClose();
-              onScrollToConcierge();
-            }}
-            className="w-full p-4 sm:p-5 rounded-2xl bg-[#F7F3EC] text-[#28221D] border border-[#D5CBBD] hover:border-[#28221D] hover:bg-white transition-all flex items-center justify-between group shadow-xs cursor-pointer text-left"
-          >
-            <div className="flex items-center space-x-3.5">
-              <div className="w-10 h-10 rounded-xl bg-[#ECE5DA] text-[#28221D] flex items-center justify-center shrink-0 border border-[#D5CBBD]">
-                <Utensils className="w-5 h-5 text-[#B58D59]" />
-              </div>
-              <div className="text-left">
-                <div className="flex items-center space-x-2">
-                  <span className="font-marcellus text-base sm:text-lg font-normal text-[#28221D]">
-                    Instant Table Concierge
-                  </span>
-                  <span className="text-[9px] uppercase tracking-widest font-mono bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full font-bold">
-                    ON-SITE
-                  </span>
-                </div>
-                <p className="text-xs text-[#655B51] font-light mt-0.5">
-                  Quick in-page waitlist & private event inquiry deck
-                </p>
-              </div>
-            </div>
-            <span className="font-mono text-xs text-[#B58D59] font-bold group-hover:translate-x-0.5 transition-transform shrink-0">
-              Jump →
-            </span>
-          </button>
 
           {/* Option 4: Direct Email & Instagram Row */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">

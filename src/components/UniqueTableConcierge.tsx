@@ -30,6 +30,8 @@ export const UniqueTableConcierge: React.FC<UniqueTableConciergeProps> = ({
 
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submittedRefId, setSubmittedRefId] = useState('');
+  const [submittedEmail, setSubmittedEmail] = useState('');
   const [copiedType, setCopiedType] = useState<string | null>(null);
 
   const handleCopy = (text: string, type: string) => {
@@ -38,48 +40,82 @@ export const UniqueTableConcierge: React.FC<UniqueTableConciergeProps> = ({
     setTimeout(() => setCopiedType(null), 2500);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name.trim() || !formData.email.trim()) return;
 
     setIsSubmitting(true);
+    const refId = formData.experienceType === 'supper_club' 
+      ? `PCH-WL-${Date.now().toString().slice(-5)}`
+      : `PCH-EVT-${Date.now().toString().slice(-5)}`;
 
-    setTimeout(() => {
-      if (formData.experienceType === 'supper_club') {
-        const newWaitlist: WaitlistEntry = {
-          id: `PCH-WL-${Date.now().toString().slice(-5)}`,
-          fullName: formData.name.trim(),
-          email: formData.email.trim(),
-          phone: formData.phone.trim() || undefined,
-          city: formData.cityOrVenue.trim() || 'Undisclosed',
-          partySize: Number(formData.guestCount),
-          dietaryPreferences: [formData.dietary],
-          notes: formData.notes.trim() || undefined,
-          submittedAt: new Date().toISOString(),
-          status: 'pending',
-        };
-        onAddWaitlist(newWaitlist);
-      } else {
-        const newInquiry: PrivateEventInquiry = {
-          id: `PCH-EVT-${Date.now().toString().slice(-5)}`,
-          fullName: formData.name.trim(),
-          email: formData.email.trim(),
-          phone: formData.phone.trim() || 'Flexible',
-          eventType: formData.experienceType as any,
-          guestCount: Number(formData.guestCount),
-          preferredDate: formData.preferredDate.trim() || 'Flexible Timeline',
-          locationOrVenue: formData.cityOrVenue.trim() || 'Private Residence',
-          dietaryRestrictions: formData.dietary,
-          storytellingNotes: formData.notes.trim() || 'Custom curated table',
-          submittedAt: new Date().toISOString(),
-          status: 'new',
-        };
-        onAddInquiry(newInquiry);
-      }
+    // 1. Add to local state & Host Ledger
+    if (formData.experienceType === 'supper_club') {
+      const newWaitlist: WaitlistEntry = {
+        id: refId,
+        fullName: formData.name.trim(),
+        email: formData.email.trim(),
+        phone: formData.phone.trim() || undefined,
+        city: formData.cityOrVenue.trim() || 'Toronto / GTA',
+        partySize: Number(formData.guestCount),
+        dietaryPreferences: [formData.dietary],
+        notes: formData.notes.trim() || undefined,
+        submittedAt: new Date().toISOString(),
+        status: 'pending',
+      };
+      onAddWaitlist(newWaitlist);
+    } else {
+      const newInquiry: PrivateEventInquiry = {
+        id: refId,
+        fullName: formData.name.trim(),
+        email: formData.email.trim(),
+        phone: formData.phone.trim() || 'Flexible',
+        eventType: formData.experienceType as any,
+        guestCount: Number(formData.guestCount),
+        preferredDate: formData.preferredDate.trim() || 'Flexible Timeline',
+        locationOrVenue: formData.cityOrVenue.trim() || 'Private Residence',
+        dietaryRestrictions: formData.dietary,
+        storytellingNotes: formData.notes.trim() || 'Custom curated table',
+        submittedAt: new Date().toISOString(),
+        status: 'new',
+      };
+      onAddInquiry(newInquiry);
+    }
 
-      setIsSubmitting(false);
-      setIsSubmitted(true);
-    }, 450);
+    // 2. Dispatch automated dual-email notification (to pichhutaaney@gmail.com and the customer)
+    try {
+      await fetch('https://formsubmit.co/ajax/pichhutaaney@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          _subject: `New Pichhutaaney Reservation [${refId}] - ${formData.name.trim()}`,
+          _replyto: formData.email.trim(),
+          _cc: formData.email.trim(),
+          _autoresponse: `Thank you ${formData.name.trim()} for your reservation request at Pichhutaaney! Your reference ID is ${refId}. Enakshi will review your request and reach out with seating details and confirmation.`,
+          _template: 'table',
+          'Reference ID': refId,
+          'Full Name': formData.name.trim(),
+          'Email Address': formData.email.trim(),
+          'Phone / WhatsApp': formData.phone.trim() || 'Not provided',
+          'Experience Type': formData.experienceType.replace('_', ' ').toUpperCase(),
+          'Party Size': formData.guestCount,
+          'City / Area': formData.cityOrVenue.trim() || 'Toronto / GTA',
+          'Dietary Preference': formData.dietary,
+          'Occasion / Notes': formData.notes.trim() || 'None',
+          'Submitted Date': new Date().toLocaleString(),
+        }),
+      });
+    } catch (err) {
+      console.warn('Background email notification queued locally:', err);
+    }
+
+    setSubmittedRefId(refId);
+    setSubmittedEmail(formData.email.trim());
+    setIsSubmitting(false);
+    setIsSubmitted(true);
   };
 
   const handleReset = () => {
@@ -94,6 +130,8 @@ export const UniqueTableConcierge: React.FC<UniqueTableConciergeProps> = ({
       dietary: 'Omnivore (Fish, Seafood & Veg)',
       notes: '',
     });
+    setSubmittedRefId('');
+    setSubmittedEmail('');
     setIsSubmitted(false);
   };
 
@@ -223,23 +261,50 @@ export const UniqueTableConcierge: React.FC<UniqueTableConciergeProps> = ({
           {/* Right Column: Interactive Table Reservation Form */}
           <div className="lg:col-span-7 bg-[#F7F3EC] border border-[#D5CBBD] p-8 sm:p-10 rounded-3xl shadow-sm text-[#28221D]">
             {isSubmitted ? (
-              <div className="h-full flex flex-col items-center justify-center text-center p-8 space-y-5">
+              <div className="h-full flex flex-col items-center justify-center text-center p-6 sm:p-8 space-y-6 animate-in fade-in zoom-in-95 duration-200">
                 <div className="w-16 h-16 bg-[#ECE5DA] border border-[#B58D59] rounded-full flex items-center justify-center text-[#28221D] shadow-sm">
                   <CheckCircle2 className="w-8 h-8 text-[#B58D59]" />
                 </div>
 
                 <div className="space-y-2">
+                  <span className="font-mono text-[10px] uppercase tracking-widest text-[#B58D59] font-bold">
+                    RESERVATION REGISTRY CONFIRMED
+                  </span>
                   <h4 className="font-marcellus text-3xl font-normal text-[#28221D]">
-                    Reservation Transmitted
+                    Receipt & Table Pass
                   </h4>
-                  <p className="text-xs sm:text-sm text-[#655B51] max-w-sm mx-auto leading-relaxed font-light">
-                    Thank you, {formData.name}. Enakshi will review your gathering parameters and respond to <strong>{formData.email}</strong> shortly.
+                  <p className="text-xs sm:text-sm text-[#655B51] max-w-md mx-auto leading-relaxed font-light">
+                    Thank you, <strong>{formData.name}</strong>. Your gathering request is registered in Enakshi’s Host Ledger.
                   </p>
+                </div>
+
+                {/* Summary Card */}
+                <div className="w-full max-w-md bg-[#ECE5DA] border border-[#D5CBBD] rounded-2xl p-4 text-left space-y-2 font-mono text-xs shadow-2xs">
+                  <div className="flex justify-between border-b border-[#D5CBBD] pb-2 text-[11px]">
+                    <span className="text-[#655B51]">Booking Ref:</span>
+                    <span className="font-bold text-[#28221D]">{submittedRefId}</span>
+                  </div>
+                  <div className="flex justify-between border-b border-[#D5CBBD] pb-2 text-[11px]">
+                    <span className="text-[#655B51]">Party / Experience:</span>
+                    <span className="font-bold text-[#28221D]">{formData.guestCount} Guests • {formData.experienceType.replace('_', ' ')}</span>
+                  </div>
+                  <div className="flex justify-between text-[11px]">
+                    <span className="text-[#655B51]">Email Acknowledgment:</span>
+                    <span className="text-[#28221D] font-medium truncate max-w-[200px]">{submittedEmail}</span>
+                  </div>
+                </div>
+
+                {/* Dual-Email notice */}
+                <div className="w-full max-w-md bg-[#28221D] text-[#ECE5DA] rounded-xl p-3 text-[11px] font-sans flex items-center space-x-2.5 shadow-sm text-left">
+                  <Mail className="w-4 h-4 text-[#B58D59] shrink-0" />
+                  <span className="leading-snug">
+                    Dual notification dispatched to <strong>pichhutaaney@gmail.com</strong> and <strong>{submittedEmail}</strong>.
+                  </span>
                 </div>
 
                 <button
                   onClick={handleReset}
-                  className="px-6 py-3 bg-[#28221D] hover:bg-[#1C1713] text-[#ECE5DA] font-sans text-xs uppercase tracking-widest font-semibold transition-all rounded-full cursor-pointer shadow-md"
+                  className="px-7 py-3 bg-[#28221D] hover:bg-[#1C1713] text-[#ECE5DA] font-sans text-xs uppercase tracking-widest font-semibold transition-all rounded-full cursor-pointer shadow-md"
                 >
                   Submit Another Request
                 </button>

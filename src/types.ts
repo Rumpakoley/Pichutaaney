@@ -8,7 +8,7 @@ export interface WaitlistEntry {
   dietaryPreferences: string[];
   notes?: string;
   submittedAt: string;
-  status: 'pending' | 'invited' | 'confirmed';
+  status: 'pending' | 'shortlisted' | 'invited' | 'confirmed' | 'archived';
 }
 
 export interface PrivateEventInquiry {
@@ -24,7 +24,7 @@ export interface PrivateEventInquiry {
   dietaryRestrictions: string;
   storytellingNotes: string;
   submittedAt: string;
-  status: 'new' | 'in_discussion' | 'booked';
+  status: 'new' | 'shortlisted' | 'in_discussion' | 'booked' | 'archived';
 }
 
 export interface ContactMessage {
