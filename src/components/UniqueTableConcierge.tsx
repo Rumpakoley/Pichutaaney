@@ -365,10 +365,9 @@ export const UniqueTableConcierge: React.FC<UniqueTableConciergeProps> = ({
                       onChange={(e) => setFormData({ ...formData, experienceType: e.target.value })}
                       className="w-full bg-[#ECE5DA] border border-[#D5CBBD] rounded-full px-4 py-2.5 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] font-sans"
                     >
-                      <option value="supper_club">Supper Club (Priority Waitlist)</option>
-                      <option value="intimate_dinner">Private In-Home Dining (6–16 Guests)</option>
-                      <option value="celebration">Milestone Gathering (Up to 35 Guests)</option>
-                      <option value="workshop">Interactive Cooking Circle</option>
+                      <option value="supper_club">Supper Club Waitlist</option>
+                      <option value="private_dinners">Private Dinners</option>
+                      <option value="brand_collaborations">Brand Collaborations</option>
                     </select>
                   </div>
 

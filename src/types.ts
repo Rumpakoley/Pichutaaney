@@ -16,7 +16,7 @@ export interface PrivateEventInquiry {
   fullName: string;
   email: string;
   phone: string;
-  eventType: 'intimate_dinner' | 'celebration' | 'curated_gathering' | 'workshop' | 'other';
+  eventType: 'private_dinners' | 'brand_collaborations' | 'supper_club' | 'intimate_dinner' | 'celebration' | 'curated_gathering' | 'workshop' | 'other';
   guestCount: number;
   preferredDate: string;
   locationOrVenue: string;
