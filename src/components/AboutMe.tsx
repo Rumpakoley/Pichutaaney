@@ -109,7 +109,7 @@ export const AboutMe: React.FC = () => {
             <div className="rounded-3xl border border-[#DED8CF] bg-white p-3 shadow-md overflow-hidden">
               <div className="relative rounded-2xl overflow-hidden bg-[#E9E4DD] group">
                 <img
-                  src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=900&q=80"
+                  src="https://res.cloudinary.com/dpdtsaalf/image/upload/v1790097435/WhatsApp_Image_2026-09-22_at_10.49.36_AM_cjzkai.jpg"
                   alt="Enakshi, founder and culinary host of Pichhutaaney"
                   referrerPolicy="no-referrer"
                   className="w-full h-[420px] sm:h-[460px] object-cover filter contrast-[1.02] brightness-[0.98] transition-transform duration-700 ease-out group-hover:scale-105"

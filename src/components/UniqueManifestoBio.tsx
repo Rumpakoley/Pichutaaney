@@ -20,7 +20,7 @@ export const UniqueManifestoBio: React.FC = () => {
             <div className="rounded-3xl p-3 bg-[#F7F3EC] border border-[#D5CBBD] shadow-md">
               <div className="relative rounded-2xl overflow-hidden aspect-[4/4.8] bg-[#E8E0D5] group">
                 <img
-                  src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=900&q=80"
+                  src="https://res.cloudinary.com/dpdtsaalf/image/upload/v1790097435/WhatsApp_Image_2026-09-22_at_10.49.36_AM_cjzkai.jpg"
                   alt="Enakshi, founder of Pichhutaaney"
                   className="w-full h-full object-cover filter contrast-[1.02] brightness-[0.98] group-hover:scale-105 transition-transform duration-700"
                 />
