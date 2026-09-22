@@ -96,7 +96,9 @@ export const GetInTouch: React.FC<GetInTouchProps> = ({ onAddInquiry, onAddMessa
                     </div>
                     <div>
                       <span className="block font-medium text-[#171716]">Kitchen Notes & Updates</span>
-                      <span className="text-[#55524E]">@pichhutaaney</span>
+                      <a href="https://www.instagram.com/pichhutaaney?utm_source=ig_web_button_share_sheet&stkn=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" className="text-[#2D2D2A] hover:underline font-medium">
+                        @pichhutaaney
+                      </a>
                     </div>
                   </div>
 

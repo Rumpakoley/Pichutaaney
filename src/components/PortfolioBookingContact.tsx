@@ -147,7 +147,7 @@ export const PortfolioBookingContact: React.FC<PortfolioBookingContactProps> = (
                     Instagram journal
                   </span>
                   <a
-                    href="https://instagram.com"
+                    href="https://www.instagram.com/pichhutaaney?utm_source=ig_web_button_share_sheet&stkn=ZDNlZDc0MzIxNw=="
                     target="_blank"
                     rel="noopener noreferrer"
                     className="font-marcellus text-sm font-normal text-black hover:text-[#8B3A26] hover:underline flex items-center gap-1 block"

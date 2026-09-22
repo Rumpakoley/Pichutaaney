@@ -148,7 +148,7 @@ export const UniqueTableConcierge: React.FC<UniqueTableConciergeProps> = ({
                       Instagram Journal
                     </span>
                     <a
-                      href="https://instagram.com"
+                      href="https://www.instagram.com/pichhutaaney?utm_source=ig_web_button_share_sheet&stkn=ZDNlZDc0MzIxNw=="
                       target="_blank"
                       rel="noopener noreferrer"
                       className="font-marcellus text-sm font-normal text-[#28221D] hover:text-[#B58D59] hover:underline flex items-center gap-1 block"

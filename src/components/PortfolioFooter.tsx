@@ -54,7 +54,7 @@ export const PortfolioFooter: React.FC<PortfolioFooterProps> = ({ onOpenLedger }
             </span>
             <div className="space-y-1.5 text-xs text-white/70 font-sans">
               <p>Email: <a href="mailto:pichhutaaney@gmail.com" className="text-white underline hover:text-[#ffd177]">pichhutaaney@gmail.com</a></p>
-              <p>Instagram: <span className="text-white">@pichhutaaney</span></p>
+              <p>Instagram: <a href="https://www.instagram.com/pichhutaaney?utm_source=ig_web_button_share_sheet&stkn=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" className="text-white underline hover:text-[#ffd177]">@pichhutaaney</a></p>
               <p>Location: <span className="text-white">Kolkata & Toronto</span></p>
             </div>
 
