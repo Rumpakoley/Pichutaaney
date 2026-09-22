@@ -55,7 +55,7 @@ export const UniqueFooter: React.FC<UniqueFooterProps> = ({ onOpenLedger }) => {
             <div className="space-y-1.5 text-xs text-[#D5CBBD] font-sans font-light">
               <p>Direct: <a href="mailto:hello@pichhutaaney.com" className="text-white underline hover:text-[#B58D59]">hello@pichhutaaney.com</a></p>
               <p>Instagram: <span className="text-white">@pichhutaaney</span></p>
-              <p>Base: <span className="text-white">Kolkata & San Francisco</span></p>
+              <p>Base: <span className="text-white">Kolkata & Toronto</span></p>
             </div>
 
             <div className="pt-3">

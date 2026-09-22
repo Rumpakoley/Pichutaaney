@@ -49,15 +49,18 @@ export const UniqueManifestoBio: React.FC = () => {
 
           {/* Right Column: Culinary Manifesto & Principles */}
           <div className="lg:col-span-7 space-y-8">
-            <div className="space-y-3">
+            <div className="space-y-4">
               <span className="font-sans text-[11px] uppercase tracking-[0.25em] text-[#B58D59] font-bold block">
-                THE PHILOSOPHY OF PICHHUTAANEY
+                ABOUT ME • ENAKSHI
               </span>
               <h2 className="font-marcellus text-3xl sm:text-4xl md:text-5xl font-normal text-[#28221D] tracking-tight leading-tight">
-                Food cooked by raw instinct, not formulas.
+                Bringing people together around food, stories & home.
               </h2>
-              <p className="font-pt-serif italic text-lg sm:text-xl text-[#4A4138] leading-relaxed pt-2">
-                “Pichhutaaney (পিছুটানে) is that gentle, nostalgic pull toward where you came from—expressed through dishes created with unhurried memory, wanderlust, and heartfelt hospitality.”
+              <p className="font-sans text-base sm:text-lg text-[#28221D] leading-relaxed font-normal">
+                I’m Enakshi, a self-taught chef from Kolkata, now based in Toronto. I grew up in a joint family, surrounded by people and long conversations around the dining table—and that has always been my happy place.
+              </p>
+              <p className="font-pt-serif italic text-lg sm:text-xl text-[#4A4138] leading-relaxed border-l-2 border-[#B58D59] pl-4 py-1">
+                “Through Pichhutaaney, I want to recreate that feeling: bringing people together around food, stories and a table that feels a little like home.”
               </p>
             </div>
 
