@@ -64,7 +64,7 @@ export const UniqueManifestoBio: React.FC = () => {
                 Food cooked by raw instinct, not formulas.
               </h2>
               <p className="font-pt-serif italic text-lg sm:text-xl text-[#4A4138] leading-relaxed pt-2">
-                “Pichhutaaney (পিছুটানেই) is that gentle, nostalgic pull toward where you came from—expressed through dishes created with unhurried memory, wanderlust, and heartfelt hospitality.”
+                “Pichhutaaney (পিছুটানে) is that gentle, nostalgic pull toward where you came from—expressed through dishes created with unhurried memory, wanderlust, and heartfelt hospitality.”
               </p>
             </div>
 

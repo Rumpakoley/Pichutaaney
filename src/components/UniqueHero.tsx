@@ -87,7 +87,7 @@ export const UniqueHero: React.FC = () => {
             </h1>
             <div className="flex items-center space-x-3 pt-1">
               <span className="font-bengali text-3xl sm:text-4xl text-[#28221D] font-medium">
-                পিছুটানেই
+                পিছুটানে
               </span>
               <span className="font-pt-serif italic text-sm sm:text-base text-[#655B51]">
                 / The gentle, backward glance toward home /

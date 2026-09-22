@@ -35,7 +35,7 @@ export const UniqueNavbar: React.FC<UniqueNavbarProps> = ({ onOpenLedger, reserv
             Pichhutaaney
           </span>
           <span className="font-bengali text-[11px] text-[#655B51] leading-tight font-medium">
-            পিছুটানেই
+            পিছুটানে
           </span>
         </div>
       </a>

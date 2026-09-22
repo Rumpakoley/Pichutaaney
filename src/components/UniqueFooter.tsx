@@ -21,7 +21,7 @@ export const UniqueFooter: React.FC<UniqueFooterProps> = ({ onOpenLedger }) => {
                 Pichhutaaney
               </span>
               <span className="font-bengali text-xs text-[#B58D59] px-3 py-1 rounded-full border border-[#B58D59]/30 bg-white/5 font-medium">
-                পিছুটানেই
+                পিছুটানে
               </span>
             </div>
             <p className="font-sans text-xs sm:text-sm text-[#D5CBBD] leading-relaxed max-w-sm font-light">
@@ -73,7 +73,7 @@ export const UniqueFooter: React.FC<UniqueFooterProps> = ({ onOpenLedger }) => {
         {/* Subfooter */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] font-sans uppercase tracking-widest text-[#D5CBBD]/60">
           <div>
-            © {new Date().getFullYear()} ENAKSHI • PICHHUTAANEY (পিছুটানেই)
+            © {new Date().getFullYear()} ENAKSHI • PICHHUTAANEY (পিছুটানে)
           </div>
 
           <button

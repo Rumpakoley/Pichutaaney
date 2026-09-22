@@ -43,7 +43,7 @@ export const PortfolioQA: React.FC = () => {
               Q: What is the meaning behind the name 'Pichhutaaney'?
             </h4>
             <p className="font-sans text-xs sm:text-sm leading-relaxed text-black/80 font-light">
-              In Bengali, Pichhutaaney (পিছুটানেই) describes that tender, nostalgic backward glance—the quiet pull toward home and where you came from, alive in every spice, bite, and conversation no matter how far you travel across the world.
+              In Bengali, Pichhutaaney (পিছুটানে) describes that tender, nostalgic backward glance—the quiet pull toward home and where you came from, alive in every spice, bite, and conversation no matter how far you travel across the world.
             </p>
           </div>
         </div>

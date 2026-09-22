@@ -9,7 +9,7 @@ export const StoryOfPichhutaaney: React.FC = () => {
       {/* Subtle Bengali Watermark */}
       <div className="absolute right-4 sm:right-12 top-4 select-none pointer-events-none z-0 opacity-[0.04]">
         <span className="font-bengali text-6xl sm:text-8xl md:text-9xl font-normal text-[#171716]">
-          পিছুটানেই
+          পিছুটানে
         </span>
       </div>
 
@@ -32,7 +32,7 @@ export const StoryOfPichhutaaney: React.FC = () => {
             {/* Left: The Word and Etymology */}
             <div className="lg:col-span-6 space-y-4 border-b lg:border-b-0 lg:border-r border-[#DED8CF] pb-8 lg:pb-0 lg:pr-10">
               <div className="flex items-center space-x-3">
-                <span className="font-bengali text-3xl font-medium text-[#171716]">পিছুটানেই</span>
+                <span className="font-bengali text-3xl font-medium text-[#171716]">পিছুটানে</span>
                 <span className="text-[11px] uppercase tracking-[0.2em] text-[#8C867D] font-sans">/ pich-hu-taan /</span>
               </div>
               <h3 className="font-marcellus text-2xl sm:text-3xl font-normal text-[#171716] leading-snug">
