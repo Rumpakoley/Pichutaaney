@@ -137,28 +137,7 @@ export const PortfolioBookingContact: React.FC<PortfolioBookingContactProps> = (
                 </div>
               </div>
 
-              {/* Phone Card */}
-              <div className="flex items-center gap-4 bg-[#FAF6F0] border-2 border-black p-4 rounded-2xl shadow-sm group">
-                <div className="w-10 h-10 bg-black text-[#ffd177] flex items-center justify-center shrink-0 rounded-xl group-hover:bg-[#ffd177] group-hover:text-black transition-colors border border-black">
-                  <Phone className="w-4 h-4" />
-                </div>
-                <div>
-                  <span className="font-mono text-[9px] uppercase tracking-wider text-black/60 block font-bold">
-                    Hotline phone
-                  </span>
-                  <button
-                    onClick={() => handleCopy('+14155550192', 'phone')}
-                    className="font-mono text-xs sm:text-sm font-bold text-black hover:text-[#8B3A26] hover:underline text-left block cursor-pointer"
-                  >
-                    +1 (415) 555-0192
-                  </button>
-                  <span className="font-mono text-[9px] text-[#8B3A26] block mt-0.5 font-bold">
-                    {copiedType === 'phone' ? '✓ Copied Hotline' : 'Click to copy hotline'}
-                  </span>
-                </div>
-              </div>
-
-              {/* Instagram Card */}
+                {/* Instagram Card */}
               <div className="flex items-center gap-4 bg-[#FAF6F0] border-2 border-black p-4 rounded-2xl shadow-sm group">
                 <div className="w-10 h-10 bg-black text-[#ffd177] flex items-center justify-center shrink-0 rounded-xl group-hover:bg-[#ffd177] group-hover:text-black transition-colors border border-black">
                   <Instagram className="w-4 h-4" />

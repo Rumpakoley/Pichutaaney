@@ -138,27 +138,6 @@ export const UniqueTableConcierge: React.FC<UniqueTableConciergeProps> = ({
                   </div>
                 </div>
 
-                {/* Phone */}
-                <div className="flex items-center gap-4 bg-[#ECE5DA] border border-[#D5CBBD] p-4 rounded-2xl group">
-                  <div className="w-10 h-10 bg-[#28221D] text-[#ECE5DA] flex items-center justify-center shrink-0 rounded-xl shadow-xs">
-                    <Phone className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <span className="font-mono text-[9px] uppercase tracking-wider text-[#655B51] block font-bold">
-                      Concierge Hotline
-                    </span>
-                    <button
-                      onClick={() => handleCopy('+14155550192', 'phone')}
-                      className="font-mono text-xs sm:text-sm font-bold text-[#28221D] hover:text-[#B58D59] hover:underline text-left block cursor-pointer"
-                    >
-                      +1 (415) 555-0192
-                    </button>
-                    <span className="font-mono text-[9px] text-[#B58D59] block mt-0.5 font-bold">
-                      {copiedType === 'phone' ? '✓ Copied Hotline' : 'Click to copy hotline'}
-                    </span>
-                  </div>
-                </div>
-
                 {/* Instagram */}
                 <div className="flex items-center gap-4 bg-[#ECE5DA] border border-[#D5CBBD] p-4 rounded-2xl group">
                   <div className="w-10 h-10 bg-[#B58D59] text-[#28221D] flex items-center justify-center shrink-0 rounded-xl shadow-xs">
