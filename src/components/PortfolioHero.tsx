@@ -131,7 +131,7 @@ export const PortfolioHero: React.FC = () => {
           className="my-auto py-6 space-y-3 sm:space-y-4"
         >
           <div className="flex items-baseline flex-wrap gap-x-6 gap-y-3">
-            <h1 className="font-marcellus text-[4.2rem] sm:text-[5.5rem] md:text-[7rem] lg:text-[6rem] xl:text-[7.5rem] leading-[0.8] font-normal tracking-tight text-black">
+            <h1 className="font-marcellus text-[2.75rem] xs:text-[3.5rem] sm:text-[4.5rem] md:text-[5.5rem] lg:text-[4rem] xl:text-[5.2rem] leading-[0.85] font-normal tracking-tight text-black">
               ENAKSHI
             </h1>
 
@@ -148,10 +148,10 @@ export const PortfolioHero: React.FC = () => {
           </div>
 
           <div>
-            <h1 className="font-marcellus text-[3.8rem] sm:text-[5rem] md:text-[6.5rem] lg:text-[5.5rem] xl:text-[7rem] leading-[0.8] font-normal tracking-tight text-black flex items-center gap-3">
-              <span>PICHHUTAANEY</span>
+            <h1 className="font-marcellus text-[2.2rem] xs:text-[2.8rem] sm:text-[3.8rem] md:text-[4.6rem] lg:text-[3.2rem] xl:text-[4.4rem] 2xl:text-[5.2rem] leading-[0.85] font-normal tracking-tight text-black w-full">
+              PICHHUTAANEY
             </h1>
-            <span className="font-bengali text-2xl sm:text-3xl text-black/80 font-medium block mt-1">
+            <span className="font-bengali text-xl sm:text-2xl md:text-3xl text-black/80 font-medium block mt-1.5">
               পিছুটানেই <span className="font-mono text-xs uppercase tracking-widest font-bold opacity-60">/ The Backward Glance /</span>
             </span>
           </div>
