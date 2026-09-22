@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Navbar } from './components/Navbar';
-import { Hero } from './components/Hero';
+import { PortfolioNavbar } from './components/PortfolioNavbar';
+import { PortfolioHero } from './components/PortfolioHero';
 import { MarqueeBanner } from './components/MarqueeBanner';
-import { CinematicVideoReel } from './components/CinematicVideoReel';
-import { AboutMe } from './components/AboutMe';
-import { StoryOfPichhutaaney } from './components/StoryOfPichhutaaney';
-import { SupperClubWaitlist } from './components/SupperClubWaitlist';
-import { PrivateEvents } from './components/PrivateEvents';
-import { KitchenDiaries } from './components/KitchenDiaries';
-import { SampleMenu } from './components/SampleMenu';
-import { GetInTouch } from './components/GetInTouch';
-import { Footer } from './components/Footer';
+import { PortfolioBio } from './components/PortfolioBio';
+import { PortfolioGallery } from './components/PortfolioGallery';
+import { PortfolioVideoAudioReels } from './components/PortfolioVideoAudioReels';
+import { PortfolioCraftSkills } from './components/PortfolioCraftSkills';
+import { PortfolioQA } from './components/PortfolioQA';
+import { PortfolioBookingContact } from './components/PortfolioBookingContact';
+import { PortfolioFooter } from './components/PortfolioFooter';
 import { HostLedgerModal } from './components/HostLedgerModal';
 import { WaitlistEntry, PrivateEventInquiry, ContactMessage } from './types';
 
@@ -119,10 +117,6 @@ export default function App() {
     setInquiries((prev) => [inquiry, ...prev]);
   };
 
-  const handleAddMessage = (msg: ContactMessage) => {
-    setMessages((prev) => [msg, ...prev]);
-  };
-
   const handleUpdateWaitlistStatus = (id: string, status: WaitlistEntry['status']) => {
     setWaitlist((prev) =>
       prev.map((item) => (item.id === id ? { ...item, status } : item))
@@ -136,54 +130,45 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#171716] text-[#2D2D2A] font-sans selection:bg-[#2D2D2A] selection:text-[#FAF8F5] antialiased">
-      {/* Framed Canvas */}
-      <div className="min-h-full max-w-[1600px] mx-auto bg-[#E9E4DD] overflow-hidden flex flex-col">
-        {/* Navigation Header */}
-        <Navbar
-          onOpenLedger={() => setIsLedgerOpen(true)}
-          waitlistCount={waitlist.length}
-          inquiryCount={inquiries.length}
+    <div className="min-h-screen bg-[#FAF6F0] text-[#0e0e0e] font-sans selection:bg-[#ffd177] selection:text-black antialiased">
+      {/* Floating Capsule Navigation (Matches Husne Shabnam Portfolio) */}
+      <PortfolioNavbar
+        onOpenLedger={() => setIsLedgerOpen(true)}
+        waitlistCount={waitlist.length + inquiries.length}
+      />
+
+      <main className="w-full">
+        {/* Section 01: Split Artist Portfolio Hero */}
+        <PortfolioHero />
+
+        {/* Continuous Marquee Ticker */}
+        <MarqueeBanner />
+
+        {/* Section 02: Artist Statement & Biography */}
+        <PortfolioBio />
+
+        {/* Section 03: Tasting Exhibitions & Printed Menu Cards (Horizontal Snap Slider with Filters) */}
+        <PortfolioGallery />
+
+        {/* Section 04: Living Kitchen in Motion (Reels + Decibel Equalizer Player) */}
+        <PortfolioVideoAudioReels />
+
+        {/* Section 05: Movement & Culinary Craft Disciplines ([01], [02], [03], [04]) */}
+        <PortfolioCraftSkills />
+
+        {/* Section 06: Curator Q&A Dialogues */}
+        <PortfolioQA />
+
+        {/* Section 07: Hotline & Interactive Table Booking Deck */}
+        <PortfolioBookingContact
+          onAddWaitlist={handleAddWaitlist}
+          onAddInquiry={handleAddInquiry}
+          recentEntries={[...waitlist, ...inquiries]}
         />
+      </main>
 
-        <main className="flex-1">
-          {/* Hero Section */}
-          <Hero />
-
-          {/* Infinite Marquee Banner (Matches Previous Site: "For the wanderers *") */}
-          <MarqueeBanner />
-
-          {/* Cinematic Kitchen Atmosphere Video Reel */}
-          <CinematicVideoReel />
-
-          {/* Section 1: About Me */}
-          <AboutMe />
-
-          {/* Section 2: The Story of Pichhutaaney */}
-          <StoryOfPichhutaaney />
-
-          {/* Section 3: Supper Club Waitlist */}
-          <SupperClubWaitlist
-            onAddEntry={handleAddWaitlist}
-            existingEntriesCount={waitlist.length}
-          />
-
-          {/* Section 4: Private Events */}
-          <PrivateEvents onAddInquiry={handleAddInquiry} />
-
-          {/* Expansion: Kitchen Diaries & Lore */}
-          <KitchenDiaries />
-
-          {/* Expansion: Sample Tasting Editions */}
-          <SampleMenu />
-
-          {/* Section 5: Get in Touch */}
-          <GetInTouch onAddMessage={handleAddMessage} />
-        </main>
-
-        {/* Footer */}
-        <Footer onOpenLedger={() => setIsLedgerOpen(true)} />
-      </div>
+      {/* Section 08: Artist Portfolio Footer */}
+      <PortfolioFooter onOpenLedger={() => setIsLedgerOpen(true)} />
 
       {/* Host Desk / Registry Modal */}
       <HostLedgerModal
