@@ -55,7 +55,7 @@ export const UniqueManifestoBio: React.FC = () => {
               <h2 className="font-marcellus text-3xl sm:text-4xl md:text-5xl font-normal text-[#28221D] tracking-tight leading-tight">
                 Bringing people together around food, stories & home.
               </h2>
-              <p className="font-sans text-base sm:text-lg text-[#28221D] leading-relaxed font-normal">
+              <p className="font-serif-cormorant text-xl sm:text-2xl text-[#28221D] leading-relaxed font-normal tracking-wide">
                 I’m Enakshi, a self-taught chef from Kolkata, now based in Toronto. I grew up in a joint family, surrounded by people and long conversations around the dining table—and that has always been my happy place.
               </p>
               <p className="font-pt-serif italic text-lg sm:text-xl text-[#4A4138] leading-relaxed border-l-2 border-[#B58D59] pl-4 py-1">
