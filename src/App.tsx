@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { PortfolioNavbar } from './components/PortfolioNavbar';
-import { PortfolioHero } from './components/PortfolioHero';
+import { UniqueNavbar } from './components/UniqueNavbar';
+import { UniqueHero } from './components/UniqueHero';
 import { MarqueeBanner } from './components/MarqueeBanner';
-import { PortfolioBio } from './components/PortfolioBio';
-import { PortfolioGallery } from './components/PortfolioGallery';
-import { PortfolioVideoAudioReels } from './components/PortfolioVideoAudioReels';
-import { PortfolioCraftSkills } from './components/PortfolioCraftSkills';
-import { PortfolioQA } from './components/PortfolioQA';
-import { PortfolioBookingContact } from './components/PortfolioBookingContact';
-import { PortfolioFooter } from './components/PortfolioFooter';
+import { UniqueManifestoBio } from './components/UniqueManifestoBio';
+import { UniqueMenuExhibitions } from './components/UniqueMenuExhibitions';
+import { UniqueKitchenHearthReels } from './components/UniqueKitchenHearthReels';
+import { UniqueCulinaryTerroirs } from './components/UniqueCulinaryTerroirs';
+import { UniqueCuratorDialogues } from './components/UniqueCuratorDialogues';
+import { UniqueTableConcierge } from './components/UniqueTableConcierge';
+import { UniqueFooter } from './components/UniqueFooter';
 import { HostLedgerModal } from './components/HostLedgerModal';
 import { WaitlistEntry, PrivateEventInquiry, ContactMessage } from './types';
 
@@ -130,45 +130,45 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAF6F0] text-[#0e0e0e] font-sans selection:bg-[#ffd177] selection:text-black antialiased">
-      {/* Floating Capsule Navigation (Matches Husne Shabnam Portfolio) */}
-      <PortfolioNavbar
+    <div className="min-h-screen bg-[#FAF7F2] text-[#191512] font-sans selection:bg-[#963D28] selection:text-white antialiased">
+      {/* Bespoke Floating Concierge Navigation */}
+      <UniqueNavbar
         onOpenLedger={() => setIsLedgerOpen(true)}
-        waitlistCount={waitlist.length + inquiries.length}
+        reservationCount={waitlist.length + inquiries.length}
       />
 
       <main className="w-full">
-        {/* Section 01: Split Artist Portfolio Hero */}
-        <PortfolioHero />
+        {/* Section 01: Chef Atelier Signature Hero */}
+        <UniqueHero />
 
         {/* Continuous Marquee Ticker */}
         <MarqueeBanner />
 
-        {/* Section 02: Artist Statement & Biography */}
-        <PortfolioBio />
+        {/* Section 02: Founder's Note & Culinary Manifesto */}
+        <UniqueManifestoBio />
 
-        {/* Section 03: Tasting Exhibitions & Printed Menu Cards (Horizontal Snap Slider with Filters) */}
-        <PortfolioGallery />
+        {/* Section 03: Tasting Menu Archive & Printed Editions Deck */}
+        <UniqueMenuExhibitions />
 
-        {/* Section 04: Living Kitchen in Motion (Reels + Decibel Equalizer Player) */}
-        <PortfolioVideoAudioReels />
+        {/* Section 04: Living Hearth in Motion (6-Reel Studio & Acoustics) */}
+        <UniqueKitchenHearthReels />
 
-        {/* Section 05: Movement & Culinary Craft Disciplines ([01], [02], [03], [04]) */}
-        <PortfolioCraftSkills />
+        {/* Section 05: The 4 Regional Terroirs & Geographical Anchors */}
+        <UniqueCulinaryTerroirs />
 
         {/* Section 06: Curator Q&A Dialogues */}
-        <PortfolioQA />
+        <UniqueCuratorDialogues />
 
-        {/* Section 07: Hotline & Interactive Table Booking Deck */}
-        <PortfolioBookingContact
+        {/* Section 07: Direct Concierge & Table Reservation Deck */}
+        <UniqueTableConcierge
           onAddWaitlist={handleAddWaitlist}
           onAddInquiry={handleAddInquiry}
           recentEntries={[...waitlist, ...inquiries]}
         />
       </main>
 
-      {/* Section 08: Artist Portfolio Footer */}
-      <PortfolioFooter onOpenLedger={() => setIsLedgerOpen(true)} />
+      {/* Section 08: Bespoke Culinary Footer */}
+      <UniqueFooter onOpenLedger={() => setIsLedgerOpen(true)} />
 
       {/* Host Desk / Registry Modal */}
       <HostLedgerModal
