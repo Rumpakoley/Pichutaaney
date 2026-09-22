@@ -37,18 +37,11 @@ export const UniqueManifestoBio: React.FC = () => {
             </div>
 
             {/* Provenance Strip */}
-            <div className="bg-[#F7F3EC] rounded-full border border-[#D5CBBD] px-5 py-3 flex items-center justify-between text-xs text-[#655B51] shadow-xs">
+            <div className="bg-[#F7F3EC] rounded-full border border-[#D5CBBD] px-5 py-2.5 flex items-center justify-center text-xs text-[#655B51] shadow-xs">
               <div className="flex items-center space-x-2">
                 <MapPin className="w-3.5 h-3.5 text-[#B58D59]" />
                 <span className="font-sans font-semibold uppercase tracking-wider text-[10.5px] text-[#28221D]">
                   West Bengal to the World
-                </span>
-              </div>
-              <span className="text-[#D5CBBD]">/</span>
-              <div className="flex items-center space-x-2">
-                <Utensils className="w-3.5 h-3.5 text-[#B58D59]" />
-                <span className="font-sans font-semibold uppercase tracking-wider text-[10.5px] text-[#28221D]">
-                  Unstandardized Hearth
                 </span>
               </div>
             </div>
