@@ -100,22 +100,6 @@ export const UniqueHero: React.FC = () => {
             An intuitive Indian dining table, communal supper club, and living archive of kitchen memories. Cooked by instinct, shaped by travel, and rooted in the warmth of West Bengal.
           </p>
 
-          {/* Sensory Pillar Badges */}
-          <div className="grid grid-cols-3 gap-2.5 pt-2 max-w-lg">
-            <div className="p-3 bg-[#F7F3EC] rounded-2xl border border-[#D5CBBD] shadow-xs text-left">
-              <span className="font-mono text-[9px] text-[#B58D59] uppercase font-bold block">01 / SENSES</span>
-              <span className="font-marcellus text-xs font-normal text-[#28221D] block mt-0.5">Mustard Smoke</span>
-            </div>
-            <div className="p-3 bg-[#F7F3EC] rounded-2xl border border-[#D5CBBD] shadow-xs text-left">
-              <span className="font-mono text-[9px] text-[#B58D59] uppercase font-bold block">02 / TABLE</span>
-              <span className="font-marcellus text-xs font-normal text-[#28221D] block mt-0.5">14 Communal Seats</span>
-            </div>
-            <div className="p-3 bg-[#F7F3EC] rounded-2xl border border-[#D5CBBD] shadow-xs text-left">
-              <span className="font-mono text-[9px] text-[#B58D59] uppercase font-bold block">03 / ETHOS</span>
-              <span className="font-marcellus text-xs font-normal text-[#28221D] block mt-0.5">Peel-to-Stem Care</span>
-            </div>
-          </div>
-
           {/* Quick CTAs */}
           <div className="flex flex-wrap items-center gap-3 pt-2">
             <a
