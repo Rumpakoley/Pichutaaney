@@ -4,23 +4,13 @@ import { Sparkles, Utensils, Compass, Flame, Play, ArrowUpRight, Volume2, Volume
 
 const CHEF_ATELIER_LOOKBOOK = [
   {
-    id: 'vid-enakshi-story',
-    category: 'Chef & Table Stories',
-    title: 'Enakshi • Food, Stories & Home',
-    subtitle: 'Recreating the warmth of Kolkata joint families and long conversations around the dining table',
-    type: 'video',
-    url: 'https://res.cloudinary.com/dpdtsaalf/video/upload/v1790102790/WhatsApp_Video_2026-09-22_at_10.52.23_AM_vugp9u.mp4',
-    badge: 'REEL 01 • STORIES & HOME',
-    provenance: 'Kolkata to Toronto Table',
-  },
-  {
     id: 'vid-intro',
     category: 'The Intuitive Cook',
     title: 'The Essence of Pichhutaaney',
     subtitle: 'Wandering, sensory memory, and instinct-led cooking in full motion',
     type: 'video',
     url: 'https://res.cloudinary.com/dpdtsaalf/video/upload/v1788549931/WhatsApp_Video_2026-09-05_at_12.42.00_AM_4_k3o720.mp4',
-    badge: 'REEL 02 • THE ESSENCE',
+    badge: 'REEL 01 • THE ESSENCE',
     provenance: 'Bengal Delta to Global Tables',
   },
   {
@@ -30,7 +20,7 @@ const CHEF_ATELIER_LOOKBOOK = [
     subtitle: 'Golden mustard oil heating to smoke point and the rhythm of the pan',
     type: 'video',
     url: 'https://res.cloudinary.com/dpdtsaalf/video/upload/v1788549950/WhatsApp_Video_2026-09-05_at_12.47.22_AM_udyrd8.mp4',
-    badge: 'REEL 03 • THE HEARTH',
+    badge: 'REEL 02 • THE HEARTH',
     provenance: 'Nadia District & River Silts',
   },
   {
@@ -40,7 +30,7 @@ const CHEF_ATELIER_LOOKBOOK = [
     subtitle: 'Panch phoron, whole spices, and raw instinct guiding the pan',
     type: 'video',
     url: 'https://res.cloudinary.com/dpdtsaalf/video/upload/v1788549943/WhatsApp_Video_2026-09-05_at_12.42.00_AM_jkldp2.mp4',
-    badge: 'REEL 04 • INSTINCT',
+    badge: 'REEL 03 • INSTINCT',
     provenance: 'Panch Phoron & Mustard Smoke',
   },
   {
@@ -50,7 +40,7 @@ const CHEF_ATELIER_LOOKBOOK = [
     subtitle: 'Steaming in banana leaves and slow simmered earthen textures',
     type: 'video',
     url: 'https://res.cloudinary.com/dpdtsaalf/video/upload/v1788549942/WhatsApp_Video_2026-09-05_at_12.42.00_AM_3_lm4akh.mp4',
-    badge: 'REEL 05 • HANDCRAFT',
+    badge: 'REEL 04 • HANDCRAFT',
     provenance: 'Banana Leaf & Slow Simmer',
   },
   {
@@ -60,7 +50,7 @@ const CHEF_ATELIER_LOOKBOOK = [
     subtitle: 'Strangers gathering around shared plates and warm conversations',
     type: 'video',
     url: 'https://res.cloudinary.com/dpdtsaalf/video/upload/v1788549941/WhatsApp_Video_2026-09-05_at_12.42.00_AM_2_w12jyr.mp4',
-    badge: 'REEL 06 • THE GATHERING',
+    badge: 'REEL 05 • THE GATHERING',
     provenance: 'Rotating Pop-Ups & Salons',
   },
   {
@@ -70,7 +60,7 @@ const CHEF_ATELIER_LOOKBOOK = [
     subtitle: 'Atmospheric glimpses into Enakshi’s private kitchen studio',
     type: 'video',
     url: 'https://res.cloudinary.com/dpdtsaalf/video/upload/v1788549936/WhatsApp_Video_2026-09-05_at_12.42.00_AM_1_hoycwv.mp4',
-    badge: 'REEL 07 • THE ARCHIVE',
+    badge: 'REEL 06 • THE ARCHIVE',
     provenance: 'Enakshi’s Culinary Atelier',
   },
 ];
