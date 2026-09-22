@@ -21,7 +21,7 @@ export const PortfolioFooter: React.FC<PortfolioFooterProps> = ({ onOpenLedger }
                 Pichhutaaney
               </span>
               <span className="font-bengali text-xs text-[#ffd177] px-3 py-1 rounded-full border border-[#ffd177]/30 bg-white/5 font-medium">
-                পিছুটান
+                পিছুটানেই
               </span>
             </div>
             <p className="font-sans text-xs sm:text-sm text-white/70 leading-relaxed max-w-sm font-light">

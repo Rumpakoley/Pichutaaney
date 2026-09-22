@@ -152,7 +152,7 @@ export const PortfolioHero: React.FC = () => {
               <span>PICHHUTAANEY</span>
             </h1>
             <span className="font-bengali text-2xl sm:text-3xl text-black/80 font-medium block mt-1">
-              পিছুটান <span className="font-mono text-xs uppercase tracking-widest font-bold opacity-60">/ The Backward Glance /</span>
+              পিছুটানেই <span className="font-mono text-xs uppercase tracking-widest font-bold opacity-60">/ The Backward Glance /</span>
             </span>
           </div>
         </motion.div>

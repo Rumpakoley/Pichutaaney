@@ -24,7 +24,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLedger }) => {
                   Pichhutaaney
                 </span>
                 <span className="text-xs font-bengali font-medium text-[#EED485] px-3 py-1 rounded-full border border-[#EED485]/40 bg-[#EED485]/10">
-                  পিছুটান
+                  পিছুটানেই
                 </span>
               </div>
             </RevealHeading>
