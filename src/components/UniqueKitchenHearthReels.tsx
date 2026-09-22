@@ -79,20 +79,20 @@ export const UniqueKitchenHearthReels: React.FC = () => {
   };
 
   return (
-    <section id="hearth-reels" className="py-20 sm:py-28 bg-[#191512] text-[#F5EFEB] border-b border-[#3D342C] text-left">
+    <section id="hearth-reels" className="py-20 sm:py-28 bg-[#1C1713] text-[#ECE5DA] border-b border-[#382F27] text-left">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-white/10 pb-8">
           <div className="space-y-2">
-            <div className="inline-flex items-center space-x-2 text-[10px] tracking-[0.25em] uppercase font-bold text-[#E8A857] font-sans bg-white/10 px-4 py-1.5 rounded-full border border-white/10">
-              <Flame className="w-3.5 h-3.5 text-[#E8A857]" />
+            <div className="inline-flex items-center space-x-2 text-[10px] tracking-[0.25em] uppercase font-bold text-[#B58D59] font-sans bg-white/10 px-4 py-1.5 rounded-full border border-white/10">
+              <Flame className="w-3.5 h-3.5 text-[#B58D59]" />
               <span>THE LIVING HEARTH IN MOTION</span>
             </div>
-            <h2 className="font-marcellus text-3xl sm:text-4xl md:text-5xl font-normal text-white tracking-tight">
+            <h2 className="font-marcellus text-3xl sm:text-4xl md:text-5xl font-normal text-[#ECE5DA] tracking-tight">
               Scent, Sizzle & Living Kitchen Reels
             </h2>
           </div>
-          <p className="font-sans text-xs sm:text-sm text-[#D8CEBF] max-w-md leading-relaxed font-light">
+          <p className="font-sans text-xs sm:text-sm text-[#D5CBBD] max-w-md leading-relaxed font-light">
             Witness the sizzle of golden mustard oil heating to smoke point, whole spices crackling in the pan, and intimate communal dinner moments.
           </p>
         </div>
@@ -114,7 +114,7 @@ export const UniqueKitchenHearthReels: React.FC = () => {
 
             {/* Top Tag */}
             <div className="absolute top-4 sm:top-6 left-4 sm:left-6">
-              <span className="bg-[#191512]/85 backdrop-blur-md px-4 py-1.5 rounded-full text-[10px] font-mono tracking-widest uppercase border border-white/20 text-[#E8A857] font-bold">
+              <span className="bg-[#1C1713]/85 backdrop-blur-md px-4 py-1.5 rounded-full text-[10px] font-mono tracking-widest uppercase border border-white/20 text-[#B58D59] font-bold">
                 {activeReel.tag}
               </span>
             </div>
@@ -122,22 +122,22 @@ export const UniqueKitchenHearthReels: React.FC = () => {
             {/* Bottom Overlay Info & Controls */}
             <div className="absolute bottom-0 inset-x-0 p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4">
               <div className="text-left space-y-1.5 max-w-xl">
-                <span className="text-[10px] uppercase tracking-widest text-[#E8A857] font-bold font-mono">
+                <span className="text-[10px] uppercase tracking-widest text-[#B58D59] font-bold font-mono">
                   {activeReel.title}
                 </span>
                 <p className="font-pt-serif italic text-lg sm:text-2xl text-white leading-snug">
                   {activeReel.quote}
                 </p>
-                <p className="text-xs text-[#D8CEBF] font-sans font-light hidden sm:block">
+                <p className="text-xs text-[#D5CBBD] font-sans font-light hidden sm:block">
                   {activeReel.subtitle}
                 </p>
               </div>
 
               {/* Floating Controls Bar */}
-              <div className="flex items-center space-x-3 bg-[#191512]/85 backdrop-blur-md px-5 py-2.5 rounded-full border border-white/20 text-xs text-white">
+              <div className="flex items-center space-x-3 bg-[#1C1713]/85 backdrop-blur-md px-5 py-2.5 rounded-full border border-white/20 text-xs text-white">
                 <button
                   onClick={togglePlay}
-                  className="flex items-center space-x-1.5 hover:text-[#E8A857] transition-colors p-1 cursor-pointer"
+                  className="flex items-center space-x-1.5 hover:text-[#B58D59] transition-colors p-1 cursor-pointer"
                   aria-label={isPlaying ? 'Pause video' : 'Play video'}
                 >
                   {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4 fill-current" />}
@@ -150,7 +150,7 @@ export const UniqueKitchenHearthReels: React.FC = () => {
 
                 <button
                   onClick={toggleMute}
-                  className="flex items-center space-x-1.5 hover:text-[#E8A857] transition-colors p-1 cursor-pointer"
+                  className="flex items-center space-x-1.5 hover:text-[#B58D59] transition-colors p-1 cursor-pointer"
                   aria-label={isMuted ? 'Unmute audio' : 'Mute audio'}
                 >
                   {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
@@ -163,7 +163,7 @@ export const UniqueKitchenHearthReels: React.FC = () => {
 
                 <button
                   onClick={handleFullScreen}
-                  className="hover:text-[#E8A857] transition-colors p-1 cursor-pointer"
+                  className="hover:text-[#B58D59] transition-colors p-1 cursor-pointer"
                   aria-label="Fullscreen"
                 >
                   <Maximize className="w-4 h-4" />
@@ -183,7 +183,7 @@ export const UniqueKitchenHearthReels: React.FC = () => {
                 onClick={() => setActiveIdx(idx)}
                 className={`group relative rounded-2xl overflow-hidden p-3 text-left border transition-all duration-300 cursor-pointer ${
                   isActive
-                    ? 'bg-white/10 border-[#E8A857] shadow-md ring-1 ring-[#E8A857]'
+                    ? 'bg-white/10 border-[#B58D59] shadow-md ring-1 ring-[#B58D59]'
                     : 'bg-white/5 border-white/10 hover:border-white/30'
                 }`}
               >
@@ -195,13 +195,13 @@ export const UniqueKitchenHearthReels: React.FC = () => {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-                    <div className={`p-1.5 rounded-full ${isActive ? 'bg-[#E8A857] text-[#191512]' : 'bg-white/30 text-white'}`}>
+                    <div className={`p-1.5 rounded-full ${isActive ? 'bg-[#B58D59] text-[#1C1713]' : 'bg-white/30 text-white'}`}>
                       <Play className="w-3.5 h-3.5 fill-current" />
                     </div>
                   </div>
                 </div>
 
-                <span className="block text-[9.5px] font-mono uppercase tracking-widest text-[#E8A857] mb-0.5 font-bold">
+                <span className="block text-[9.5px] font-mono uppercase tracking-widest text-[#B58D59] mb-0.5 font-bold">
                   REEL 0{idx + 1}
                 </span>
                 <h4 className="font-marcellus text-sm font-normal text-white truncate">
@@ -213,27 +213,27 @@ export const UniqueKitchenHearthReels: React.FC = () => {
         </div>
 
         {/* Living Hearth Soundtrack Deck */}
-        <div className="border border-white/15 p-6 sm:p-7 bg-white/5 text-[#F5EFEB] flex flex-col lg:flex-row items-center justify-between gap-6 rounded-3xl">
+        <div className="border border-white/15 p-6 sm:p-7 bg-white/5 text-[#ECE5DA] flex flex-col lg:flex-row items-center justify-between gap-6 rounded-3xl">
           <div className="space-y-1 w-full lg:w-84 shrink-0 text-left">
-            <span className="font-mono text-[9px] text-[#E8A857] uppercase tracking-widest font-black block">
+            <span className="font-mono text-[9px] text-[#B58D59] uppercase tracking-widest font-black block">
               Living Hearth Soundtrack
             </span>
             <h4 className="font-marcellus text-lg font-normal text-white leading-tight">
               {activeReel.title}
             </h4>
-            <p className="font-sans text-xs text-[#D8CEBF] font-light truncate">
+            <p className="font-sans text-xs text-[#D5CBBD] font-light truncate">
               {activeReel.subtitle}
             </p>
           </div>
 
           <div className="w-full flex-1 space-y-2">
             <div className="h-12 bg-black/40 border border-white/10 flex items-end justify-between p-2.5 gap-0.5 relative overflow-hidden rounded-xl">
-              <div className="absolute inset-0 bg-[#E8A857]/5 pointer-events-none" />
+              <div className="absolute inset-0 bg-[#B58D59]/5 pointer-events-none" />
               {waveBars.map((val, idx) => (
                 <div
                   key={idx}
                   className={`w-full max-w-[6px] rounded-full transition-all duration-300 ${
-                    isPlaying ? 'bg-[#E8A857]' : 'bg-white/20'
+                    isPlaying ? 'bg-[#B58D59]' : 'bg-white/20'
                   }`}
                   style={{ height: `${val}%`, minHeight: '4px' }}
                 />
@@ -242,8 +242,8 @@ export const UniqueKitchenHearthReels: React.FC = () => {
 
             <div className="flex justify-between items-center text-xs font-mono text-white/50 px-1">
               <span>{formatTime(currentTime)}</span>
-              <span className="text-[8.5px] uppercase tracking-widest font-bold text-[#E8A857] flex items-center gap-1.5">
-                <Radio className="w-3 h-3 text-[#E8A857] animate-pulse" />
+              <span className="text-[8.5px] uppercase tracking-widest font-bold text-[#B58D59] flex items-center gap-1.5">
+                <Radio className="w-3 h-3 text-[#B58D59] animate-pulse" />
                 <span>{isPlaying ? '▶ LIVE HEARTH ACOUSTICS' : '■ SOUND STANDBY'}</span>
               </span>
               <span>{formatTime(duration)}</span>
@@ -256,11 +256,11 @@ export const UniqueKitchenHearthReels: React.FC = () => {
               className={`w-11 h-11 rounded-full border border-black flex items-center justify-center transition-all cursor-pointer ${
                 isPlaying
                   ? 'bg-red-600 text-white hover:bg-red-700'
-                  : 'bg-[#E8A857] hover:bg-[#E8A857]/90 text-[#191512]'
+                  : 'bg-[#B58D59] hover:bg-[#B58D59]/90 text-[#1C1713]'
               }`}
               title={isPlaying ? 'Pause' : 'Play'}
             >
-              {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4 ml-0.5 fill-[#191512]" />}
+              {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4 ml-0.5 fill-[#1C1713]" />}
             </button>
           </div>
         </div>

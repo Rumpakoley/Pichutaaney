@@ -130,7 +130,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAF7F2] text-[#191512] font-sans selection:bg-[#963D28] selection:text-white antialiased">
+    <div className="min-h-screen bg-[#ECE5DA] text-[#28221D] font-sans selection:bg-[#B58D59] selection:text-white antialiased">
       {/* Bespoke Floating Concierge Navigation */}
       <UniqueNavbar
         onOpenLedger={() => setIsLedgerOpen(true)}

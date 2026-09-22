@@ -96,88 +96,88 @@ export const UniqueTableConcierge: React.FC<UniqueTableConciergeProps> = ({
   };
 
   return (
-    <section id="table-concierge" className="py-20 sm:py-28 bg-[#FAF7F2] border-b border-[#D8CEBF] text-left">
+    <section id="table-concierge" className="py-20 sm:py-28 bg-[#ECE5DA] border-b border-[#D5CBBD] text-left">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
           {/* Left Column: Concierge Desk & Hotlines */}
-          <div className="lg:col-span-5 bg-white border border-[#D8CEBF] p-8 sm:p-10 rounded-3xl shadow-sm flex flex-col justify-between space-y-8">
+          <div className="lg:col-span-5 bg-[#F7F3EC] border border-[#D5CBBD] p-8 sm:p-10 rounded-3xl shadow-sm flex flex-col justify-between space-y-8">
             <div className="space-y-6">
               <div className="space-y-2">
-                <span className="font-sans text-[11px] uppercase tracking-[0.25em] text-[#963D28] font-bold block">
+                <span className="font-sans text-[11px] uppercase tracking-[0.25em] text-[#B58D59] font-bold block">
                   CONCIERGE & DESK
                 </span>
-                <h3 className="font-marcellus text-3xl sm:text-4xl font-normal text-[#191512] tracking-tight">
+                <h3 className="font-marcellus text-3xl sm:text-4xl font-normal text-[#28221D] tracking-tight">
                   Direct Table Concierge
                 </h3>
               </div>
 
-              <p className="font-sans text-xs sm:text-sm text-[#695F55] leading-relaxed font-light">
+              <p className="font-sans text-xs sm:text-sm text-[#655B51] leading-relaxed font-light">
                 Connect directly to join private supper club drops, reserve bespoke in-home dinners, or discuss culinary collaborations and food writing.
               </p>
 
               {/* Contact Cards */}
               <div className="space-y-3.5 pt-2">
                 {/* Email */}
-                <div className="flex items-center gap-4 bg-[#FAF7F2] border border-[#D8CEBF] p-4 rounded-2xl group">
-                  <div className="w-10 h-10 bg-[#963D28] text-white flex items-center justify-center shrink-0 rounded-xl shadow-xs">
+                <div className="flex items-center gap-4 bg-[#ECE5DA] border border-[#D5CBBD] p-4 rounded-2xl group">
+                  <div className="w-10 h-10 bg-[#28221D] text-[#ECE5DA] flex items-center justify-center shrink-0 rounded-xl shadow-xs">
                     <Mail className="w-4 h-4" />
                   </div>
                   <div>
-                    <span className="font-mono text-[9px] uppercase tracking-wider text-[#695F55] block font-bold">
+                    <span className="font-mono text-[9px] uppercase tracking-wider text-[#655B51] block font-bold">
                       Direct Correspondence
                     </span>
                     <button
                       onClick={() => handleCopy('hello@pichhutaaney.com', 'email')}
-                      className="font-marcellus text-sm font-normal text-[#191512] hover:text-[#963D28] hover:underline text-left block cursor-pointer"
+                      className="font-marcellus text-sm font-normal text-[#28221D] hover:text-[#B58D59] hover:underline text-left block cursor-pointer"
                     >
                       hello@pichhutaaney.com
                     </button>
-                    <span className="font-mono text-[9px] text-[#963D28] block mt-0.5 font-bold">
+                    <span className="font-mono text-[9px] text-[#B58D59] block mt-0.5 font-bold">
                       {copiedType === 'email' ? '✓ Copied Address' : 'Click to copy email'}
                     </span>
                   </div>
                 </div>
 
                 {/* Phone */}
-                <div className="flex items-center gap-4 bg-[#FAF7F2] border border-[#D8CEBF] p-4 rounded-2xl group">
-                  <div className="w-10 h-10 bg-[#191512] text-white flex items-center justify-center shrink-0 rounded-xl shadow-xs">
+                <div className="flex items-center gap-4 bg-[#ECE5DA] border border-[#D5CBBD] p-4 rounded-2xl group">
+                  <div className="w-10 h-10 bg-[#28221D] text-[#ECE5DA] flex items-center justify-center shrink-0 rounded-xl shadow-xs">
                     <Phone className="w-4 h-4" />
                   </div>
                   <div>
-                    <span className="font-mono text-[9px] uppercase tracking-wider text-[#695F55] block font-bold">
+                    <span className="font-mono text-[9px] uppercase tracking-wider text-[#655B51] block font-bold">
                       Concierge Hotline
                     </span>
                     <button
                       onClick={() => handleCopy('+14155550192', 'phone')}
-                      className="font-mono text-xs sm:text-sm font-bold text-[#191512] hover:text-[#963D28] hover:underline text-left block cursor-pointer"
+                      className="font-mono text-xs sm:text-sm font-bold text-[#28221D] hover:text-[#B58D59] hover:underline text-left block cursor-pointer"
                     >
                       +1 (415) 555-0192
                     </button>
-                    <span className="font-mono text-[9px] text-[#963D28] block mt-0.5 font-bold">
+                    <span className="font-mono text-[9px] text-[#B58D59] block mt-0.5 font-bold">
                       {copiedType === 'phone' ? '✓ Copied Hotline' : 'Click to copy hotline'}
                     </span>
                   </div>
                 </div>
 
                 {/* Instagram */}
-                <div className="flex items-center gap-4 bg-[#FAF7F2] border border-[#D8CEBF] p-4 rounded-2xl group">
-                  <div className="w-10 h-10 bg-[#E8A857] text-[#191512] flex items-center justify-center shrink-0 rounded-xl shadow-xs">
+                <div className="flex items-center gap-4 bg-[#ECE5DA] border border-[#D5CBBD] p-4 rounded-2xl group">
+                  <div className="w-10 h-10 bg-[#B58D59] text-[#28221D] flex items-center justify-center shrink-0 rounded-xl shadow-xs">
                     <Instagram className="w-4 h-4" />
                   </div>
                   <div>
-                    <span className="font-mono text-[9px] uppercase tracking-wider text-[#695F55] block font-bold">
+                    <span className="font-mono text-[9px] uppercase tracking-wider text-[#655B51] block font-bold">
                       Instagram Journal
                     </span>
                     <a
                       href="https://instagram.com"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="font-marcellus text-sm font-normal text-[#191512] hover:text-[#963D28] hover:underline flex items-center gap-1 block"
+                      className="font-marcellus text-sm font-normal text-[#28221D] hover:text-[#B58D59] hover:underline flex items-center gap-1 block"
                     >
                       <span>@pichhutaaney</span>
-                      <ExternalLink className="w-3 h-3 text-[#963D28]" />
+                      <ExternalLink className="w-3 h-3 text-[#B58D59]" />
                     </a>
-                    <span className="font-mono text-[9px] text-[#695F55] block mt-0.5">
+                    <span className="font-mono text-[9px] text-[#655B51] block mt-0.5">
                       Follow kitchen reels & seat releases
                     </span>
                   </div>
@@ -187,15 +187,15 @@ export const UniqueTableConcierge: React.FC<UniqueTableConciergeProps> = ({
 
             {/* Live Registry Strip */}
             {recentEntries.length > 0 && (
-              <div className="space-y-2 border-t border-[#D8CEBF] pt-4 text-[10px] font-mono">
-                <span className="uppercase tracking-widest text-[#695F55] font-bold block">
+              <div className="space-y-2 border-t border-[#D5CBBD] pt-4 text-[10px] font-mono">
+                <span className="uppercase tracking-widest text-[#655B51] font-bold block">
                   RECENT REGISTRATIONS ({recentEntries.length})
                 </span>
                 <div className="space-y-1.5 max-h-28 overflow-y-auto pr-1">
                   {recentEntries.slice(0, 3).map((item) => (
-                    <div key={item.id} className="flex items-center justify-between bg-[#FAF7F2] px-3 py-1.5 rounded-lg border border-[#D8CEBF]">
-                      <span className="font-bold truncate text-[#191512]">{item.fullName}</span>
-                      <span className="bg-[#963D28] text-white px-2 py-0.5 rounded text-[8.5px] uppercase font-bold">
+                    <div key={item.id} className="flex items-center justify-between bg-[#ECE5DA] px-3 py-1.5 rounded-lg border border-[#D5CBBD]">
+                      <span className="font-bold truncate text-[#28221D]">{item.fullName}</span>
+                      <span className="bg-[#28221D] text-[#ECE5DA] px-2 py-0.5 rounded text-[8.5px] uppercase font-bold">
                         {item.status}
                       </span>
                     </div>
@@ -206,39 +206,39 @@ export const UniqueTableConcierge: React.FC<UniqueTableConciergeProps> = ({
           </div>
 
           {/* Right Column: Interactive Table Reservation Form */}
-          <div className="lg:col-span-7 bg-white border border-[#D8CEBF] p-8 sm:p-10 rounded-3xl shadow-sm text-[#191512]">
+          <div className="lg:col-span-7 bg-[#F7F3EC] border border-[#D5CBBD] p-8 sm:p-10 rounded-3xl shadow-sm text-[#28221D]">
             {isSubmitted ? (
               <div className="h-full flex flex-col items-center justify-center text-center p-8 space-y-5">
-                <div className="w-16 h-16 bg-[#E8F0E5] border border-[#4D6345] rounded-full flex items-center justify-center text-[#4D6345] shadow-sm">
-                  <CheckCircle2 className="w-8 h-8" />
+                <div className="w-16 h-16 bg-[#ECE5DA] border border-[#B58D59] rounded-full flex items-center justify-center text-[#28221D] shadow-sm">
+                  <CheckCircle2 className="w-8 h-8 text-[#B58D59]" />
                 </div>
 
                 <div className="space-y-2">
-                  <h4 className="font-marcellus text-3xl font-normal text-[#191512]">
+                  <h4 className="font-marcellus text-3xl font-normal text-[#28221D]">
                     Reservation Transmitted
                   </h4>
-                  <p className="text-xs sm:text-sm text-[#695F55] max-w-sm mx-auto leading-relaxed font-light">
+                  <p className="text-xs sm:text-sm text-[#655B51] max-w-sm mx-auto leading-relaxed font-light">
                     Thank you, {formData.name}. Enakshi will review your gathering parameters and respond to <strong>{formData.email}</strong> shortly.
                   </p>
                 </div>
 
                 <button
                   onClick={handleReset}
-                  className="px-6 py-3 bg-[#963D28] hover:bg-[#80311E] text-white font-sans text-xs uppercase tracking-widest font-semibold transition-all rounded-full cursor-pointer shadow-md"
+                  className="px-6 py-3 bg-[#28221D] hover:bg-[#1C1713] text-[#ECE5DA] font-sans text-xs uppercase tracking-widest font-semibold transition-all rounded-full cursor-pointer shadow-md"
                 >
                   Submit Another Request
                 </button>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="space-y-1 border-b border-[#D8CEBF] pb-4">
-                  <span className="font-mono text-xs text-[#963D28] uppercase tracking-wider block font-bold">
+                <div className="space-y-1 border-b border-[#D5CBBD] pb-4">
+                  <span className="font-mono text-xs text-[#B58D59] uppercase tracking-wider block font-bold">
                     SEAT & GATHERING SPECIFICATIONS
                   </span>
-                  <h4 className="font-marcellus text-2xl font-normal text-[#191512]">
+                  <h4 className="font-marcellus text-2xl font-normal text-[#28221D]">
                     Table Reservation & Waitlist Form
                   </h4>
-                  <p className="text-xs text-[#695F55] font-light">
+                  <p className="text-xs text-[#655B51] font-light">
                     Fill out your preferences to join upcoming private batch seatings or host a bespoke gathering.
                   </p>
                 </div>
@@ -246,8 +246,8 @@ export const UniqueTableConcierge: React.FC<UniqueTableConciergeProps> = ({
                 {/* Name & Email */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1">
-                    <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#191512] block">
-                      Full Name <span className="text-[#963D28]">*</span>
+                    <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block">
+                      Full Name <span className="text-[#B58D59]">*</span>
                     </label>
                     <input
                       type="text"
@@ -255,13 +255,13 @@ export const UniqueTableConcierge: React.FC<UniqueTableConciergeProps> = ({
                       placeholder="e.g. Ananya Sengupta"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full bg-[#FAF7F2] border border-[#D8CEBF] rounded-full px-4 py-2.5 text-xs text-[#191512] focus:outline-none focus:border-[#963D28] placeholder:text-[#9A8F83] font-sans"
+                      className="w-full bg-[#ECE5DA] border border-[#D5CBBD] rounded-full px-4 py-2.5 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] placeholder:text-[#9A8F83] font-sans"
                     />
                   </div>
 
                   <div className="space-y-1">
-                    <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#191512] block">
-                      Email Address <span className="text-[#963D28]">*</span>
+                    <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block">
+                      Email Address <span className="text-[#B58D59]">*</span>
                     </label>
                     <input
                       type="email"
@@ -269,7 +269,7 @@ export const UniqueTableConcierge: React.FC<UniqueTableConciergeProps> = ({
                       placeholder="you@example.com"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full bg-[#FAF7F2] border border-[#D8CEBF] rounded-full px-4 py-2.5 text-xs text-[#191512] focus:outline-none focus:border-[#963D28] placeholder:text-[#9A8F83] font-sans"
+                      className="w-full bg-[#ECE5DA] border border-[#D5CBBD] rounded-full px-4 py-2.5 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] placeholder:text-[#9A8F83] font-sans"
                     />
                   </div>
                 </div>
@@ -277,13 +277,13 @@ export const UniqueTableConcierge: React.FC<UniqueTableConciergeProps> = ({
                 {/* Experience & Party Size */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1">
-                    <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#191512] block">
+                    <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block">
                       Dining Experience
                     </label>
                     <select
                       value={formData.experienceType}
                       onChange={(e) => setFormData({ ...formData, experienceType: e.target.value })}
-                      className="w-full bg-[#FAF7F2] border border-[#D8CEBF] rounded-full px-4 py-2.5 text-xs text-[#191512] focus:outline-none focus:border-[#963D28] font-sans"
+                      className="w-full bg-[#ECE5DA] border border-[#D5CBBD] rounded-full px-4 py-2.5 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] font-sans"
                     >
                       <option value="supper_club">Supper Club (Priority Waitlist)</option>
                       <option value="intimate_dinner">Private In-Home Dining (6–16 Guests)</option>
@@ -293,7 +293,7 @@ export const UniqueTableConcierge: React.FC<UniqueTableConciergeProps> = ({
                   </div>
 
                   <div className="space-y-1">
-                    <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#191512] block">
+                    <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block">
                       Party Size
                     </label>
                     <input
@@ -302,7 +302,7 @@ export const UniqueTableConcierge: React.FC<UniqueTableConciergeProps> = ({
                       max={50}
                       value={formData.guestCount}
                       onChange={(e) => setFormData({ ...formData, guestCount: Number(e.target.value) })}
-                      className="w-full bg-[#FAF7F2] border border-[#D8CEBF] rounded-full px-4 py-2.5 text-xs text-[#191512] focus:outline-none focus:border-[#963D28] font-sans"
+                      className="w-full bg-[#ECE5DA] border border-[#D5CBBD] rounded-full px-4 py-2.5 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] font-sans"
                     />
                   </div>
                 </div>
@@ -310,7 +310,7 @@ export const UniqueTableConcierge: React.FC<UniqueTableConciergeProps> = ({
                 {/* Phone & Location */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1">
-                    <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#191512] block">
+                    <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block">
                       Phone / WhatsApp
                     </label>
                     <input
@@ -318,12 +318,12 @@ export const UniqueTableConcierge: React.FC<UniqueTableConciergeProps> = ({
                       placeholder="+1 (555) 000-0000"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full bg-[#FAF7F2] border border-[#D8CEBF] rounded-full px-4 py-2.5 text-xs text-[#191512] focus:outline-none focus:border-[#963D28] placeholder:text-[#9A8F83] font-sans"
+                      className="w-full bg-[#ECE5DA] border border-[#D5CBBD] rounded-full px-4 py-2.5 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] placeholder:text-[#9A8F83] font-sans"
                     />
                   </div>
 
                   <div className="space-y-1">
-                    <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#191512] block">
+                    <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block">
                       City / Area
                     </label>
                     <input
@@ -331,14 +331,14 @@ export const UniqueTableConcierge: React.FC<UniqueTableConciergeProps> = ({
                       placeholder="e.g. San Francisco / Berkeley"
                       value={formData.cityOrVenue}
                       onChange={(e) => setFormData({ ...formData, cityOrVenue: e.target.value })}
-                      className="w-full bg-[#FAF7F2] border border-[#D8CEBF] rounded-full px-4 py-2.5 text-xs text-[#191512] focus:outline-none focus:border-[#963D28] placeholder:text-[#9A8F83] font-sans"
+                      className="w-full bg-[#ECE5DA] border border-[#D5CBBD] rounded-full px-4 py-2.5 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] placeholder:text-[#9A8F83] font-sans"
                     />
                   </div>
                 </div>
 
                 {/* Dietary Profile */}
                 <div className="space-y-1">
-                  <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#191512] block">
+                  <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block">
                     Dietary Preference
                   </label>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -349,8 +349,8 @@ export const UniqueTableConcierge: React.FC<UniqueTableConciergeProps> = ({
                         onClick={() => setFormData({ ...formData, dietary: item })}
                         className={`py-2 px-2 text-[11px] font-sans border rounded-full transition-all cursor-pointer truncate ${
                           formData.dietary.includes(item.split(' ')[0])
-                            ? 'bg-[#963D28] text-white border-[#963D28] font-semibold shadow-xs'
-                            : 'bg-[#FAF7F2] text-[#4D453D] border-[#D8CEBF] hover:border-[#963D28]'
+                            ? 'bg-[#28221D] text-[#ECE5DA] border-[#28221D] font-semibold shadow-xs'
+                            : 'bg-[#ECE5DA] text-[#4A4138] border-[#D5CBBD] hover:border-[#28221D]'
                         }`}
                       >
                         {item}
@@ -361,24 +361,24 @@ export const UniqueTableConcierge: React.FC<UniqueTableConciergeProps> = ({
 
                 {/* Notes */}
                 <div className="space-y-1">
-                  <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#191512] block">
-                    Special Occasion & Memory Notes <span className="font-normal text-[#695F55]">(Optional)</span>
+                  <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block">
+                    Special Occasion & Memory Notes <span className="font-normal text-[#655B51]">(Optional)</span>
                   </label>
                   <textarea
                     rows={2}
                     placeholder="Tell us about cherished family recipes, dietary needs, or occasion..."
                     value={formData.notes}
                     onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-                    className="w-full bg-[#FAF7F2] border border-[#D8CEBF] rounded-2xl p-3 text-xs text-[#191512] focus:outline-none focus:border-[#963D28] placeholder:text-[#9A8F83] font-sans"
+                    className="w-full bg-[#ECE5DA] border border-[#D5CBBD] rounded-2xl p-3 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] placeholder:text-[#9A8F83] font-sans"
                   />
                 </div>
 
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-3.5 bg-[#963D28] hover:bg-[#80311E] text-white font-sans text-xs uppercase tracking-widest font-semibold transition-all rounded-full cursor-pointer shadow-md disabled:opacity-50 flex items-center justify-center space-x-2"
+                  className="w-full py-3.5 bg-[#28221D] hover:bg-[#1C1713] text-[#ECE5DA] font-sans text-xs uppercase tracking-widest font-semibold transition-all rounded-full cursor-pointer shadow-md disabled:opacity-50 flex items-center justify-center space-x-2"
                 >
-                  <Send className="w-3.5 h-3.5 text-[#E8A857]" />
+                  <Send className="w-3.5 h-3.5 text-[#B58D59]" />
                   <span>{isSubmitting ? 'Transmitting Request...' : 'Send Table Reservation Request'}</span>
                 </button>
               </form>

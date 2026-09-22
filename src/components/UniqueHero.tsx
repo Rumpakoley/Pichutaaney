@@ -61,17 +61,17 @@ export const UniqueHero: React.FC = () => {
   const currentItem = CHEF_ATELIER_LOOKBOOK[activeIdx];
 
   return (
-    <section id="hero" className="relative min-h-[92vh] lg:min-h-screen bg-[#FAF7F2] text-[#191512] pt-24 sm:pt-28 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden border-b border-[#D8CEBF]">
-      {/* Decorative Warm Saffron & Terracotta Ambient Gradients */}
-      <div className="absolute top-0 right-0 w-[550px] h-[550px] bg-[#E8A857]/15 rounded-full blur-3xl pointer-events-none -z-0" />
-      <div className="absolute bottom-10 left-0 w-[450px] h-[450px] bg-[#963D28]/10 rounded-full blur-3xl pointer-events-none -z-0" />
+    <section id="hero" className="relative min-h-[92vh] lg:min-h-screen bg-[#ECE5DA] text-[#28221D] pt-24 sm:pt-28 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden border-b border-[#D5CBBD]">
+      {/* Subtle organic light glow matching menu card highlights */}
+      <div className="absolute top-0 right-0 w-[550px] h-[550px] bg-[#F7F3EC]/70 rounded-full blur-3xl pointer-events-none -z-0" />
+      <div className="absolute bottom-10 left-0 w-[450px] h-[450px] bg-[#D5CBBD]/30 rounded-full blur-3xl pointer-events-none -z-0" />
 
       <div className="max-w-7xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center min-h-[75vh]">
-        {/* Left Column: Bespoke Culinary Identity */}
+        {/* Left Column: Bespoke Culinary Identity in Menu Card Parchment */}
         <div className="lg:col-span-6 text-left space-y-6">
-          {/* Top Pill Tag & Origin Stamp */}
-          <div className="inline-flex items-center space-x-2.5 bg-[#E8E0D5]/70 border border-[#D8CEBF] px-4 py-1.5 rounded-full text-xs font-sans text-[#191512] shadow-xs">
-            <span className="w-2 h-2 rounded-full bg-[#963D28] animate-pulse" />
+          {/* Top Pill Tag */}
+          <div className="inline-flex items-center space-x-2.5 bg-[#F7F3EC] border border-[#D5CBBD] px-4 py-1.5 rounded-full text-xs font-sans text-[#28221D] shadow-xs">
+            <span className="w-2 h-2 rounded-full bg-[#B58D59] animate-pulse" />
             <span className="font-semibold uppercase tracking-wider text-[10.5px]">
               INTUITIVE CULINARY ATELIER & SUPPER CLUB
             </span>
@@ -79,40 +79,40 @@ export const UniqueHero: React.FC = () => {
 
           {/* Hero Typography */}
           <div className="space-y-2">
-            <span className="font-sans text-xs uppercase tracking-[0.25em] text-[#963D28] font-bold block">
-              FOUNDED BY ENAKSHI
+            <span className="font-sans text-xs uppercase tracking-[0.25em] text-[#B58D59] font-bold block">
+              TASTING NIGHTS WITH
             </span>
-            <h1 className="font-marcellus text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-normal text-[#191512] tracking-tight leading-[0.9]">
+            <h1 className="font-marcellus text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-normal text-[#28221D] tracking-tight leading-[0.9]">
               Pichhutaaney
             </h1>
             <div className="flex items-center space-x-3 pt-1">
-              <span className="font-bengali text-3xl sm:text-4xl text-[#963D28] font-medium">
+              <span className="font-bengali text-3xl sm:text-4xl text-[#28221D] font-medium">
                 পিছুটানেই
               </span>
-              <span className="font-pt-serif italic text-sm sm:text-base text-[#695F55]">
+              <span className="font-pt-serif italic text-sm sm:text-base text-[#655B51]">
                 / The gentle, backward glance toward home /
               </span>
             </div>
           </div>
 
           {/* Core Hook Narrative */}
-          <p className="font-sans text-sm sm:text-base text-[#4D453D] leading-relaxed font-light max-w-xl">
+          <p className="font-sans text-sm sm:text-base text-[#4A4138] leading-relaxed font-light max-w-xl">
             An intuitive Indian dining table, communal supper club, and living archive of kitchen memories. Cooked by instinct, shaped by travel, and rooted in the warmth of West Bengal.
           </p>
 
           {/* Sensory Pillar Badges */}
           <div className="grid grid-cols-3 gap-2.5 pt-2 max-w-lg">
-            <div className="p-3 bg-white/80 rounded-2xl border border-[#D8CEBF] shadow-xs text-left">
-              <span className="font-mono text-[9px] text-[#963D28] uppercase font-bold block">01 / SENSES</span>
-              <span className="font-marcellus text-xs font-normal text-[#191512] block mt-0.5">Mustard Smoke</span>
+            <div className="p-3 bg-[#F7F3EC] rounded-2xl border border-[#D5CBBD] shadow-xs text-left">
+              <span className="font-mono text-[9px] text-[#B58D59] uppercase font-bold block">01 / SENSES</span>
+              <span className="font-marcellus text-xs font-normal text-[#28221D] block mt-0.5">Mustard Smoke</span>
             </div>
-            <div className="p-3 bg-white/80 rounded-2xl border border-[#D8CEBF] shadow-xs text-left">
-              <span className="font-mono text-[9px] text-[#963D28] uppercase font-bold block">02 / TABLE</span>
-              <span className="font-marcellus text-xs font-normal text-[#191512] block mt-0.5">14 Communal Seats</span>
+            <div className="p-3 bg-[#F7F3EC] rounded-2xl border border-[#D5CBBD] shadow-xs text-left">
+              <span className="font-mono text-[9px] text-[#B58D59] uppercase font-bold block">02 / TABLE</span>
+              <span className="font-marcellus text-xs font-normal text-[#28221D] block mt-0.5">14 Communal Seats</span>
             </div>
-            <div className="p-3 bg-white/80 rounded-2xl border border-[#D8CEBF] shadow-xs text-left">
-              <span className="font-mono text-[9px] text-[#963D28] uppercase font-bold block">03 / ETHOS</span>
-              <span className="font-marcellus text-xs font-normal text-[#191512] block mt-0.5">Peel-to-Stem Care</span>
+            <div className="p-3 bg-[#F7F3EC] rounded-2xl border border-[#D5CBBD] shadow-xs text-left">
+              <span className="font-mono text-[9px] text-[#B58D59] uppercase font-bold block">03 / ETHOS</span>
+              <span className="font-marcellus text-xs font-normal text-[#28221D] block mt-0.5">Peel-to-Stem Care</span>
             </div>
           </div>
 
@@ -120,15 +120,15 @@ export const UniqueHero: React.FC = () => {
           <div className="flex flex-wrap items-center gap-3 pt-2">
             <a
               href="#tasting-archive"
-              className="inline-flex items-center space-x-2 px-6 py-3 bg-[#191512] hover:bg-[#963D28] text-white rounded-full font-sans text-xs uppercase tracking-widest font-semibold transition-all shadow-md hover:shadow-lg"
+              className="inline-flex items-center space-x-2 px-6 py-3 bg-[#28221D] hover:bg-[#1C1713] text-[#ECE5DA] rounded-full font-sans text-xs uppercase tracking-widest font-semibold transition-all shadow-md hover:shadow-lg"
             >
               <span>Explore Tasting Archive</span>
-              <ArrowUpRight className="w-3.5 h-3.5 text-[#E8A857]" />
+              <ArrowUpRight className="w-3.5 h-3.5 text-[#B58D59]" />
             </a>
 
             <a
               href="#table-concierge"
-              className="inline-flex items-center space-x-2 px-6 py-3 bg-white border border-[#D8CEBF] hover:border-[#191512] text-[#191512] rounded-full font-sans text-xs uppercase tracking-widest font-semibold transition-all shadow-xs"
+              className="inline-flex items-center space-x-2 px-6 py-3 bg-[#F7F3EC] border border-[#D5CBBD] hover:border-[#28221D] text-[#28221D] rounded-full font-sans text-xs uppercase tracking-widest font-semibold transition-all shadow-xs"
             >
               <span>Supper Club Waitlist</span>
             </a>
@@ -137,7 +137,7 @@ export const UniqueHero: React.FC = () => {
 
         {/* Right Column: Layered Chef's Atelier Lookbook Deck */}
         <div className="lg:col-span-6 relative">
-          <div className="relative rounded-3xl overflow-hidden bg-[#191512] border-2 border-[#191512] shadow-2xl group aspect-[4/4.8] sm:aspect-[4/4.2]">
+          <div className="relative rounded-3xl overflow-hidden bg-[#28221D] border-2 border-[#28221D] shadow-2xl group aspect-[4/4.8] sm:aspect-[4/4.2]">
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentItem.id}
@@ -171,7 +171,7 @@ export const UniqueHero: React.FC = () => {
 
             {/* Top Bar with Provenance & Badge */}
             <div className="absolute top-4 sm:top-6 left-4 sm:left-6 right-4 sm:right-6 flex items-center justify-between pointer-events-none">
-              <span className="bg-[#191512]/85 backdrop-blur-md px-3.5 py-1.5 rounded-full text-[9.5px] font-mono tracking-widest uppercase border border-white/20 text-[#E8A857] font-bold">
+              <span className="bg-[#1C1713]/85 backdrop-blur-md px-3.5 py-1.5 rounded-full text-[9.5px] font-mono tracking-widest uppercase border border-white/20 text-[#ECE5DA] font-bold">
                 {currentItem.badge}
               </span>
 
@@ -181,7 +181,7 @@ export const UniqueHero: React.FC = () => {
                   className="pointer-events-auto p-2 rounded-full bg-black/60 hover:bg-black text-white backdrop-blur-md border border-white/20 transition-all cursor-pointer"
                   title={isMuted ? 'Unmute Sound' : 'Mute Sound'}
                 >
-                  {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5 text-[#E8A857]" />}
+                  {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5 text-[#B58D59]" />}
                 </button>
               )}
             </div>
@@ -194,7 +194,7 @@ export const UniqueHero: React.FC = () => {
                   onClick={() => setActiveIdx(idx)}
                   className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full overflow-hidden border-2 transition-all relative cursor-pointer ${
                     activeIdx === idx
-                      ? 'border-[#E8A857] scale-110 shadow-md ring-2 ring-[#E8A857]/50'
+                      ? 'border-[#B58D59] scale-110 shadow-md ring-2 ring-[#B58D59]/50'
                       : 'border-white/30 opacity-60 hover:opacity-100'
                   }`}
                   title={item.category}
@@ -210,7 +210,7 @@ export const UniqueHero: React.FC = () => {
 
             {/* Bottom Caption & Provenance */}
             <div className="absolute bottom-0 inset-x-0 p-5 sm:p-6 text-left text-white pt-10 pointer-events-none">
-              <span className="font-mono text-[9px] uppercase tracking-widest text-[#E8A857] font-bold block mb-0.5">
+              <span className="font-mono text-[9px] uppercase tracking-widest text-[#B58D59] font-bold block mb-0.5">
                 PROVENANCE // {currentItem.provenance}
               </span>
               <h4 className="font-marcellus text-base sm:text-lg font-normal text-white">
