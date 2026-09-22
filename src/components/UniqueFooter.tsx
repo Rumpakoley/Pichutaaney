@@ -40,9 +40,9 @@ export const UniqueFooter: React.FC<UniqueFooterProps> = ({ onOpenLedger }) => {
             <div className="space-y-1.5 text-xs text-[#D5CBBD] font-sans">
               <div><a href="#hero" className="hover:text-[#B58D59] transition-colors">01 // CHEF ATELIER LOOKBOOK</a></div>
               <div><a href="#hearth-reels" className="hover:text-[#B58D59] transition-colors">02 // LIVING HEARTH IN MOTION</a></div>
-              <div><a href="#terroir-pillars" className="hover:text-[#B58D59] transition-colors">03 // 4 CULINARY TERROIRS & ANCHORS</a></div>
-              <div><a href="#philosophy" className="hover:text-[#B58D59] transition-colors">04 // MANIFESTO & PRINCIPLES</a></div>
-              <div><a href="#table-concierge" className="hover:text-[#B58D59] transition-colors">05 // TABLE CONCIERGE & HOTLINE</a></div>
+              <div><a href="#philosophy" className="hover:text-[#B58D59] transition-colors">03 // MANIFESTO & PRINCIPLES</a></div>
+              <div><a href="#dialogues" className="hover:text-[#B58D59] transition-colors">04 // CURATOR DIALOGUES</a></div>
+              <div><a href="#table-concierge" className="hover:text-[#B58D59] transition-colors">05 // TABLE CONCIERGE & DESK</a></div>
             </div>
           </div>
 

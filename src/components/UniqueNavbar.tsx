@@ -54,16 +54,16 @@ export const UniqueNavbar: React.FC<UniqueNavbarProps> = ({
           Living Hearth
         </a>
         <a
-          href="#terroir-pillars"
-          className="px-3.5 py-1.5 rounded-full text-[#28221D] hover:bg-black/5 hover:text-[#B58D59] transition-colors"
-        >
-          Terroirs
-        </a>
-        <a
           href="#philosophy"
           className="px-3.5 py-1.5 rounded-full text-[#28221D] hover:bg-black/5 hover:text-[#B58D59] transition-colors"
         >
           Philosophy
+        </a>
+        <a
+          href="#dialogues"
+          className="px-3.5 py-1.5 rounded-full text-[#28221D] hover:bg-black/5 hover:text-[#B58D59] transition-colors"
+        >
+          Dialogues
         </a>
         <a
           href="#table-concierge"

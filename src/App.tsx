@@ -4,7 +4,6 @@ import { UniqueHero } from './components/UniqueHero';
 import { MarqueeBanner } from './components/MarqueeBanner';
 import { UniqueManifestoBio } from './components/UniqueManifestoBio';
 import { UniqueKitchenHearthReels } from './components/UniqueKitchenHearthReels';
-import { UniqueCulinaryTerroirs } from './components/UniqueCulinaryTerroirs';
 import { UniqueCuratorDialogues } from './components/UniqueCuratorDialogues';
 import { UniqueTableConcierge } from './components/UniqueTableConcierge';
 import { UniqueFooter } from './components/UniqueFooter';
@@ -156,16 +155,13 @@ export default function App() {
         {/* Section 02: Founder's Note & Culinary Manifesto */}
         <UniqueManifestoBio />
 
-        {/* Section 03: Living Hearth in Motion (6-Reel Studio & Acoustics) */}
+        {/* Section 03: Living Hearth in Motion */}
         <UniqueKitchenHearthReels />
 
-        {/* Section 04: The 4 Regional Terroirs & Geographical Anchors */}
-        <UniqueCulinaryTerroirs />
-
-        {/* Section 05: Curator Q&A Dialogues */}
+        {/* Section 04: Curator Q&A Dialogues */}
         <UniqueCuratorDialogues />
 
-        {/* Section 06: Direct Concierge & Table Reservation Deck */}
+        {/* Section 05: Direct Concierge & Table Reservation Deck */}
         <UniqueTableConcierge
           onAddWaitlist={handleAddWaitlist}
           onAddInquiry={handleAddInquiry}
