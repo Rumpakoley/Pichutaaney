@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, ExternalLink, Calendar, Link2, Mail, Instagram, Utensils, CheckCircle2 } from 'lucide-react';
+import { ExternalLink, Calendar, Link2, Mail, Instagram, Utensils, CheckCircle2 } from 'lucide-react';
 
 interface ReservationLinktreeModalProps {
   isOpen: boolean;
@@ -15,7 +15,10 @@ export const ReservationLinktreeModal: React.FC<ReservationLinktreeModalProps> =
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/75 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6 font-sans animate-in fade-in duration-200">
+    <div 
+      className="fixed inset-0 z-50 overflow-y-auto bg-black/75 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6 font-sans animate-in fade-in duration-200"
+      onClick={onClose}
+    >
       <div 
         className="bg-[#ECE5DA] border border-[#D5CBBD] rounded-3xl shadow-2xl w-full max-w-xl overflow-hidden text-left transition-all"
         onClick={(e) => e.stopPropagation()}
@@ -35,14 +38,6 @@ export const ReservationLinktreeModal: React.FC<ReservationLinktreeModalProps> =
               Choose your preferred way to request seats, explore the Linktree hub, or connect directly.
             </p>
           </div>
-
-          <button
-            onClick={onClose}
-            className="p-2 rounded-full bg-[#ECE5DA] text-[#655B51] hover:text-[#28221D] hover:bg-[#DFD7CB] transition-colors cursor-pointer shrink-0"
-            aria-label="Close modal"
-          >
-            <X className="w-5 h-5" />
-          </button>
         </div>
 
         {/* Modal Link Cards List */}
