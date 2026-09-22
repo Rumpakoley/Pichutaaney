@@ -62,28 +62,28 @@ export const UniqueCulinaryTerroirs: React.FC = () => {
         <div className="p-6 sm:p-8 rounded-3xl bg-[#F7F3EC] border border-[#D5CBBD] flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="space-y-1 text-left">
             <span className="font-mono text-[9.5px] uppercase tracking-widest text-[#B58D59] font-bold block">
-              DOWNLOADABLE ARCHIVES
+              SUPPER FEASTS & HEARTH
             </span>
             <h4 className="font-marcellus text-xl text-[#28221D]">
-              Tasting Menu Dossiers & Event Briefs
+              Living Hearth & Private Dining
             </h4>
             <p className="font-sans text-xs text-[#655B51] font-light">
-              Explore our comprehensive 4-edition tasting catalog and private dining guide.
+              Explore culinary reels in motion and reserve your bespoke in-home table.
             </p>
           </div>
 
           <div className="flex flex-wrap gap-3">
             <a
-              href="#tasting-archive"
+              href="#hearth-reels"
               className="px-5 py-2.5 rounded-full bg-[#ECE5DA] border border-[#D5CBBD] hover:border-[#28221D] font-sans text-xs uppercase tracking-wider font-semibold text-[#28221D] transition-all shadow-xs"
             >
-              View 4-Course Catalog
+              Watch Kitchen Reels
             </a>
             <a
               href="#table-concierge"
               className="px-5 py-2.5 rounded-full bg-[#28221D] text-[#ECE5DA] hover:bg-[#1C1713] font-sans text-xs uppercase tracking-wider font-semibold transition-all shadow-sm"
             >
-              Private Event Inquiry
+              Table Concierge
             </a>
           </div>
         </div>

@@ -48,12 +48,6 @@ export const UniqueNavbar: React.FC<UniqueNavbarProps> = ({
       {/* Navigation Links */}
       <nav className="hidden md:flex items-center space-x-1 lg:space-x-2 font-sans text-xs uppercase tracking-wider font-semibold">
         <a
-          href="#tasting-archive"
-          className="px-3.5 py-1.5 rounded-full text-[#28221D] hover:bg-black/5 hover:text-[#B58D59] transition-colors"
-        >
-          Tasting Archive
-        </a>
-        <a
           href="#hearth-reels"
           className="px-3.5 py-1.5 rounded-full text-[#28221D] hover:bg-black/5 hover:text-[#B58D59] transition-colors"
         >
@@ -70,6 +64,12 @@ export const UniqueNavbar: React.FC<UniqueNavbarProps> = ({
           className="px-3.5 py-1.5 rounded-full text-[#28221D] hover:bg-black/5 hover:text-[#B58D59] transition-colors"
         >
           Philosophy
+        </a>
+        <a
+          href="#table-concierge"
+          className="px-3.5 py-1.5 rounded-full text-[#28221D] hover:bg-black/5 hover:text-[#B58D59] transition-colors"
+        >
+          Concierge
         </a>
       </nav>
 

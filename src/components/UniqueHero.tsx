@@ -107,10 +107,10 @@ export const UniqueHero: React.FC<UniqueHeroProps> = ({ onOpenReservationHub }) 
           {/* Quick CTAs */}
           <div className="flex flex-wrap items-center gap-3 pt-2">
             <a
-              href="#tasting-archive"
+              href="#hearth-reels"
               className="inline-flex items-center space-x-2 px-6 py-3 bg-[#28221D] hover:bg-[#1C1713] text-[#ECE5DA] rounded-full font-sans text-xs uppercase tracking-widest font-semibold transition-all shadow-md hover:shadow-lg"
             >
-              <span>Explore Tasting Archive</span>
+              <span>Explore Living Hearth</span>
               <ArrowUpRight className="w-3.5 h-3.5 text-[#B58D59]" />
             </a>
 
