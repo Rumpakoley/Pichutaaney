@@ -9,6 +9,7 @@ import { UniqueTableConcierge } from './components/UniqueTableConcierge';
 import { UniqueFooter } from './components/UniqueFooter';
 import { HostLedgerModal } from './components/HostLedgerModal';
 import { WaitlistEntry, PrivateEventInquiry, ContactMessage } from './types';
+import { useScrollReveal } from './hooks/useScrollReveal';
 
 const INITIAL_WAITLIST: WaitlistEntry[] = [
   {
@@ -82,6 +83,7 @@ export default function App() {
   });
 
   const [isLedgerOpen, setIsLedgerOpen] = useState(false);
+  useScrollReveal();
 
   useEffect(() => {
     try {
