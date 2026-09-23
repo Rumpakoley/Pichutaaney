@@ -55,12 +55,16 @@ const HearthVideoCard: React.FC<{ item: VideoCardData }> = ({ item }) => {
   const [isMuted, setIsMuted] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
 
+  const webmUrl = item.url.replace('/video/upload/', '/video/upload/f_webm/').replace(/\.mp4$/i, '.webm');
+  const transcodedMp4Url = item.url.replace('/video/upload/', '/video/upload/f_mp4,vc_h264/');
+
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
     video.defaultMuted = true;
     video.muted = true;
+    video.load();
 
     const startPlayback = () => {
       video.play().then(() => {
@@ -123,7 +127,6 @@ const HearthVideoCard: React.FC<{ item: VideoCardData }> = ({ item }) => {
 
         <video
           ref={videoRef}
-          src={item.url}
           poster={item.poster}
           autoPlay
           loop
@@ -132,8 +135,10 @@ const HearthVideoCard: React.FC<{ item: VideoCardData }> = ({ item }) => {
           preload="auto"
           onPlay={() => setIsPlaying(true)}
           onPause={() => setIsPlaying(false)}
-          className="relative w-full h-full object-cover filter contrast-[1.04] brightness-95 group-hover:scale-105 transition-transform duration-700 ease-out z-1"
+          className="relative w-full h-full object-cover filter contrast-[1.04] brightness-95 group-hover:scale-105 transition-transform duration-700 ease-out"
         >
+          <source src={webmUrl} type="video/webm" />
+          <source src={transcodedMp4Url} type="video/mp4" />
           <source src={item.url} type="video/mp4" />
         </video>
 
