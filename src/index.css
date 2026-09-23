@@ -17,11 +17,6 @@
   h1, h2, h3, h4, .font-serif, .font-display {
     font-family: 'Marcellus', 'PT Serif', 'Cormorant Garamond', 'Noto Serif Bengali', Georgia, serif;
     letter-spacing: -0.01em;
-    transition: color 0.3s ease, letter-spacing 0.3s ease, transform 0.3s ease;
-  }
-
-  p, span, label, a, button {
-    transition: color 0.25s ease, opacity 0.25s ease, transform 0.25s ease;
   }
 }
 
@@ -43,30 +38,6 @@
 
 .font-sans-body {
   font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-}
-
-/* Fluid Text Hover Effects & Shimmers */
-.text-shimmer-hover {
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.text-shimmer-hover:hover {
-  color: #B58D59;
-  letter-spacing: 0.02em;
-}
-
-.text-gold-hover {
-  transition: color 0.3s ease, transform 0.3s ease;
-}
-.text-gold-hover:hover {
-  color: #B58D59;
-}
-
-.quote-highlight {
-  transition: all 0.4s ease;
-}
-.quote-highlight:hover {
-  color: #1C1713;
-  transform: translateX(4px);
 }
 
 /* Palette helpers */
@@ -120,4 +91,55 @@
 
 .animate-marquee:hover {
   animation-play-state: paused;
+}
+
+/* Reliable GPU-accelerated Keyframe Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-fade-in-scale {
+  animation: fadeInScale 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animation-delay-100 {
+  animation-delay: 0.1s;
+}
+
+.animation-delay-200 {
+  animation-delay: 0.2s;
+}
+
+.animation-delay-300 {
+  animation-delay: 0.3s;
+}
+
+.animation-delay-400 {
+  animation-delay: 0.4s;
+}
+
+.animation-delay-500 {
+  animation-delay: 0.5s;
 }

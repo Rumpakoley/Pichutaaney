@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { motion } from 'motion/react';
 import { WaitlistEntry, PrivateEventInquiry } from '../types';
 import { Mail, Send, CheckCircle2 } from 'lucide-react';
 
@@ -128,217 +127,211 @@ export const UniqueTableConcierge: React.FC<UniqueTableConciergeProps> = ({
     <section id="table-concierge" className="py-20 sm:py-28 bg-[#ECE5DA] border-b border-[#D5CBBD] text-left overflow-hidden">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Interactive Table Reservation Form Card */}
-        <motion.div 
-          initial={{ opacity: 0, y: 25 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="bg-[#F7F3EC] border border-[#D5CBBD] p-8 sm:p-12 rounded-3xl shadow-sm text-[#28221D] hover:border-[#B58D59]/50 transition-all duration-300"
-        >
-            {isSubmitted ? (
-              <div className="h-full flex flex-col items-center justify-center text-center p-6 sm:p-8 space-y-6 animate-in fade-in zoom-in-95 duration-200">
-                <div className="w-16 h-16 bg-[#ECE5DA] border border-[#B58D59] rounded-full flex items-center justify-center text-[#28221D] shadow-sm">
-                  <CheckCircle2 className="w-8 h-8 text-[#B58D59]" />
-                </div>
-
-                <div className="space-y-2">
-                  <span className="font-mono text-[10px] uppercase tracking-widest text-[#B58D59] font-bold">
-                    RESERVATION REGISTRY CONFIRMED
-                  </span>
-                  <h4 className="font-marcellus text-3xl font-normal text-[#28221D]">
-                    Receipt & Table Pass
-                  </h4>
-                  <p className="text-xs sm:text-sm text-[#655B51] max-w-md mx-auto leading-relaxed font-light">
-                    Thank you, <strong>{formData.name}</strong>. Your gathering request is registered in Enakshi’s Host Ledger.
-                  </p>
-                </div>
-
-                {/* Summary Card */}
-                <div className="w-full max-w-md bg-[#ECE5DA] border border-[#D5CBBD] rounded-2xl p-4 text-left space-y-2 font-mono text-xs shadow-2xs">
-                  <div className="flex justify-between border-b border-[#D5CBBD] pb-2 text-[11px]">
-                    <span className="text-[#655B51]">Booking Ref:</span>
-                    <span className="font-bold text-[#28221D]">{submittedRefId}</span>
-                  </div>
-                  <div className="flex justify-between border-b border-[#D5CBBD] pb-2 text-[11px]">
-                    <span className="text-[#655B51]">Party / Experience:</span>
-                    <span className="font-bold text-[#28221D]">{formData.guestCount} Guests • {formData.experienceType.replace('_', ' ')}</span>
-                  </div>
-                  <div className="flex justify-between text-[11px]">
-                    <span className="text-[#655B51]">Email Acknowledgment:</span>
-                    <span className="text-[#28221D] font-medium truncate max-w-[200px]">{submittedEmail}</span>
-                  </div>
-                </div>
-
-                {/* Dual-Email notice */}
-                <div className="w-full max-w-md bg-[#28221D] text-[#ECE5DA] rounded-xl p-3 text-[11px] font-sans flex items-center space-x-2.5 shadow-sm text-left">
-                  <Mail className="w-4 h-4 text-[#B58D59] shrink-0" />
-                  <span className="leading-snug">
-                    Dual notification dispatched to <strong>pichhutaaney@gmail.com</strong> and <strong>{submittedEmail}</strong>.
-                  </span>
-                </div>
-
-                <button
-                  onClick={handleReset}
-                  className="px-7 py-3 bg-[#28221D] hover:bg-[#1C1713] text-[#ECE5DA] font-sans text-xs uppercase tracking-widest font-semibold transition-all rounded-full cursor-pointer shadow-md"
-                >
-                  Submit Another Request
-                </button>
+        <div className="bg-[#F7F3EC] border border-[#D5CBBD] p-8 sm:p-12 rounded-3xl shadow-sm text-[#28221D] hover:border-[#B58D59]/50 transition-all duration-300 animate-fade-in-up">
+          {isSubmitted ? (
+            <div className="h-full flex flex-col items-center justify-center text-center p-6 sm:p-8 space-y-6 animate-fade-in-scale">
+              <div className="w-16 h-16 bg-[#ECE5DA] border border-[#B58D59] rounded-full flex items-center justify-center text-[#28221D] shadow-sm">
+                <CheckCircle2 className="w-8 h-8 text-[#B58D59]" />
               </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="space-y-1 border-b border-[#D5CBBD] pb-4">
-                  <span className="font-mono text-xs text-[#B58D59] uppercase tracking-wider block font-bold">
-                    SEAT & GATHERING SPECIFICATIONS
-                  </span>
-                  <h4 className="font-marcellus text-2xl font-normal text-[#28221D]">
-                    Table Reservation & Waitlist Form
-                  </h4>
-                  <p className="text-xs text-[#655B51] font-light">
-                    Fill out your preferences to join upcoming private batch seatings or host a bespoke gathering.
-                  </p>
+
+              <div className="space-y-2">
+                <span className="font-mono text-[10px] uppercase tracking-widest text-[#B58D59] font-bold">
+                  RESERVATION REGISTRY CONFIRMED
+                </span>
+                <h4 className="font-marcellus text-3xl font-normal text-[#28221D]">
+                  Receipt & Table Pass
+                </h4>
+                <p className="text-xs sm:text-sm text-[#655B51] max-w-md mx-auto leading-relaxed font-light">
+                  Thank you, <strong>{formData.name}</strong>. Your gathering request is registered in Enakshi’s Host Ledger.
+                </p>
+              </div>
+
+              {/* Summary Card */}
+              <div className="w-full max-w-md bg-[#ECE5DA] border border-[#D5CBBD] rounded-2xl p-4 text-left space-y-2 font-mono text-xs shadow-2xs">
+                <div className="flex justify-between border-b border-[#D5CBBD] pb-2 text-[11px]">
+                  <span className="text-[#655B51]">Booking Ref:</span>
+                  <span className="font-bold text-[#28221D]">{submittedRefId}</span>
                 </div>
-
-                {/* Name & Email */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="space-y-1">
-                    <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block">
-                      Full Name <span className="text-[#B58D59]">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      placeholder="e.g. Ananya Sengupta"
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full bg-[#ECE5DA] border border-[#D5CBBD] rounded-full px-4 py-2.5 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] placeholder:text-[#9A8F83] font-sans"
-                    />
-                  </div>
-
-                  <div className="space-y-1">
-                    <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block">
-                      Email Address <span className="text-[#B58D59]">*</span>
-                    </label>
-                    <input
-                      type="email"
-                      required
-                      placeholder="you@example.com"
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full bg-[#ECE5DA] border border-[#D5CBBD] rounded-full px-4 py-2.5 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] placeholder:text-[#9A8F83] font-sans"
-                    />
-                  </div>
+                <div className="flex justify-between border-b border-[#D5CBBD] pb-2 text-[11px]">
+                  <span className="text-[#655B51]">Party / Experience:</span>
+                  <span className="font-bold text-[#28221D]">{formData.guestCount} Guests • {formData.experienceType.replace('_', ' ')}</span>
                 </div>
-
-                {/* Experience & Party Size */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="space-y-1">
-                    <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block">
-                      Dining Experience
-                    </label>
-                    <select
-                      value={formData.experienceType}
-                      onChange={(e) => setFormData({ ...formData, experienceType: e.target.value })}
-                      className="w-full bg-[#ECE5DA] border border-[#D5CBBD] rounded-full px-4 py-2.5 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] font-sans"
-                    >
-                      <option value="supper_club">Supper Club Waitlist</option>
-                      <option value="private_dinners">Private Dinners</option>
-                      <option value="brand_collaborations">Brand Collaborations</option>
-                    </select>
-                  </div>
-
-                  <div className="space-y-1">
-                    <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block">
-                      Party Size
-                    </label>
-                    <input
-                      type="number"
-                      min={1}
-                      max={50}
-                      value={formData.guestCount}
-                      onChange={(e) => setFormData({ ...formData, guestCount: Number(e.target.value) })}
-                      className="w-full bg-[#ECE5DA] border border-[#D5CBBD] rounded-full px-4 py-2.5 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] font-sans"
-                    />
-                  </div>
+                <div className="flex justify-between text-[11px]">
+                  <span className="text-[#655B51]">Email Acknowledgment:</span>
+                  <span className="text-[#28221D] font-medium truncate max-w-[200px]">{submittedEmail}</span>
                 </div>
+              </div>
 
-                {/* Phone & Location */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="space-y-1">
-                    <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block">
-                      Phone / WhatsApp
-                    </label>
-                    <input
-                      type="tel"
-                      placeholder="+1 (555) 000-0000"
-                      value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full bg-[#ECE5DA] border border-[#D5CBBD] rounded-full px-4 py-2.5 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] placeholder:text-[#9A8F83] font-sans"
-                    />
-                  </div>
+              {/* Dual-Email notice */}
+              <div className="w-full max-w-md bg-[#28221D] text-[#ECE5DA] rounded-xl p-3 text-[11px] font-sans flex items-center space-x-2.5 shadow-sm text-left">
+                <Mail className="w-4 h-4 text-[#B58D59] shrink-0" />
+                <span className="leading-snug">
+                  Dual notification dispatched to <strong>pichhutaaney@gmail.com</strong> and <strong>{submittedEmail}</strong>.
+                </span>
+              </div>
 
-                  <div className="space-y-1">
-                    <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block">
-                      City / Area
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="e.g. San Francisco / Berkeley"
-                      value={formData.cityOrVenue}
-                      onChange={(e) => setFormData({ ...formData, cityOrVenue: e.target.value })}
-                      className="w-full bg-[#ECE5DA] border border-[#D5CBBD] rounded-full px-4 py-2.5 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] placeholder:text-[#9A8F83] font-sans"
-                    />
-                  </div>
-                </div>
+              <button
+                onClick={handleReset}
+                className="px-7 py-3 bg-[#28221D] hover:bg-[#1C1713] text-[#ECE5DA] font-sans text-xs uppercase tracking-widest font-semibold transition-all rounded-full cursor-pointer shadow-md hover:scale-105 active:scale-95"
+              >
+                Submit Another Request
+              </button>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="space-y-1 border-b border-[#D5CBBD] pb-4">
+                <span className="font-mono text-xs text-[#B58D59] uppercase tracking-wider block font-bold">
+                  SEAT & GATHERING SPECIFICATIONS
+                </span>
+                <h4 className="font-marcellus text-2xl font-normal text-[#28221D]">
+                  Table Reservation & Waitlist Form
+                </h4>
+                <p className="text-xs text-[#655B51] font-light">
+                  Fill out your preferences to join upcoming private batch seatings or host a bespoke gathering.
+                </p>
+              </div>
 
-                {/* Dietary Profile */}
+              {/* Name & Email */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1">
                   <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block">
-                    Dietary Preference
+                    Full Name <span className="text-[#B58D59]">*</span>
                   </label>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                    {['Omnivore', 'Pescatarian', 'Vegetarian', 'Vegan / Plant'].map((item) => (
-                      <button
-                        key={item}
-                        type="button"
-                        onClick={() => setFormData({ ...formData, dietary: item })}
-                        className={`py-2 px-2 text-[11px] font-sans border rounded-full transition-all cursor-pointer truncate ${
-                          formData.dietary.includes(item.split(' ')[0])
-                            ? 'bg-[#28221D] text-[#ECE5DA] border-[#28221D] font-semibold shadow-xs'
-                            : 'bg-[#ECE5DA] text-[#4A4138] border-[#D5CBBD] hover:border-[#28221D]'
-                        }`}
-                      >
-                        {item}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Notes */}
-                <div className="space-y-1">
-                  <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block">
-                    Special Occasion & Memory Notes <span className="font-normal text-[#655B51]">(Optional)</span>
-                  </label>
-                  <textarea
-                    rows={2}
-                    placeholder="Tell us about cherished family recipes, dietary needs, or occasion..."
-                    value={formData.notes}
-                    onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-                    className="w-full bg-[#ECE5DA] border border-[#D5CBBD] rounded-2xl p-3 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] placeholder:text-[#9A8F83] font-sans"
+                  <input
+                    type="text"
+                    required
+                    placeholder="e.g. Ananya Sengupta"
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    className="w-full bg-[#ECE5DA] border border-[#D5CBBD] rounded-full px-4 py-2.5 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] placeholder:text-[#9A8F83] font-sans transition-all duration-200"
                   />
                 </div>
 
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full py-3.5 bg-[#28221D] hover:bg-[#1C1713] text-[#ECE5DA] font-sans text-xs uppercase tracking-widest font-semibold transition-all rounded-full cursor-pointer shadow-md disabled:opacity-50 flex items-center justify-center space-x-2"
-                >
-                  <Send className="w-3.5 h-3.5 text-[#B58D59]" />
-                  <span>{isSubmitting ? 'Transmitting Request...' : 'Send Table Reservation Request'}</span>
-                </button>
-              </form>
-            )}
-          </motion.div>
+                <div className="space-y-1">
+                  <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block">
+                    Email Address <span className="text-[#B58D59]">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    required
+                    placeholder="you@example.com"
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    className="w-full bg-[#ECE5DA] border border-[#D5CBBD] rounded-full px-4 py-2.5 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] placeholder:text-[#9A8F83] font-sans transition-all duration-200"
+                  />
+                </div>
+              </div>
+
+              {/* Experience & Party Size */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="space-y-1">
+                  <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block">
+                    Dining Experience
+                  </label>
+                  <select
+                    value={formData.experienceType}
+                    onChange={(e) => setFormData({ ...formData, experienceType: e.target.value })}
+                    className="w-full bg-[#ECE5DA] border border-[#D5CBBD] rounded-full px-4 py-2.5 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] font-sans transition-all duration-200"
+                  >
+                    <option value="supper_club">Supper Club Waitlist</option>
+                    <option value="private_dinners">Private Dinners</option>
+                    <option value="brand_collaborations">Brand Collaborations</option>
+                  </select>
+                </div>
+
+                <div className="space-y-1">
+                  <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block">
+                    Party Size
+                  </label>
+                  <input
+                    type="number"
+                    min={1}
+                    max={50}
+                    value={formData.guestCount}
+                    onChange={(e) => setFormData({ ...formData, guestCount: Number(e.target.value) })}
+                    className="w-full bg-[#ECE5DA] border border-[#D5CBBD] rounded-full px-4 py-2.5 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] font-sans transition-all duration-200"
+                  />
+                </div>
+              </div>
+
+              {/* Phone & Location */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="space-y-1">
+                  <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block">
+                    Phone / WhatsApp
+                  </label>
+                  <input
+                    type="tel"
+                    placeholder="+1 (555) 000-0000"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    className="w-full bg-[#ECE5DA] border border-[#D5CBBD] rounded-full px-4 py-2.5 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] placeholder:text-[#9A8F83] font-sans transition-all duration-200"
+                  />
+                </div>
+
+                <div className="space-y-1">
+                  <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block">
+                    City / Area
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="e.g. Toronto / GTA"
+                    value={formData.cityOrVenue}
+                    onChange={(e) => setFormData({ ...formData, cityOrVenue: e.target.value })}
+                    className="w-full bg-[#ECE5DA] border border-[#D5CBBD] rounded-full px-4 py-2.5 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] placeholder:text-[#9A8F83] font-sans transition-all duration-200"
+                  />
+                </div>
+              </div>
+
+              {/* Dietary Profile */}
+              <div className="space-y-1">
+                <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block">
+                  Dietary Preference
+                </label>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                  {['Omnivore', 'Pescatarian', 'Vegetarian', 'Vegan / Plant'].map((item) => (
+                    <button
+                      key={item}
+                      type="button"
+                      onClick={() => setFormData({ ...formData, dietary: item })}
+                      className={`py-2 px-2 text-[11px] font-sans border rounded-full transition-all duration-200 cursor-pointer truncate ${
+                        formData.dietary.includes(item.split(' ')[0])
+                          ? 'bg-[#28221D] text-[#ECE5DA] border-[#28221D] font-semibold shadow-xs'
+                          : 'bg-[#ECE5DA] text-[#4A4138] border-[#D5CBBD] hover:border-[#28221D]'
+                      }`}
+                    >
+                      {item}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Notes */}
+              <div className="space-y-1">
+                <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block">
+                  Special Occasion & Memory Notes <span className="font-normal text-[#655B51]">(Optional)</span>
+                </label>
+                <textarea
+                  rows={2}
+                  placeholder="Tell us about cherished family recipes, dietary needs, or occasion..."
+                  value={formData.notes}
+                  onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
+                  className="w-full bg-[#ECE5DA] border border-[#D5CBBD] rounded-2xl p-3 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] placeholder:text-[#9A8F83] font-sans transition-all duration-200"
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full py-3.5 bg-[#28221D] hover:bg-[#1C1713] text-[#ECE5DA] font-sans text-xs uppercase tracking-widest font-semibold transition-all duration-300 rounded-full cursor-pointer shadow-md hover:shadow-lg hover:scale-[1.01] active:scale-[0.99] disabled:opacity-50 flex items-center justify-center space-x-2"
+              >
+                <Send className="w-3.5 h-3.5 text-[#B58D59]" />
+                <span>{isSubmitting ? 'Transmitting Request...' : 'Send Table Reservation Request'}</span>
+              </button>
+            </form>
+          )}
         </div>
-      </section>
-    );
-  };
+      </div>
+    </section>
+  );
+};

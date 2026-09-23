@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
 import { Sparkles, Utensils, Compass, Flame, Play, ArrowUpRight, Volume2, VolumeX, ChevronRight, ChevronLeft } from 'lucide-react';
 
 const CHEF_ATELIER_LOOKBOOK = [
@@ -108,75 +107,40 @@ export const UniqueHero: React.FC = () => {
 
       <div className="max-w-7xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center min-h-[75vh]">
         {/* Left Column: Bespoke Culinary Identity in Menu Card Parchment */}
-        <motion.div 
-          initial={{ opacity: 0, y: 25 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="lg:col-span-6 text-left space-y-6"
-        >
+        <div className="lg:col-span-6 text-left space-y-6 animate-fade-in-up">
           {/* Top Pill Tag */}
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="inline-flex items-center space-x-2.5 bg-[#F7F3EC] border border-[#D5CBBD] px-4 py-1.5 rounded-full text-xs font-sans text-[#28221D] shadow-xs hover:border-[#B58D59] transition-colors"
-          >
+          <div className="inline-flex items-center space-x-2.5 bg-[#F7F3EC] border border-[#D5CBBD] px-4 py-1.5 rounded-full text-xs font-sans text-[#28221D] shadow-xs hover:border-[#B58D59] transition-colors">
             <span className="w-2 h-2 rounded-full bg-[#B58D59] animate-pulse" />
             <span className="font-semibold uppercase tracking-wider text-[10.5px]">
               INTUITIVE CULINARY ATELIER & SUPPER CLUB
             </span>
-          </motion.div>
+          </div>
 
           {/* Hero Typography */}
           <div className="space-y-2">
-            <motion.span 
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="font-sans text-xs uppercase tracking-[0.25em] text-[#B58D59] font-bold block"
-            >
+            <span className="font-sans text-xs uppercase tracking-[0.25em] text-[#B58D59] font-bold block">
               TASTING NIGHTS WITH
-            </motion.span>
-            <motion.h1 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="font-marcellus text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-normal text-[#28221D] tracking-tight leading-[0.9] hover:text-[#B58D59] transition-colors duration-500 cursor-default"
-            >
+            </span>
+            <h1 className="font-marcellus text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-normal text-[#28221D] tracking-tight leading-[0.9] hover:text-[#B58D59] transition-colors duration-500 cursor-default">
               Pichhutaaney
-            </motion.h1>
-            <motion.div 
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.4 }}
-              className="flex items-center space-x-3 pt-1 group/bengali"
-            >
+            </h1>
+            <div className="flex items-center space-x-3 pt-1 group/bengali">
               <span className="font-bengali text-3xl sm:text-4xl text-[#28221D] font-medium group-hover/bengali:text-[#B58D59] transition-colors duration-300">
                 পিছুটানে
               </span>
               <span className="font-pt-serif italic text-sm sm:text-base text-[#655B51] group-hover/bengali:text-[#28221D] transition-colors duration-300">
                 / The gentle, backward glance toward home /
               </span>
-            </motion.div>
+            </div>
           </div>
 
           {/* Core Hook Narrative */}
-          <motion.p 
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.5 }}
-            className="font-sans text-sm sm:text-base text-[#4A4138] leading-relaxed font-light max-w-xl"
-          >
+          <p className="font-sans text-sm sm:text-base text-[#4A4138] leading-relaxed font-light max-w-xl">
             An intuitive Indian dining table, communal supper club, and living archive of kitchen memories. Cooked by instinct, shaped by travel, and rooted in the warmth of West Bengal.
-          </motion.p>
+          </p>
 
           {/* Quick CTAs */}
-          <motion.div 
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.6 }}
-            className="flex flex-wrap items-center gap-3 pt-2"
-          >
+          <div className="flex flex-wrap items-center gap-3 pt-2">
             <a
               href="#hearth-reels"
               className="inline-flex items-center space-x-2 px-6 py-3 bg-[#28221D] hover:bg-[#1C1713] text-[#ECE5DA] rounded-full font-sans text-xs uppercase tracking-widest font-semibold transition-all shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-[0.98]"
@@ -191,8 +155,8 @@ export const UniqueHero: React.FC = () => {
             >
               <span>Supper Club Waitlist</span>
             </a>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
         {/* Right Column: Instant Zero-Lag Lookbook Player */}
         <div className="lg:col-span-6 relative">

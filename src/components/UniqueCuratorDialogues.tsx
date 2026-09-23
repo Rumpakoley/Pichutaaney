@@ -1,5 +1,4 @@
 import React from 'react';
-import { motion } from 'motion/react';
 import { Sparkles, MessageCircle } from 'lucide-react';
 
 const DIALOGUES = [
@@ -29,13 +28,7 @@ export const UniqueCuratorDialogues: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           {/* Left Column */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-4 lg:sticky lg:top-24 space-y-3"
-          >
+          <div className="lg:col-span-4 lg:sticky lg:top-24 space-y-3 animate-fade-in-up">
             <span className="font-sans text-[11px] uppercase tracking-[0.25em] text-[#B58D59] font-bold block">
               CURATOR DIALOGUES
             </span>
@@ -45,18 +38,14 @@ export const UniqueCuratorDialogues: React.FC = () => {
             <p className="font-sans text-xs sm:text-sm text-[#655B51] leading-relaxed font-light">
               Understanding the intuitive cooking philosophy, memory archiving, and communal table ethos behind Pichhutaaney.
             </p>
-          </motion.div>
+          </div>
 
           {/* Right Column: 3 Dialogue Cards */}
           <div className="lg:col-span-8 space-y-4">
-            {DIALOGUES.map((item, idx) => (
-              <motion.div
+            {DIALOGUES.map((item) => (
+              <div
                 key={item.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.6, delay: idx * 0.15, ease: [0.16, 1, 0.3, 1] }}
-                className="p-7 sm:p-8 bg-[#F7F3EC] rounded-3xl border border-[#D5CBBD] shadow-xs space-y-2 text-left hover:border-[#B58D59] hover:shadow-md transition-all duration-300 group"
+                className="p-7 sm:p-8 bg-[#F7F3EC] rounded-3xl border border-[#D5CBBD] shadow-xs space-y-2 text-left hover:border-[#B58D59] hover:shadow-md transition-all duration-300 group cursor-default"
               >
                 <h4 className="font-marcellus text-lg sm:text-xl font-normal text-[#28221D] group-hover:text-[#B58D59] transition-colors duration-300">
                   {item.question}
@@ -64,7 +53,7 @@ export const UniqueCuratorDialogues: React.FC = () => {
                 <p className="font-sans text-xs sm:text-sm text-[#4A4138] leading-relaxed font-light group-hover:text-[#28221D] transition-colors duration-300">
                   {item.answer}
                 </p>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
