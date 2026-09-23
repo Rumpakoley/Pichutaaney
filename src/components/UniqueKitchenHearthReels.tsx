@@ -4,6 +4,7 @@ import { Play, Pause, Volume2, VolumeX, Maximize, Flame, ChevronLeft, ChevronRig
 interface VideoCardData {
   id: string;
   url: string;
+  poster: string;
   tag: string;
   title: string;
   quote: string;
@@ -14,6 +15,7 @@ const HEARTH_VIDEOS: VideoCardData[] = [
   {
     id: 'hearth-1',
     url: 'https://res.cloudinary.com/dpdtsaalf/video/upload/v1790102790/WhatsApp_Video_2026-09-22_at_10.52.23_AM_vugp9u.mp4',
+    poster: 'https://res.cloudinary.com/dpdtsaalf/video/upload/so_1/v1790102790/WhatsApp_Video_2026-09-22_at_10.52.23_AM_vugp9u.jpg',
     tag: 'THE LIVING HEARTH • IN MOTION',
     title: 'Enakshi • Food, Stories & Home',
     quote: '“Cooking not by formula, but by the quiet pull of memory and instinct.”',
@@ -22,6 +24,7 @@ const HEARTH_VIDEOS: VideoCardData[] = [
   {
     id: 'hearth-2',
     url: 'https://res.cloudinary.com/dpdtsaalf/video/upload/v1790183107/whatsapp-video-2026-09-22-at-110243-pm_hXNXyxwo_1_rh4fal.mp4',
+    poster: 'https://res.cloudinary.com/dpdtsaalf/video/upload/so_1/v1790183107/whatsapp-video-2026-09-22-at-110243-pm_hXNXyxwo_1_rh4fal.jpg',
     tag: 'HEIRLOOM TEMPERING • PHORON',
     title: 'Panch Phoron & Mustard Smoke',
     quote: '“The magic begins when whole spices crackle in smoking mustard oil.”',
@@ -30,6 +33,7 @@ const HEARTH_VIDEOS: VideoCardData[] = [
   {
     id: 'hearth-3',
     url: 'https://res.cloudinary.com/dpdtsaalf/video/upload/v1790183317/WhatsApp_Video_2026-09-22_at_11.10.54_PM_s2agzc.mp4',
+    poster: 'https://res.cloudinary.com/dpdtsaalf/video/upload/so_1/v1790183317/WhatsApp_Video_2026-09-22_at_11.10.54_PM_s2agzc.jpg',
     tag: 'STORIES & MEMORIES • ROOTS',
     title: 'Enakshi • Memories of Bengal',
     quote: '“Food is the most honest language of belonging I know.”',
@@ -38,6 +42,7 @@ const HEARTH_VIDEOS: VideoCardData[] = [
   {
     id: 'hearth-4',
     url: 'https://res.cloudinary.com/dpdtsaalf/video/upload/v1790183520/WhatsApp_Video_2026-09-23_at_12.43.27_AM_jymoqj.mp4',
+    poster: 'https://res.cloudinary.com/dpdtsaalf/video/upload/so_1/v1790183520/WhatsApp_Video_2026-09-23_at_12.43.27_AM_jymoqj.jpg',
     tag: 'CULINARY ATELIER • PASSION',
     title: 'Art of Bengali Flavors',
     quote: '“Every dish tells a tale of tradition, spices, and soulful cooking.”',
@@ -46,6 +51,7 @@ const HEARTH_VIDEOS: VideoCardData[] = [
   {
     id: 'hearth-5',
     url: 'https://res.cloudinary.com/dpdtsaalf/video/upload/v1788549950/WhatsApp_Video_2026-09-05_at_12.47.22_AM_udyrd8.mp4',
+    poster: 'https://res.cloudinary.com/dpdtsaalf/video/upload/so_1/v1788549950/WhatsApp_Video_2026-09-05_at_12.47.22_AM_udyrd8.jpg',
     tag: 'SUPPER CLUB • COMMUNAL TABLE',
     title: 'Feasts & Intimate Dinners',
     quote: '“An invitation to gather, linger over courses, and share quiet laughter.”',
@@ -54,6 +60,7 @@ const HEARTH_VIDEOS: VideoCardData[] = [
   {
     id: 'hearth-6',
     url: 'https://res.cloudinary.com/dpdtsaalf/video/upload/v1788549941/WhatsApp_Video_2026-09-05_at_12.42.00_AM_2_w12jyr.mp4',
+    poster: 'https://res.cloudinary.com/dpdtsaalf/video/upload/so_1/v1788549941/WhatsApp_Video_2026-09-05_at_12.42.00_AM_2_w12jyr.jpg',
     tag: 'SEASONAL HARVEST • ATELIER',
     title: 'Slow Simmered Curations',
     quote: '“Layers of flavor born of patience, intuition, and time-honored cast iron.”',
@@ -66,8 +73,6 @@ const HearthVideoCard: React.FC<{ item: VideoCardData }> = ({ item }) => {
   const [isMuted, setIsMuted] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  const posterUrl = item.url.replace('/video/upload/', '/video/upload/so_1/').replace(/\.mp4$/i, '.jpg');
-
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
@@ -79,7 +84,7 @@ const HearthVideoCard: React.FC<{ item: VideoCardData }> = ({ item }) => {
       video.play().then(() => {
         setIsPlaying(true);
       }).catch(() => {
-        // Autoplay policy deferred until user interacts
+        // Autoplay deferred or requires user interaction
       });
     };
 
@@ -126,10 +131,18 @@ const HearthVideoCard: React.FC<{ item: VideoCardData }> = ({ item }) => {
   return (
     <div className="relative rounded-3xl overflow-hidden bg-black border border-white/15 shadow-2xl group flex flex-col justify-between hover:border-[#B58D59]/60 transition-all duration-300 h-full select-none">
       <div className="relative aspect-[4/5] sm:aspect-[3/4] w-full overflow-hidden bg-black cursor-pointer" onClick={togglePlay}>
+        {/* Instant Frame Image Fallback while buffering */}
+        <img
+          src={item.poster}
+          alt={item.title}
+          className="absolute inset-0 w-full h-full object-cover filter contrast-[1.04] brightness-95"
+          loading="lazy"
+        />
+
         <video
           ref={videoRef}
           src={item.url}
-          poster={posterUrl}
+          poster={item.poster}
           autoPlay
           loop
           muted
@@ -137,8 +150,10 @@ const HearthVideoCard: React.FC<{ item: VideoCardData }> = ({ item }) => {
           preload="auto"
           onPlay={() => setIsPlaying(true)}
           onPause={() => setIsPlaying(false)}
-          className="w-full h-full object-cover filter contrast-[1.04] brightness-95 group-hover:scale-105 transition-transform duration-700 ease-out"
-        />
+          className="relative w-full h-full object-cover filter contrast-[1.04] brightness-95 group-hover:scale-105 transition-transform duration-700 ease-out z-1"
+        >
+          <source src={item.url} type="video/mp4" />
+        </video>
 
         {/* Ambient Gradient Overlays */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/35 to-black/30 pointer-events-none" />
