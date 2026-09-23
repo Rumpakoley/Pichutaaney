@@ -46,6 +46,12 @@ export const UniqueNavbar: React.FC<UniqueNavbarProps> = ({
       {/* Navigation Links */}
       <nav className="hidden md:flex items-center space-x-1 lg:space-x-2 font-sans text-xs uppercase tracking-wider font-semibold">
         <a
+          href="#dishes-gallery"
+          className="px-3.5 py-1.5 rounded-full text-[#28221D] hover:bg-black/5 hover:text-[#B58D59] hover:tracking-widest transition-all duration-300"
+        >
+          Dishes
+        </a>
+        <a
           href="#hearth-reels"
           className="px-3.5 py-1.5 rounded-full text-[#28221D] hover:bg-black/5 hover:text-[#B58D59] hover:tracking-widest transition-all duration-300"
         >

@@ -3,6 +3,7 @@ import { UniqueNavbar } from './components/UniqueNavbar';
 import { UniqueHero } from './components/UniqueHero';
 import { MarqueeBanner } from './components/MarqueeBanner';
 import { UniqueManifestoBio } from './components/UniqueManifestoBio';
+import { UniqueDishesGallery } from './components/UniqueDishesGallery';
 import { UniqueKitchenHearthReels } from './components/UniqueKitchenHearthReels';
 import { UniqueCuratorDialogues } from './components/UniqueCuratorDialogues';
 import { UniqueTableConcierge } from './components/UniqueTableConcierge';
@@ -147,7 +148,10 @@ export default function App() {
         {/* Section 02: Founder's Note & Culinary Manifesto */}
         <UniqueManifestoBio />
 
-        {/* Section 03: Living Hearth in Motion */}
+        {/* Section 03: Prepared Dishes Atelier Gallery */}
+        <UniqueDishesGallery />
+
+        {/* Section 04: Living Hearth in Motion */}
         <UniqueKitchenHearthReels />
 
         {/* Section 04: Curator Q&A Dialogues */}
