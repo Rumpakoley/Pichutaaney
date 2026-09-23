@@ -35,6 +35,22 @@ const HEARTH_VIDEOS: VideoCardData[] = [
     quote: '“An invitation to gather, linger over courses, and share quiet laughter.”',
     subtitle: 'Private supper clubs crafted with storytelling, warmth, and generous hospitality.',
   },
+  {
+    id: 'hearth-4',
+    url: 'https://res.cloudinary.com/dpdtsaalf/video/upload/v1790183317/WhatsApp_Video_2026-09-22_at_11.10.54_PM_s2agzc.mp4',
+    tag: 'STORIES & MEMORIES • ROOTS',
+    title: 'Enakshi • Memories of Bengal',
+    quote: '“Food is the most honest language of belonging I know.”',
+    subtitle: 'Reflections on heritage, regional culinary history, and memories of Kolkata tables.',
+  },
+  {
+    id: 'hearth-5',
+    url: 'https://res.cloudinary.com/dpdtsaalf/video/upload/v1788549941/WhatsApp_Video_2026-09-05_at_12.42.00_AM_2_w12jyr.mp4',
+    tag: 'SEASONAL HARVEST • ATELIER',
+    title: 'Slow Simmered Curations',
+    quote: '“Layers of flavor born of patience, intuition, and time-honored cast iron.”',
+    subtitle: 'Simmered broths, seasonal produce, and courses crafted with deep care.',
+  },
 ];
 
 const HearthVideoCard: React.FC<{ item: VideoCardData }> = ({ item }) => {
