@@ -65,11 +65,7 @@ const CHEF_ATELIER_LOOKBOOK = [
   },
 ];
 
-interface UniqueHeroProps {
-  onOpenReservationHub?: () => void;
-}
-
-export const UniqueHero: React.FC<UniqueHeroProps> = ({ onOpenReservationHub }) => {
+export const UniqueHero: React.FC = () => {
   const [activeIdx, setActiveIdx] = useState(0);
   const [isMuted, setIsMuted] = useState(true);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
@@ -154,21 +150,12 @@ export const UniqueHero: React.FC<UniqueHeroProps> = ({ onOpenReservationHub }) 
               <ArrowUpRight className="w-3.5 h-3.5 text-[#B58D59]" />
             </a>
 
-            {onOpenReservationHub ? (
-              <button
-                onClick={onOpenReservationHub}
-                className="inline-flex items-center space-x-2 px-6 py-3 bg-[#F7F3EC] border border-[#D5CBBD] hover:border-[#28221D] text-[#28221D] rounded-full font-sans text-xs uppercase tracking-widest font-semibold transition-all shadow-xs cursor-pointer"
-              >
-                <span>Supper Club Waitlist & Links</span>
-              </button>
-            ) : (
-              <a
-                href="#table-concierge"
-                className="inline-flex items-center space-x-2 px-6 py-3 bg-[#F7F3EC] border border-[#D5CBBD] hover:border-[#28221D] text-[#28221D] rounded-full font-sans text-xs uppercase tracking-widest font-semibold transition-all shadow-xs"
-              >
-                <span>Supper Club Waitlist</span>
-              </a>
-            )}
+            <a
+              href="#table-concierge"
+              className="inline-flex items-center space-x-2 px-6 py-3 bg-[#F7F3EC] border border-[#D5CBBD] hover:border-[#28221D] text-[#28221D] rounded-full font-sans text-xs uppercase tracking-widest font-semibold transition-all shadow-xs"
+            >
+              <span>Supper Club Waitlist</span>
+            </a>
           </div>
         </div>
 

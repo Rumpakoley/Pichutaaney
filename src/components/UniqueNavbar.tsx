@@ -3,13 +3,11 @@ import { BookOpen } from 'lucide-react';
 
 interface UniqueNavbarProps {
   onOpenLedger: () => void;
-  onOpenReservationHub: () => void;
   reservationCount: number;
 }
 
 export const UniqueNavbar: React.FC<UniqueNavbarProps> = ({ 
   onOpenLedger, 
-  onOpenReservationHub, 
   reservationCount 
 }) => {
   const [scrolled, setScrolled] = useState(false);
@@ -75,12 +73,12 @@ export const UniqueNavbar: React.FC<UniqueNavbarProps> = ({
 
       {/* Actions */}
       <div className="flex items-center space-x-2">
-        <button
-          onClick={onOpenReservationHub}
-          className="px-4 sm:px-5 py-1.5 bg-[#28221D] hover:bg-[#B58D59] hover:text-[#1C1713] text-[#ECE5DA] rounded-full font-sans text-xs uppercase tracking-widest font-semibold transition-all shadow-sm hover:shadow-md cursor-pointer"
+        <a
+          href="#table-concierge"
+          className="px-4 sm:px-5 py-1.5 bg-[#28221D] hover:bg-[#B58D59] hover:text-[#1C1713] text-[#ECE5DA] rounded-full font-sans text-xs uppercase tracking-widest font-semibold transition-all shadow-sm hover:shadow-md inline-block"
         >
           Reserve Table
-        </button>
+        </a>
 
         {reservationCount > 0 && (
           <button

@@ -6,14 +6,12 @@ import { motion } from 'motion/react';
 interface UniqueTableConciergeProps {
   onAddWaitlist: (entry: WaitlistEntry) => void;
   onAddInquiry: (inquiry: PrivateEventInquiry) => void;
-  onOpenReservationHub?: () => void;
   recentEntries: (WaitlistEntry | PrivateEventInquiry)[];
 }
 
 export const UniqueTableConcierge: React.FC<UniqueTableConciergeProps> = ({
   onAddWaitlist,
   onAddInquiry,
-  onOpenReservationHub,
   recentEntries,
 }) => {
   const [formData, setFormData] = useState({
