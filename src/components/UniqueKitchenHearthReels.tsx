@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Play, Pause, Volume2, VolumeX, Maximize, Flame } from 'lucide-react';
+import { Play, Pause, Volume2, VolumeX, Maximize, Flame, ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface VideoCardData {
   id: string;
@@ -29,14 +29,6 @@ const HEARTH_VIDEOS: VideoCardData[] = [
   },
   {
     id: 'hearth-3',
-    url: 'https://res.cloudinary.com/dpdtsaalf/video/upload/v1788549950/WhatsApp_Video_2026-09-05_at_12.47.22_AM_udyrd8.mp4',
-    tag: 'SUPPER CLUB • COMMUNAL TABLE',
-    title: 'Feasts & Intimate Dinners',
-    quote: '“An invitation to gather, linger over courses, and share quiet laughter.”',
-    subtitle: 'Private supper clubs crafted with storytelling, warmth, and generous hospitality.',
-  },
-  {
-    id: 'hearth-4',
     url: 'https://res.cloudinary.com/dpdtsaalf/video/upload/v1790183317/WhatsApp_Video_2026-09-22_at_11.10.54_PM_s2agzc.mp4',
     tag: 'STORIES & MEMORIES • ROOTS',
     title: 'Enakshi • Memories of Bengal',
@@ -44,7 +36,23 @@ const HEARTH_VIDEOS: VideoCardData[] = [
     subtitle: 'Reflections on heritage, regional culinary history, and memories of Kolkata tables.',
   },
   {
+    id: 'hearth-4',
+    url: 'https://res.cloudinary.com/dpdtsaalf/video/upload/v1790183520/WhatsApp_Video_2026-09-23_at_12.43.27_AM_jymoqj.mp4',
+    tag: 'CULINARY ATELIER • PASSION',
+    title: 'Art of Bengali Flavors',
+    quote: '“Every dish tells a tale of tradition, spices, and soulful cooking.”',
+    subtitle: 'Mastering the balance of sweet, pungent, and savory notes across traditional dishes.',
+  },
+  {
     id: 'hearth-5',
+    url: 'https://res.cloudinary.com/dpdtsaalf/video/upload/v1788549950/WhatsApp_Video_2026-09-05_at_12.47.22_AM_udyrd8.mp4',
+    tag: 'SUPPER CLUB • COMMUNAL TABLE',
+    title: 'Feasts & Intimate Dinners',
+    quote: '“An invitation to gather, linger over courses, and share quiet laughter.”',
+    subtitle: 'Private supper clubs crafted with storytelling, warmth, and generous hospitality.',
+  },
+  {
+    id: 'hearth-6',
     url: 'https://res.cloudinary.com/dpdtsaalf/video/upload/v1788549941/WhatsApp_Video_2026-09-05_at_12.42.00_AM_2_w12jyr.mp4',
     tag: 'SEASONAL HARVEST • ATELIER',
     title: 'Slow Simmered Curations',
@@ -83,7 +91,7 @@ const HearthVideoCard: React.FC<{ item: VideoCardData }> = ({ item }) => {
   };
 
   return (
-    <div className="relative rounded-3xl overflow-hidden bg-black border border-white/15 shadow-2xl group flex flex-col justify-between hover:border-[#B58D59]/50 transition-all duration-300">
+    <div className="relative rounded-3xl overflow-hidden bg-black border border-white/15 shadow-2xl group flex flex-col justify-between hover:border-[#B58D59]/60 transition-all duration-300 h-full select-none">
       <div className="relative aspect-[4/5] sm:aspect-[3/4] w-full overflow-hidden bg-black">
         <video
           ref={videoRef}
@@ -162,11 +170,19 @@ const HearthVideoCard: React.FC<{ item: VideoCardData }> = ({ item }) => {
 };
 
 export const UniqueKitchenHearthReels: React.FC = () => {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  const handleScroll = (direction: 'left' | 'right') => {
+    if (!scrollContainerRef.current) return;
+    const scrollAmount = direction === 'left' ? -420 : 420;
+    scrollContainerRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+  };
+
   return (
-    <section id="hearth-reels" className="py-20 sm:py-28 bg-[#1C1713] text-[#ECE5DA] border-b border-[#382F27] text-left">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+    <section id="hearth-reels" className="py-20 sm:py-28 bg-[#1C1713] text-[#ECE5DA] border-b border-[#382F27] text-left overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-white/10 pb-8">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-white/10 pb-8">
           <div className="space-y-2">
             <div className="inline-flex items-center space-x-2 text-[10px] tracking-[0.25em] uppercase font-bold text-[#B58D59] font-sans bg-white/10 px-4 py-1.5 rounded-full border border-white/10">
               <Flame className="w-3.5 h-3.5 text-[#B58D59]" />
@@ -176,15 +192,48 @@ export const UniqueKitchenHearthReels: React.FC = () => {
               Scent, Sizzle & Living Kitchen
             </h2>
           </div>
-          <p className="font-sans text-xs sm:text-sm text-[#D5CBBD] max-w-md leading-relaxed font-light">
-            Witness the sizzle of golden mustard oil heating to smoke point, whole spices crackling in the pan, and intimate communal dinner moments.
-          </p>
+
+          {/* Right Header Description & Navigation Buttons */}
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+            <p className="font-sans text-xs sm:text-sm text-[#D5CBBD] max-w-sm leading-relaxed font-light">
+              Witness the sizzle of golden mustard oil, spices crackling, and intimate communal dinners.
+            </p>
+
+            {/* Scroll Navigation Buttons */}
+            <div className="flex items-center space-x-2 shrink-0">
+              <button
+                onClick={() => handleScroll('left')}
+                title="Scroll Left"
+                className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#B58D59] hover:text-[#1C1713] text-white flex items-center justify-center border border-white/20 transition-all cursor-pointer shadow-sm hover:scale-105"
+                aria-label="Scroll left"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+              <button
+                onClick={() => handleScroll('right')}
+                title="Scroll Right"
+                className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#B58D59] hover:text-[#1C1713] text-white flex items-center justify-center border border-white/20 transition-all cursor-pointer shadow-sm hover:scale-105"
+                aria-label="Scroll right"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
         </div>
 
-        {/* 3-Card Video Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        {/* Horizontal Scroll Track */}
+        <div
+          ref={scrollContainerRef}
+          className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-6 pt-2 scroll-smooth scrollbar-thin scrollbar-thumb-[#B58D59]/50 scrollbar-track-white/5"
+          style={{ scrollbarWidth: 'thin' }}
+        >
           {HEARTH_VIDEOS.map((item) => (
-            <HearthVideoCard key={item.id} item={item} />
+            <div
+              key={item.id}
+              className="w-[85vw] sm:w-[360px] md:w-[390px] lg:w-[410px] shrink-0 snap-start"
+            >
+              <HearthVideoCard item={item} />
+            </div>
           ))}
         </div>
       </div>
