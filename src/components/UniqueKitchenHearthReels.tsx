@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Play, Pause, Volume2, VolumeX, Maximize, Flame, ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface VideoCardData {
@@ -133,7 +133,6 @@ const HearthVideoCard: React.FC<{ item: VideoCardData }> = ({ item }) => {
           autoPlay
           loop
           muted
-          defaultMuted
           playsInline
           preload="auto"
           onPlay={() => setIsPlaying(true)}
