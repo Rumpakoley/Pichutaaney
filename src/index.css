@@ -167,3 +167,16 @@
     transition: none !important;
   }
 }
+
+/* Bespoke Atelier Cursor System */
+@media (pointer: fine) {
+  html, body, a, button, [role="button"], .cursor-pointer {
+    cursor: none !important;
+  }
+
+  /* Restore text cursor over inputs and textareas for natural usability */
+  input, textarea, select {
+    cursor: text !important;
+  }
+}
+

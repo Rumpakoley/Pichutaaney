@@ -9,6 +9,7 @@ import { UniqueCuratorDialogues } from './components/UniqueCuratorDialogues';
 import { UniqueTableConcierge } from './components/UniqueTableConcierge';
 import { UniqueFooter } from './components/UniqueFooter';
 import { HostLedgerModal } from './components/HostLedgerModal';
+import { UniqueCursor } from './components/UniqueCursor';
 import { WaitlistEntry, PrivateEventInquiry, ContactMessage } from './types';
 import { useScrollReveal } from './hooks/useScrollReveal';
 
@@ -132,6 +133,9 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#ECE5DA] text-[#28221D] font-sans selection:bg-[#B58D59] selection:text-white antialiased">
+      {/* Bespoke Interactive Atelier Cursor */}
+      <UniqueCursor />
+
       {/* Bespoke Floating Concierge Navigation */}
       <UniqueNavbar
         onOpenLedger={() => setIsLedgerOpen(true)}
