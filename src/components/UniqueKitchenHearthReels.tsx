@@ -66,40 +66,78 @@ const HearthVideoCard: React.FC<{ item: VideoCardData }> = ({ item }) => {
   const [isMuted, setIsMuted] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  const togglePlay = () => {
-    if (!videoRef.current) return;
-    if (isPlaying) {
-      videoRef.current.pause();
-      setIsPlaying(false);
+  const posterUrl = item.url.replace('/video/upload/', '/video/upload/so_1/').replace(/\.mp4$/i, '.jpg');
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    video.defaultMuted = true;
+    video.muted = true;
+
+    const startPlayback = () => {
+      video.play().then(() => {
+        setIsPlaying(true);
+      }).catch(() => {
+        // Autoplay policy deferred until user interacts
+      });
+    };
+
+    if (video.readyState >= 2) {
+      startPlayback();
     } else {
-      videoRef.current.play();
-      setIsPlaying(true);
+      video.addEventListener('loadeddata', startPlayback, { once: true });
+      video.addEventListener('canplay', startPlayback, { once: true });
+    }
+
+    return () => {
+      video.removeEventListener('loadeddata', startPlayback);
+      video.removeEventListener('canplay', startPlayback);
+    };
+  }, [item.url]);
+
+  const togglePlay = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (video.paused) {
+      video.play().then(() => setIsPlaying(true)).catch(() => {});
+    } else {
+      video.pause();
+      setIsPlaying(false);
     }
   };
 
   const toggleMute = () => {
-    if (!videoRef.current) return;
-    videoRef.current.muted = !isMuted;
-    setIsMuted(!isMuted);
+    const video = videoRef.current;
+    if (!video) return;
+    const nextMuted = !video.muted;
+    video.muted = nextMuted;
+    setIsMuted(nextMuted);
   };
 
   const handleFullScreen = () => {
-    if (!videoRef.current) return;
-    if (videoRef.current.requestFullscreen) {
-      videoRef.current.requestFullscreen();
+    const video = videoRef.current;
+    if (!video) return;
+    if (video.requestFullscreen) {
+      video.requestFullscreen();
     }
   };
 
   return (
     <div className="relative rounded-3xl overflow-hidden bg-black border border-white/15 shadow-2xl group flex flex-col justify-between hover:border-[#B58D59]/60 transition-all duration-300 h-full select-none">
-      <div className="relative aspect-[4/5] sm:aspect-[3/4] w-full overflow-hidden bg-black">
+      <div className="relative aspect-[4/5] sm:aspect-[3/4] w-full overflow-hidden bg-black cursor-pointer" onClick={togglePlay}>
         <video
           ref={videoRef}
           src={item.url}
+          poster={posterUrl}
           autoPlay
           loop
-          muted={isMuted}
+          muted
+          defaultMuted
           playsInline
+          preload="auto"
+          onPlay={() => setIsPlaying(true)}
+          onPause={() => setIsPlaying(false)}
           className="w-full h-full object-cover filter contrast-[1.04] brightness-95 group-hover:scale-105 transition-transform duration-700 ease-out"
         />
 
@@ -107,14 +145,23 @@ const HearthVideoCard: React.FC<{ item: VideoCardData }> = ({ item }) => {
         <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/35 to-black/30 pointer-events-none" />
 
         {/* Top Tag */}
-        <div className="absolute top-4 left-4 z-10">
+        <div className="absolute top-4 left-4 z-10 pointer-events-none">
           <span className="bg-[#1C1713]/85 backdrop-blur-md px-3.5 py-1.5 rounded-full text-[9px] font-mono tracking-wider uppercase border border-white/20 text-[#B58D59] font-bold shadow-xs">
             {item.tag}
           </span>
         </div>
 
+        {/* Center Play Overlay Icon when Paused */}
+        {!isPlaying && (
+          <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+            <div className="w-14 h-14 rounded-full bg-[#1C1713]/80 border border-white/20 backdrop-blur-md flex items-center justify-center text-[#B58D59] shadow-xl">
+              <Play className="w-6 h-6 fill-current translate-x-0.5" />
+            </div>
+          </div>
+        )}
+
         {/* Bottom Info & Controls */}
-        <div className="absolute bottom-0 inset-x-0 p-5 sm:p-6 flex flex-col justify-end space-y-3 z-10">
+        <div className="absolute bottom-0 inset-x-0 p-5 sm:p-6 flex flex-col justify-end space-y-3 z-10" onClick={(e) => e.stopPropagation()}>
           <div className="text-left space-y-1">
             <span className="text-[9.5px] uppercase tracking-widest text-[#B58D59] font-bold font-mono block">
               {item.title}
@@ -147,9 +194,9 @@ const HearthVideoCard: React.FC<{ item: VideoCardData }> = ({ item }) => {
               className="flex items-center space-x-1.5 hover:text-[#B58D59] transition-colors p-1 cursor-pointer"
               aria-label={isMuted ? 'Unmute audio' : 'Mute audio'}
             >
-              {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
+              {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5 text-[#B58D59]" />}
               <span className="font-mono uppercase text-[9.5px] tracking-wider font-bold">
-                {isMuted ? 'Unmute' : 'Sound'}
+                {isMuted ? 'Unmute' : 'Mute'}
               </span>
             </button>
 
