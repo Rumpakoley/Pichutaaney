@@ -2,13 +2,13 @@ import React, { useEffect, useState, useRef } from 'react';
 
 /**
  * UniqueCursor
- * Handcrafted Traditional Bengali Hand Fan ("হাতপাখা" / Haat Pakha):
- * - Alternating crimson-red & ivory bamboo pleats with white alpona motifs
- * - Vermilion pleated fabric frill border
- * - Light natural cane / bamboo handle
- * - Gentle breeze fanning flutter on hover
- * - Breeze ripple puff on click
- * - Pinpoint accurate click hotspot at top tip
+ * Aesthetic Handcrafted Bengali Hand Fan ("হাতপাখা" / Haat Pakha):
+ * - Authentic asymmetrical palm-leaf design with side bamboo cane handle
+ * - Alternating rich vermilion-red & ivory cream pleats with fine white alpona motifs
+ * - Delicate pleated fabric frill border
+ * - Zero intrusive floating circles or beacon dots
+ * - Precise click hotspot at the top tip
+ * - Graceful subtle tilt on hover
  * - Automatically disabled on touch / mobile devices
  */
 export const UniqueCursor: React.FC = () => {
@@ -16,14 +16,9 @@ export const UniqueCursor: React.FC = () => {
   const [visible, setVisible] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
-  const [hoverLabel, setHoverLabel] = useState<string | null>(null);
 
   const fanRef = useRef<HTMLDivElement>(null);
-  const breezeRef = useRef<HTMLDivElement>(null);
-
   const mousePos = useRef({ x: -100, y: -100 });
-  const breezePos = useRef({ x: -100, y: -100 });
-  const animFrameId = useRef<number | null>(null);
 
   useEffect(() => {
     // Only enable on desktop pointer devices
@@ -49,20 +44,7 @@ export const UniqueCursor: React.FC = () => {
         'a, button, input, textarea, select, [role="button"], .cursor-pointer, video'
       );
 
-      if (interactive) {
-        setIsHovered(true);
-
-        if (interactive.closest('#hearth-reels, video')) {
-          setHoverLabel('SAVOR');
-        } else if (interactive.closest('#dishes-gallery, [data-plate]')) {
-          setHoverLabel('TASTE');
-        } else {
-          setHoverLabel(null);
-        }
-      } else {
-        setIsHovered(false);
-        setHoverLabel(null);
-      }
+      setIsHovered(!!interactive);
     };
 
     const onMouseDown = () => setIsClicked(true);
@@ -70,26 +52,11 @@ export const UniqueCursor: React.FC = () => {
     const onMouseLeave = () => setVisible(false);
     const onMouseEnter = () => setVisible(true);
 
-    // Smooth breeze trailing ring lerp loop
-    const render = () => {
-      const lerpFactor = 0.2;
-      breezePos.current.x += (mousePos.current.x - breezePos.current.x) * lerpFactor;
-      breezePos.current.y += (mousePos.current.y - breezePos.current.y) * lerpFactor;
-
-      if (breezeRef.current) {
-        breezeRef.current.style.transform = `translate3d(${breezePos.current.x}px, ${breezePos.current.y}px, 0)`;
-      }
-
-      animFrameId.current = requestAnimationFrame(render);
-    };
-
     window.addEventListener('mousemove', onMouseMove, { passive: true });
     window.addEventListener('mousedown', onMouseDown);
     window.addEventListener('mouseup', onMouseUp);
     document.addEventListener('mouseleave', onMouseLeave);
     document.addEventListener('mouseenter', onMouseEnter);
-
-    animFrameId.current = requestAnimationFrame(render);
 
     return () => {
       window.removeEventListener('mousemove', onMouseMove);
@@ -97,10 +64,6 @@ export const UniqueCursor: React.FC = () => {
       window.removeEventListener('mouseup', onMouseUp);
       document.removeEventListener('mouseleave', onMouseLeave);
       document.removeEventListener('mouseenter', onMouseEnter);
-
-      if (animFrameId.current) {
-        cancelAnimationFrame(animFrameId.current);
-      }
     };
   }, [visible]);
 
@@ -113,261 +76,220 @@ export const UniqueCursor: React.FC = () => {
       }`}
       aria-hidden="true"
     >
-      {/* Trailing Cooling Breeze Halo */}
-      <div
-        ref={breezeRef}
-        style={{ willChange: 'transform' }}
-        className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 pointer-events-none flex items-center justify-center"
-      >
-        <div
-          className={`rounded-full flex items-center justify-center transition-all duration-300 ease-out ${
-            isHovered
-              ? isClicked
-                ? 'w-10 h-10 bg-[#B82228]/25 border-2 border-[#B82228] scale-90'
-                : 'w-14 h-14 bg-[#B82228]/12 border border-[#B82228]/60 backdrop-blur-[0.5px] scale-100 shadow-[0_0_16px_rgba(184,34,40,0.35)]'
-              : isClicked
-              ? 'w-6 h-6 border-2 border-[#B82228] bg-[#B82228]/30 scale-75 animate-ping'
-              : 'w-8 h-8 border border-[#B82228]/35 bg-[#B82228]/5 scale-100'
-          }`}
-        >
-          {hoverLabel && isHovered && (
-            <span className="font-mono text-[7.5px] uppercase tracking-widest text-[#B82228] font-bold select-none animate-fade-in-scale">
-              {hoverLabel}
-            </span>
-          )}
-        </div>
-      </div>
-
-      {/* Main Handcrafted Bengali Haat Pakha (Hand Fan) */}
+      {/* Aesthetic Handcrafted Bengali Hand Fan (No floating circles/dots) */}
       <div
         ref={fanRef}
         style={{ willChange: 'transform' }}
-        className="absolute top-0 left-0 pointer-events-none -translate-x-1 -translate-y-1"
+        className="absolute top-0 left-0 pointer-events-none -translate-x-[2px] -translate-y-[2px]"
       >
         <div
-          className={`relative origin-[4px_4px] transition-transform duration-200 ease-out ${
+          className={`relative origin-[2px_2px] transition-transform duration-200 ease-out ${
             isClicked
-              ? '-rotate-24 scale-90 translate-y-0.5'
+              ? '-rotate-15 scale-90 translate-y-0.5'
               : isHovered
-              ? 'rotate-8 scale-110 animate-pulse'
+              ? 'rotate-8 scale-110'
               : 'rotate-0 scale-100'
           }`}
         >
-          {/* SVG Handcrafted Traditional Bengali Hand Fan */}
+          {/* Authentic Bengali Haat Pakha SVG */}
           <svg
-            width="38"
-            height="42"
-            viewBox="0 0 38 42"
+            width="32"
+            height="38"
+            viewBox="0 0 32 38"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="filter drop-shadow-[0_2px_5px_rgba(0,0,0,0.45)]"
+            className="filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.35)]"
           >
             <defs>
-              {/* Crimson Red Fan Pleat Gradient */}
-              <linearGradient id="redPleat" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stopColor="#C92A31" />
-                <stop offset="60%" stopColor="#A81C22" />
-                <stop offset="100%" stopColor="#7E1217" />
+              {/* Vermilion Red Pleat Gradient */}
+              <linearGradient id="pakhaRed" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stopColor="#D92832" />
+                <stop offset="60%" stopColor="#B31B23" />
+                <stop offset="100%" stopColor="#8C1016" />
               </linearGradient>
 
-              {/* Ivory Bamboo/Palm Leaf Pleat Gradient */}
-              <linearGradient id="ivoryPleat" x1="0" y1="0" x2="1" y2="1">
+              {/* Natural Ivory Palm-Leaf Pleat Gradient */}
+              <linearGradient id="pakhaIvory" x1="0" y1="0" x2="1" y2="1">
                 <stop offset="0%" stopColor="#FFFDF7" />
-                <stop offset="60%" stopColor="#F2E8D3" />
-                <stop offset="100%" stopColor="#DFCDB0" />
+                <stop offset="60%" stopColor="#F5EBD7" />
+                <stop offset="100%" stopColor="#E2D4BC" />
               </linearGradient>
 
-              {/* Natural Bamboo Cane Handle Gradient */}
-              <linearGradient id="bambooHandle" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0%" stopColor="#EAD8B2" />
-                <stop offset="50%" stopColor="#D2BF96" />
-                <stop offset="100%" stopColor="#B39F74" />
+              {/* Slender Bamboo Cane Handle Gradient */}
+              <linearGradient id="pakhaBamboo" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stopColor="#EADBBA" />
+                <stop offset="50%" stopColor="#D5C198" />
+                <stop offset="100%" stopColor="#B8A375" />
               </linearGradient>
 
-              {/* Red Ruffled Frill Shadow */}
-              <filter id="frillShadow" x="-10%" y="-10%" width="120%" height="120%">
-                <feDropShadow dx="0" dy="0.5" stdDeviation="0.5" floodColor="#400" floodOpacity="0.4" />
-              </filter>
+              {/* Soft Frill Edge Gradient */}
+              <linearGradient id="pakhaFrill" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stopColor="#E22E37" />
+                <stop offset="100%" stopColor="#9E141B" />
+              </linearGradient>
             </defs>
 
-            {/* --- 1. Long Bamboo Cane Handle --- */}
-            {/* Extended downward handle */}
+            {/* --- 1. Bamboo Cane Spine & Long Handle (running down right side) --- */}
             <path
-              d="M17.5 17.5 L24.5 39.5 C24.7 40.5 25.8 41 26.5 40.5 C27.2 40 27 39 26.5 38 L19.5 16 Z"
-              fill="url(#bambooHandle)"
-              stroke="#8C7752"
-              strokeWidth="0.5"
+              d="M19 13.5 L22.5 35 C22.7 36 23.5 36.5 24.2 36.2 C24.8 35.8 24.8 35 24.5 34 L21 12 Z"
+              fill="url(#pakhaBamboo)"
+              stroke="#87714C"
+              strokeWidth="0.4"
             />
-            {/* Bamboo natural node rings */}
-            <line x1="20.5" y1="26" x2="22.5" y2="26.8" stroke="#8C7752" strokeWidth="0.6" strokeLinecap="round" />
-            <line x1="22.5" y1="33" x2="24.5" y2="33.8" stroke="#8C7752" strokeWidth="0.6" strokeLinecap="round" />
+            {/* Natural bamboo notches */}
+            <line x1="20.5" y1="21" x2="22.2" y2="21.5" stroke="#7A643E" strokeWidth="0.5" strokeLinecap="round" />
+            <line x1="21.8" y1="28" x2="23.5" y2="28.5" stroke="#7A643E" strokeWidth="0.5" strokeLinecap="round" />
 
-            {/* --- 2. Circular Pleated Fan Body (Wedges radiating from center hub (18, 17)) --- */}
-            {/* Center Pivot Hub: (18, 17), Outer Arc Radius: ~14px */}
-
-            {/* Wedge 1: Red with Alpona (Top-Left) */}
+            {/* --- 2. Fan Fan-Blade Disc: Alternating Red & Ivory Wedges radiating from Pivot (19.5, 14) --- */}
+            
+            {/* Sector 1: Red (Far-Left Edge / Pointer Apex) */}
             <path
-              d="M18 17 L5.5 11.5 A14 14 0 0 1 9 6 Z"
-              fill="url(#redPleat)"
-              stroke="#6B0F13"
-              strokeWidth="0.3"
+              d="M19.5 14 L4.5 9.5 A14 14 0 0 1 7 4 Z"
+              fill="url(#pakhaRed)"
+              stroke="#730C11"
+              strokeWidth="0.25"
             />
-            {/* Alpona motifs on Wedge 1 */}
-            <path d="M7.5 9.5 Q9 9 11 11" stroke="#FFF" strokeWidth="0.5" strokeLinecap="round" />
-            <circle cx="8" cy="8" r="0.45" fill="#FFF" />
-            <circle cx="10" cy="9.5" r="0.45" fill="#FFF" />
+            {/* Delicate White Alpona Motifs */}
+            <path d="M6 6.5 Q8 6 10 7.5" stroke="#FFF" strokeWidth="0.45" strokeLinecap="round" opacity="0.9" />
+            <circle cx="6.5" cy="5.5" r="0.4" fill="#FFF" />
+            <circle cx="8.5" cy="6.5" r="0.4" fill="#FFF" />
 
-            {/* Wedge 2: Ivory (Top) */}
+            {/* Sector 2: Ivory */}
             <path
-              d="M18 17 L9 6 A14 14 0 0 1 14 3.5 Z"
-              fill="url(#ivoryPleat)"
-              stroke="#B39F74"
-              strokeWidth="0.3"
+              d="M19.5 14 L7 4 A14 14 0 0 1 11.5 2 Z"
+              fill="url(#pakhaIvory)"
+              stroke="#C4B394"
+              strokeWidth="0.25"
             />
 
-            {/* Wedge 3: Red with Alpona (Top-Center) */}
+            {/* Sector 3: Red with Alpona */}
             <path
-              d="M18 17 L14 3.5 A14 14 0 0 1 20 3 Z"
-              fill="url(#redPleat)"
-              stroke="#6B0F13"
-              strokeWidth="0.3"
+              d="M19.5 14 L11.5 2 A14 14 0 0 1 16.5 1.5 Z"
+              fill="url(#pakhaRed)"
+              stroke="#730C11"
+              strokeWidth="0.25"
             />
-            {/* Alpona on Wedge 3 */}
-            <path d="M16 5.5 Q17 8 17.5 11" stroke="#FFF" strokeWidth="0.5" strokeLinecap="round" />
-            <circle cx="16" cy="4.5" r="0.45" fill="#FFF" />
-            <circle cx="16.8" cy="7" r="0.45" fill="#FFF" />
+            <path d="M13.5 3 Q14.5 5 15 8" stroke="#FFF" strokeWidth="0.45" strokeLinecap="round" opacity="0.9" />
+            <circle cx="13" cy="2.5" r="0.4" fill="#FFF" />
+            <circle cx="14" cy="4.5" r="0.4" fill="#FFF" />
 
-            {/* Wedge 4: Ivory (Top-Right) */}
+            {/* Sector 4: Ivory */}
             <path
-              d="M18 17 L20 3 A14 14 0 0 1 26 5 Z"
-              fill="url(#ivoryPleat)"
-              stroke="#B39F74"
-              strokeWidth="0.3"
-            />
-
-            {/* Wedge 5: Red with Alpona (Right) */}
-            <path
-              d="M18 17 L26 5 A14 14 0 0 1 30.5 9 Z"
-              fill="url(#redPleat)"
-              stroke="#6B0F13"
-              strokeWidth="0.3"
-            />
-            {/* Alpona on Wedge 5 */}
-            <path d="M25 7.5 Q23.5 10 21 12" stroke="#FFF" strokeWidth="0.5" strokeLinecap="round" />
-            <circle cx="27" cy="7" r="0.45" fill="#FFF" />
-            <circle cx="25" cy="9" r="0.45" fill="#FFF" />
-
-            {/* Wedge 6: Ivory (Mid-Right) */}
-            <path
-              d="M18 17 L30.5 9 A14 14 0 0 1 32 14.5 Z"
-              fill="url(#ivoryPleat)"
-              stroke="#B39F74"
-              strokeWidth="0.3"
+              d="M19.5 14 L16.5 1.5 A14 14 0 0 1 21.5 2.5 Z"
+              fill="url(#pakhaIvory)"
+              stroke="#C4B394"
+              strokeWidth="0.25"
             />
 
-            {/* Wedge 7: Red with Alpona (Lower-Right) */}
+            {/* Sector 5: Red with Alpona */}
             <path
-              d="M18 17 L32 14.5 A14 14 0 0 1 30 20.5 Z"
-              fill="url(#redPleat)"
-              stroke="#6B0F13"
-              strokeWidth="0.3"
+              d="M19.5 14 L21.5 2.5 A14 14 0 0 1 26 5 Z"
+              fill="url(#pakhaRed)"
+              stroke="#730C11"
+              strokeWidth="0.25"
             />
-            {/* Alpona on Wedge 7 */}
-            <circle cx="29" cy="16" r="0.45" fill="#FFF" />
-            <circle cx="27" cy="18" r="0.45" fill="#FFF" />
+            <path d="M22.5 4.5 Q21.5 7 19.5 9" stroke="#FFF" strokeWidth="0.45" strokeLinecap="round" opacity="0.9" />
+            <circle cx="23.5" cy="4" r="0.4" fill="#FFF" />
+            <circle cx="22" cy="6" r="0.4" fill="#FFF" />
 
-            {/* Wedge 8: Ivory (Lower) */}
+            {/* Sector 6: Ivory */}
             <path
-              d="M18 17 L30 20.5 A14 14 0 0 1 24.5 25 Z"
-              fill="url(#ivoryPleat)"
-              stroke="#B39F74"
-              strokeWidth="0.3"
-            />
-
-            {/* Wedge 9: Red with Alpona (Left/Bottom-Left) */}
-            <path
-              d="M18 17 L4.5 16 A14 14 0 0 1 5.5 11.5 Z"
-              fill="url(#redPleat)"
-              stroke="#6B0F13"
-              strokeWidth="0.3"
-            />
-            <circle cx="6" cy="13" r="0.45" fill="#FFF" />
-
-            {/* Wedge 10: Ivory Bottom-Left */}
-            <path
-              d="M18 17 L6.5 21.5 A14 14 0 0 1 4.5 16 Z"
-              fill="url(#ivoryPleat)"
-              stroke="#B39F74"
-              strokeWidth="0.3"
+              d="M19.5 14 L26 5 A14 14 0 0 1 29 9 Z"
+              fill="url(#pakhaIvory)"
+              stroke="#C4B394"
+              strokeWidth="0.25"
             />
 
-            {/* Wedge 11: Red with Alpona (Bottom) */}
+            {/* Sector 7: Red with Alpona */}
             <path
-              d="M18 17 L11 25.5 A14 14 0 0 1 6.5 21.5 Z"
-              fill="url(#redPleat)"
-              stroke="#6B0F13"
-              strokeWidth="0.3"
+              d="M19.5 14 L29 9 A14 14 0 0 1 29.5 14 Z"
+              fill="url(#pakhaRed)"
+              stroke="#730C11"
+              strokeWidth="0.25"
             />
-            <circle cx="9" cy="22" r="0.45" fill="#FFF" />
+            <circle cx="27.5" cy="10" r="0.4" fill="#FFF" />
+            <circle cx="26" cy="12" r="0.4" fill="#FFF" />
 
-            {/* Wedge 12: Ivory Base */}
+            {/* Sector 8: Ivory Lower-Right */}
             <path
-              d="M18 17 L16 27 A14 14 0 0 1 11 25.5 Z"
-              fill="url(#ivoryPleat)"
-              stroke="#B39F74"
-              strokeWidth="0.3"
+              d="M19.5 14 L29.5 14 A14 14 0 0 1 26 19.5 Z"
+              fill="url(#pakhaIvory)"
+              stroke="#C4B394"
+              strokeWidth="0.25"
             />
 
-            {/* --- 3. Ruffled Vermilion Fabric Frill Border along Outer Rim --- */}
-            {/* Scalloped pleated ruffled border path surrounding the perimeter */}
+            {/* Sector 9: Red Lower-Left */}
             <path
-              d="M16 28.5
-                 C14.5 28 13.5 27 12 27
-                 C10.5 27 9.5 25.5 8 24.5
-                 C6.5 23.5 5.5 21.5 4.5 19.5
-                 C3.5 17.5 3 15 3.5 13
-                 C4 11 4.5 9 6 7
-                 C7.5 5 9.5 3.5 11.5 2.5
-                 C13.5 1.5 16 1.2 18.5 1.5
-                 C21 1.8 23.5 2.8 25.5 4.5
-                 C27.5 6.2 29.5 8.5 31 11
-                 C32.5 13.5 33.5 16 33.2 18.5
-                 C33 21 31.5 23.5 29.5 25
-                 C27.5 26.5 25.5 27.5 23.5 27.8
-                 L22.5 26
-                 C24 25.5 26 24.5 27.5 23
-                 C29 21.5 30.5 19.5 30.5 17.5
-                 C30.5 15.5 29.8 13.2 28.5 11.5
-                 C27.2 9.8 25.5 8 23.8 6.8
-                 C22.1 5.6 20 4.8 18 4.6
-                 C16 4.4 14 4.8 12.2 5.6
-                 C10.4 6.4 8.8 7.8 7.8 9.5
-                 C6.8 11.2 6.4 13 6.6 14.8
-                 C6.8 16.6 7.8 18.5 9 20
-                 C10.2 21.5 11.8 22.8 13.2 23.8
+              d="M19.5 14 L3.8 14 A14 14 0 0 1 4.5 9.5 Z"
+              fill="url(#pakhaRed)"
+              stroke="#730C11"
+              strokeWidth="0.25"
+            />
+            <circle cx="5" cy="11.5" r="0.4" fill="#FFF" />
+
+            {/* Sector 10: Ivory Base-Left */}
+            <path
+              d="M19.5 14 L6 18 A14 14 0 0 1 3.8 14 Z"
+              fill="url(#pakhaIvory)"
+              stroke="#C4B394"
+              strokeWidth="0.25"
+            />
+
+            {/* Sector 11: Red Base */}
+            <path
+              d="M19.5 14 L10 21 A14 14 0 0 1 6 18 Z"
+              fill="url(#pakhaRed)"
+              stroke="#730C11"
+              strokeWidth="0.25"
+            />
+            <circle cx="8" cy="18.5" r="0.4" fill="#FFF" />
+
+            {/* Sector 12: Ivory Spine Border */}
+            <path
+              d="M19.5 14 L14 22 A14 14 0 0 1 10 21 Z"
+              fill="url(#pakhaIvory)"
+              stroke="#C4B394"
+              strokeWidth="0.25"
+            />
+
+            {/* --- 3. Delicate Pleated Fabric Ruffled Frill along Perimeter --- */}
+            {/* Finely scalloped crimson fabric ruffled trim */}
+            <path
+              d="M14.5 22.8
+                 C13 22.2 11.5 21.2 9.5 20
+                 C7.5 18.8 5.8 17 5 15
+                 C4.2 13 4 10.8 5 8.8
+                 C6 6.8 7.5 5 9.2 3.8
+                 C10.9 2.6 13 1.8 15 1.5
+                 C17 1.2 19.2 1.5 21.2 2.2
+                 C23.2 2.9 25.2 4.2 27 6
+                 C28.8 7.8 30 10 30.5 12.2
+                 C31 14.4 30.2 16.8 28.8 18.8
+                 C27.4 20.8 25.2 21.8 23 21.8
+                 L22.2 20.5
+                 C24 20.5 25.8 19.5 27 18
+                 C28.2 16.5 28.8 14.5 28.5 12.8
+                 C28.2 11 27 9.2 25.5 7.8
+                 C24 6.4 22.2 5.2 20.5 4.8
+                 C18.8 4.4 17 4.2 15.2 4.5
+                 C13.4 4.8 11.8 5.4 10.4 6.5
+                 C9 7.6 7.8 9.2 7.2 11
+                 C6.6 12.8 6.8 14.5 7.5 16
+                 C8.2 17.5 9.5 18.8 11.2 19.8
+                 C12.9 20.8 14.2 21.5 15.2 21.8
                  Z"
-              fill="#D42028"
-              stroke="#8B1015"
-              strokeWidth="0.5"
-              filter="url(#frillShadow)"
+              fill="url(#pakhaFrill)"
+              stroke="#7E0E14"
+              strokeWidth="0.4"
             />
 
-            {/* Little fabric crease highlights on the frill */}
-            <path d="M6 7 L7.5 9 M11.5 2.5 L12.5 5 M18.5 1.5 L18.8 4.2 M25.5 4.5 L24.5 6.8 M31 11 L29 12.5 M33.2 18.5 L30.5 18" stroke="#FFA3A6" strokeWidth="0.4" strokeLinecap="round" />
+            {/* Delicate fabric pleat stitches / highlights */}
+            <path d="M5.5 8.5 L6.8 9.8 M9.5 3.5 L10.5 5 M15 1.5 L15.5 3.5 M21.2 2.2 L20.8 4 M27 6 L25.5 7.5 M30.5 12.2 L28.8 12.8" stroke="#FFA3A8" strokeWidth="0.35" strokeLinecap="round" />
 
-            {/* --- 4. Center Brass / Bamboo Tie Hub (Binding Pivot) --- */}
-            <circle cx="18" cy="17" r="2.2" fill="#D2BF96" stroke="#5E4928" strokeWidth="0.6" />
-            <circle cx="18" cy="17" r="1.1" fill="#7E1217" />
-            <circle cx="18" cy="17" r="0.4" fill="#FFF" />
-
-            {/* Gentle Pointer Beacon at Top Tip (Hotspot indicator) */}
-            <circle
-              cx="4"
-              cy="4"
-              r="1.2"
-              fill="#FFF8DC"
-              className={isHovered ? 'animate-ping' : ''}
-            />
+            {/* --- 4. Central Hub Binding Node (Bamboo Cane Ring & Thread) --- */}
+            <circle cx="19.5" cy="14" r="2" fill="#D5C198" stroke="#6E5A35" strokeWidth="0.5" />
+            <circle cx="19.5" cy="14" r="1.1" fill="#8C1016" />
+            <circle cx="19.5" cy="14" r="0.4" fill="#FFFDF7" />
           </svg>
         </div>
       </div>
