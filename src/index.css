@@ -8,12 +8,20 @@
 
   body {
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background-color: #E9E4DD;
-    color: #2D2D2A;
+    background-color: #ECE5DA;
+    color: #28221D;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   h1, h2, h3, h4, .font-serif, .font-display {
     font-family: 'Marcellus', 'PT Serif', 'Cormorant Garamond', 'Noto Serif Bengali', Georgia, serif;
+    letter-spacing: -0.01em;
+    transition: color 0.3s ease, letter-spacing 0.3s ease, transform 0.3s ease;
+  }
+
+  p, span, label, a, button {
+    transition: color 0.25s ease, opacity 0.25s ease, transform 0.25s ease;
   }
 }
 
@@ -37,33 +45,57 @@
   font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-/* Previous Website Theme Palette: Sand (#E9E4DD), Charcoal (#2D2D2A), Dark (#171716), Gold Accent (#EED485) */
+/* Fluid Text Hover Effects & Shimmers */
+.text-shimmer-hover {
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.text-shimmer-hover:hover {
+  color: #B58D59;
+  letter-spacing: 0.02em;
+}
+
+.text-gold-hover {
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+.text-gold-hover:hover {
+  color: #B58D59;
+}
+
+.quote-highlight {
+  transition: all 0.4s ease;
+}
+.quote-highlight:hover {
+  color: #1C1713;
+  transform: translateX(4px);
+}
+
+/* Palette helpers */
 .bg-sand {
-  background-color: #E9E4DD;
+  background-color: #ECE5DA;
 }
 
 .bg-sand-light {
-  background-color: #F7F5F0;
+  background-color: #F7F3EC;
 }
 
 .bg-charcoal {
-  background-color: #2D2D2A;
+  background-color: #28221D;
 }
 
 .bg-dark-black {
-  background-color: #171716;
+  background-color: #1C1713;
 }
 
 .text-charcoal {
-  color: #2D2D2A;
+  color: #28221D;
 }
 
 .text-gold-accent {
-  color: #EED485;
+  color: #B58D59;
 }
 
 .border-sand {
-  border-color: #DED8CF;
+  border-color: #D5CBBD;
 }
 
 .border-hairline {
@@ -89,4 +121,3 @@
 .animate-marquee:hover {
   animation-play-state: paused;
 }
-

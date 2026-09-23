@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'motion/react';
 import { WaitlistEntry, PrivateEventInquiry } from '../types';
 import { Mail, Send, CheckCircle2 } from 'lucide-react';
 
@@ -124,10 +125,16 @@ export const UniqueTableConcierge: React.FC<UniqueTableConciergeProps> = ({
   };
 
   return (
-    <section id="table-concierge" className="py-20 sm:py-28 bg-[#ECE5DA] border-b border-[#D5CBBD] text-left">
+    <section id="table-concierge" className="py-20 sm:py-28 bg-[#ECE5DA] border-b border-[#D5CBBD] text-left overflow-hidden">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Interactive Table Reservation Form Card */}
-        <div className="bg-[#F7F3EC] border border-[#D5CBBD] p-8 sm:p-12 rounded-3xl shadow-sm text-[#28221D]">
+        <motion.div 
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="bg-[#F7F3EC] border border-[#D5CBBD] p-8 sm:p-12 rounded-3xl shadow-sm text-[#28221D] hover:border-[#B58D59]/50 transition-all duration-300"
+        >
             {isSubmitted ? (
               <div className="h-full flex flex-col items-center justify-center text-center p-6 sm:p-8 space-y-6 animate-in fade-in zoom-in-95 duration-200">
                 <div className="w-16 h-16 bg-[#ECE5DA] border border-[#B58D59] rounded-full flex items-center justify-center text-[#28221D] shadow-sm">
@@ -330,7 +337,7 @@ export const UniqueTableConcierge: React.FC<UniqueTableConciergeProps> = ({
                 </button>
               </form>
             )}
-          </div>
+          </motion.div>
         </div>
       </section>
     );
