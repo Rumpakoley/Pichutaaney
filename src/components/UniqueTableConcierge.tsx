@@ -1,18 +1,15 @@
 import React, { useState } from 'react';
 import { WaitlistEntry, PrivateEventInquiry } from '../types';
-import { Mail, Phone, Instagram, Send, CheckCircle2, Check, ExternalLink, Calendar, Users, Utensils } from 'lucide-react';
-import { motion } from 'motion/react';
+import { Mail, Send, CheckCircle2 } from 'lucide-react';
 
 interface UniqueTableConciergeProps {
   onAddWaitlist: (entry: WaitlistEntry) => void;
   onAddInquiry: (inquiry: PrivateEventInquiry) => void;
-  recentEntries: (WaitlistEntry | PrivateEventInquiry)[];
 }
 
 export const UniqueTableConcierge: React.FC<UniqueTableConciergeProps> = ({
   onAddWaitlist,
   onAddInquiry,
-  recentEntries,
 }) => {
   const [formData, setFormData] = useState({
     name: '',
@@ -30,13 +27,6 @@ export const UniqueTableConcierge: React.FC<UniqueTableConciergeProps> = ({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submittedRefId, setSubmittedRefId] = useState('');
   const [submittedEmail, setSubmittedEmail] = useState('');
-  const [copiedType, setCopiedType] = useState<string | null>(null);
-
-  const handleCopy = (text: string, type: string) => {
-    navigator.clipboard.writeText(text);
-    setCopiedType(type);
-    setTimeout(() => setCopiedType(null), 2500);
-  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -135,95 +125,9 @@ export const UniqueTableConcierge: React.FC<UniqueTableConciergeProps> = ({
 
   return (
     <section id="table-concierge" className="py-20 sm:py-28 bg-[#ECE5DA] border-b border-[#D5CBBD] text-left">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
-          {/* Left Column: Concierge Desk & Hotlines */}
-          <div className="lg:col-span-5 bg-[#F7F3EC] border border-[#D5CBBD] p-8 sm:p-10 rounded-3xl shadow-sm flex flex-col justify-between space-y-8">
-            <div className="space-y-6">
-              <div className="space-y-2">
-                <span className="font-sans text-[11px] uppercase tracking-[0.25em] text-[#B58D59] font-bold block">
-                  CONCIERGE & DESK
-                </span>
-                <h3 className="font-marcellus text-3xl sm:text-4xl font-normal text-[#28221D] tracking-tight">
-                  Direct Table Concierge
-                </h3>
-              </div>
-
-              <p className="font-sans text-xs sm:text-sm text-[#655B51] leading-relaxed font-light">
-                Connect directly to join private supper club drops, reserve bespoke in-home dinners, or discuss culinary collaborations and food writing.
-              </p>
-
-              {/* Contact Cards */}
-              <div className="space-y-3.5 pt-2">
-                {/* Email */}
-                <div className="flex items-center gap-4 bg-[#ECE5DA] border border-[#D5CBBD] p-4 rounded-2xl group">
-                  <div className="w-10 h-10 bg-[#28221D] text-[#ECE5DA] flex items-center justify-center shrink-0 rounded-xl shadow-xs">
-                    <Mail className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <span className="font-mono text-[9px] uppercase tracking-wider text-[#655B51] block font-bold">
-                      Direct Correspondence
-                    </span>
-                    <button
-                      onClick={() => handleCopy('pichhutaaney@gmail.com', 'email')}
-                      className="font-marcellus text-sm font-normal text-[#28221D] hover:text-[#B58D59] hover:underline text-left block cursor-pointer"
-                    >
-                      pichhutaaney@gmail.com
-                    </button>
-                    <span className="font-mono text-[9px] text-[#B58D59] block mt-0.5 font-bold">
-                      {copiedType === 'email' ? '✓ Copied Address' : 'Click to copy email'}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Instagram */}
-                <div className="flex items-center gap-4 bg-[#ECE5DA] border border-[#D5CBBD] p-4 rounded-2xl group">
-                  <div className="w-10 h-10 bg-[#B58D59] text-[#28221D] flex items-center justify-center shrink-0 rounded-xl shadow-xs">
-                    <Instagram className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <span className="font-mono text-[9px] uppercase tracking-wider text-[#655B51] block font-bold">
-                      Instagram Journal
-                    </span>
-                    <a
-                      href="https://www.instagram.com/pichhutaaney?utm_source=ig_web_button_share_sheet&stkn=ZDNlZDc0MzIxNw=="
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="font-marcellus text-sm font-normal text-[#28221D] hover:text-[#B58D59] hover:underline flex items-center gap-1 block"
-                    >
-                      <span>@pichhutaaney</span>
-                      <ExternalLink className="w-3 h-3 text-[#B58D59]" />
-                    </a>
-                    <span className="font-mono text-[9px] text-[#655B51] block mt-0.5">
-                      Follow kitchen reels & seat releases
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Live Registry Strip */}
-            {recentEntries.length > 0 && (
-              <div className="space-y-2 border-t border-[#D5CBBD] pt-4 text-[10px] font-mono">
-                <span className="uppercase tracking-widest text-[#655B51] font-bold block">
-                  RECENT REGISTRATIONS ({recentEntries.length})
-                </span>
-                <div className="space-y-1.5 max-h-28 overflow-y-auto pr-1">
-                  {recentEntries.slice(0, 3).map((item) => (
-                    <div key={item.id} className="flex items-center justify-between bg-[#ECE5DA] px-3 py-1.5 rounded-lg border border-[#D5CBBD]">
-                      <span className="font-bold truncate text-[#28221D]">{item.fullName}</span>
-                      <span className="bg-[#28221D] text-[#ECE5DA] px-2 py-0.5 rounded text-[8.5px] uppercase font-bold">
-                        {item.status}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* Right Column: Interactive Table Reservation Form */}
-          <div className="lg:col-span-7 bg-[#F7F3EC] border border-[#D5CBBD] p-8 sm:p-10 rounded-3xl shadow-sm text-[#28221D]">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Interactive Table Reservation Form Card */}
+        <div className="bg-[#F7F3EC] border border-[#D5CBBD] p-8 sm:p-12 rounded-3xl shadow-sm text-[#28221D]">
             {isSubmitted ? (
               <div className="h-full flex flex-col items-center justify-center text-center p-6 sm:p-8 space-y-6 animate-in fade-in zoom-in-95 duration-200">
                 <div className="w-16 h-16 bg-[#ECE5DA] border border-[#B58D59] rounded-full flex items-center justify-center text-[#28221D] shadow-sm">
@@ -428,7 +332,6 @@ export const UniqueTableConcierge: React.FC<UniqueTableConciergeProps> = ({
             )}
           </div>
         </div>
-      </div>
-    </section>
-  );
-};
+      </section>
+    );
+  };

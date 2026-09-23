@@ -155,7 +155,6 @@ export default function App() {
         <UniqueTableConcierge
           onAddWaitlist={handleAddWaitlist}
           onAddInquiry={handleAddInquiry}
-          recentEntries={[...waitlist, ...inquiries]}
         />
       </main>
 
