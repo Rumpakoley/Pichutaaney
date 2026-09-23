@@ -48,24 +48,6 @@ const HEARTH_VIDEOS: VideoCardData[] = [
     quote: '“Every dish tells a tale of tradition, spices, and soulful cooking.”',
     subtitle: 'Mastering the balance of sweet, pungent, and savory notes across traditional dishes.',
   },
-  {
-    id: 'hearth-5',
-    url: 'https://res.cloudinary.com/dpdtsaalf/video/upload/v1788549950/WhatsApp_Video_2026-09-05_at_12.47.22_AM_udyrd8.mp4',
-    poster: 'https://res.cloudinary.com/dpdtsaalf/video/upload/so_1/v1788549950/WhatsApp_Video_2026-09-05_at_12.47.22_AM_udyrd8.jpg',
-    tag: 'SUPPER CLUB • COMMUNAL TABLE',
-    title: 'Feasts & Intimate Dinners',
-    quote: '“An invitation to gather, linger over courses, and share quiet laughter.”',
-    subtitle: 'Private supper clubs crafted with storytelling, warmth, and generous hospitality.',
-  },
-  {
-    id: 'hearth-6',
-    url: 'https://res.cloudinary.com/dpdtsaalf/video/upload/v1788549941/WhatsApp_Video_2026-09-05_at_12.42.00_AM_2_w12jyr.mp4',
-    poster: 'https://res.cloudinary.com/dpdtsaalf/video/upload/so_1/v1788549941/WhatsApp_Video_2026-09-05_at_12.42.00_AM_2_w12jyr.jpg',
-    tag: 'SEASONAL HARVEST • ATELIER',
-    title: 'Slow Simmered Curations',
-    quote: '“Layers of flavor born of patience, intuition, and time-honored cast iron.”',
-    subtitle: 'Simmered broths, seasonal produce, and courses crafted with deep care.',
-  },
 ];
 
 const HearthVideoCard: React.FC<{ item: VideoCardData }> = ({ item }) => {
