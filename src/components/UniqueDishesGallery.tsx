@@ -11,6 +11,27 @@ interface DishImage {
 
 const DISH_COLLECTION: DishImage[] = [
   {
+    id: 'dish-begun-bhaja-rice',
+    title: 'Pan-Roasted Begun Bhaja with Steamed Rice Timbale',
+    bengaliTitle: 'ঘিয়ে ভাজা বেগুন ও সুগন্ধি ভাত',
+    imageUrl: 'https://res.cloudinary.com/dpdtsaalf/image/upload/v1790187884/1_a4says.jpg',
+    aspect: 'aspect-[3/4]',
+  },
+  {
+    id: 'dish-beetroot-pistachio',
+    title: 'Slow-Roasted Beetroot with Crushed Pistachios & Garden Herbs',
+    bengaliTitle: 'ভাজা বিট ও পেস্তার যুগলবন্দী',
+    imageUrl: 'https://res.cloudinary.com/dpdtsaalf/image/upload/v1790187885/WhatsApp_Image_2026-09-23_at_12.44.49_AM_p5iv1i.jpg',
+    aspect: 'aspect-[3/4]',
+  },
+  {
+    id: 'dish-tasting-platter',
+    title: 'Atelier Tasting Course: Fish, Begun Bhaja & Spiced Reduction',
+    bengaliTitle: 'মাছের পদ ও বেগুন ভাজা সাথে ভাত',
+    imageUrl: 'https://res.cloudinary.com/dpdtsaalf/image/upload/v1790187885/WhatsApp_Image_2026-09-22_at_11.08.48_PM_peinnn.jpg',
+    aspect: 'aspect-[3/4]',
+  },
+  {
     id: 'dish-1',
     title: 'Plated Grain & Spiced Purée with Vine Tomatoes',
     bengaliTitle: 'অনন্য সাজানো পদ',
