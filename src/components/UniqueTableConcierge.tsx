@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
-import { WaitlistEntry, PrivateEventInquiry } from '../types';
-import { Mail, Send, CheckCircle2 } from 'lucide-react';
+import { WaitlistEntry, PrivateEventInquiry, FormCustomQuestion, MenuVenueNotice } from '../types';
+import { Mail, Send, CheckCircle2, Sparkles } from 'lucide-react';
 
 interface UniqueTableConciergeProps {
   onAddWaitlist: (entry: WaitlistEntry) => void;
   onAddInquiry: (inquiry: PrivateEventInquiry) => void;
+  customQuestions?: FormCustomQuestion[];
+  menuNotice?: MenuVenueNotice;
 }
 
 export const UniqueTableConcierge: React.FC<UniqueTableConciergeProps> = ({
   onAddWaitlist,
   onAddInquiry,
+  customQuestions = [],
+  menuNotice,
 }) => {
   const [formData, setFormData] = useState({
     name: '',
@@ -22,6 +26,7 @@ export const UniqueTableConcierge: React.FC<UniqueTableConciergeProps> = ({
     dietary: 'Omnivore (Fish, Seafood & Veg)',
     notes: '',
   });
+  const [customAnswers, setCustomAnswers] = useState<Record<string, string>>({});
 
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -48,6 +53,7 @@ export const UniqueTableConcierge: React.FC<UniqueTableConciergeProps> = ({
         partySize: Number(formData.guestCount),
         dietaryPreferences: [formData.dietary],
         notes: formData.notes.trim() || undefined,
+        customAnswers: Object.keys(customAnswers).length > 0 ? customAnswers : undefined,
         submittedAt: new Date().toISOString(),
         status: 'pending',
       };
@@ -64,6 +70,7 @@ export const UniqueTableConcierge: React.FC<UniqueTableConciergeProps> = ({
         locationOrVenue: formData.cityOrVenue.trim() || 'Private Residence',
         dietaryRestrictions: formData.dietary,
         storytellingNotes: formData.notes.trim() || 'Custom curated table',
+        customAnswers: Object.keys(customAnswers).length > 0 ? customAnswers : undefined,
         submittedAt: new Date().toISOString(),
         status: 'new',
       };
@@ -93,6 +100,7 @@ export const UniqueTableConcierge: React.FC<UniqueTableConciergeProps> = ({
           'City / Area': formData.cityOrVenue.trim() || 'Toronto / GTA',
           'Dietary Preference': formData.dietary,
           'Occasion / Notes': formData.notes.trim() || 'None',
+          ...Object.entries(customAnswers).reduce((acc, [k, v]) => ({ ...acc, [`Custom: ${k}`]: v }), {}),
           'Submitted Date': new Date().toLocaleString(),
         }),
       });
@@ -118,6 +126,7 @@ export const UniqueTableConcierge: React.FC<UniqueTableConciergeProps> = ({
       dietary: 'Omnivore (Fish, Seafood & Veg)',
       notes: '',
     });
+    setCustomAnswers({});
     setSubmittedRefId('');
     setSubmittedEmail('');
     setIsSubmitted(false);
@@ -190,6 +199,25 @@ export const UniqueTableConcierge: React.FC<UniqueTableConciergeProps> = ({
                   Fill out your preferences to join upcoming private batch seatings or host a bespoke gathering.
                 </p>
               </div>
+
+              {/* Host Menu & Venue Announcement Notice */}
+              {menuNotice?.isActive && (menuNotice.heading || menuNotice.note) && (
+                <div className="bg-[#ECE5DA] border-l-4 border-[#B58D59] rounded-2xl p-4 sm:p-5 text-left space-y-1.5 shadow-2xs">
+                  {menuNotice.heading && (
+                    <div className="flex items-center space-x-2">
+                      <Sparkles className="w-4 h-4 text-[#B58D59] shrink-0" />
+                      <span className="font-sans font-bold text-xs uppercase tracking-wider text-[#28221D]">
+                        {menuNotice.heading}
+                      </span>
+                    </div>
+                  )}
+                  {menuNotice.note && (
+                    <p className="font-pt-serif italic text-xs sm:text-sm text-[#4A4138] leading-relaxed whitespace-pre-line">
+                      {menuNotice.note}
+                    </p>
+                  )}
+                </div>
+              )}
 
               {/* Name & Email */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -319,6 +347,54 @@ export const UniqueTableConcierge: React.FC<UniqueTableConciergeProps> = ({
                   className="w-full bg-[#ECE5DA] border border-[#D5CBBD] rounded-2xl p-3 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] placeholder:text-[#9A8F83] font-sans transition-all duration-200"
                 />
               </div>
+
+              {/* Dynamic Menu & Event Questions Configured by Enakshi */}
+              {customQuestions.filter(q => q.enabled).map((q) => (
+                <div key={q.id} className="space-y-1">
+                  <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block">
+                    {q.label} {q.required ? <span className="text-[#B58D59]">*</span> : <span className="font-normal text-[#655B51]">(Optional)</span>}
+                  </label>
+                  {q.type === 'yes_no' ? (
+                    <div className="flex space-x-2">
+                      {['Yes', 'No'].map((opt) => (
+                        <button
+                          key={opt}
+                          type="button"
+                          onClick={() => setCustomAnswers(prev => ({ ...prev, [q.label]: opt }))}
+                          className={`flex-1 py-2 px-3 text-xs rounded-full border transition-all cursor-pointer font-sans ${
+                            customAnswers[q.label] === opt
+                              ? 'bg-[#28221D] text-[#ECE5DA] border-[#28221D] font-semibold shadow-xs'
+                              : 'bg-[#ECE5DA] text-[#4A4138] border-[#D5CBBD] hover:border-[#28221D]'
+                          }`}
+                        >
+                          {opt}
+                        </button>
+                      ))}
+                    </div>
+                  ) : q.type === 'dropdown' && q.options && q.options.length > 0 ? (
+                    <select
+                      value={customAnswers[q.label] || ''}
+                      required={q.required}
+                      onChange={(e) => setCustomAnswers(prev => ({ ...prev, [q.label]: e.target.value }))}
+                      className="w-full bg-[#ECE5DA] border border-[#D5CBBD] rounded-full px-4 py-2.5 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] font-sans cursor-pointer"
+                    >
+                      <option value="">Select an option...</option>
+                      {q.options.map((opt) => (
+                        <option key={opt} value={opt}>{opt}</option>
+                      ))}
+                    </select>
+                  ) : (
+                    <input
+                      type="text"
+                      placeholder={q.placeholder || 'Your response...'}
+                      required={q.required}
+                      value={customAnswers[q.label] || ''}
+                      onChange={(e) => setCustomAnswers(prev => ({ ...prev, [q.label]: e.target.value }))}
+                      className="w-full bg-[#ECE5DA] border border-[#D5CBBD] rounded-full px-4 py-2.5 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] placeholder:text-[#9A8F83] font-sans transition-all duration-200"
+                    />
+                  )}
+                </div>
+              ))}
 
               <button
                 type="submit"

@@ -1,3 +1,19 @@
+export interface FormCustomQuestion {
+  id: string;
+  label: string;
+  type: 'text' | 'yes_no' | 'dropdown';
+  options?: string[];
+  placeholder?: string;
+  required?: boolean;
+  enabled: boolean;
+}
+
+export interface MenuVenueNotice {
+  isActive: boolean;
+  heading: string;
+  note: string;
+}
+
 export interface WaitlistEntry {
   id: string;
   fullName: string;
@@ -7,6 +23,7 @@ export interface WaitlistEntry {
   partySize: number;
   dietaryPreferences: string[];
   notes?: string;
+  customAnswers?: Record<string, string>;
   submittedAt: string;
   status: 'pending' | 'shortlisted' | 'invited' | 'confirmed' | 'archived';
 }
@@ -23,6 +40,7 @@ export interface PrivateEventInquiry {
   budgetOrFormat?: string;
   dietaryRestrictions: string;
   storytellingNotes: string;
+  customAnswers?: Record<string, string>;
   submittedAt: string;
   status: 'new' | 'shortlisted' | 'in_discussion' | 'booked' | 'archived';
 }

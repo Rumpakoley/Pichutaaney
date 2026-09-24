@@ -10,8 +10,32 @@ import { UniqueTableConcierge } from './components/UniqueTableConcierge';
 import { UniqueFooter } from './components/UniqueFooter';
 import { HostLedgerModal } from './components/HostLedgerModal';
 import { UniqueCursor } from './components/UniqueCursor';
-import { WaitlistEntry, PrivateEventInquiry, ContactMessage } from './types';
+import { WaitlistEntry, PrivateEventInquiry, ContactMessage, FormCustomQuestion, MenuVenueNotice } from './types';
 import { useScrollReveal } from './hooks/useScrollReveal';
+
+const INITIAL_CUSTOM_QUESTIONS: FormCustomQuestion[] = [
+  {
+    id: 'q-spice',
+    label: 'Spice Tolerance Preference',
+    type: 'dropdown',
+    options: ['Authentic Bengali (Bold & Pungent)', 'Balanced / Medium', 'Mild / Gentle'],
+    required: false,
+    enabled: true,
+  },
+  {
+    id: 'q-celebration',
+    label: 'Are you celebrating a special occasion or milestone?',
+    type: 'yes_no',
+    required: false,
+    enabled: true,
+  },
+];
+
+const INITIAL_MENU_NOTICE: MenuVenueNotice = {
+  isActive: true,
+  heading: 'Upcoming Supper Club & Intimate Batch Seating',
+  note: 'Current Atelier Menu: 5-Course Heritage Fish & Heirloom Grains. BYOB welcome without corkage. Exact venue location dispatched upon confirmation.',
+};
 
 const INITIAL_WAITLIST: WaitlistEntry[] = [
   {
@@ -84,6 +108,24 @@ export default function App() {
     }
   });
 
+  const [customQuestions, setCustomQuestions] = useState<FormCustomQuestion[]>(() => {
+    try {
+      const saved = localStorage.getItem('pichhutaaney_custom_questions');
+      return saved ? JSON.parse(saved) : INITIAL_CUSTOM_QUESTIONS;
+    } catch {
+      return INITIAL_CUSTOM_QUESTIONS;
+    }
+  });
+
+  const [menuNotice, setMenuNotice] = useState<MenuVenueNotice>(() => {
+    try {
+      const saved = localStorage.getItem('pichhutaaney_menu_notice');
+      return saved ? JSON.parse(saved) : INITIAL_MENU_NOTICE;
+    } catch {
+      return INITIAL_MENU_NOTICE;
+    }
+  });
+
   const [isLedgerOpen, setIsLedgerOpen] = useState(false);
   useScrollReveal();
 
@@ -110,6 +152,22 @@ export default function App() {
       console.error(e);
     }
   }, [messages]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('pichhutaaney_custom_questions', JSON.stringify(customQuestions));
+    } catch (e) {
+      console.error(e);
+    }
+  }, [customQuestions]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('pichhutaaney_menu_notice', JSON.stringify(menuNotice));
+    } catch (e) {
+      console.error(e);
+    }
+  }, [menuNotice]);
 
   const handleAddWaitlist = (entry: WaitlistEntry) => {
     setWaitlist((prev) => [entry, ...prev]);
@@ -165,6 +223,8 @@ export default function App() {
         <UniqueTableConcierge
           onAddWaitlist={handleAddWaitlist}
           onAddInquiry={handleAddInquiry}
+          customQuestions={customQuestions}
+          menuNotice={menuNotice}
         />
       </main>
 
@@ -180,6 +240,10 @@ export default function App() {
         messages={messages}
         onUpdateWaitlistStatus={handleUpdateWaitlistStatus}
         onUpdateInquiryStatus={handleUpdateInquiryStatus}
+        customQuestions={customQuestions}
+        menuNotice={menuNotice}
+        onUpdateCustomQuestions={setCustomQuestions}
+        onUpdateMenuNotice={setMenuNotice}
       />
     </div>
   );

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { WaitlistEntry, PrivateEventInquiry, ContactMessage } from '../types';
-import { X, Download, Filter, Search, Check, Clock, Mail, Users, Calendar, Star, Copy, Sparkles, CheckCircle2 } from 'lucide-react';
+import { WaitlistEntry, PrivateEventInquiry, ContactMessage, FormCustomQuestion, MenuVenueNotice } from '../types';
+import { X, Download, Filter, Search, Check, Clock, Mail, Users, Calendar, Star, Copy, Sparkles, CheckCircle2, Sliders, Plus, Trash2 } from 'lucide-react';
 
 interface HostLedgerModalProps {
   isOpen: boolean;
@@ -10,6 +10,10 @@ interface HostLedgerModalProps {
   messages: ContactMessage[];
   onUpdateWaitlistStatus: (id: string, status: WaitlistEntry['status']) => void;
   onUpdateInquiryStatus: (id: string, status: PrivateEventInquiry['status']) => void;
+  customQuestions?: FormCustomQuestion[];
+  menuNotice?: MenuVenueNotice;
+  onUpdateCustomQuestions?: (questions: FormCustomQuestion[]) => void;
+  onUpdateMenuNotice?: (notice: MenuVenueNotice) => void;
 }
 
 export const HostLedgerModal: React.FC<HostLedgerModalProps> = ({
@@ -20,11 +24,21 @@ export const HostLedgerModal: React.FC<HostLedgerModalProps> = ({
   messages,
   onUpdateWaitlistStatus,
   onUpdateInquiryStatus,
+  customQuestions = [],
+  menuNotice = { isActive: false, heading: '', note: '' },
+  onUpdateCustomQuestions,
+  onUpdateMenuNotice,
 }) => {
-  const [activeTab, setActiveTab] = useState<'waitlist' | 'inquiries' | 'messages'>('waitlist');
+  const [activeTab, setActiveTab] = useState<'waitlist' | 'inquiries' | 'messages' | 'settings'>('waitlist');
   const [statusFilter, setStatusFilter] = useState<'all' | 'shortlisted' | 'pending' | 'invited' | 'confirmed'>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [copiedMessage, setCopiedMessage] = useState<string | null>(null);
+
+  // Form customizer state
+  const [newQuestionLabel, setNewQuestionLabel] = useState('');
+  const [newQuestionType, setNewQuestionType] = useState<'text' | 'yes_no' | 'dropdown'>('text');
+  const [newQuestionOptions, setNewQuestionOptions] = useState('');
+  const [newQuestionRequired, setNewQuestionRequired] = useState(false);
 
   if (!isOpen) return null;
 
@@ -242,11 +256,24 @@ export const HostLedgerModal: React.FC<HostLedgerModalProps> = ({
             >
               Messages ({messages.length})
             </button>
+            <button
+              onClick={() => {
+                setActiveTab('settings');
+              }}
+              className={`px-3.5 py-1.5 rounded-full transition-all border cursor-pointer flex items-center space-x-1.5 ${
+                activeTab === 'settings'
+                  ? 'bg-[#B58D59] text-[#1C1713] border-[#B58D59] font-bold shadow-xs'
+                  : 'text-[#655B51] bg-[#F7F3EC] border-[#D5CBBD] hover:text-[#28221D]'
+              }`}
+            >
+              <Sliders className="w-3.5 h-3.5" />
+              <span>Menu & Questions ({customQuestions.length})</span>
+            </button>
           </div>
 
           {/* Filter Pills & Search */}
           <div className="flex flex-wrap items-center gap-2">
-            {activeTab !== 'messages' && (
+            {activeTab !== 'messages' && activeTab !== 'settings' && (
               <div className="flex items-center space-x-1 text-[10px] font-sans">
                 {(['all', 'shortlisted', 'pending', 'invited', 'confirmed'] as const).map((filterKey) => (
                   <button
@@ -463,6 +490,262 @@ export const HostLedgerModal: React.FC<HostLedgerModalProps> = ({
                   ))}
                 </div>
               )}
+            </div>
+          )}
+
+          {/* TAB 4: MENU & QUESTIONS SETTINGS */}
+          {activeTab === 'settings' && (
+            <div className="p-6 space-y-8 animate-in fade-in duration-200 text-left">
+              {/* Notice Banner Editor */}
+              <div className="bg-[#ECE5DA] border border-[#D5CBBD] rounded-3xl p-6 sm:p-8 space-y-5">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#D5CBBD] pb-4">
+                  <div className="space-y-1">
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-[#B58D59] font-bold">
+                      CURRENT MENU & VENUE ANNOUNCEMENT
+                    </span>
+                    <h3 className="font-marcellus text-xl sm:text-2xl text-[#28221D]">
+                      Menu & Venue Notice on Reservation Form
+                    </h3>
+                    <p className="text-xs text-[#655B51] font-light">
+                      This note displays prominently at the top of the reservation form. Update it anytime you change the menu, pricing, timings, or venue address.
+                    </p>
+                  </div>
+                  <label className="flex items-center space-x-2 cursor-pointer bg-[#F7F3EC] px-3.5 py-2 rounded-full border border-[#D5CBBD] hover:border-[#B58D59] transition-colors shrink-0">
+                    <input
+                      type="checkbox"
+                      checked={menuNotice.isActive}
+                      onChange={(e) => {
+                        onUpdateMenuNotice?.({ ...menuNotice, isActive: e.target.checked });
+                      }}
+                      className="rounded accent-[#B58D59]"
+                    />
+                    <span className="text-xs font-semibold text-[#28221D]">
+                      {menuNotice.isActive ? 'Active (Visible on Form)' : 'Hidden (Draft)'}
+                    </span>
+                  </label>
+                </div>
+
+                <div className="space-y-3">
+                  <div>
+                    <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block mb-1">
+                      Banner Heading
+                    </label>
+                    <input
+                      type="text"
+                      value={menuNotice.heading}
+                      onChange={(e) => {
+                        onUpdateMenuNotice?.({ ...menuNotice, heading: e.target.value });
+                      }}
+                      placeholder="e.g. Upcoming Autumn Supper Club • 5-Course Heritage Tasting"
+                      className="w-full bg-[#F7F3EC] border border-[#D5CBBD] rounded-full px-4 py-2 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] font-sans"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block mb-1">
+                      Special Venue / Menu Instructions & Details
+                    </label>
+                    <textarea
+                      rows={3}
+                      value={menuNotice.note}
+                      onChange={(e) => {
+                        onUpdateMenuNotice?.({ ...menuNotice, note: e.target.value });
+                      }}
+                      placeholder="e.g. Seating promptly at 7:00 PM. BYOB welcome. Location details and secret buzzer code provided upon confirmation."
+                      className="w-full bg-[#F7F3EC] border border-[#D5CBBD] rounded-2xl p-3 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] font-sans"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Questions Builder */}
+              <div className="bg-[#F7F3EC] border border-[#D5CBBD] rounded-3xl p-6 sm:p-8 space-y-6">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#D5CBBD] pb-4">
+                  <div className="space-y-1">
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-[#B58D59] font-bold">
+                      FORM QUESTIONS BUILDER
+                    </span>
+                    <h3 className="font-marcellus text-xl sm:text-2xl text-[#28221D]">
+                      Custom Questions for Guests
+                    </h3>
+                    <p className="text-xs text-[#655B51] font-light">
+                      Add, edit, enable, or delete questions. Guests will answer these when booking.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Existing Questions List */}
+                <div className="space-y-3">
+                  {customQuestions.length === 0 ? (
+                    <div className="p-8 text-center text-xs text-[#8C867D] bg-[#ECE5DA]/50 rounded-2xl border border-dashed border-[#D5CBBD]">
+                      No custom questions yet. Add your first question below!
+                    </div>
+                  ) : (
+                    customQuestions.map((q, idx) => (
+                      <div
+                        key={q.id}
+                        className={`p-4 rounded-2xl border transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4 ${
+                          q.enabled
+                            ? 'bg-[#ECE5DA] border-[#D5CBBD]'
+                            : 'bg-[#ECE5DA]/40 border-dashed border-[#D5CBBD] opacity-60'
+                        }`}
+                      >
+                        <div className="space-y-1 max-w-lg">
+                          <div className="flex items-center space-x-2">
+                            <span className="text-xs font-mono font-bold text-[#B58D59]">
+                              Q{idx + 1}.
+                            </span>
+                            <span className="font-medium text-xs text-[#28221D]">
+                              {q.label}
+                            </span>
+                            {q.required && (
+                              <span className="text-[9px] uppercase font-bold text-[#B58D59] bg-[#B58D59]/10 px-2 py-0.5 rounded-full">
+                                Required
+                              </span>
+                            )}
+                          </div>
+                          <div className="flex items-center space-x-2 text-[10.5px] text-[#655B51]">
+                            <span className="font-mono uppercase bg-white/60 px-2 py-0.5 rounded border border-[#D5CBBD]/60">
+                              Type: {q.type.replace('_', ' ')}
+                            </span>
+                            {q.options && q.options.length > 0 && (
+                              <span className="truncate max-w-xs">
+                                Options: {q.options.join(', ')}
+                              </span>
+                            )}
+                          </div>
+                        </div>
+
+                        <div className="flex items-center space-x-2 shrink-0">
+                          {/* Enable/Disable Toggle */}
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const updated = customQuestions.map(item =>
+                                item.id === q.id ? { ...item, enabled: !item.enabled } : item
+                              );
+                              onUpdateCustomQuestions?.(updated);
+                            }}
+                            className={`px-3 py-1.5 rounded-full text-xs font-medium cursor-pointer transition-colors ${
+                              q.enabled
+                                ? 'bg-emerald-700 text-white hover:bg-emerald-800'
+                                : 'bg-[#D5CBBD] text-[#4A4138] hover:bg-[#C5BBAE]'
+                            }`}
+                          >
+                            {q.enabled ? '✓ Enabled' : 'Disabled'}
+                          </button>
+
+                          {/* Delete Question */}
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const updated = customQuestions.filter(item => item.id !== q.id);
+                              onUpdateCustomQuestions?.(updated);
+                            }}
+                            className="p-2 rounded-full text-rose-700 hover:bg-rose-100 hover:text-rose-900 transition-colors cursor-pointer"
+                            title="Delete this question"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
+                      </div>
+                    ))
+                  )}
+                </div>
+
+                {/* Add New Question Form */}
+                <div className="p-5 rounded-2xl bg-[#ECE5DA] border border-[#B58D59]/30 space-y-4">
+                  <div className="flex items-center space-x-2">
+                    <Plus className="w-4 h-4 text-[#B58D59]" />
+                    <span className="font-sans font-bold text-xs uppercase tracking-wider text-[#28221D]">
+                      Add a New Question
+                    </span>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div className="sm:col-span-2">
+                      <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block mb-1">
+                        Question Label / Prompt
+                      </label>
+                      <input
+                        type="text"
+                        value={newQuestionLabel}
+                        onChange={(e) => setNewQuestionLabel(e.target.value)}
+                        placeholder="e.g. Wine pairing preference or BYOB?"
+                        className="w-full bg-[#F7F3EC] border border-[#D5CBBD] rounded-full px-4 py-2 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] font-sans"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block mb-1">
+                        Answer Type
+                      </label>
+                      <select
+                        value={newQuestionType}
+                        onChange={(e) => setNewQuestionType(e.target.value as any)}
+                        className="w-full bg-[#F7F3EC] border border-[#D5CBBD] rounded-full px-4 py-2 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] font-sans cursor-pointer"
+                      >
+                        <option value="text">Short Text Answer</option>
+                        <option value="yes_no">Yes / No Buttons</option>
+                        <option value="dropdown">Dropdown Selection</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  {newQuestionType === 'dropdown' && (
+                    <div>
+                      <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block mb-1">
+                        Options (comma-separated)
+                      </label>
+                      <input
+                        type="text"
+                        value={newQuestionOptions}
+                        onChange={(e) => setNewQuestionOptions(e.target.value)}
+                        placeholder="e.g. Red Wine, White Wine, Non-Alcoholic, BYOB"
+                        className="w-full bg-[#F7F3EC] border border-[#D5CBBD] rounded-full px-4 py-2 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] font-sans"
+                      />
+                    </div>
+                  )}
+
+                  <div className="flex items-center justify-between pt-2">
+                    <label className="flex items-center space-x-2 text-xs text-[#28221D] cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={newQuestionRequired}
+                        onChange={(e) => setNewQuestionRequired(e.target.checked)}
+                        className="rounded accent-[#B58D59]"
+                      />
+                      <span>Mark question as required</span>
+                    </label>
+
+                    <button
+                      type="button"
+                      onClick={() => {
+                        if (!newQuestionLabel.trim()) return;
+                        const newQ: FormCustomQuestion = {
+                          id: `q-${Date.now()}`,
+                          label: newQuestionLabel.trim(),
+                          type: newQuestionType,
+                          options: newQuestionType === 'dropdown'
+                            ? newQuestionOptions.split(',').map(s => s.trim()).filter(Boolean)
+                            : undefined,
+                          required: newQuestionRequired,
+                          enabled: true,
+                        };
+                        const updated = [...customQuestions, newQ];
+                        onUpdateCustomQuestions?.(updated);
+                        setNewQuestionLabel('');
+                        setNewQuestionOptions('');
+                        setNewQuestionRequired(false);
+                      }}
+                      className="px-5 py-2 rounded-full bg-[#28221D] hover:bg-[#1C1713] text-[#ECE5DA] text-xs font-semibold uppercase tracking-wider flex items-center space-x-1.5 cursor-pointer shadow-sm transition-transform active:scale-95"
+                    >
+                      <Plus className="w-3.5 h-3.5 text-[#B58D59]" />
+                      <span>Add Question</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
           )}
         </div>

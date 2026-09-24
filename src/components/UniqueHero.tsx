@@ -23,23 +23,13 @@ const CHEF_ATELIER_LOOKBOOK = [
     provenance: 'Nadia District & River Silts',
   },
   {
-    id: 'vid-2',
-    category: 'Spices & Tempering',
-    title: 'Intuitive Tempering',
-    subtitle: 'Panch phoron, whole spices, and raw instinct guiding the pan',
-    type: 'video',
-    url: 'https://res.cloudinary.com/dpdtsaalf/video/upload/v1788549943/WhatsApp_Video_2026-09-05_at_12.42.00_AM_jkldp2.mp4',
-    badge: 'REEL 03 • INSTINCT',
-    provenance: 'Panch Phoron & Mustard Smoke',
-  },
-  {
     id: 'vid-3',
     category: 'Handcrafted Traditions',
     title: 'Handcrafted Heritage',
     subtitle: 'Steaming in banana leaves and slow simmered earthen textures',
     type: 'video',
     url: 'https://res.cloudinary.com/dpdtsaalf/video/upload/v1788549942/WhatsApp_Video_2026-09-05_at_12.42.00_AM_3_lm4akh.mp4',
-    badge: 'REEL 04 • HANDCRAFT',
+    badge: 'REEL 03 • HANDCRAFT',
     provenance: 'Banana Leaf & Slow Simmer',
   },
   {
@@ -49,7 +39,7 @@ const CHEF_ATELIER_LOOKBOOK = [
     subtitle: 'Strangers gathering around shared plates and warm conversations',
     type: 'video',
     url: 'https://res.cloudinary.com/dpdtsaalf/video/upload/v1788549941/WhatsApp_Video_2026-09-05_at_12.42.00_AM_2_w12jyr.mp4',
-    badge: 'REEL 05 • THE GATHERING',
+    badge: 'REEL 04 • THE GATHERING',
     provenance: 'Rotating Pop-Ups & Salons',
   },
   {
@@ -59,8 +49,18 @@ const CHEF_ATELIER_LOOKBOOK = [
     subtitle: 'Atmospheric glimpses into Enakshi’s private kitchen studio',
     type: 'video',
     url: 'https://res.cloudinary.com/dpdtsaalf/video/upload/v1788549936/WhatsApp_Video_2026-09-05_at_12.42.00_AM_1_hoycwv.mp4',
-    badge: 'REEL 06 • THE ARCHIVE',
+    badge: 'REEL 05 • THE ARCHIVE',
     provenance: 'Enakshi’s Culinary Atelier',
+  },
+  {
+    id: 'vid-2',
+    category: 'Spices & Tempering',
+    title: 'Intuitive Tempering',
+    subtitle: 'Panch phoron, whole spices, and raw instinct guiding the pan',
+    type: 'video',
+    url: 'https://res.cloudinary.com/dpdtsaalf/video/upload/v1788549943/WhatsApp_Video_2026-09-05_at_12.42.00_AM_jkldp2.mp4',
+    badge: 'REEL 06 • INSTINCT',
+    provenance: 'Panch Phoron & Mustard Smoke',
   },
 ];
 
