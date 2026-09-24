@@ -11,6 +11,13 @@ interface DishImage {
 
 const DISH_COLLECTION: DishImage[] = [
   {
+    id: 'dish-herb-crusted-fish',
+    title: 'Herb-Crusted Fish Fillet with Kasundi Emulsion & Rice Timbale',
+    bengaliTitle: 'ধনেপাতা মাখা মাছ ও সুগন্ধি ভাত',
+    imageUrl: 'https://res.cloudinary.com/dpdtsaalf/image/upload/v1790187884/WhatsApp_Image_2026-09-22_at_11.09.29_PM_v7nizk.jpg',
+    aspect: 'aspect-[3/4]',
+  },
+  {
     id: 'dish-begun-bhaja-rice',
     title: 'Pan-Roasted Begun Bhaja with Steamed Rice Timbale',
     bengaliTitle: 'ঘিয়ে ভাজা বেগুন ও সুগন্ধি ভাত',
