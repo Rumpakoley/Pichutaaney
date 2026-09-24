@@ -16,7 +16,7 @@ export const CLIENT_VIDEOS: ClientVideo[] = [
     id: 'vid-intro',
     title: 'The Essence of Pichhutaaney',
     subtitle: 'Wandering, memory, and instinct-led cooking in full motion',
-    url: 'https://res.cloudinary.com/dpdtsaalf/video/upload/v1790102790/WhatsApp_Video_2026-09-22_at_10.52.23_AM_vugp9u.mp4',
+    url: 'https://res.cloudinary.com/dpdtsaalf/video/upload/v1790275883/whatsapp-video-2026-09-22-at-105223-am_EJQaSZwo_online-video-cutter.com_mcbyn5.mp4',
     tag: 'REEL 01 • THE ESSENCE',
     quote: '“Cooking not by formula, but by the quiet pull of memory and instinct.”',
   },

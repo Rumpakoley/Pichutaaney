@@ -14,8 +14,8 @@ interface VideoCardData {
 const HEARTH_VIDEOS: VideoCardData[] = [
   {
     id: 'hearth-1',
-    url: 'https://res.cloudinary.com/dpdtsaalf/video/upload/v1790102790/WhatsApp_Video_2026-09-22_at_10.52.23_AM_vugp9u.mp4',
-    poster: 'https://res.cloudinary.com/dpdtsaalf/video/upload/so_1/v1790102790/WhatsApp_Video_2026-09-22_at_10.52.23_AM_vugp9u.jpg',
+    url: 'https://res.cloudinary.com/dpdtsaalf/video/upload/v1790275883/whatsapp-video-2026-09-22-at-105223-am_EJQaSZwo_online-video-cutter.com_mcbyn5.mp4',
+    poster: 'https://res.cloudinary.com/dpdtsaalf/video/upload/so_1/v1790275883/whatsapp-video-2026-09-22-at-105223-am_EJQaSZwo_online-video-cutter.com_mcbyn5.jpg',
     tag: 'THE LIVING HEARTH • IN MOTION',
     title: 'Enakshi • Food, Stories & Home',
     quote: '“Cooking not by formula, but by the quiet pull of memory and instinct.”',
