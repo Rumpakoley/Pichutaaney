@@ -46,39 +46,11 @@ const DISH_COLLECTION: DishImage[] = [
     aspect: 'aspect-[3/4]',
   },
   {
-    id: 'dish-2',
-    title: 'Enakshi Plating Tasting Courses in Atelier',
-    bengaliTitle: 'রন্ধনশালায় স্বহস্তে পরিবেশন',
-    imageUrl: 'https://res.cloudinary.com/dpdtsaalf/video/upload/so_4/v1790102790/WhatsApp_Video_2026-09-22_at_10.52.23_AM_vugp9u.jpg',
-    aspect: 'aspect-[3/4.2]',
-  },
-  {
     id: 'dish-3',
     title: 'Crispy Bhaja, Fish & Fermented Courses',
     bengaliTitle: 'পঞ্চ ব্যঞ্জন ও মাছ ভাজা',
     imageUrl: 'https://res.cloudinary.com/dpdtsaalf/video/upload/so_7/v1790183107/whatsapp-video-2026-09-22-at-110243-pm_hXNXyxwo_1_rh4fal.jpg',
     aspect: 'aspect-[4/5]',
-  },
-  {
-    id: 'dish-4',
-    title: 'Intimate Candlelit Dining Table with Plates',
-    bengaliTitle: 'সান্ধ্য ভোজের সজ্জিত টেবিল',
-    imageUrl: 'https://res.cloudinary.com/dpdtsaalf/video/upload/so_1/v1790183317/WhatsApp_Video_2026-09-22_at_11.10.54_PM_s2agzc.jpg',
-    aspect: 'aspect-[3/4]',
-  },
-  {
-    id: 'dish-5',
-    title: 'Communal Supper Club Service Bowls',
-    bengaliTitle: 'একত্রে সাজানো খাবারের থালা',
-    imageUrl: 'https://res.cloudinary.com/dpdtsaalf/video/upload/so_2/v1790183107/whatsapp-video-2026-09-22-at-110243-pm_hXNXyxwo_1_rh4fal.jpg',
-    aspect: 'aspect-[4/3.2]',
-  },
-  {
-    id: 'dish-6',
-    title: 'Open Flame Smoked Skewers',
-    bengaliTitle: 'হিমেল আঁচে তৈরি পদ',
-    imageUrl: 'https://res.cloudinary.com/dpdtsaalf/video/upload/so_1/v1788549943/WhatsApp_Video_2026-09-05_at_12.42.00_AM_jkldp2.jpg',
-    aspect: 'aspect-[3/4.2]',
   },
 ];
 
