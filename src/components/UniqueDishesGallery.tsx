@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ZoomIn, X, ChevronRight, ChevronLeft, Sparkles, Utensils, Maximize2 } from 'lucide-react';
 
 interface DishImage {
@@ -56,6 +56,13 @@ const DISH_COLLECTION: DishImage[] = [
 
 export const UniqueDishesGallery: React.FC = () => {
   const [lightboxIdx, setLightboxIdx] = useState<number | null>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  const handleScroll = (direction: 'left' | 'right') => {
+    if (!scrollContainerRef.current) return;
+    const scrollAmount = direction === 'left' ? -400 : 400;
+    scrollContainerRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+  };
 
   // Keyboard navigation for lightbox
   useEffect(() => {
@@ -73,68 +80,98 @@ export const UniqueDishesGallery: React.FC = () => {
 
   return (
     <section id="dishes-gallery" className="py-20 sm:py-28 bg-[#1C1713] text-[#ECE5DA] border-b border-[#382F27] text-left overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         {/* Section Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-white/10 pb-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-white/10 pb-6">
           <div className="space-y-2">
             <div className="inline-flex items-center space-x-2 text-[10px] tracking-[0.25em] uppercase font-bold text-[#B58D59] font-sans bg-white/5 px-4 py-1.5 rounded-full border border-white/10">
               <Utensils className="w-3.5 h-3.5 text-[#B58D59]" />
               <span>THE LIVING DISHES GALLERY</span>
             </div>
-            <h2 className="font-marcellus text-3xl sm:text-5xl md:text-6xl font-normal text-[#ECE5DA] tracking-tight">
+            <h2 className="font-marcellus text-3xl sm:text-4xl md:text-5xl font-normal text-[#ECE5DA] tracking-tight">
               Dishes from the Hearth
             </h2>
           </div>
 
-          <div className="flex items-center space-x-3">
-            <span className="font-bengali text-2xl sm:text-3xl text-[#B58D59] font-medium">
-              রান্না ও পরিবেশন
-            </span>
-            <span className="font-mono text-xs text-[#D5CBBD]/60 hidden md:inline">
-              / Click any dish for full view /
-            </span>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+            <div className="flex items-center space-x-3">
+              <span className="font-bengali text-2xl sm:text-3xl text-[#B58D59] font-medium">
+                রান্না ও পরিবেশন
+              </span>
+              <span className="font-mono text-xs text-[#D5CBBD]/60 hidden lg:inline">
+                / Click dish for full view /
+              </span>
+            </div>
+
+            {/* Horizontal Scroll Navigation Controls */}
+            <div className="flex items-center space-x-2 shrink-0">
+              <button
+                onClick={() => handleScroll('left')}
+                title="Scroll Left"
+                className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#B58D59] hover:text-[#1C1713] text-white flex items-center justify-center border border-white/20 transition-all cursor-pointer shadow-sm hover:scale-105 active:scale-95"
+                aria-label="Scroll left"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+              <button
+                onClick={() => handleScroll('right')}
+                title="Scroll Right"
+                className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#B58D59] hover:text-[#1C1713] text-white flex items-center justify-center border border-white/20 transition-all cursor-pointer shadow-sm hover:scale-105 active:scale-95"
+                aria-label="Scroll right"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
           </div>
         </div>
 
-        {/* Unique Pure Visual Gallery Grid with Staggered Layout & Motions */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        {/* Single Row Horizontal Scroll Track */}
+        <div
+          ref={scrollContainerRef}
+          className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-6 pt-2 scroll-smooth scrollbar-thin scrollbar-thumb-[#B58D59]/50 scrollbar-track-white/5"
+          style={{ scrollbarWidth: 'thin' }}
+        >
           {DISH_COLLECTION.map((dish, idx) => (
             <div
               key={dish.id}
-              onClick={() => setLightboxIdx(idx)}
-              className="group relative rounded-3xl overflow-hidden bg-[#28221D] border border-white/15 shadow-2xl hover:border-[#B58D59] transition-all duration-500 cursor-pointer hover:-translate-y-2 select-none"
+              className="w-[82vw] sm:w-[340px] md:w-[370px] lg:w-[390px] shrink-0 snap-start"
             >
-              {/* Image Container with Cinematic Zoom & Ambient Depth */}
-              <div className="relative aspect-[4/5] w-full overflow-hidden bg-black/60">
-                <img
-                  src={dish.imageUrl}
-                  alt={dish.title}
-                  loading="lazy"
-                  className="w-full h-full object-cover filter contrast-[1.04] brightness-95 group-hover:scale-108 group-hover:brightness-100 transition-all duration-700 ease-out"
-                />
+              <div
+                onClick={() => setLightboxIdx(idx)}
+                className="group relative rounded-3xl overflow-hidden bg-[#28221D] border border-white/15 shadow-2xl hover:border-[#B58D59] transition-all duration-500 cursor-pointer hover:-translate-y-2 select-none h-full"
+              >
+                {/* Image Container with Cinematic Zoom & Ambient Depth */}
+                <div className="relative aspect-[4/5] w-full overflow-hidden bg-black/60">
+                  <img
+                    src={dish.imageUrl}
+                    alt={dish.title}
+                    loading="lazy"
+                    className="w-full h-full object-cover filter contrast-[1.04] brightness-95 group-hover:scale-108 group-hover:brightness-100 transition-all duration-700 ease-out"
+                  />
 
-                {/* Ambient Gradient Overlays */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent opacity-60 group-hover:opacity-30 transition-opacity duration-500 pointer-events-none" />
+                  {/* Ambient Gradient Overlays */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent opacity-60 group-hover:opacity-30 transition-opacity duration-500 pointer-events-none" />
 
-                {/* Top Badge: Bengali Script Watermark */}
-                <div className="absolute top-4 left-4 z-10 pointer-events-none">
-                  <span className="bg-[#1C1713]/85 backdrop-blur-md px-3.5 py-1.5 rounded-full text-xs font-bengali text-[#B58D59] border border-white/15 shadow-sm">
-                    {dish.bengaliTitle}
-                  </span>
-                </div>
+                  {/* Top Badge: Bengali Script Watermark */}
+                  <div className="absolute top-4 left-4 z-10 pointer-events-none">
+                    <span className="bg-[#1C1713]/85 backdrop-blur-md px-3.5 py-1.5 rounded-full text-xs font-bengali text-[#B58D59] border border-white/15 shadow-sm">
+                      {dish.bengaliTitle}
+                    </span>
+                  </div>
 
-                {/* Top Right Expand Icon Button */}
-                <div className="absolute top-4 right-4 z-10 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                  <span className="w-10 h-10 rounded-full bg-[#1C1713]/85 backdrop-blur-md text-[#ECE5DA] flex items-center justify-center border border-white/20 shadow-lg group-hover:scale-110 transition-transform">
-                    <Maximize2 className="w-4 h-4 text-[#B58D59]" />
-                  </span>
-                </div>
+                  {/* Top Right Expand Icon Button */}
+                  <div className="absolute top-4 right-4 z-10 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                    <span className="w-10 h-10 rounded-full bg-[#1C1713]/85 backdrop-blur-md text-[#ECE5DA] flex items-center justify-center border border-white/20 shadow-lg group-hover:scale-110 transition-transform">
+                      <Maximize2 className="w-4 h-4 text-[#B58D59]" />
+                    </span>
+                  </div>
 
-                {/* Bottom Overlay Title on Hover */}
-                <div className="absolute bottom-0 inset-x-0 p-5 bg-gradient-to-t from-black/95 via-black/70 to-transparent text-left pointer-events-none z-10 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                  <h3 className="font-marcellus text-lg sm:text-xl text-white font-normal leading-snug drop-shadow-sm">
-                    {dish.title}
-                  </h3>
+                  {/* Bottom Overlay Title on Hover */}
+                  <div className="absolute bottom-0 inset-x-0 p-5 bg-gradient-to-t from-black/95 via-black/70 to-transparent text-left pointer-events-none z-10 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                    <h3 className="font-marcellus text-lg sm:text-xl text-white font-normal leading-snug drop-shadow-sm">
+                      {dish.title}
+                    </h3>
+                  </div>
                 </div>
               </div>
             </div>
