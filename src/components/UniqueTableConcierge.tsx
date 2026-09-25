@@ -171,11 +171,11 @@ export const UniqueTableConcierge: React.FC<UniqueTableConciergeProps> = ({
                 </div>
               </div>
 
-              {/* Dual-Email notice */}
+              {/* Email confirmation notice */}
               <div className="w-full max-w-md bg-[#28221D] text-[#ECE5DA] rounded-xl p-3 text-[11px] font-sans flex items-center space-x-2.5 shadow-sm text-left">
                 <Mail className="w-4 h-4 text-[#B58D59] shrink-0" />
                 <span className="leading-snug">
-                  Dual notification dispatched to <strong>pichhutaaney@gmail.com</strong> and <strong>{submittedEmail}</strong>.
+                  Confirmation receipt dispatched to <strong>{submittedEmail}</strong> and forwarded to Enakshi’s table concierge.
                 </span>
               </div>
 
