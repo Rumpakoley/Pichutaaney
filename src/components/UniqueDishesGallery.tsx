@@ -52,6 +52,27 @@ const DISH_COLLECTION: DishImage[] = [
     imageUrl: 'https://res.cloudinary.com/dpdtsaalf/video/upload/so_7/v1790183107/whatsapp-video-2026-09-22-at-110243-pm_hXNXyxwo_1_rh4fal.jpg',
     aspect: 'aspect-[4/5]',
   },
+  {
+    id: 'dish-begun-dal-puree',
+    title: 'Roasted Begun & Spiced Dal Purée Tasting Plates',
+    bengaliTitle: 'ভাজা বেগুন ও ডাল বাটা',
+    imageUrl: 'https://res.cloudinary.com/dpdtsaalf/image/upload/v1790277016/Screenshot_2026-09-25_003652_l9pyz1.png',
+    aspect: 'aspect-[3/4]',
+  },
+  {
+    id: 'dish-herb-foam-fish',
+    title: 'Seared Fish Course with Herb Foam & Crisps',
+    bengaliTitle: 'অনন্য ফেনা ও মাছের পদ',
+    imageUrl: 'https://res.cloudinary.com/dpdtsaalf/image/upload/v1790277016/Screenshot_2026-09-25_003611_nvwm7o.png',
+    aspect: 'aspect-[3/4]',
+  },
+  {
+    id: 'dish-sesame-brioche',
+    title: 'Artisanal Spiced Patty in Toasted Sesame Brioche',
+    bengaliTitle: 'তিল ছড়ানো বিশেষ প্যাটি',
+    imageUrl: 'https://res.cloudinary.com/dpdtsaalf/image/upload/v1790277016/Screenshot_2026-09-25_003802_dmms5a.png',
+    aspect: 'aspect-[3/4]',
+  },
 ];
 
 export const UniqueDishesGallery: React.FC = () => {
