@@ -41,7 +41,7 @@ const DISH_COLLECTION: DishImage[] = [
   },
   {
     id: 'dish-paati-shapta',
-    title: 'Paati Shapta with Vanilla Ice Cream on Nolen Gur Croutons',
+    title: 'Paatishapta with Vanilla Ice Cream served with Nolen Gur Sourdough Croutons',
     bengaliTitle: 'পাটিসাপটা ও নলেন গুড়',
     imageUrl: 'https://res.cloudinary.com/dpdtsaalf/image/upload/v1790433183/WhatsApp_Image_2026-09-26_at_1.05.30_AM_ituj5e.jpg',
     aspect: 'aspect-[3/4]',
