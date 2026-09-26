@@ -53,9 +53,9 @@ const HEARTH_VIDEOS: VideoCardData[] = [
     url: 'https://res.cloudinary.com/dpdtsaalf/video/upload/v1790433305/WhatsApp_Video_2026-09-26_at_1.02.13_AM_uaqlq4.mp4',
     poster: 'https://res.cloudinary.com/dpdtsaalf/video/upload/so_1/v1790433305/WhatsApp_Video_2026-09-26_at_1.02.13_AM_uaqlq4.jpg',
     tag: 'PLATING INSTINCTS • ATELIER',
-    title: 'Art of Plating & Heritage Textures',
-    quote: '“Every plate is a canvas of memory, aroma, and delicate textures.”',
-    subtitle: 'Harmonizing seasonal ingredients, vibrant emulsions, and thoughtful presentation.',
+    title: 'Mushroom Truffle Risotto',
+    quote: '“Mushroom truffle risotto with cream of shukto and charred zucchini.”',
+    subtitle: 'Harmonizing earthy wild mushrooms, delicate cream of shukto, and fire-charred zucchini.',
   },
   {
     id: 'hearth-6',
