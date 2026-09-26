@@ -61,10 +61,10 @@ const HEARTH_VIDEOS: VideoCardData[] = [
     id: 'hearth-6',
     url: 'https://res.cloudinary.com/dpdtsaalf/video/upload/v1790436155/WhatsApp_Video_2026-09-26_at_1.03.21_AM_gj6bgl.mp4',
     poster: 'https://res.cloudinary.com/dpdtsaalf/video/upload/so_1/v1790436155/WhatsApp_Video_2026-09-26_at_1.03.21_AM_gj6bgl.jpg',
-    tag: 'COMMUNAL HEARTH • STORIES',
-    title: 'The Pichhutaaney Supper Table',
-    quote: '“Gathering strangers around warm food, heartfelt laughter, and shared stories.”',
-    subtitle: 'The warmth of an unhurried communal feast celebrating roots, memory, and nostalgia.',
+    tag: 'CITRUS & SPICE • HEARTH',
+    title: 'Lemon Soufflé & Margarita Chilli',
+    quote: '“Lemon soufflé with margarita chilli.”',
+    subtitle: 'Zesty baked lemon soufflé dusted with spiced margarita chilli for an unexpected finish.',
   },
 ];
 
