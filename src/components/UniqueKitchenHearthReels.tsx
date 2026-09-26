@@ -48,6 +48,24 @@ const HEARTH_VIDEOS: VideoCardData[] = [
     quote: '“Every dish tells a tale of tradition, spices, and soulful cooking.”',
     subtitle: 'Mastering the balance of sweet, pungent, and savory notes across traditional dishes.',
   },
+  {
+    id: 'hearth-5',
+    url: 'https://res.cloudinary.com/dpdtsaalf/video/upload/v1790433305/WhatsApp_Video_2026-09-26_at_1.02.13_AM_uaqlq4.mp4',
+    poster: 'https://res.cloudinary.com/dpdtsaalf/video/upload/so_1/v1790433305/WhatsApp_Video_2026-09-26_at_1.02.13_AM_uaqlq4.jpg',
+    tag: 'PLATING INSTINCTS • ATELIER',
+    title: 'Art of Plating & Heritage Textures',
+    quote: '“Every plate is a canvas of memory, aroma, and delicate textures.”',
+    subtitle: 'Harmonizing seasonal ingredients, vibrant emulsions, and thoughtful presentation.',
+  },
+  {
+    id: 'hearth-6',
+    url: 'https://res.cloudinary.com/dpdtsaalf/video/upload/v1790436155/WhatsApp_Video_2026-09-26_at_1.03.21_AM_gj6bgl.mp4',
+    poster: 'https://res.cloudinary.com/dpdtsaalf/video/upload/so_1/v1790436155/WhatsApp_Video_2026-09-26_at_1.03.21_AM_gj6bgl.jpg',
+    tag: 'COMMUNAL HEARTH • STORIES',
+    title: 'The Pichhutaaney Supper Table',
+    quote: '“Gathering strangers around warm food, heartfelt laughter, and shared stories.”',
+    subtitle: 'The warmth of an unhurried communal feast celebrating roots, memory, and nostalgia.',
+  },
 ];
 
 const HearthVideoCard: React.FC<{ item: VideoCardData }> = ({ item }) => {
