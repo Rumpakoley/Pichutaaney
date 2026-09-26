@@ -7,6 +7,7 @@ interface DishImage {
   bengaliTitle: string;
   imageUrl: string;
   aspect: string; // for mosaic variety
+  objectPosition?: string;
 }
 
 const DISH_COLLECTION: DishImage[] = [
@@ -32,13 +33,6 @@ const DISH_COLLECTION: DishImage[] = [
     aspect: 'aspect-[3/4]',
   },
   {
-    id: 'dish-tasting-platter',
-    title: 'Atelier Tasting Course: Fish, Begun Bhaja & Spiced Reduction',
-    bengaliTitle: 'মাছের পদ ও বেগুন ভাজা সাথে ভাত',
-    imageUrl: 'https://res.cloudinary.com/dpdtsaalf/image/upload/v1790187885/WhatsApp_Image_2026-09-22_at_11.08.48_PM_peinnn.jpg',
-    aspect: 'aspect-[3/4]',
-  },
-  {
     id: 'dish-1',
     title: 'Plated Grain & Spiced Purée with Vine Tomatoes',
     bengaliTitle: 'অনন্য সাজানো পদ',
@@ -57,20 +51,6 @@ const DISH_COLLECTION: DishImage[] = [
     title: 'Roasted Begun & Spiced Dal Purée Tasting Plates',
     bengaliTitle: 'ভাজা বেগুন ও ডাল বাটা',
     imageUrl: 'https://res.cloudinary.com/dpdtsaalf/image/upload/v1790277016/Screenshot_2026-09-25_003652_l9pyz1.png',
-    aspect: 'aspect-[3/4]',
-  },
-  {
-    id: 'dish-herb-foam-fish',
-    title: 'Seared Fish Course with Herb Foam & Crisps',
-    bengaliTitle: 'অনন্য ফেনা ও মাছের পদ',
-    imageUrl: 'https://res.cloudinary.com/dpdtsaalf/image/upload/v1790277016/Screenshot_2026-09-25_003611_nvwm7o.png',
-    aspect: 'aspect-[3/4]',
-  },
-  {
-    id: 'dish-sesame-brioche',
-    title: 'Artisanal Spiced Patty in Toasted Sesame Brioche',
-    bengaliTitle: 'তিল ছড়ানো বিশেষ প্যাটি',
-    imageUrl: 'https://res.cloudinary.com/dpdtsaalf/image/upload/v1790277016/Screenshot_2026-09-25_003802_dmms5a.png',
     aspect: 'aspect-[3/4]',
   },
 ];
