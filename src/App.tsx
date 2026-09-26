@@ -10,7 +10,8 @@ import { UniqueTableConcierge } from './components/UniqueTableConcierge';
 import { UniqueFooter } from './components/UniqueFooter';
 import { HostLedgerModal } from './components/HostLedgerModal';
 import { UniqueCursor } from './components/UniqueCursor';
-import { WaitlistEntry, PrivateEventInquiry, ContactMessage, FormCustomQuestion, MenuVenueNotice } from './types';
+import { WaitlistEntry, PrivateEventInquiry, ContactMessage, FormCustomQuestion, MenuVenueNotice, CuratorDialogueItem } from './types';
+import { DEFAULT_DIALOGUES } from './components/UniqueCuratorDialogues';
 import { useScrollReveal } from './hooks/useScrollReveal';
 
 const INITIAL_CUSTOM_QUESTIONS: FormCustomQuestion[] = [
@@ -126,6 +127,15 @@ export default function App() {
     }
   });
 
+  const [dialogues, setDialogues] = useState<CuratorDialogueItem[]>(() => {
+    try {
+      const saved = localStorage.getItem('pichhutaaney_dialogues');
+      return saved ? JSON.parse(saved) : DEFAULT_DIALOGUES;
+    } catch {
+      return DEFAULT_DIALOGUES;
+    }
+  });
+
   const [isLedgerOpen, setIsLedgerOpen] = useState(false);
   useScrollReveal();
 
@@ -168,6 +178,14 @@ export default function App() {
       console.error(e);
     }
   }, [menuNotice]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('pichhutaaney_dialogues', JSON.stringify(dialogues));
+    } catch (e) {
+      console.error(e);
+    }
+  }, [dialogues]);
 
   const handleAddWaitlist = (entry: WaitlistEntry) => {
     setWaitlist((prev) => [entry, ...prev]);
@@ -217,7 +235,7 @@ export default function App() {
         <UniqueKitchenHearthReels />
 
         {/* Section 04: Curator Q&A Dialogues */}
-        <UniqueCuratorDialogues />
+        <UniqueCuratorDialogues dialogues={dialogues} />
 
         {/* Section 05: Direct Concierge & Table Reservation Deck */}
         <UniqueTableConcierge
@@ -242,8 +260,10 @@ export default function App() {
         onUpdateInquiryStatus={handleUpdateInquiryStatus}
         customQuestions={customQuestions}
         menuNotice={menuNotice}
+        dialogues={dialogues}
         onUpdateCustomQuestions={setCustomQuestions}
         onUpdateMenuNotice={setMenuNotice}
+        onUpdateDialogues={setDialogues}
       />
     </div>
   );

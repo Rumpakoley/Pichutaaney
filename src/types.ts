@@ -14,6 +14,12 @@ export interface MenuVenueNotice {
   note: string;
 }
 
+export interface CuratorDialogueItem {
+  id: string;
+  question: string;
+  answer: string;
+}
+
 export interface WaitlistEntry {
   id: string;
   fullName: string;

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { WaitlistEntry, PrivateEventInquiry, ContactMessage, FormCustomQuestion, MenuVenueNotice } from '../types';
-import { X, Download, Filter, Search, Check, Clock, Mail, Users, Calendar, Star, Copy, Sparkles, CheckCircle2, Sliders, Plus, Trash2 } from 'lucide-react';
+import { WaitlistEntry, PrivateEventInquiry, ContactMessage, FormCustomQuestion, MenuVenueNotice, CuratorDialogueItem } from '../types';
+import { X, Download, Filter, Search, Check, Clock, Mail, Users, Calendar, Star, Copy, Sparkles, CheckCircle2, Sliders, Plus, Trash2, MessageSquareText } from 'lucide-react';
 
 interface HostLedgerModalProps {
   isOpen: boolean;
@@ -12,8 +12,10 @@ interface HostLedgerModalProps {
   onUpdateInquiryStatus: (id: string, status: PrivateEventInquiry['status']) => void;
   customQuestions?: FormCustomQuestion[];
   menuNotice?: MenuVenueNotice;
+  dialogues?: CuratorDialogueItem[];
   onUpdateCustomQuestions?: (questions: FormCustomQuestion[]) => void;
   onUpdateMenuNotice?: (notice: MenuVenueNotice) => void;
+  onUpdateDialogues?: (dialogues: CuratorDialogueItem[]) => void;
 }
 
 export const HostLedgerModal: React.FC<HostLedgerModalProps> = ({
@@ -26,8 +28,10 @@ export const HostLedgerModal: React.FC<HostLedgerModalProps> = ({
   onUpdateInquiryStatus,
   customQuestions = [],
   menuNotice = { isActive: false, heading: '', note: '' },
+  dialogues = [],
   onUpdateCustomQuestions,
   onUpdateMenuNotice,
+  onUpdateDialogues,
 }) => {
   const [activeTab, setActiveTab] = useState<'waitlist' | 'inquiries' | 'messages' | 'settings'>('waitlist');
   const [statusFilter, setStatusFilter] = useState<'all' | 'shortlisted' | 'pending' | 'invited' | 'confirmed'>('all');
@@ -39,6 +43,10 @@ export const HostLedgerModal: React.FC<HostLedgerModalProps> = ({
   const [newQuestionType, setNewQuestionType] = useState<'text' | 'yes_no' | 'dropdown'>('text');
   const [newQuestionOptions, setNewQuestionOptions] = useState('');
   const [newQuestionRequired, setNewQuestionRequired] = useState(false);
+
+  // Dialogue editor state
+  const [newDialogueQ, setNewDialogueQ] = useState('');
+  const [newDialogueA, setNewDialogueA] = useState('');
 
   if (!isOpen) return null;
 
@@ -742,6 +750,143 @@ export const HostLedgerModal: React.FC<HostLedgerModalProps> = ({
                     >
                       <Plus className="w-3.5 h-3.5 text-[#B58D59]" />
                       <span>Add Question</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* TAB 4 SECTION 3: CURATOR DIALOGUES & Q&A EDITOR */}
+              <div className="bg-[#ECE5DA] border border-[#D5CBBD] rounded-3xl p-6 sm:p-8 space-y-6">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#D5CBBD] pb-4">
+                  <div className="space-y-1">
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-[#B58D59] font-bold flex items-center gap-1.5">
+                      <MessageSquareText className="w-3.5 h-3.5" />
+                      <span>WEBSITE Q&A / CURATOR DIALOGUES EDITOR</span>
+                    </span>
+                    <h3 className="font-marcellus text-xl sm:text-2xl text-[#28221D]">
+                      Edit Curator & Guest Conversations
+                    </h3>
+                    <p className="text-xs text-[#655B51] font-light">
+                      Customize questions and answers displayed in the "Curator Dialogues" section on the website. Changes are saved instantly.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Existing Dialogues List with Inline Editing */}
+                <div className="space-y-4">
+                  {dialogues.map((item, idx) => (
+                    <div
+                      key={item.id}
+                      className="p-5 rounded-2xl bg-[#F7F3EC] border border-[#D5CBBD] space-y-3 shadow-xs"
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-mono font-bold text-[#B58D59]">
+                          Q&A Card #{idx + 1}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const updated = dialogues.filter(d => d.id !== item.id);
+                            onUpdateDialogues?.(updated);
+                          }}
+                          className="p-1.5 rounded-full text-rose-700 hover:bg-rose-100 hover:text-rose-900 transition-colors cursor-pointer"
+                          title="Delete this Q&A card"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      </div>
+
+                      <div>
+                        <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block mb-1">
+                          Question
+                        </label>
+                        <input
+                          type="text"
+                          value={item.question}
+                          onChange={(e) => {
+                            const updated = dialogues.map(d =>
+                              d.id === item.id ? { ...d, question: e.target.value } : d
+                            );
+                            onUpdateDialogues?.(updated);
+                          }}
+                          className="w-full bg-[#ECE5DA] border border-[#D5CBBD] rounded-full px-4 py-2 text-xs text-[#28221D] font-medium focus:outline-none focus:border-[#28221D] font-sans"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block mb-1">
+                          Answer / Philosophy Response
+                        </label>
+                        <textarea
+                          rows={3}
+                          value={item.answer}
+                          onChange={(e) => {
+                            const updated = dialogues.map(d =>
+                              d.id === item.id ? { ...d, answer: e.target.value } : d
+                            );
+                            onUpdateDialogues?.(updated);
+                          }}
+                          className="w-full bg-[#ECE5DA] border border-[#D5CBBD] rounded-2xl p-3 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] font-sans leading-relaxed"
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Add New Dialogue */}
+                <div className="p-5 rounded-2xl bg-[#F7F3EC] border border-[#B58D59]/30 space-y-4">
+                  <div className="flex items-center space-x-2">
+                    <Plus className="w-4 h-4 text-[#B58D59]" />
+                    <span className="font-sans font-bold text-xs uppercase tracking-wider text-[#28221D]">
+                      Add a New Q&A Card
+                    </span>
+                  </div>
+
+                  <div>
+                    <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block mb-1">
+                      New Question Prompt
+                    </label>
+                    <input
+                      type="text"
+                      value={newDialogueQ}
+                      onChange={(e) => setNewDialogueQ(e.target.value)}
+                      placeholder="e.g. Q: How do you source your seasonal ingredients?"
+                      className="w-full bg-[#ECE5DA] border border-[#D5CBBD] rounded-full px-4 py-2 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] font-sans"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block mb-1">
+                      New Answer
+                    </label>
+                    <textarea
+                      rows={2}
+                      value={newDialogueA}
+                      onChange={(e) => setNewDialogueA(e.target.value)}
+                      placeholder="e.g. I work directly with local farmers and seasonal growers to bring fresh ingredients to every dinner."
+                      className="w-full bg-[#ECE5DA] border border-[#D5CBBD] rounded-2xl p-3 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] font-sans"
+                    />
+                  </div>
+
+                  <div className="flex justify-end pt-1">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        if (!newDialogueQ.trim() || !newDialogueA.trim()) return;
+                        const newD: CuratorDialogueItem = {
+                          id: `d-${Date.now()}`,
+                          question: newDialogueQ.trim(),
+                          answer: newDialogueA.trim(),
+                        };
+                        const updated = [...dialogues, newD];
+                        onUpdateDialogues?.(updated);
+                        setNewDialogueQ('');
+                        setNewDialogueA('');
+                      }}
+                      className="px-5 py-2 rounded-full bg-[#28221D] hover:bg-[#1C1713] text-[#ECE5DA] text-xs font-semibold uppercase tracking-wider flex items-center space-x-1.5 cursor-pointer shadow-sm transition-transform active:scale-95"
+                    >
+                      <Plus className="w-3.5 h-3.5 text-[#B58D59]" />
+                      <span>Add Q&A Card</span>
                     </button>
                   </div>
                 </div>

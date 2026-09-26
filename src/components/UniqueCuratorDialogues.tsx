@@ -1,28 +1,36 @@
 import React from 'react';
-import { Sparkles, MessageCircle } from 'lucide-react';
+import { CuratorDialogueItem } from '../types';
 
-const DIALOGUES = [
+export const DEFAULT_DIALOGUES: CuratorDialogueItem[] = [
   {
     id: 'd-1',
     question: 'Q: What makes intuitive cooking different from following a recipe?',
     answer:
-      'Food to me has never been about rigid formulas or standardized scales. It lives in instinct—the sizzle of golden mustard oil when it reaches smoke point, the fragrance of whole panch phoron bloomed in the pan, and the generational touch passed down through memory.',
+      'Food for me has never been about rigid formulas or weighing scales. It lives in instinct, like knowing the exact moment golden mustard oil reaches smoke point, the aroma of whole panch phoron blooming in the hot pan, and the sensory touch passed down through family memory.',
   },
   {
     id: 'd-2',
     question: 'Q: How do you curate a seasonal Pichhutaaney supper club?',
     answer:
-      'We seat 10 to 14 guests around one communal table. Menus change with the micro-seasons—celebrating root-to-stem vegetable stories, probiotic pantaa bhaat ferments, and forgotten heirloom staples presented with personal travel stories over three unhurried hours.',
+      'We bring together 10 to 14 guests around one communal table. The menu shifts with the seasons, celebrating root to stem vegetable cooking, traditional ferments like pantaa bhaat, and lesser known heirloom recipes shared with personal travel stories over three unhurried hours.',
   },
   {
     id: 'd-3',
-    question: 'Q: What is the meaning behind the name \'Pichhutaaney\'?',
+    question: "Q: What is the meaning behind the name 'Pichhutaaney'?",
     answer:
-      'In Bengali, Pichhutaaney (পিছুটানে) describes that tender, nostalgic backward glance—the quiet pull toward home and where you came from, alive in every spice, bite, and conversation no matter how far you wander across the globe.',
+      'In Bengali, Pichhutaaney (পিছুটানে) describes that tender nostalgic backward glance, the quiet pull toward home and where you came from, alive in every spice, bite, and conversation no matter how far you wander across the globe.',
   },
 ];
 
-export const UniqueCuratorDialogues: React.FC = () => {
+interface UniqueCuratorDialoguesProps {
+  dialogues?: CuratorDialogueItem[];
+}
+
+export const UniqueCuratorDialogues: React.FC<UniqueCuratorDialoguesProps> = ({
+  dialogues = DEFAULT_DIALOGUES,
+}) => {
+  const displayDialogues = dialogues && dialogues.length > 0 ? dialogues : DEFAULT_DIALOGUES;
+
   return (
     <section id="dialogues" className="py-20 sm:py-24 bg-[#ECE5DA] border-b border-[#D5CBBD] text-left overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -40,9 +48,9 @@ export const UniqueCuratorDialogues: React.FC = () => {
             </p>
           </div>
 
-          {/* Right Column: 3 Dialogue Cards */}
+          {/* Right Column: Dialogue Cards */}
           <div className="lg:col-span-8 space-y-4">
-            {DIALOGUES.map((item) => (
+            {displayDialogues.map((item) => (
               <div
                 key={item.id}
                 className="p-7 sm:p-8 bg-[#F7F3EC] rounded-3xl border border-[#D5CBBD] shadow-xs space-y-2 text-left hover:border-[#B58D59] hover:shadow-md transition-all duration-300 group cursor-default"
@@ -61,3 +69,4 @@ export const UniqueCuratorDialogues: React.FC = () => {
     </section>
   );
 };
+
