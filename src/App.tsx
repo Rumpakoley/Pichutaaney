@@ -10,8 +10,10 @@ import { UniqueTableConcierge } from './components/UniqueTableConcierge';
 import { UniqueFooter } from './components/UniqueFooter';
 import { HostLedgerModal } from './components/HostLedgerModal';
 import { UniqueCursor } from './components/UniqueCursor';
-import { WaitlistEntry, PrivateEventInquiry, ContactMessage, FormCustomQuestion, MenuVenueNotice, CuratorDialogueItem } from './types';
+import { WaitlistEntry, PrivateEventInquiry, ContactMessage, FormCustomQuestion, MenuVenueNotice, CuratorDialogueItem, DishImageItem, HearthVideoItem } from './types';
 import { DEFAULT_DIALOGUES } from './components/UniqueCuratorDialogues';
+import { DEFAULT_DISH_COLLECTION } from './components/UniqueDishesGallery';
+import { DEFAULT_HEARTH_VIDEOS } from './components/UniqueKitchenHearthReels';
 import { useScrollReveal } from './hooks/useScrollReveal';
 
 const INITIAL_CUSTOM_QUESTIONS: FormCustomQuestion[] = [
@@ -136,6 +138,24 @@ export default function App() {
     }
   });
 
+  const [dishes, setDishes] = useState<DishImageItem[]>(() => {
+    try {
+      const saved = localStorage.getItem('pichhutaaney_dishes');
+      return saved ? JSON.parse(saved) : DEFAULT_DISH_COLLECTION;
+    } catch {
+      return DEFAULT_DISH_COLLECTION;
+    }
+  });
+
+  const [videos, setVideos] = useState<HearthVideoItem[]>(() => {
+    try {
+      const saved = localStorage.getItem('pichhutaaney_videos');
+      return saved ? JSON.parse(saved) : DEFAULT_HEARTH_VIDEOS;
+    } catch {
+      return DEFAULT_HEARTH_VIDEOS;
+    }
+  });
+
   const [isLedgerOpen, setIsLedgerOpen] = useState(false);
   useScrollReveal();
 
@@ -187,6 +207,22 @@ export default function App() {
     }
   }, [dialogues]);
 
+  useEffect(() => {
+    try {
+      localStorage.setItem('pichhutaaney_dishes', JSON.stringify(dishes));
+    } catch (e) {
+      console.error(e);
+    }
+  }, [dishes]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('pichhutaaney_videos', JSON.stringify(videos));
+    } catch (e) {
+      console.error(e);
+    }
+  }, [videos]);
+
   const handleAddWaitlist = (entry: WaitlistEntry) => {
     setWaitlist((prev) => [entry, ...prev]);
   };
@@ -229,10 +265,10 @@ export default function App() {
         <UniqueManifestoBio />
 
         {/* Section 03: Prepared Dishes Atelier Gallery */}
-        <UniqueDishesGallery />
+        <UniqueDishesGallery dishes={dishes} />
 
         {/* Section 04: Living Hearth in Motion */}
-        <UniqueKitchenHearthReels />
+        <UniqueKitchenHearthReels videos={videos} />
 
         {/* Section 04: Curator Q&A Dialogues */}
         <UniqueCuratorDialogues dialogues={dialogues} />
@@ -261,9 +297,13 @@ export default function App() {
         customQuestions={customQuestions}
         menuNotice={menuNotice}
         dialogues={dialogues}
+        dishes={dishes}
+        videos={videos}
         onUpdateCustomQuestions={setCustomQuestions}
         onUpdateMenuNotice={setMenuNotice}
         onUpdateDialogues={setDialogues}
+        onUpdateDishes={setDishes}
+        onUpdateVideos={setVideos}
       />
     </div>
   );

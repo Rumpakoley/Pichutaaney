@@ -1,17 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Play, Pause, Volume2, VolumeX, Maximize, Flame, ChevronLeft, ChevronRight } from 'lucide-react';
+import { HearthVideoItem } from '../types';
 
-interface VideoCardData {
-  id: string;
-  url: string;
-  poster: string;
-  tag: string;
-  title: string;
-  quote: string;
-  subtitle: string;
-}
-
-const HEARTH_VIDEOS: VideoCardData[] = [
+export const DEFAULT_HEARTH_VIDEOS: HearthVideoItem[] = [
   {
     id: 'hearth-aamontron',
     url: 'https://res.cloudinary.com/dpdtsaalf/video/upload/v1790433308/WhatsApp_Video_2026-09-26_at_12.59.54_AM_pikgxs.mp4',
@@ -244,7 +235,14 @@ const HearthVideoCard: React.FC<{ item: VideoCardData }> = ({ item }) => {
   );
 };
 
-export const UniqueKitchenHearthReels: React.FC = () => {
+interface UniqueKitchenHearthReelsProps {
+  videos?: HearthVideoItem[];
+}
+
+export const UniqueKitchenHearthReels: React.FC<UniqueKitchenHearthReelsProps> = ({
+  videos = DEFAULT_HEARTH_VIDEOS,
+}) => {
+  const activeVideos = videos && videos.length > 0 ? videos : DEFAULT_HEARTH_VIDEOS;
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const handleScroll = (direction: 'left' | 'right') => {
@@ -302,7 +300,7 @@ export const UniqueKitchenHearthReels: React.FC = () => {
           className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-6 pt-2 scroll-smooth scrollbar-thin scrollbar-thumb-[#B58D59]/50 scrollbar-track-white/5"
           style={{ scrollbarWidth: 'thin' }}
         >
-          {HEARTH_VIDEOS.map((item) => (
+          {activeVideos.map((item) => (
             <div
               key={item.id}
               className="w-[85vw] sm:w-[360px] md:w-[390px] lg:w-[410px] shrink-0 snap-start"

@@ -1,16 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ZoomIn, X, ChevronRight, ChevronLeft, Sparkles, Utensils, Maximize2 } from 'lucide-react';
+import { DishImageItem } from '../types';
 
-interface DishImage {
-  id: string;
-  title: string;
-  bengaliTitle: string;
-  imageUrl: string;
-  aspect: string; // for mosaic variety
-  objectPosition?: string;
-}
-
-const DISH_COLLECTION: DishImage[] = [
+export const DEFAULT_DISH_COLLECTION: DishImageItem[] = [
   {
     id: 'dish-herb-crusted-fish',
     title: 'Herb-Crusted Fish Fillet with Kasundi Emulsion & Rice Timbale',
@@ -69,7 +61,14 @@ const DISH_COLLECTION: DishImage[] = [
   },
 ];
 
-export const UniqueDishesGallery: React.FC = () => {
+interface UniqueDishesGalleryProps {
+  dishes?: DishImageItem[];
+}
+
+export const UniqueDishesGallery: React.FC<UniqueDishesGalleryProps> = ({
+  dishes = DEFAULT_DISH_COLLECTION,
+}) => {
+  const activeDishes = dishes && dishes.length > 0 ? dishes : DEFAULT_DISH_COLLECTION;
   const [lightboxIdx, setLightboxIdx] = useState<number | null>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
@@ -85,13 +84,13 @@ export const UniqueDishesGallery: React.FC = () => {
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setLightboxIdx(null);
-      if (e.key === 'ArrowRight') setLightboxIdx((prev) => (prev !== null ? (prev + 1) % DISH_COLLECTION.length : null));
-      if (e.key === 'ArrowLeft') setLightboxIdx((prev) => (prev !== null ? (prev - 1 + DISH_COLLECTION.length) % DISH_COLLECTION.length : null));
+      if (e.key === 'ArrowRight') setLightboxIdx((prev) => (prev !== null ? (prev + 1) % activeDishes.length : null));
+      if (e.key === 'ArrowLeft') setLightboxIdx((prev) => (prev !== null ? (prev - 1 + activeDishes.length) % activeDishes.length : null));
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [lightboxIdx]);
+  }, [lightboxIdx, activeDishes.length]);
 
   return (
     <section id="dishes-gallery" className="py-20 sm:py-28 bg-[#1C1713] text-[#ECE5DA] border-b border-[#382F27] text-left overflow-hidden">
@@ -146,7 +145,7 @@ export const UniqueDishesGallery: React.FC = () => {
           className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-6 pt-2 scroll-smooth scrollbar-thin scrollbar-thumb-[#B58D59]/50 scrollbar-track-white/5"
           style={{ scrollbarWidth: 'thin' }}
         >
-          {DISH_COLLECTION.map((dish, idx) => (
+          {activeDishes.map((dish, idx) => (
             <div
               key={dish.id}
               className="w-[82vw] sm:w-[340px] md:w-[370px] lg:w-[390px] shrink-0 snap-start"
@@ -194,7 +193,7 @@ export const UniqueDishesGallery: React.FC = () => {
         </div>
 
         {/* Full-Screen Pure Visual Lightbox Modal */}
-        {lightboxIdx !== null && (
+        {lightboxIdx !== null && activeDishes[lightboxIdx] && (
           <div
             className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-xl p-4 sm:p-8 animate-fade-in-scale select-none"
             onClick={() => setLightboxIdx(null)}
@@ -203,11 +202,11 @@ export const UniqueDishesGallery: React.FC = () => {
             <div className="absolute top-6 left-6 right-6 flex items-center justify-between z-50 pointer-events-none">
               <div className="pointer-events-auto flex items-center space-x-3 bg-black/60 backdrop-blur-md px-4 py-2 rounded-full border border-white/15">
                 <span className="font-mono text-xs text-[#B58D59] tracking-widest uppercase">
-                  {lightboxIdx + 1} / {DISH_COLLECTION.length}
+                  {lightboxIdx + 1} / {activeDishes.length}
                 </span>
                 <span className="text-white/30">|</span>
                 <span className="font-bengali text-sm text-white">
-                  {DISH_COLLECTION[lightboxIdx].bengaliTitle}
+                  {activeDishes[lightboxIdx].bengaliTitle}
                 </span>
               </div>
 
@@ -225,7 +224,7 @@ export const UniqueDishesGallery: React.FC = () => {
             <button
               onClick={(e) => {
                 e.stopPropagation();
-                setLightboxIdx((lightboxIdx - 1 + DISH_COLLECTION.length) % DISH_COLLECTION.length);
+                setLightboxIdx((lightboxIdx - 1 + activeDishes.length) % activeDishes.length);
               }}
               className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 p-3.5 rounded-full bg-black/70 hover:bg-[#B58D59] hover:text-[#1C1713] text-white border border-white/20 transition-all cursor-pointer z-50 hover:scale-110 shadow-2xl"
               title="Previous Dish"
@@ -238,7 +237,7 @@ export const UniqueDishesGallery: React.FC = () => {
             <button
               onClick={(e) => {
                 e.stopPropagation();
-                setLightboxIdx((lightboxIdx + 1) % DISH_COLLECTION.length);
+                setLightboxIdx((lightboxIdx + 1) % activeDishes.length);
               }}
               className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 p-3.5 rounded-full bg-black/70 hover:bg-[#B58D59] hover:text-[#1C1713] text-white border border-white/20 transition-all cursor-pointer z-50 hover:scale-110 shadow-2xl"
               title="Next Dish"
@@ -253,15 +252,15 @@ export const UniqueDishesGallery: React.FC = () => {
               onClick={(e) => e.stopPropagation()}
             >
               <img
-                src={DISH_COLLECTION[lightboxIdx].imageUrl}
-                alt={DISH_COLLECTION[lightboxIdx].title}
+                src={activeDishes[lightboxIdx].imageUrl}
+                alt={activeDishes[lightboxIdx].title}
                 className="max-h-[82vh] w-auto max-w-full object-contain filter contrast-[1.03]"
               />
 
               {/* Bottom Image Subtitle Bar */}
               <div className="absolute bottom-0 inset-x-0 p-4 sm:p-5 bg-gradient-to-t from-black/95 via-black/80 to-transparent text-left pointer-events-none">
                 <h3 className="font-marcellus text-lg sm:text-2xl text-white font-normal">
-                  {DISH_COLLECTION[lightboxIdx].title}
+                  {activeDishes[lightboxIdx].title}
                 </h3>
               </div>
             </div>

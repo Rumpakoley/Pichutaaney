@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-import { WaitlistEntry, PrivateEventInquiry, ContactMessage, FormCustomQuestion, MenuVenueNotice, CuratorDialogueItem } from '../types';
-import { X, Download, Filter, Search, Check, Clock, Mail, Users, Calendar, Star, Copy, Sparkles, CheckCircle2, Sliders, Plus, Trash2, MessageSquareText } from 'lucide-react';
+import { WaitlistEntry, PrivateEventInquiry, ContactMessage, FormCustomQuestion, MenuVenueNotice, CuratorDialogueItem, DishImageItem, HearthVideoItem } from '../types';
+import { X, Download, Filter, Search, Check, Clock, Mail, Users, Calendar, Star, Copy, Sparkles, CheckCircle2, Sliders, Plus, Trash2, MessageSquareText, Image, Film, RotateCcw, Utensils } from 'lucide-react';
+import { DEFAULT_DISH_COLLECTION } from './UniqueDishesGallery';
+import { DEFAULT_HEARTH_VIDEOS } from './UniqueKitchenHearthReels';
+import { DEFAULT_DIALOGUES } from './UniqueCuratorDialogues';
 
 interface HostLedgerModalProps {
   isOpen: boolean;
@@ -13,9 +16,13 @@ interface HostLedgerModalProps {
   customQuestions?: FormCustomQuestion[];
   menuNotice?: MenuVenueNotice;
   dialogues?: CuratorDialogueItem[];
+  dishes?: DishImageItem[];
+  videos?: HearthVideoItem[];
   onUpdateCustomQuestions?: (questions: FormCustomQuestion[]) => void;
   onUpdateMenuNotice?: (notice: MenuVenueNotice) => void;
   onUpdateDialogues?: (dialogues: CuratorDialogueItem[]) => void;
+  onUpdateDishes?: (dishes: DishImageItem[]) => void;
+  onUpdateVideos?: (videos: HearthVideoItem[]) => void;
 }
 
 export const HostLedgerModal: React.FC<HostLedgerModalProps> = ({
@@ -29,11 +36,16 @@ export const HostLedgerModal: React.FC<HostLedgerModalProps> = ({
   customQuestions = [],
   menuNotice = { isActive: false, heading: '', note: '' },
   dialogues = [],
+  dishes = [],
+  videos = [],
   onUpdateCustomQuestions,
   onUpdateMenuNotice,
   onUpdateDialogues,
+  onUpdateDishes,
+  onUpdateVideos,
 }) => {
   const [activeTab, setActiveTab] = useState<'waitlist' | 'inquiries' | 'messages' | 'settings'>('waitlist');
+  const [settingsSubTab, setSettingsSubTab] = useState<'dishes' | 'videos' | 'dialogues' | 'notice' | 'questions'>('dishes');
   const [statusFilter, setStatusFilter] = useState<'all' | 'shortlisted' | 'pending' | 'invited' | 'confirmed'>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [copiedMessage, setCopiedMessage] = useState<string | null>(null);
@@ -47,6 +59,18 @@ export const HostLedgerModal: React.FC<HostLedgerModalProps> = ({
   // Dialogue editor state
   const [newDialogueQ, setNewDialogueQ] = useState('');
   const [newDialogueA, setNewDialogueA] = useState('');
+
+  // Dish editor state
+  const [newDishTitle, setNewDishTitle] = useState('');
+  const [newDishBengaliTitle, setNewDishBengaliTitle] = useState('');
+  const [newDishImageUrl, setNewDishImageUrl] = useState('');
+
+  // Video editor state
+  const [newVideoTitle, setNewVideoTitle] = useState('');
+  const [newVideoTag, setNewVideoTag] = useState('');
+  const [newVideoQuote, setNewVideoQuote] = useState('');
+  const [newVideoSubtitle, setNewVideoSubtitle] = useState('');
+  const [newVideoUrl, setNewVideoUrl] = useState('');
 
   if (!isOpen) return null;
 
@@ -493,396 +517,953 @@ export const HostLedgerModal: React.FC<HostLedgerModalProps> = ({
             </div>
           )}
 
-          {/* TAB 4: MENU & QUESTIONS SETTINGS */}
+          {/* TAB 4: MENU, MEDIA & CONTENT STUDIO */}
           {activeTab === 'settings' && (
-            <div className="p-6 space-y-8 animate-in fade-in duration-200 text-left">
-              {/* Notice Banner Editor */}
-              <div className="bg-[#ECE5DA] border border-[#D5CBBD] rounded-3xl p-6 sm:p-8 space-y-5">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#D5CBBD] pb-4">
-                  <div className="space-y-1">
-                    <span className="text-[10px] font-mono uppercase tracking-widest text-[#B58D59] font-bold">
-                      CURRENT MENU & VENUE ANNOUNCEMENT
-                    </span>
-                    <h3 className="font-marcellus text-xl sm:text-2xl text-[#28221D]">
-                      Menu & Venue Notice on Reservation Form
-                    </h3>
-                    <p className="text-xs text-[#655B51] font-light">
-                      This note displays prominently at the top of the reservation form. Update it anytime you change the menu, pricing, timings, or venue address.
-                    </p>
-                  </div>
-                  <label className="flex items-center space-x-2 cursor-pointer bg-[#F7F3EC] px-3.5 py-2 rounded-full border border-[#D5CBBD] hover:border-[#B58D59] transition-colors shrink-0">
-                    <input
-                      type="checkbox"
-                      checked={menuNotice.isActive}
-                      onChange={(e) => {
-                        onUpdateMenuNotice?.({ ...menuNotice, isActive: e.target.checked });
-                      }}
-                      className="rounded accent-[#B58D59]"
-                    />
-                    <span className="text-xs font-semibold text-[#28221D]">
-                      {menuNotice.isActive ? 'Active (Visible on Form)' : 'Hidden (Draft)'}
-                    </span>
-                  </label>
-                </div>
+            <div className="p-6 space-y-6 animate-in fade-in duration-200 text-left">
+              {/* Studio Sub-Navigation Bar */}
+              <div className="flex flex-wrap items-center gap-2 p-1.5 bg-[#F7F3EC] rounded-2xl border border-[#D5CBBD]">
+                <button
+                  type="button"
+                  onClick={() => setSettingsSubTab('dishes')}
+                  className={`px-4 py-2 rounded-xl text-xs font-semibold flex items-center space-x-1.5 transition-all cursor-pointer ${
+                    settingsSubTab === 'dishes'
+                      ? 'bg-[#28221D] text-[#ECE5DA] shadow-xs'
+                      : 'text-[#655B51] hover:text-[#28221D] hover:bg-[#ECE5DA]'
+                  }`}
+                >
+                  <Utensils className="w-3.5 h-3.5 text-[#B58D59]" />
+                  <span>🍽️ Dish Photos ({dishes.length})</span>
+                </button>
 
-                <div className="space-y-3">
-                  <div>
-                    <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block mb-1">
-                      Banner Heading
-                    </label>
-                    <input
-                      type="text"
-                      value={menuNotice.heading}
-                      onChange={(e) => {
-                        onUpdateMenuNotice?.({ ...menuNotice, heading: e.target.value });
-                      }}
-                      placeholder="e.g. Upcoming Autumn Supper Club • 5-Course Heritage Tasting"
-                      className="w-full bg-[#F7F3EC] border border-[#D5CBBD] rounded-full px-4 py-2 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] font-sans"
-                    />
-                  </div>
+                <button
+                  type="button"
+                  onClick={() => setSettingsSubTab('videos')}
+                  className={`px-4 py-2 rounded-xl text-xs font-semibold flex items-center space-x-1.5 transition-all cursor-pointer ${
+                    settingsSubTab === 'videos'
+                      ? 'bg-[#28221D] text-[#ECE5DA] shadow-xs'
+                      : 'text-[#655B51] hover:text-[#28221D] hover:bg-[#ECE5DA]'
+                  }`}
+                >
+                  <Film className="w-3.5 h-3.5 text-[#B58D59]" />
+                  <span>🎬 Video Reels ({videos.length})</span>
+                </button>
 
-                  <div>
-                    <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block mb-1">
-                      Special Venue / Menu Instructions & Details
-                    </label>
-                    <textarea
-                      rows={3}
-                      value={menuNotice.note}
-                      onChange={(e) => {
-                        onUpdateMenuNotice?.({ ...menuNotice, note: e.target.value });
-                      }}
-                      placeholder="e.g. Seating promptly at 7:00 PM. BYOB welcome. Location details and secret buzzer code provided upon confirmation."
-                      className="w-full bg-[#F7F3EC] border border-[#D5CBBD] rounded-2xl p-3 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] font-sans"
-                    />
-                  </div>
-                </div>
+                <button
+                  type="button"
+                  onClick={() => setSettingsSubTab('dialogues')}
+                  className={`px-4 py-2 rounded-xl text-xs font-semibold flex items-center space-x-1.5 transition-all cursor-pointer ${
+                    settingsSubTab === 'dialogues'
+                      ? 'bg-[#28221D] text-[#ECE5DA] shadow-xs'
+                      : 'text-[#655B51] hover:text-[#28221D] hover:bg-[#ECE5DA]'
+                  }`}
+                >
+                  <MessageSquareText className="w-3.5 h-3.5 text-[#B58D59]" />
+                  <span>💬 Q&A Dialogues ({dialogues.length})</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setSettingsSubTab('notice')}
+                  className={`px-4 py-2 rounded-xl text-xs font-semibold flex items-center space-x-1.5 transition-all cursor-pointer ${
+                    settingsSubTab === 'notice'
+                      ? 'bg-[#28221D] text-[#ECE5DA] shadow-xs'
+                      : 'text-[#655B51] hover:text-[#28221D] hover:bg-[#ECE5DA]'
+                  }`}
+                >
+                  <Sparkles className="w-3.5 h-3.5 text-[#B58D59]" />
+                  <span>📢 Menu Notice</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setSettingsSubTab('questions')}
+                  className={`px-4 py-2 rounded-xl text-xs font-semibold flex items-center space-x-1.5 transition-all cursor-pointer ${
+                    settingsSubTab === 'questions'
+                      ? 'bg-[#28221D] text-[#ECE5DA] shadow-xs'
+                      : 'text-[#655B51] hover:text-[#28221D] hover:bg-[#ECE5DA]'
+                  }`}
+                >
+                  <Sliders className="w-3.5 h-3.5 text-[#B58D59]" />
+                  <span>❓ Form Questions ({customQuestions.length})</span>
+                </button>
               </div>
 
-              {/* Questions Builder */}
-              <div className="bg-[#F7F3EC] border border-[#D5CBBD] rounded-3xl p-6 sm:p-8 space-y-6">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#D5CBBD] pb-4">
-                  <div className="space-y-1">
-                    <span className="text-[10px] font-mono uppercase tracking-widest text-[#B58D59] font-bold">
-                      FORM QUESTIONS BUILDER
-                    </span>
-                    <h3 className="font-marcellus text-xl sm:text-2xl text-[#28221D]">
-                      Custom Questions for Guests
-                    </h3>
-                    <p className="text-xs text-[#655B51] font-light">
-                      Add, edit, enable, or delete questions. Guests will answer these when booking.
-                    </p>
-                  </div>
-                </div>
-
-                {/* Existing Questions List */}
-                <div className="space-y-3">
-                  {customQuestions.length === 0 ? (
-                    <div className="p-8 text-center text-xs text-[#8C867D] bg-[#ECE5DA]/50 rounded-2xl border border-dashed border-[#D5CBBD]">
-                      No custom questions yet. Add your first question below!
+              {/* SUBTAB 1: DISH PHOTOS GALLERY */}
+              {settingsSubTab === 'dishes' && (
+                <div className="space-y-6 animate-in fade-in duration-150">
+                  {/* Header & Reset */}
+                  <div className="bg-[#ECE5DA] border border-[#D5CBBD] rounded-3xl p-6 sm:p-7 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div className="space-y-1">
+                      <span className="text-[10px] font-mono uppercase tracking-widest text-[#B58D59] font-bold">
+                        DISHES FROM THE HEARTH • GALLERY MANAGER
+                      </span>
+                      <h3 className="font-marcellus text-xl sm:text-2xl text-[#28221D]">
+                        Dish Photos & Presentation Cards
+                      </h3>
+                      <p className="text-xs text-[#655B51] font-light">
+                        Add new photo cards, change dish descriptions, update image links, or delete cards in real-time.
+                      </p>
                     </div>
-                  ) : (
-                    customQuestions.map((q, idx) => (
-                      <div
-                        key={q.id}
-                        className={`p-4 rounded-2xl border transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4 ${
-                          q.enabled
-                            ? 'bg-[#ECE5DA] border-[#D5CBBD]'
-                            : 'bg-[#ECE5DA]/40 border-dashed border-[#D5CBBD] opacity-60'
-                        }`}
+
+                    <button
+                      type="button"
+                      onClick={() => onUpdateDishes?.(DEFAULT_DISH_COLLECTION)}
+                      className="px-4 py-2 rounded-full border border-[#D5CBBD] bg-[#F7F3EC] hover:bg-[#28221D] hover:text-[#ECE5DA] text-xs font-medium text-[#655B51] flex items-center space-x-1.5 cursor-pointer transition-colors shrink-0"
+                      title="Reset gallery to default dish cards"
+                    >
+                      <RotateCcw className="w-3.5 h-3.5" />
+                      <span>Reset to Defaults</span>
+                    </button>
+                  </div>
+
+                  {/* Add New Dish Form */}
+                  <div className="p-6 rounded-3xl bg-[#F7F3EC] border border-[#B58D59]/40 space-y-4 shadow-sm">
+                    <div className="flex items-center space-x-2 border-b border-[#D5CBBD] pb-3">
+                      <Plus className="w-4 h-4 text-[#B58D59]" />
+                      <h4 className="font-sans font-bold text-xs uppercase tracking-wider text-[#28221D]">
+                        Add a New Dish Photo Card
+                      </h4>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block mb-1">
+                          Dish Title / Description
+                        </label>
+                        <input
+                          type="text"
+                          value={newDishTitle}
+                          onChange={(e) => setNewDishTitle(e.target.value)}
+                          placeholder="e.g. Tamarind Mango Ceviche with Scallops & Citrus Broth"
+                          className="w-full bg-[#ECE5DA] border border-[#D5CBBD] rounded-full px-4 py-2 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] font-sans"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block mb-1">
+                          Bengali Badge Title (বাংলা নাম)
+                        </label>
+                        <input
+                          type="text"
+                          value={newDishBengaliTitle}
+                          onChange={(e) => setNewDishBengaliTitle(e.target.value)}
+                          placeholder="e.g. আম ও তেঁতুল সেভিচে"
+                          className="w-full bg-[#ECE5DA] border border-[#D5CBBD] rounded-full px-4 py-2 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] font-bengali text-sm"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block mb-1">
+                        Image URL (Cloudinary / Direct Link)
+                      </label>
+                      <input
+                        type="url"
+                        value={newDishImageUrl}
+                        onChange={(e) => setNewDishImageUrl(e.target.value)}
+                        placeholder="https://res.cloudinary.com/..."
+                        className="w-full bg-[#ECE5DA] border border-[#D5CBBD] rounded-full px-4 py-2 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] font-mono"
+                      />
+                    </div>
+
+                    <div className="flex justify-end pt-1">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          if (!newDishTitle.trim() || !newDishImageUrl.trim()) return;
+                          const newDish: DishImageItem = {
+                            id: `dish-${Date.now()}`,
+                            title: newDishTitle.trim(),
+                            bengaliTitle: newDishBengaliTitle.trim() || 'অনন্য পদ',
+                            imageUrl: newDishImageUrl.trim(),
+                            aspect: 'aspect-[3/4]',
+                          };
+                          const updated = [...dishes, newDish];
+                          onUpdateDishes?.(updated);
+                          setNewDishTitle('');
+                          setNewDishBengaliTitle('');
+                          setNewDishImageUrl('');
+                        }}
+                        className="px-6 py-2.5 rounded-full bg-[#28221D] hover:bg-[#1C1713] text-[#ECE5DA] text-xs font-semibold uppercase tracking-wider flex items-center space-x-1.5 cursor-pointer shadow-sm transition-transform active:scale-95"
                       >
-                        <div className="space-y-1 max-w-lg">
-                          <div className="flex items-center space-x-2">
-                            <span className="text-xs font-mono font-bold text-[#B58D59]">
-                              Q{idx + 1}.
-                            </span>
-                            <span className="font-medium text-xs text-[#28221D]">
-                              {q.label}
-                            </span>
-                            {q.required && (
-                              <span className="text-[9px] uppercase font-bold text-[#B58D59] bg-[#B58D59]/10 px-2 py-0.5 rounded-full">
-                                Required
-                              </span>
-                            )}
-                          </div>
-                          <div className="flex items-center space-x-2 text-[10.5px] text-[#655B51]">
-                            <span className="font-mono uppercase bg-white/60 px-2 py-0.5 rounded border border-[#D5CBBD]/60">
-                              Type: {q.type.replace('_', ' ')}
-                            </span>
-                            {q.options && q.options.length > 0 && (
-                              <span className="truncate max-w-xs">
-                                Options: {q.options.join(', ')}
-                              </span>
-                            )}
+                        <Plus className="w-3.5 h-3.5 text-[#B58D59]" />
+                        <span>Add Dish to Gallery</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Existing Dishes List */}
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between text-xs text-[#655B51] font-mono uppercase tracking-wider">
+                      <span>Live Dishes ({dishes.length})</span>
+                      <span>Edit below to update live site</span>
+                    </div>
+
+                    {dishes.map((dish, idx) => (
+                      <div
+                        key={dish.id}
+                        className="p-5 rounded-2xl bg-[#F7F3EC] border border-[#D5CBBD] space-y-4 shadow-xs flex flex-col md:flex-row gap-5 items-start"
+                      >
+                        {/* Thumbnail Preview */}
+                        <div className="w-24 h-28 rounded-xl overflow-hidden bg-black shrink-0 border border-white/20 relative shadow-xs">
+                          <img
+                            src={dish.imageUrl}
+                            alt={dish.title}
+                            className="w-full h-full object-cover"
+                            onError={(e) => {
+                              (e.currentTarget as HTMLImageElement).src = 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=300';
+                            }}
+                          />
+                          <div className="absolute top-1 left-1 bg-black/80 px-1.5 py-0.5 rounded text-[8px] font-mono text-[#B58D59]">
+                            #{idx + 1}
                           </div>
                         </div>
 
-                        <div className="flex items-center space-x-2 shrink-0">
-                          {/* Enable/Disable Toggle */}
-                          <button
-                            type="button"
-                            onClick={() => {
-                              const updated = customQuestions.map(item =>
-                                item.id === q.id ? { ...item, enabled: !item.enabled } : item
-                              );
-                              onUpdateCustomQuestions?.(updated);
-                            }}
-                            className={`px-3 py-1.5 rounded-full text-xs font-medium cursor-pointer transition-colors ${
-                              q.enabled
-                                ? 'bg-emerald-700 text-white hover:bg-emerald-800'
-                                : 'bg-[#D5CBBD] text-[#4A4138] hover:bg-[#C5BBAE]'
-                            }`}
-                          >
-                            {q.enabled ? '✓ Enabled' : 'Disabled'}
-                          </button>
+                        {/* Editable Fields */}
+                        <div className="flex-1 w-full space-y-3">
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                              <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block mb-1">
+                                Dish Title
+                              </label>
+                              <input
+                                type="text"
+                                value={dish.title}
+                                onChange={(e) => {
+                                  const updated = dishes.map(d =>
+                                    d.id === dish.id ? { ...d, title: e.target.value } : d
+                                  );
+                                  onUpdateDishes?.(updated);
+                                }}
+                                className="w-full bg-[#ECE5DA] border border-[#D5CBBD] rounded-full px-3.5 py-1.5 text-xs text-[#28221D] font-medium focus:outline-none focus:border-[#28221D]"
+                              />
+                            </div>
 
-                          {/* Delete Question */}
+                            <div>
+                              <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block mb-1">
+                                Bengali Badge (বাংলা নাম)
+                              </label>
+                              <input
+                                type="text"
+                                value={dish.bengaliTitle}
+                                onChange={(e) => {
+                                  const updated = dishes.map(d =>
+                                    d.id === dish.id ? { ...d, bengaliTitle: e.target.value } : d
+                                  );
+                                  onUpdateDishes?.(updated);
+                                }}
+                                className="w-full bg-[#ECE5DA] border border-[#D5CBBD] rounded-full px-3.5 py-1.5 text-xs text-[#28221D] font-bengali text-sm focus:outline-none focus:border-[#28221D]"
+                              />
+                            </div>
+                          </div>
+
+                          <div>
+                            <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block mb-1">
+                              Image URL
+                            </label>
+                            <input
+                              type="url"
+                              value={dish.imageUrl}
+                              onChange={(e) => {
+                                const updated = dishes.map(d =>
+                                  d.id === dish.id ? { ...d, imageUrl: e.target.value } : d
+                                );
+                                onUpdateDishes?.(updated);
+                              }}
+                              className="w-full bg-[#ECE5DA] border border-[#D5CBBD] rounded-full px-3.5 py-1.5 text-xs text-[#28221D] font-mono focus:outline-none focus:border-[#28221D]"
+                            />
+                          </div>
+                        </div>
+
+                        {/* Action Buttons */}
+                        <div className="flex md:flex-col items-center justify-end gap-2 shrink-0">
                           <button
                             type="button"
                             onClick={() => {
-                              const updated = customQuestions.filter(item => item.id !== q.id);
-                              onUpdateCustomQuestions?.(updated);
+                              const updated = dishes.filter(d => d.id !== dish.id);
+                              onUpdateDishes?.(updated);
                             }}
                             className="p-2 rounded-full text-rose-700 hover:bg-rose-100 hover:text-rose-900 transition-colors cursor-pointer"
-                            title="Delete this question"
+                            title="Delete this dish card"
                           >
                             <Trash2 className="w-4 h-4" />
                           </button>
                         </div>
                       </div>
-                    ))
-                  )}
+                    ))}
+                  </div>
                 </div>
+              )}
 
-                {/* Add New Question Form */}
-                <div className="p-5 rounded-2xl bg-[#ECE5DA] border border-[#B58D59]/30 space-y-4">
-                  <div className="flex items-center space-x-2">
-                    <Plus className="w-4 h-4 text-[#B58D59]" />
-                    <span className="font-sans font-bold text-xs uppercase tracking-wider text-[#28221D]">
-                      Add a New Question
-                    </span>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                    <div className="sm:col-span-2">
-                      <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block mb-1">
-                        Question Label / Prompt
-                      </label>
-                      <input
-                        type="text"
-                        value={newQuestionLabel}
-                        onChange={(e) => setNewQuestionLabel(e.target.value)}
-                        placeholder="e.g. Wine pairing preference or BYOB?"
-                        className="w-full bg-[#F7F3EC] border border-[#D5CBBD] rounded-full px-4 py-2 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] font-sans"
-                      />
+              {/* SUBTAB 2: VIDEO REELS MANAGER */}
+              {settingsSubTab === 'videos' && (
+                <div className="space-y-6 animate-in fade-in duration-150">
+                  {/* Header & Reset */}
+                  <div className="bg-[#ECE5DA] border border-[#D5CBBD] rounded-3xl p-6 sm:p-7 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div className="space-y-1">
+                      <span className="text-[10px] font-mono uppercase tracking-widest text-[#B58D59] font-bold">
+                        SCENT, SIZZLE & LIVING HEARTH • VIDEO REELS
+                      </span>
+                      <h3 className="font-marcellus text-xl sm:text-2xl text-[#28221D]">
+                        Living Kitchen Video Reels
+                      </h3>
+                      <p className="text-xs text-[#655B51] font-light">
+                        Add invitation videos, culinary motion reels, edit quotes/descriptions, or update video links.
+                      </p>
                     </div>
-
-                    <div>
-                      <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block mb-1">
-                        Answer Type
-                      </label>
-                      <select
-                        value={newQuestionType}
-                        onChange={(e) => setNewQuestionType(e.target.value as any)}
-                        className="w-full bg-[#F7F3EC] border border-[#D5CBBD] rounded-full px-4 py-2 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] font-sans cursor-pointer"
-                      >
-                        <option value="text">Short Text Answer</option>
-                        <option value="yes_no">Yes / No Buttons</option>
-                        <option value="dropdown">Dropdown Selection</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  {newQuestionType === 'dropdown' && (
-                    <div>
-                      <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block mb-1">
-                        Options (comma-separated)
-                      </label>
-                      <input
-                        type="text"
-                        value={newQuestionOptions}
-                        onChange={(e) => setNewQuestionOptions(e.target.value)}
-                        placeholder="e.g. Red Wine, White Wine, Non-Alcoholic, BYOB"
-                        className="w-full bg-[#F7F3EC] border border-[#D5CBBD] rounded-full px-4 py-2 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] font-sans"
-                      />
-                    </div>
-                  )}
-
-                  <div className="flex items-center justify-between pt-2">
-                    <label className="flex items-center space-x-2 text-xs text-[#28221D] cursor-pointer">
-                      <input
-                        type="checkbox"
-                        checked={newQuestionRequired}
-                        onChange={(e) => setNewQuestionRequired(e.target.checked)}
-                        className="rounded accent-[#B58D59]"
-                      />
-                      <span>Mark question as required</span>
-                    </label>
 
                     <button
                       type="button"
-                      onClick={() => {
-                        if (!newQuestionLabel.trim()) return;
-                        const newQ: FormCustomQuestion = {
-                          id: `q-${Date.now()}`,
-                          label: newQuestionLabel.trim(),
-                          type: newQuestionType,
-                          options: newQuestionType === 'dropdown'
-                            ? newQuestionOptions.split(',').map(s => s.trim()).filter(Boolean)
-                            : undefined,
-                          required: newQuestionRequired,
-                          enabled: true,
-                        };
-                        const updated = [...customQuestions, newQ];
-                        onUpdateCustomQuestions?.(updated);
-                        setNewQuestionLabel('');
-                        setNewQuestionOptions('');
-                        setNewQuestionRequired(false);
-                      }}
-                      className="px-5 py-2 rounded-full bg-[#28221D] hover:bg-[#1C1713] text-[#ECE5DA] text-xs font-semibold uppercase tracking-wider flex items-center space-x-1.5 cursor-pointer shadow-sm transition-transform active:scale-95"
+                      onClick={() => onUpdateVideos?.(DEFAULT_HEARTH_VIDEOS)}
+                      className="px-4 py-2 rounded-full border border-[#D5CBBD] bg-[#F7F3EC] hover:bg-[#28221D] hover:text-[#ECE5DA] text-xs font-medium text-[#655B51] flex items-center space-x-1.5 cursor-pointer transition-colors shrink-0"
+                      title="Reset video reels to default videos"
                     >
-                      <Plus className="w-3.5 h-3.5 text-[#B58D59]" />
-                      <span>Add Question</span>
+                      <RotateCcw className="w-3.5 h-3.5" />
+                      <span>Reset to Defaults</span>
                     </button>
                   </div>
-                </div>
-              </div>
 
-              {/* TAB 4 SECTION 3: CURATOR DIALOGUES & Q&A EDITOR */}
-              <div className="bg-[#ECE5DA] border border-[#D5CBBD] rounded-3xl p-6 sm:p-8 space-y-6">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#D5CBBD] pb-4">
-                  <div className="space-y-1">
-                    <span className="text-[10px] font-mono uppercase tracking-widest text-[#B58D59] font-bold flex items-center gap-1.5">
-                      <MessageSquareText className="w-3.5 h-3.5" />
-                      <span>WEBSITE Q&A / CURATOR DIALOGUES EDITOR</span>
-                    </span>
-                    <h3 className="font-marcellus text-xl sm:text-2xl text-[#28221D]">
-                      Edit Curator & Guest Conversations
-                    </h3>
-                    <p className="text-xs text-[#655B51] font-light">
-                      Customize questions and answers displayed in the "Curator Dialogues" section on the website. Changes are saved instantly.
-                    </p>
-                  </div>
-                </div>
+                  {/* Add New Video Form */}
+                  <div className="p-6 rounded-3xl bg-[#F7F3EC] border border-[#B58D59]/40 space-y-4 shadow-sm">
+                    <div className="flex items-center space-x-2 border-b border-[#D5CBBD] pb-3">
+                      <Plus className="w-4 h-4 text-[#B58D59]" />
+                      <h4 className="font-sans font-bold text-xs uppercase tracking-wider text-[#28221D]">
+                        Add a New Video Reel
+                      </h4>
+                    </div>
 
-                {/* Existing Dialogues List with Inline Editing */}
-                <div className="space-y-4">
-                  {dialogues.map((item, idx) => (
-                    <div
-                      key={item.id}
-                      className="p-5 rounded-2xl bg-[#F7F3EC] border border-[#D5CBBD] space-y-3 shadow-xs"
-                    >
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs font-mono font-bold text-[#B58D59]">
-                          Q&A Card #{idx + 1}
-                        </span>
-                        <button
-                          type="button"
-                          onClick={() => {
-                            const updated = dialogues.filter(d => d.id !== item.id);
-                            onUpdateDialogues?.(updated);
-                          }}
-                          className="p-1.5 rounded-full text-rose-700 hover:bg-rose-100 hover:text-rose-900 transition-colors cursor-pointer"
-                          title="Delete this Q&A card"
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </button>
-                      </div>
-
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
                         <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block mb-1">
-                          Question
+                          Video Title
                         </label>
                         <input
                           type="text"
-                          value={item.question}
-                          onChange={(e) => {
-                            const updated = dialogues.map(d =>
-                              d.id === item.id ? { ...d, question: e.target.value } : d
-                            );
-                            onUpdateDialogues?.(updated);
-                          }}
-                          className="w-full bg-[#ECE5DA] border border-[#D5CBBD] rounded-full px-4 py-2 text-xs text-[#28221D] font-medium focus:outline-none focus:border-[#28221D] font-sans"
+                          value={newVideoTitle}
+                          onChange={(e) => setNewVideoTitle(e.target.value)}
+                          placeholder="e.g. Aamontron (The Invite) or Lemon Soufflé"
+                          className="w-full bg-[#ECE5DA] border border-[#D5CBBD] rounded-full px-4 py-2 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] font-sans"
                         />
                       </div>
 
                       <div>
                         <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block mb-1">
-                          Answer / Philosophy Response
+                          Category Badge Tag
                         </label>
-                        <textarea
-                          rows={3}
-                          value={item.answer}
-                          onChange={(e) => {
-                            const updated = dialogues.map(d =>
-                              d.id === item.id ? { ...d, answer: e.target.value } : d
-                            );
-                            onUpdateDialogues?.(updated);
-                          }}
-                          className="w-full bg-[#ECE5DA] border border-[#D5CBBD] rounded-2xl p-3 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] font-sans leading-relaxed"
+                        <input
+                          type="text"
+                          value={newVideoTag}
+                          onChange={(e) => setNewVideoTag(e.target.value)}
+                          placeholder="e.g. AAMONTRON • THE INVITE"
+                          className="w-full bg-[#ECE5DA] border border-[#D5CBBD] rounded-full px-4 py-2 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] font-mono uppercase"
                         />
                       </div>
                     </div>
-                  ))}
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block mb-1">
+                          Main Quote / Description
+                        </label>
+                        <textarea
+                          rows={2}
+                          value={newVideoQuote}
+                          onChange={(e) => setNewVideoQuote(e.target.value)}
+                          placeholder="e.g. “Mushroom truffle risotto with cream of shukto and charred zucchini.”"
+                          className="w-full bg-[#ECE5DA] border border-[#D5CBBD] rounded-2xl p-3 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] font-sans"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block mb-1">
+                          Subtitle / Detail Note
+                        </label>
+                        <textarea
+                          rows={2}
+                          value={newVideoSubtitle}
+                          onChange={(e) => setNewVideoSubtitle(e.target.value)}
+                          placeholder="e.g. Harmonizing earthy wild mushrooms, delicate cream of shukto..."
+                          className="w-full bg-[#ECE5DA] border border-[#D5CBBD] rounded-2xl p-3 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] font-sans"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block mb-1">
+                        Video URL (Cloudinary / MP4 link)
+                      </label>
+                      <input
+                        type="url"
+                        value={newVideoUrl}
+                        onChange={(e) => setNewVideoUrl(e.target.value)}
+                        placeholder="https://res.cloudinary.com/..."
+                        className="w-full bg-[#ECE5DA] border border-[#D5CBBD] rounded-full px-4 py-2 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] font-mono"
+                      />
+                    </div>
+
+                    <div className="flex justify-end pt-1">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          if (!newVideoTitle.trim() || !newVideoUrl.trim()) return;
+                          const posterUrl = newVideoUrl.replace('/video/upload/', '/video/upload/so_1/').replace(/\.mp4$/i, '.jpg');
+                          const newVid: HearthVideoItem = {
+                            id: `hearth-${Date.now()}`,
+                            url: newVideoUrl.trim(),
+                            poster: posterUrl,
+                            tag: newVideoTag.trim() || 'THE LIVING HEARTH',
+                            title: newVideoTitle.trim(),
+                            quote: newVideoQuote.trim() ? (newVideoQuote.startsWith('“') ? newVideoQuote.trim() : `“${newVideoQuote.trim()}”`) : '“Cooking from memory and instinct.”',
+                            subtitle: newVideoSubtitle.trim() || 'Reflections on heritage and seasonal table storytelling.',
+                          };
+                          const updated = [...videos, newVid];
+                          onUpdateVideos?.(updated);
+                          setNewVideoTitle('');
+                          setNewVideoTag('');
+                          setNewVideoQuote('');
+                          setNewVideoSubtitle('');
+                          setNewVideoUrl('');
+                        }}
+                        className="px-6 py-2.5 rounded-full bg-[#28221D] hover:bg-[#1C1713] text-[#ECE5DA] text-xs font-semibold uppercase tracking-wider flex items-center space-x-1.5 cursor-pointer shadow-sm transition-transform active:scale-95"
+                      >
+                        <Plus className="w-3.5 h-3.5 text-[#B58D59]" />
+                        <span>Add Video Reel</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Existing Videos List */}
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between text-xs text-[#655B51] font-mono uppercase tracking-wider">
+                      <span>Live Video Reels ({videos.length})</span>
+                      <span>Edit below to update live site</span>
+                    </div>
+
+                    {videos.map((vid, idx) => (
+                      <div
+                        key={vid.id}
+                        className="p-5 rounded-2xl bg-[#F7F3EC] border border-[#D5CBBD] space-y-3 shadow-xs"
+                      >
+                        <div className="flex items-center justify-between border-b border-[#D5CBBD] pb-2">
+                          <div className="flex items-center space-x-2">
+                            <span className="text-xs font-mono font-bold text-[#B58D59]">
+                              Reel #{idx + 1}
+                            </span>
+                            <span className="font-mono text-[9px] uppercase px-2 py-0.5 rounded-full bg-[#ECE5DA] text-[#655B51]">
+                              {vid.tag}
+                            </span>
+                          </div>
+
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const updated = videos.filter(v => v.id !== vid.id);
+                              onUpdateVideos?.(updated);
+                            }}
+                            className="p-1.5 rounded-full text-rose-700 hover:bg-rose-100 hover:text-rose-900 transition-colors cursor-pointer"
+                            title="Delete this video reel"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                          <div>
+                            <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block mb-1">
+                              Title
+                            </label>
+                            <input
+                              type="text"
+                              value={vid.title}
+                              onChange={(e) => {
+                                const updated = videos.map(v =>
+                                  v.id === vid.id ? { ...v, title: e.target.value } : v
+                                );
+                                onUpdateVideos?.(updated);
+                              }}
+                              className="w-full bg-[#ECE5DA] border border-[#D5CBBD] rounded-full px-3.5 py-1.5 text-xs text-[#28221D] font-medium focus:outline-none focus:border-[#28221D]"
+                            />
+                          </div>
+
+                          <div>
+                            <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block mb-1">
+                              Category Badge Tag
+                            </label>
+                            <input
+                              type="text"
+                              value={vid.tag}
+                              onChange={(e) => {
+                                const updated = videos.map(v =>
+                                  v.id === vid.id ? { ...v, tag: e.target.value } : v
+                                );
+                                onUpdateVideos?.(updated);
+                              }}
+                              className="w-full bg-[#ECE5DA] border border-[#D5CBBD] rounded-full px-3.5 py-1.5 text-xs text-[#28221D] font-mono focus:outline-none focus:border-[#28221D]"
+                            />
+                          </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                          <div>
+                            <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block mb-1">
+                              Quote / Description
+                            </label>
+                            <textarea
+                              rows={2}
+                              value={vid.quote}
+                              onChange={(e) => {
+                                const updated = videos.map(v =>
+                                  v.id === vid.id ? { ...v, quote: e.target.value } : v
+                                );
+                                onUpdateVideos?.(updated);
+                              }}
+                              className="w-full bg-[#ECE5DA] border border-[#D5CBBD] rounded-2xl p-2.5 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D]"
+                            />
+                          </div>
+
+                          <div>
+                            <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block mb-1">
+                              Subtitle / Story Note
+                            </label>
+                            <textarea
+                              rows={2}
+                              value={vid.subtitle}
+                              onChange={(e) => {
+                                const updated = videos.map(v =>
+                                  v.id === vid.id ? { ...v, subtitle: e.target.value } : v
+                                );
+                                onUpdateVideos?.(updated);
+                              }}
+                              className="w-full bg-[#ECE5DA] border border-[#D5CBBD] rounded-2xl p-2.5 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D]"
+                            />
+                          </div>
+                        </div>
+
+                        <div>
+                          <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block mb-1">
+                            Video URL
+                          </label>
+                          <input
+                            type="url"
+                            value={vid.url}
+                            onChange={(e) => {
+                              const posterUrl = e.target.value.replace('/video/upload/', '/video/upload/so_1/').replace(/\.mp4$/i, '.jpg');
+                              const updated = videos.map(v =>
+                                v.id === vid.id ? { ...v, url: e.target.value, poster: posterUrl } : v
+                              );
+                              onUpdateVideos?.(updated);
+                            }}
+                            className="w-full bg-[#ECE5DA] border border-[#D5CBBD] rounded-full px-3.5 py-1.5 text-xs text-[#28221D] font-mono focus:outline-none focus:border-[#28221D]"
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
+              )}
 
-                {/* Add New Dialogue */}
-                <div className="p-5 rounded-2xl bg-[#F7F3EC] border border-[#B58D59]/30 space-y-4">
-                  <div className="flex items-center space-x-2">
-                    <Plus className="w-4 h-4 text-[#B58D59]" />
-                    <span className="font-sans font-bold text-xs uppercase tracking-wider text-[#28221D]">
-                      Add a New Q&A Card
-                    </span>
-                  </div>
+              {/* SUBTAB 3: CURATOR DIALOGUES & Q&A EDITOR */}
+              {settingsSubTab === 'dialogues' && (
+                <div className="space-y-6 animate-in fade-in duration-150">
+                  <div className="bg-[#ECE5DA] border border-[#D5CBBD] rounded-3xl p-6 sm:p-7 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div className="space-y-1">
+                      <span className="text-[10px] font-mono uppercase tracking-widest text-[#B58D59] font-bold">
+                        CURATOR DIALOGUES • WEBSITE Q&A
+                      </span>
+                      <h3 className="font-marcellus text-xl sm:text-2xl text-[#28221D]">
+                        Edit Curator & Guest Conversations
+                      </h3>
+                      <p className="text-xs text-[#655B51] font-light">
+                        Customize questions and answers displayed in the "Curator Dialogues" section on the website.
+                      </p>
+                    </div>
 
-                  <div>
-                    <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block mb-1">
-                      New Question Prompt
-                    </label>
-                    <input
-                      type="text"
-                      value={newDialogueQ}
-                      onChange={(e) => setNewDialogueQ(e.target.value)}
-                      placeholder="e.g. Q: How do you source your seasonal ingredients?"
-                      className="w-full bg-[#ECE5DA] border border-[#D5CBBD] rounded-full px-4 py-2 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] font-sans"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block mb-1">
-                      New Answer
-                    </label>
-                    <textarea
-                      rows={2}
-                      value={newDialogueA}
-                      onChange={(e) => setNewDialogueA(e.target.value)}
-                      placeholder="e.g. I work directly with local farmers and seasonal growers to bring fresh ingredients to every dinner."
-                      className="w-full bg-[#ECE5DA] border border-[#D5CBBD] rounded-2xl p-3 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] font-sans"
-                    />
-                  </div>
-
-                  <div className="flex justify-end pt-1">
                     <button
                       type="button"
-                      onClick={() => {
-                        if (!newDialogueQ.trim() || !newDialogueA.trim()) return;
-                        const newD: CuratorDialogueItem = {
-                          id: `d-${Date.now()}`,
-                          question: newDialogueQ.trim(),
-                          answer: newDialogueA.trim(),
-                        };
-                        const updated = [...dialogues, newD];
-                        onUpdateDialogues?.(updated);
-                        setNewDialogueQ('');
-                        setNewDialogueA('');
-                      }}
-                      className="px-5 py-2 rounded-full bg-[#28221D] hover:bg-[#1C1713] text-[#ECE5DA] text-xs font-semibold uppercase tracking-wider flex items-center space-x-1.5 cursor-pointer shadow-sm transition-transform active:scale-95"
+                      onClick={() => onUpdateDialogues?.(DEFAULT_DIALOGUES)}
+                      className="px-4 py-2 rounded-full border border-[#D5CBBD] bg-[#F7F3EC] hover:bg-[#28221D] hover:text-[#ECE5DA] text-xs font-medium text-[#655B51] flex items-center space-x-1.5 cursor-pointer transition-colors shrink-0"
+                      title="Reset Q&A cards to default copy"
                     >
-                      <Plus className="w-3.5 h-3.5 text-[#B58D59]" />
-                      <span>Add Q&A Card</span>
+                      <RotateCcw className="w-3.5 h-3.5" />
+                      <span>Reset to Defaults</span>
                     </button>
                   </div>
+
+                  {/* Add New Dialogue */}
+                  <div className="p-6 rounded-3xl bg-[#F7F3EC] border border-[#B58D59]/40 space-y-4 shadow-sm">
+                    <div className="flex items-center space-x-2 border-b border-[#D5CBBD] pb-3">
+                      <Plus className="w-4 h-4 text-[#B58D59]" />
+                      <h4 className="font-sans font-bold text-xs uppercase tracking-wider text-[#28221D]">
+                        Add a New Q&A Card
+                      </h4>
+                    </div>
+
+                    <div>
+                      <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block mb-1">
+                        New Question Prompt
+                      </label>
+                      <input
+                        type="text"
+                        value={newDialogueQ}
+                        onChange={(e) => setNewDialogueQ(e.target.value)}
+                        placeholder="e.g. Q: How do you source your seasonal ingredients?"
+                        className="w-full bg-[#ECE5DA] border border-[#D5CBBD] rounded-full px-4 py-2 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] font-sans"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block mb-1">
+                        New Answer
+                      </label>
+                      <textarea
+                        rows={2}
+                        value={newDialogueA}
+                        onChange={(e) => setNewDialogueA(e.target.value)}
+                        placeholder="e.g. I work directly with local farmers and seasonal growers to bring fresh ingredients to every dinner."
+                        className="w-full bg-[#ECE5DA] border border-[#D5CBBD] rounded-2xl p-3 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] font-sans"
+                      />
+                    </div>
+
+                    <div className="flex justify-end pt-1">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          if (!newDialogueQ.trim() || !newDialogueA.trim()) return;
+                          const newD: CuratorDialogueItem = {
+                            id: `d-${Date.now()}`,
+                            question: newDialogueQ.trim(),
+                            answer: newDialogueA.trim(),
+                          };
+                          const updated = [...dialogues, newD];
+                          onUpdateDialogues?.(updated);
+                          setNewDialogueQ('');
+                          setNewDialogueA('');
+                        }}
+                        className="px-6 py-2.5 rounded-full bg-[#28221D] hover:bg-[#1C1713] text-[#ECE5DA] text-xs font-semibold uppercase tracking-wider flex items-center space-x-1.5 cursor-pointer shadow-sm transition-transform active:scale-95"
+                      >
+                        <Plus className="w-3.5 h-3.5 text-[#B58D59]" />
+                        <span>Add Q&A Card</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Existing Dialogues List */}
+                  <div className="space-y-4">
+                    {dialogues.map((item, idx) => (
+                      <div
+                        key={item.id}
+                        className="p-5 rounded-2xl bg-[#F7F3EC] border border-[#D5CBBD] space-y-3 shadow-xs"
+                      >
+                        <div className="flex items-center justify-between">
+                          <span className="text-xs font-mono font-bold text-[#B58D59]">
+                            Q&A Card #{idx + 1}
+                          </span>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const updated = dialogues.filter(d => d.id !== item.id);
+                              onUpdateDialogues?.(updated);
+                            }}
+                            className="p-1.5 rounded-full text-rose-700 hover:bg-rose-100 hover:text-rose-900 transition-colors cursor-pointer"
+                            title="Delete this Q&A card"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
+
+                        <div>
+                          <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block mb-1">
+                            Question
+                          </label>
+                          <input
+                            type="text"
+                            value={item.question}
+                            onChange={(e) => {
+                              const updated = dialogues.map(d =>
+                                d.id === item.id ? { ...d, question: e.target.value } : d
+                              );
+                              onUpdateDialogues?.(updated);
+                            }}
+                            className="w-full bg-[#ECE5DA] border border-[#D5CBBD] rounded-full px-4 py-2 text-xs text-[#28221D] font-medium focus:outline-none focus:border-[#28221D] font-sans"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block mb-1">
+                            Answer / Philosophy Response
+                          </label>
+                          <textarea
+                            rows={3}
+                            value={item.answer}
+                            onChange={(e) => {
+                              const updated = dialogues.map(d =>
+                                d.id === item.id ? { ...d, answer: e.target.value } : d
+                              );
+                              onUpdateDialogues?.(updated);
+                            }}
+                            className="w-full bg-[#ECE5DA] border border-[#D5CBBD] rounded-2xl p-3 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] font-sans leading-relaxed"
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
+
+              {/* SUBTAB 4: MENU NOTICE */}
+              {settingsSubTab === 'notice' && (
+                <div className="bg-[#ECE5DA] border border-[#D5CBBD] rounded-3xl p-6 sm:p-8 space-y-5 animate-in fade-in duration-150">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#D5CBBD] pb-4">
+                    <div className="space-y-1">
+                      <span className="text-[10px] font-mono uppercase tracking-widest text-[#B58D59] font-bold">
+                        CURRENT MENU & VENUE ANNOUNCEMENT
+                      </span>
+                      <h3 className="font-marcellus text-xl sm:text-2xl text-[#28221D]">
+                        Menu & Venue Notice on Reservation Form
+                      </h3>
+                      <p className="text-xs text-[#655B51] font-light">
+                        This note displays prominently at the top of the reservation form. Update it anytime you change the menu, pricing, timings, or venue address.
+                      </p>
+                    </div>
+                    <label className="flex items-center space-x-2 cursor-pointer bg-[#F7F3EC] px-3.5 py-2 rounded-full border border-[#D5CBBD] hover:border-[#B58D59] transition-colors shrink-0">
+                      <input
+                        type="checkbox"
+                        checked={menuNotice.isActive}
+                        onChange={(e) => {
+                          onUpdateMenuNotice?.({ ...menuNotice, isActive: e.target.checked });
+                        }}
+                        className="rounded accent-[#B58D59]"
+                      />
+                      <span className="text-xs font-semibold text-[#28221D]">
+                        {menuNotice.isActive ? 'Active (Visible on Form)' : 'Hidden (Draft)'}
+                      </span>
+                    </label>
+                  </div>
+
+                  <div className="space-y-3">
+                    <div>
+                      <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block mb-1">
+                        Banner Heading
+                      </label>
+                      <input
+                        type="text"
+                        value={menuNotice.heading}
+                        onChange={(e) => {
+                          onUpdateMenuNotice?.({ ...menuNotice, heading: e.target.value });
+                        }}
+                        placeholder="e.g. Upcoming Autumn Supper Club • 5-Course Heritage Tasting"
+                        className="w-full bg-[#F7F3EC] border border-[#D5CBBD] rounded-full px-4 py-2 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] font-sans"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block mb-1">
+                        Special Venue / Menu Instructions & Details
+                      </label>
+                      <textarea
+                        rows={3}
+                        value={menuNotice.note}
+                        onChange={(e) => {
+                          onUpdateMenuNotice?.({ ...menuNotice, note: e.target.value });
+                        }}
+                        placeholder="e.g. Seating promptly at 7:00 PM. BYOB welcome. Location details and secret buzzer code provided upon confirmation."
+                        className="w-full bg-[#F7F3EC] border border-[#D5CBBD] rounded-2xl p-3 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] font-sans"
+                      />
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* SUBTAB 5: QUESTIONS BUILDER */}
+              {settingsSubTab === 'questions' && (
+                <div className="bg-[#F7F3EC] border border-[#D5CBBD] rounded-3xl p-6 sm:p-8 space-y-6 animate-in fade-in duration-150">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#D5CBBD] pb-4">
+                    <div className="space-y-1">
+                      <span className="text-[10px] font-mono uppercase tracking-widest text-[#B58D59] font-bold">
+                        FORM QUESTIONS BUILDER
+                      </span>
+                      <h3 className="font-marcellus text-xl sm:text-2xl text-[#28221D]">
+                        Custom Questions for Guests
+                      </h3>
+                      <p className="text-xs text-[#655B51] font-light">
+                        Add, edit, enable, or delete questions. Guests will answer these when booking.
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Existing Questions List */}
+                  <div className="space-y-3">
+                    {customQuestions.length === 0 ? (
+                      <div className="p-8 text-center text-xs text-[#8C867D] bg-[#ECE5DA]/50 rounded-2xl border border-dashed border-[#D5CBBD]">
+                        No custom questions yet. Add your first question below!
+                      </div>
+                    ) : (
+                      customQuestions.map((q, idx) => (
+                        <div
+                          key={q.id}
+                          className={`p-4 rounded-2xl border transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4 ${
+                            q.enabled
+                              ? 'bg-[#ECE5DA] border-[#D5CBBD]'
+                              : 'bg-[#ECE5DA]/40 border-dashed border-[#D5CBBD] opacity-60'
+                          }`}
+                        >
+                          <div className="space-y-1 max-w-lg">
+                            <div className="flex items-center space-x-2">
+                              <span className="text-xs font-mono font-bold text-[#B58D59]">
+                                Q{idx + 1}.
+                              </span>
+                              <span className="font-medium text-xs text-[#28221D]">
+                                {q.label}
+                              </span>
+                              {q.required && (
+                                <span className="text-[9px] uppercase font-bold text-[#B58D59] bg-[#B58D59]/10 px-2 py-0.5 rounded-full">
+                                  Required
+                                </span>
+                              )}
+                            </div>
+                            <div className="flex items-center space-x-2 text-[10.5px] text-[#655B51]">
+                              <span className="font-mono uppercase bg-white/60 px-2 py-0.5 rounded border border-[#D5CBBD]/60">
+                                Type: {q.type.replace('_', ' ')}
+                              </span>
+                              {q.options && q.options.length > 0 && (
+                                <span className="truncate max-w-xs">
+                                  Options: {q.options.join(', ')}
+                                </span>
+                              )}
+                            </div>
+                          </div>
+
+                          <div className="flex items-center space-x-2 shrink-0">
+                            {/* Enable/Disable Toggle */}
+                            <button
+                              type="button"
+                              onClick={() => {
+                                const updated = customQuestions.map(item =>
+                                  item.id === q.id ? { ...item, enabled: !item.enabled } : item
+                                );
+                                onUpdateCustomQuestions?.(updated);
+                              }}
+                              className={`px-3 py-1.5 rounded-full text-xs font-medium cursor-pointer transition-colors ${
+                                q.enabled
+                                  ? 'bg-emerald-700 text-white hover:bg-emerald-800'
+                                  : 'bg-[#D5CBBD] text-[#4A4138] hover:bg-[#C5BBAE]'
+                              }`}
+                            >
+                              {q.enabled ? '✓ Enabled' : 'Disabled'}
+                            </button>
+
+                            {/* Delete Question */}
+                            <button
+                              type="button"
+                              onClick={() => {
+                                const updated = customQuestions.filter(item => item.id !== q.id);
+                                onUpdateCustomQuestions?.(updated);
+                              }}
+                              className="p-2 rounded-full text-rose-700 hover:bg-rose-100 hover:text-rose-900 transition-colors cursor-pointer"
+                              title="Delete this question"
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </button>
+                          </div>
+                        </div>
+                      ))
+                    )}
+                  </div>
+
+                  {/* Add New Question Form */}
+                  <div className="p-5 rounded-2xl bg-[#ECE5DA] border border-[#B58D59]/30 space-y-4">
+                    <div className="flex items-center space-x-2">
+                      <Plus className="w-4 h-4 text-[#B58D59]" />
+                      <span className="font-sans font-bold text-xs uppercase tracking-wider text-[#28221D]">
+                        Add a New Question
+                      </span>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                      <div className="sm:col-span-2">
+                        <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block mb-1">
+                          Question Label / Prompt
+                        </label>
+                        <input
+                          type="text"
+                          value={newQuestionLabel}
+                          onChange={(e) => setNewQuestionLabel(e.target.value)}
+                          placeholder="e.g. Wine pairing preference or BYOB?"
+                          className="w-full bg-[#F7F3EC] border border-[#D5CBBD] rounded-full px-4 py-2 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] font-sans"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block mb-1">
+                          Answer Type
+                        </label>
+                        <select
+                          value={newQuestionType}
+                          onChange={(e) => setNewQuestionType(e.target.value as any)}
+                          className="w-full bg-[#F7F3EC] border border-[#D5CBBD] rounded-full px-4 py-2 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] font-sans cursor-pointer"
+                        >
+                          <option value="text">Short Text Answer</option>
+                          <option value="yes_no">Yes / No Buttons</option>
+                          <option value="dropdown">Dropdown Selection</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    {newQuestionType === 'dropdown' && (
+                      <div>
+                        <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block mb-1">
+                          Options (comma-separated)
+                        </label>
+                        <input
+                          type="text"
+                          value={newQuestionOptions}
+                          onChange={(e) => setNewQuestionOptions(e.target.value)}
+                          placeholder="e.g. Red Wine, White Wine, Non-Alcoholic, BYOB"
+                          className="w-full bg-[#F7F3EC] border border-[#D5CBBD] rounded-full px-4 py-2 text-xs text-[#28221D] focus:outline-none focus:border-[#28221D] font-sans"
+                        />
+                      </div>
+                    )}
+
+                    <div className="flex items-center justify-between pt-2">
+                      <label className="flex items-center space-x-2 text-xs text-[#28221D] cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={newQuestionRequired}
+                          onChange={(e) => setNewQuestionRequired(e.target.checked)}
+                          className="rounded accent-[#B58D59]"
+                        />
+                        <span>Mark question as required</span>
+                      </label>
+
+                      <button
+                        type="button"
+                        onClick={() => {
+                          if (!newQuestionLabel.trim()) return;
+                          const newQ: FormCustomQuestion = {
+                            id: `q-${Date.now()}`,
+                            label: newQuestionLabel.trim(),
+                            type: newQuestionType,
+                            options: newQuestionType === 'dropdown'
+                              ? newQuestionOptions.split(',').map(s => s.trim()).filter(Boolean)
+                              : undefined,
+                            required: newQuestionRequired,
+                            enabled: true,
+                          };
+                          const updated = [...customQuestions, newQ];
+                          onUpdateCustomQuestions?.(updated);
+                          setNewQuestionLabel('');
+                          setNewQuestionOptions('');
+                          setNewQuestionRequired(false);
+                        }}
+                        className="px-5 py-2 rounded-full bg-[#28221D] hover:bg-[#1C1713] text-[#ECE5DA] text-xs font-semibold uppercase tracking-wider flex items-center space-x-1.5 cursor-pointer shadow-sm transition-transform active:scale-95"
+                      >
+                        <Plus className="w-3.5 h-3.5 text-[#B58D59]" />
+                        <span>Add Question</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           )}
         </div>

@@ -20,6 +20,25 @@ export interface CuratorDialogueItem {
   answer: string;
 }
 
+export interface DishImageItem {
+  id: string;
+  title: string;
+  bengaliTitle: string;
+  imageUrl: string;
+  aspect?: string;
+  objectPosition?: string;
+}
+
+export interface HearthVideoItem {
+  id: string;
+  url: string;
+  poster: string;
+  tag: string;
+  title: string;
+  quote: string;
+  subtitle: string;
+}
+
 export interface WaitlistEntry {
   id: string;
   fullName: string;
