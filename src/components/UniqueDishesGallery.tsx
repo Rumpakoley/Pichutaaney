@@ -34,7 +34,7 @@ const DISH_COLLECTION: DishImage[] = [
   },
   {
     id: 'dish-mango-ceviche',
-    title: 'Mango & Tamarind Ceviche with Scallops & Citrus Broth',
+    title: 'Tamarind Mango Ceviche with Scallops, Jalapeño, Cucumber and Pickled Onions',
     bengaliTitle: 'আম ও তেঁতুল সেভিচে',
     imageUrl: 'https://res.cloudinary.com/dpdtsaalf/image/upload/v1790433181/WhatsApp_Image_2026-09-26_at_1.07.12_AM_d2ykfc.jpg',
     aspect: 'aspect-[3/4]',
