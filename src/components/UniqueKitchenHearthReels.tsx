@@ -13,6 +13,15 @@ interface VideoCardData {
 
 const HEARTH_VIDEOS: VideoCardData[] = [
   {
+    id: 'hearth-aamontron',
+    url: 'https://res.cloudinary.com/dpdtsaalf/video/upload/v1790433308/WhatsApp_Video_2026-09-26_at_12.59.54_AM_pikgxs.mp4',
+    poster: 'https://res.cloudinary.com/dpdtsaalf/video/upload/so_1/v1790433308/WhatsApp_Video_2026-09-26_at_12.59.54_AM_pikgxs.jpg',
+    tag: 'AAMONTRON • THE INVITE',
+    title: 'Aamontron (The Invite)',
+    quote: '“A personal invitation to pull up a chair, share stories, and experience unhurried cooking.”',
+    subtitle: 'Enakshi invites you to the Pichhutaaney communal table and intimate supper club gatherings.',
+  },
+  {
     id: 'hearth-1',
     url: 'https://res.cloudinary.com/dpdtsaalf/video/upload/v1790275883/whatsapp-video-2026-09-22-at-105223-am_EJQaSZwo_online-video-cutter.com_mcbyn5.mp4',
     poster: 'https://res.cloudinary.com/dpdtsaalf/video/upload/so_1/v1790275883/whatsapp-video-2026-09-22-at-105223-am_EJQaSZwo_online-video-cutter.com_mcbyn5.jpg',
