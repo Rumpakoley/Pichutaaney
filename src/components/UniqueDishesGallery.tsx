@@ -33,6 +33,20 @@ const DISH_COLLECTION: DishImage[] = [
     aspect: 'aspect-[3/4]',
   },
   {
+    id: 'dish-mango-ceviche',
+    title: 'Mango & Tamarind Ceviche with Scallops & Citrus Broth',
+    bengaliTitle: 'আম ও তেঁতুল সেভিচে',
+    imageUrl: 'https://res.cloudinary.com/dpdtsaalf/image/upload/v1790433181/WhatsApp_Image_2026-09-26_at_1.07.12_AM_d2ykfc.jpg',
+    aspect: 'aspect-[3/4]',
+  },
+  {
+    id: 'dish-paati-shapta',
+    title: 'Paati Shapta with Vanilla Ice Cream on Nolen Gur Croutons',
+    bengaliTitle: 'পাটিসাপটা ও নলেন গুড়',
+    imageUrl: 'https://res.cloudinary.com/dpdtsaalf/image/upload/v1790433183/WhatsApp_Image_2026-09-26_at_1.05.30_AM_ituj5e.jpg',
+    aspect: 'aspect-[3/4]',
+  },
+  {
     id: 'dish-1',
     title: 'Plated Grain & Spiced Purée with Vine Tomatoes',
     bengaliTitle: 'অনন্য সাজানো পদ',
