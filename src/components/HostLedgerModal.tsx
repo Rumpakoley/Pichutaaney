@@ -160,14 +160,6 @@ export const HostLedgerModal: React.FC<HostLedgerModalProps> = ({
               Review real-time reservation requests, 1-click ⭐ shortlist candidate guests, and batch-notify directly.
             </p>
           </div>
-
-          <button
-            onClick={onClose}
-            className="p-2 rounded-full bg-[#ECE5DA] text-[#655B51] hover:text-[#28221D] hover:bg-[#DFD7CB] transition-colors cursor-pointer"
-            title="Close"
-          >
-            <X className="w-5 h-5" />
-          </button>
         </div>
 
         {/* Stats & Shortlist Summary Bar */}
