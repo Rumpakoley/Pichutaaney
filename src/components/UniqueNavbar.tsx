@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BookOpen } from 'lucide-react';
+import { Lock } from 'lucide-react';
 
 interface UniqueNavbarProps {
   onOpenLedger: () => void;
@@ -86,15 +86,14 @@ export const UniqueNavbar: React.FC<UniqueNavbarProps> = ({
           Reserve Table
         </a>
 
-        {reservationCount > 0 && (
-          <button
-            onClick={onOpenLedger}
-            title="Open Host Concierge Desk"
-            className="p-1.5 rounded-full bg-[#B58D59] text-white hover:bg-[#C49E67] hover:scale-105 transition-all flex items-center justify-center cursor-pointer shadow-xs"
-          >
-            <BookOpen className="w-3.5 h-3.5" />
-          </button>
-        )}
+        <button
+          onClick={onOpenLedger}
+          title="Curator & Host Portal"
+          aria-label="Curator & Host Portal"
+          className="p-2 rounded-full bg-[#28221D] text-[#ECE5DA] hover:bg-[#B58D59] hover:text-[#1C1713] transition-all flex items-center justify-center cursor-pointer shadow-xs active:scale-95"
+        >
+          <Lock className="w-3.5 h-3.5" />
+        </button>
       </div>
     </header>
   );

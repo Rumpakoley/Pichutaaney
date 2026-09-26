@@ -40,48 +40,9 @@ const INITIAL_MENU_NOTICE: MenuVenueNotice = {
   note: 'Current Atelier Menu: 5-Course Heritage Fish & Heirloom Grains. BYOB welcome without corkage. Exact venue location dispatched upon confirmation.',
 };
 
-const INITIAL_WAITLIST: WaitlistEntry[] = [
-  {
-    id: 'PCH-WL-10821',
-    fullName: 'Ananya Sengupta',
-    email: 'ananya.sen@example.com',
-    phone: '+1 (415) 555-0192',
-    city: 'San Francisco, CA',
-    partySize: 2,
-    dietaryPreferences: ['Omnivore (Fish, Seafood & Meats)'],
-    notes: 'Longing for authentic shorshe ilish and memories of my Dida’s kitchen in Salt Lake, Kolkata.',
-    submittedAt: '2026-08-28T14:22:00.000Z',
-    status: 'invited',
-  },
-  {
-    id: 'PCH-WL-10844',
-    fullName: 'Marcus Sterling',
-    email: 'marcus.s@example.com',
-    city: 'Oakland, CA',
-    partySize: 2,
-    dietaryPreferences: ['Pescatarian (River Fish, Seafood & Veg)', 'Gluten-Free'],
-    notes: 'Heard about Enakshi’s regional culinary research on lesser-known spices like radhuni.',
-    submittedAt: '2026-09-01T09:15:00.000Z',
-    status: 'pending',
-  }
-];
+const INITIAL_WAITLIST: WaitlistEntry[] = [];
 
-const INITIAL_INQUIRIES: PrivateEventInquiry[] = [
-  {
-    id: 'PCH-EVT-20412',
-    fullName: 'Dr. Priya & David Miller',
-    email: 'priya.miller@example.org',
-    phone: '+1 (510) 555-8391',
-    eventType: 'celebration',
-    guestCount: 14,
-    preferredDate: 'Late October 2026 (Saturday evening)',
-    locationOrVenue: 'Private home dining room, Berkeley Hills',
-    dietaryRestrictions: '10 omnivores, 4 strict vegetarians (no gelatin/eggs)',
-    storytellingNotes: 'Celebrating my mother’s 70th birthday. She grew up in Chandannagar and we would love a custom course reflecting French-Bengali colonial nuances.',
-    submittedAt: '2026-09-02T16:40:00.000Z',
-    status: 'in_discussion',
-  }
-];
+const INITIAL_INQUIRIES: PrivateEventInquiry[] = [];
 
 export default function App() {
   const [waitlist, setWaitlist] = useState<WaitlistEntry[]>(() => {

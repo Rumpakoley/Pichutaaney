@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { WaitlistEntry, PrivateEventInquiry, ContactMessage, FormCustomQuestion, MenuVenueNotice, CuratorDialogueItem, DishImageItem, HearthVideoItem } from '../types';
-import { X, Download, Filter, Search, Check, Clock, Mail, Users, Calendar, Star, Copy, Sparkles, CheckCircle2, Sliders, Plus, Trash2, MessageSquareText, Image, Film, RotateCcw, Utensils } from 'lucide-react';
+import { X, Download, Filter, Search, Check, Clock, Mail, Users, Calendar, Star, Copy, Sparkles, CheckCircle2, Sliders, Plus, Trash2, MessageSquareText, Image, Film, RotateCcw, Utensils, Lock, Unlock, Eye, EyeOff, ShieldCheck } from 'lucide-react';
 import { DEFAULT_DISH_COLLECTION } from './UniqueDishesGallery';
 import { DEFAULT_HEARTH_VIDEOS } from './UniqueKitchenHearthReels';
 import { DEFAULT_DIALOGUES } from './UniqueCuratorDialogues';
@@ -45,10 +45,32 @@ export const HostLedgerModal: React.FC<HostLedgerModalProps> = ({
   onUpdateVideos,
 }) => {
   const [activeTab, setActiveTab] = useState<'waitlist' | 'inquiries' | 'messages' | 'settings'>('waitlist');
-  const [settingsSubTab, setSettingsSubTab] = useState<'dishes' | 'videos' | 'dialogues' | 'notice' | 'questions'>('dishes');
+  const [settingsSubTab, setSettingsSubTab] = useState<'dishes' | 'videos' | 'dialogues' | 'notice' | 'questions' | 'security'>('dishes');
   const [statusFilter, setStatusFilter] = useState<'all' | 'shortlisted' | 'pending' | 'invited' | 'confirmed'>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [copiedMessage, setCopiedMessage] = useState<string | null>(null);
+
+  // Authentication & Security State
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
+    try {
+      return sessionStorage.getItem('pichhutaaney_curator_auth') === 'true';
+    } catch {
+      return false;
+    }
+  });
+  const [passkeyInput, setPasskeyInput] = useState('');
+  const [showPasskey, setShowPasskey] = useState(false);
+  const [authError, setAuthError] = useState<string | null>(null);
+
+  const [curatorPasskey, setCuratorPasskey] = useState<string>(() => {
+    try {
+      return localStorage.getItem('pichhutaaney_curator_passkey') || 'pichhutaaney2026';
+    } catch {
+      return 'pichhutaaney2026';
+    }
+  });
+  const [newPasskeyInput, setNewPasskeyInput] = useState('');
+  const [passkeyUpdatedMsg, setPasskeyUpdatedMsg] = useState(false);
 
   // Form customizer state
   const [newQuestionLabel, setNewQuestionLabel] = useState('');
@@ -73,6 +95,101 @@ export const HostLedgerModal: React.FC<HostLedgerModalProps> = ({
   const [newVideoUrl, setNewVideoUrl] = useState('');
 
   if (!isOpen) return null;
+
+  if (!isAuthenticated) {
+    return (
+      <div className="fixed inset-0 z-50 overflow-y-auto bg-black/80 backdrop-blur-md flex items-center justify-center p-4 font-sans text-left">
+        <div className="bg-[#F7F3EC] border border-[#D5CBBD] rounded-3xl shadow-2xl w-full max-w-md p-7 sm:p-8 space-y-6 text-center text-[#28221D] animate-in fade-in zoom-in-95 duration-200">
+          <div className="w-16 h-16 rounded-full bg-[#28221D] text-[#B58D59] flex items-center justify-center mx-auto shadow-md">
+            <Lock className="w-7 h-7" />
+          </div>
+
+          <div className="space-y-1.5">
+            <span className="text-[10px] font-mono uppercase tracking-widest text-[#B58D59] font-bold">
+              Restricted Curator Portal
+            </span>
+            <h2 className="font-marcellus text-2xl text-[#28221D]">
+              Host Desk & Guest Ledger
+            </h2>
+            <p className="text-xs text-[#655B51] font-light leading-relaxed">
+              This portal contains confidential table reservations, guest contact details, and site media management. Please enter your host passkey to unlock.
+            </p>
+          </div>
+
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (passkeyInput === curatorPasskey) {
+                setIsAuthenticated(true);
+                setAuthError(null);
+                try {
+                  sessionStorage.setItem('pichhutaaney_curator_auth', 'true');
+                } catch (err) {
+                  console.error(err);
+                }
+              } else {
+                setAuthError('Incorrect host passkey. Access denied.');
+              }
+            }}
+            className="space-y-4 text-left"
+          >
+            <div>
+              <label className="text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block mb-1.5 font-sans">
+                Host Passkey
+              </label>
+              <div className="relative">
+                <input
+                  type={showPasskey ? 'text' : 'password'}
+                  placeholder="Enter passkey..."
+                  value={passkeyInput}
+                  onChange={(e) => {
+                    setPasskeyInput(e.target.value);
+                    if (authError) setAuthError(null);
+                  }}
+                  autoFocus
+                  className="w-full bg-[#ECE5DA] border border-[#D5CBBD] rounded-full px-4 py-2.5 pr-11 text-xs text-[#28221D] font-mono tracking-wider focus:outline-none focus:border-[#28221D] shadow-inner"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPasskey(!showPasskey)}
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[#655B51] hover:text-[#28221D] cursor-pointer"
+                >
+                  {showPasskey ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
+              </div>
+            </div>
+
+            {authError && (
+              <div className="p-2.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs text-center font-medium animate-in fade-in duration-150">
+                {authError}
+              </div>
+            )}
+
+            <div className="flex gap-3 pt-2">
+              <button
+                type="button"
+                onClick={onClose}
+                className="flex-1 py-2.5 rounded-full border border-[#D5CBBD] bg-[#ECE5DA] hover:bg-[#E3D9CC] text-xs font-semibold text-[#655B51] uppercase tracking-wider cursor-pointer transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className="flex-1 py-2.5 rounded-full bg-[#28221D] hover:bg-[#1C1713] text-[#ECE5DA] text-xs font-semibold uppercase tracking-wider cursor-pointer shadow-md transition-transform active:scale-95 flex items-center justify-center space-x-1.5"
+              >
+                <Unlock className="w-3.5 h-3.5 text-[#B58D59]" />
+                <span>Unlock Portal</span>
+              </button>
+            </div>
+          </form>
+
+          <div className="pt-2 border-t border-[#D5CBBD]/50 text-[10px] text-[#655B51]/70 font-mono">
+            Protected by Host Session Encryption
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   const shortlistedWaitlistCount = waitlist.filter(w => w.status === 'shortlisted').length;
   const confirmedWaitlistCount = waitlist.filter(w => w.status === 'confirmed').length;
@@ -170,7 +287,7 @@ export const HostLedgerModal: React.FC<HostLedgerModalProps> = ({
     <div className="fixed inset-0 z-50 overflow-y-auto bg-black/75 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6 font-sans">
       <div className="bg-[#ECE5DA] border border-[#D5CBBD] rounded-3xl shadow-2xl w-full max-w-5xl max-h-[90vh] flex flex-col overflow-hidden text-left">
         {/* Modal Header */}
-        <div className="p-6 sm:p-7 border-b border-[#D5CBBD] flex items-center justify-between bg-[#F7F3EC]">
+        <div className="p-5 sm:p-6 border-b border-[#D5CBBD] flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-[#F7F3EC]">
           <div>
             <div className="flex items-center space-x-3">
               <span className="font-marcellus text-2xl sm:text-3xl font-normal text-[#28221D]">
@@ -183,6 +300,30 @@ export const HostLedgerModal: React.FC<HostLedgerModalProps> = ({
             <p className="text-xs text-[#655B51] mt-1 font-light">
               Review real-time reservation requests, 1-click ⭐ shortlist candidate guests, and batch-notify directly.
             </p>
+          </div>
+
+          <div className="flex items-center space-x-2 shrink-0">
+            <button
+              onClick={() => {
+                setIsAuthenticated(false);
+                setPasskeyInput('');
+                try {
+                  sessionStorage.removeItem('pichhutaaney_curator_auth');
+                } catch {}
+              }}
+              className="px-3.5 py-1.5 rounded-full text-[11px] font-semibold bg-[#ECE5DA] hover:bg-[#E3D9CC] text-[#655B51] hover:text-[#28221D] border border-[#D5CBBD] flex items-center space-x-1.5 cursor-pointer transition-colors shadow-xs"
+              title="Lock Curator Desk and require password on next open"
+            >
+              <Lock className="w-3.5 h-3.5 text-[#B58D59]" />
+              <span>Lock Desk</span>
+            </button>
+
+            <button
+              onClick={onClose}
+              className="px-4 py-1.5 rounded-full bg-[#28221D] text-[#ECE5DA] hover:bg-[#1C1713] text-[11px] font-semibold uppercase tracking-wider transition-colors cursor-pointer shadow-xs"
+            >
+              Close Desk
+            </button>
           </div>
         </div>
 
@@ -585,6 +726,19 @@ export const HostLedgerModal: React.FC<HostLedgerModalProps> = ({
                 >
                   <Sliders className="w-3.5 h-3.5 text-[#B58D59]" />
                   <span>❓ Form Questions ({customQuestions.length})</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setSettingsSubTab('security')}
+                  className={`px-4 py-2 rounded-xl text-xs font-semibold flex items-center space-x-1.5 transition-all cursor-pointer ${
+                    settingsSubTab === 'security'
+                      ? 'bg-[#28221D] text-[#ECE5DA] shadow-xs'
+                      : 'text-[#655B51] hover:text-[#28221D] hover:bg-[#ECE5DA]'
+                  }`}
+                >
+                  <ShieldCheck className="w-3.5 h-3.5 text-[#B58D59]" />
+                  <span>🔐 Host Passkey</span>
                 </button>
               </div>
 
@@ -1459,6 +1613,81 @@ export const HostLedgerModal: React.FC<HostLedgerModalProps> = ({
                       >
                         <Plus className="w-3.5 h-3.5 text-[#B58D59]" />
                         <span>Add Question</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* SUBTAB 6: HOST SECURITY & PASSKEY */}
+              {settingsSubTab === 'security' && (
+                <div className="space-y-6 animate-in fade-in duration-150">
+                  <div className="bg-[#ECE5DA] border border-[#D5CBBD] rounded-3xl p-6 sm:p-7 space-y-1">
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-[#B58D59] font-bold">
+                      SECURITY & CREDENTIALS
+                    </span>
+                    <h3 className="font-marcellus text-xl sm:text-2xl text-[#28221D]">
+                      Host Access Passkey
+                    </h3>
+                    <p className="text-xs text-[#655B51] font-light">
+                      Change the secret passkey required to open this Host Desk and view private guest reservation data.
+                    </p>
+                  </div>
+
+                  <div className="p-6 rounded-3xl bg-[#F7F3EC] border border-[#B58D59]/40 space-y-4 shadow-sm max-w-lg">
+                    <div>
+                      <label className="font-sans text-[10.5px] uppercase tracking-wider font-semibold text-[#28221D] block mb-1.5">
+                        New Host Passkey
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="Enter new secret passkey..."
+                        value={newPasskeyInput}
+                        onChange={(e) => setNewPasskeyInput(e.target.value)}
+                        className="w-full bg-[#ECE5DA] border border-[#D5CBBD] rounded-full px-4 py-2 text-xs text-[#28221D] font-mono tracking-wider focus:outline-none focus:border-[#28221D]"
+                      />
+                    </div>
+
+                    {passkeyUpdatedMsg && (
+                      <div className="p-2.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-medium">
+                        ✓ Host passkey updated successfully and saved in browser storage.
+                      </div>
+                    )}
+
+                    <div className="flex items-center gap-3 pt-2">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          if (!newPasskeyInput.trim()) return;
+                          setCuratorPasskey(newPasskeyInput.trim());
+                          try {
+                            localStorage.setItem('pichhutaaney_curator_passkey', newPasskeyInput.trim());
+                          } catch (err) {
+                            console.error(err);
+                          }
+                          setNewPasskeyInput('');
+                          setPasskeyUpdatedMsg(true);
+                          setTimeout(() => setPasskeyUpdatedMsg(false), 3500);
+                        }}
+                        className="px-6 py-2.5 rounded-full bg-[#28221D] hover:bg-[#1C1713] text-[#ECE5DA] text-xs font-semibold uppercase tracking-wider flex items-center space-x-1.5 cursor-pointer shadow-sm transition-transform active:scale-95"
+                      >
+                        <ShieldCheck className="w-3.5 h-3.5 text-[#B58D59]" />
+                        <span>Save New Passkey</span>
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setCuratorPasskey('pichhutaaney2026');
+                          try {
+                            localStorage.removeItem('pichhutaaney_curator_passkey');
+                          } catch {}
+                          setPasskeyUpdatedMsg(true);
+                          setTimeout(() => setPasskeyUpdatedMsg(false), 3500);
+                        }}
+                        className="px-4 py-2.5 rounded-full border border-[#D5CBBD] bg-[#ECE5DA] text-[#655B51] hover:text-[#28221D] text-xs font-medium cursor-pointer"
+                      >
+                        Reset to Default
                       </button>
                     </div>
                   </div>

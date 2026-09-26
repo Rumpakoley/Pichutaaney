@@ -18,13 +18,23 @@ export const UniqueFooter: React.FC<UniqueFooterProps> = ({ onOpenLedger }) => {
             © {new Date().getFullYear()} ENAKSHI • PICHHUTAANEY (পিছুটানে)
           </div>
 
-          <button
-            onClick={scrollToTop}
-            className="flex items-center space-x-1.5 text-[#D5CBBD] hover:text-[#B58D59] transition-colors cursor-pointer"
-          >
-            <span>Back to top</span>
-            <ArrowUp className="w-3.5 h-3.5" />
-          </button>
+          <div className="flex items-center space-x-4">
+            {onOpenLedger && (
+              <button
+                onClick={onOpenLedger}
+                className="text-[#D5CBBD]/40 hover:text-[#B58D59] transition-colors cursor-pointer text-[10px] tracking-widest font-mono uppercase"
+              >
+                Host Portal
+              </button>
+            )}
+            <button
+              onClick={scrollToTop}
+              className="flex items-center space-x-1.5 text-[#D5CBBD] hover:text-[#B58D59] transition-colors cursor-pointer"
+            >
+              <span>Back to top</span>
+              <ArrowUp className="w-3.5 h-3.5" />
+            </button>
+          </div>
         </div>
       </div>
     </footer>
