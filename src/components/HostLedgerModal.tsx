@@ -286,12 +286,12 @@ export const HostLedgerModal: React.FC<HostLedgerModalProps> = ({
               }}
               className={`px-3.5 py-1.5 rounded-full transition-all border cursor-pointer flex items-center space-x-1.5 ${
                 activeTab === 'settings'
-                  ? 'bg-[#B58D59] text-[#1C1713] border-[#B58D59] font-bold shadow-xs'
+                  ? 'bg-[#28221D] text-[#ECE5DA] border-[#28221D] shadow-xs'
                   : 'text-[#655B51] bg-[#F7F3EC] border-[#D5CBBD] hover:text-[#28221D]'
               }`}
             >
-              <Sliders className="w-3.5 h-3.5" />
-              <span>Menu & Questions ({customQuestions.length})</span>
+              <Sparkles className="w-3.5 h-3.5 text-[#B58D59]" />
+              <span>Content Studio (Photos, Videos & Menu)</span>
             </button>
           </div>
 
