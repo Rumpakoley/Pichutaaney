@@ -3,7 +3,36 @@ import { Sparkles, Utensils, Compass, Flame, Play, ArrowUpRight, Volume2, Volume
 import { HeroLookbookItem } from '../types';
 
 export const CHEF_ATELIER_LOOKBOOK: HeroLookbookItem[] = [
-  // Videos cleared for custom rearrangement by user
+  {
+    id: 'vid-essence',
+    category: 'The Intuitive Cook',
+    title: 'The Essence',
+    subtitle: 'Wandering, sensory memory, and instinct-led cooking in full motion',
+    type: 'video',
+    url: 'https://res.cloudinary.com/dpdtsaalf/video/upload/v1790520158/WhatsApp_Video_2026-09-27_at_7.56.53_PM_kry70z.mp4',
+    badge: 'REEL 01 • THE ESSENCE',
+    provenance: 'Bengal Delta to Global Tables',
+  },
+  {
+    id: 'vid-hearth',
+    category: 'The Hearth & Flame',
+    title: 'The Hearth',
+    subtitle: 'Golden mustard oil heating to smoke point and the rhythm of the pan',
+    type: 'video',
+    url: 'https://res.cloudinary.com/dpdtsaalf/video/upload/v1788549950/WhatsApp_Video_2026-09-05_at_12.47.22_AM_udyrd8.mp4',
+    badge: 'REEL 02 • THE HEARTH',
+    provenance: 'Nadia District & River Silts',
+  },
+  {
+    id: 'vid-invite',
+    category: 'The Host Invitation',
+    title: 'The Invite',
+    subtitle: 'A personal invitation to join our communal supper club table and taste memory in motion',
+    type: 'video',
+    url: 'https://res.cloudinary.com/dpdtsaalf/video/upload/v1790433308/WhatsApp_Video_2026-09-26_at_12.59.54_AM_pikgxs.mp4',
+    badge: 'AAMONTRON • THE INVITE',
+    provenance: 'Enakshi’s Table Invitation',
+  },
 ];
 
 interface UniqueHeroProps {
