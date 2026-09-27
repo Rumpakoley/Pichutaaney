@@ -39,6 +39,17 @@ export interface HearthVideoItem {
   subtitle: string;
 }
 
+export interface HeroLookbookItem {
+  id: string;
+  category: string;
+  title: string;
+  subtitle: string;
+  type: 'video';
+  url: string;
+  badge: string;
+  provenance: string;
+}
+
 export interface WaitlistEntry {
   id: string;
   fullName: string;
