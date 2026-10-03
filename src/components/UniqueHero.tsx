@@ -225,11 +225,8 @@ export const UniqueHero: React.FC<UniqueHeroProps> = ({
                   ))}
                 </div>
 
-                {/* Bottom Caption & Provenance */}
+                {/* Bottom Caption */}
                 <div className="absolute bottom-0 inset-x-0 p-5 sm:p-6 text-left text-white pt-10 pointer-events-none z-30">
-                  <span className="font-mono text-[9px] uppercase tracking-widest text-[#B58D59] font-bold block mb-0.5">
-                    PROVENANCE // {currentItem.provenance}
-                  </span>
                   <h4 className="font-marcellus text-base sm:text-lg font-normal text-white">
                     {currentItem.title}
                   </h4>
