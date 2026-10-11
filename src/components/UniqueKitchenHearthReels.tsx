@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Play, Pause, Volume2, VolumeX, Maximize, Flame, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Play, Pause, Maximize, Flame, ChevronLeft, ChevronRight } from 'lucide-react';
 import { HearthVideoItem } from '../types';
 
 export const DEFAULT_HEARTH_VIDEOS: HearthVideoItem[] = [
@@ -70,7 +70,6 @@ export const DEFAULT_HEARTH_VIDEOS: HearthVideoItem[] = [
 
 const HearthVideoCard: React.FC<{ item: VideoCardData }> = ({ item }) => {
   const [isPlaying, setIsPlaying] = useState(true);
-  const [isMuted, setIsMuted] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const webmUrl = item.url.replace('/video/upload/', '/video/upload/f_webm/').replace(/\.mp4$/i, '.webm');
@@ -114,14 +113,6 @@ const HearthVideoCard: React.FC<{ item: VideoCardData }> = ({ item }) => {
       video.pause();
       setIsPlaying(false);
     }
-  };
-
-  const toggleMute = () => {
-    const video = videoRef.current;
-    if (!video) return;
-    const nextMuted = !video.muted;
-    video.muted = nextMuted;
-    setIsMuted(nextMuted);
   };
 
   const handleFullScreen = () => {
@@ -203,19 +194,6 @@ const HearthVideoCard: React.FC<{ item: VideoCardData }> = ({ item }) => {
               {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5 fill-current" />}
               <span className="font-mono uppercase text-[9.5px] tracking-wider font-bold">
                 {isPlaying ? 'Pause' : 'Play'}
-              </span>
-            </button>
-
-            <span className="text-white/20">|</span>
-
-            <button
-              onClick={toggleMute}
-              className="flex items-center space-x-1.5 hover:text-[#B58D59] transition-colors p-1 cursor-pointer"
-              aria-label={isMuted ? 'Unmute audio' : 'Mute audio'}
-            >
-              {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5 text-[#B58D59]" />}
-              <span className="font-mono uppercase text-[9.5px] tracking-wider font-bold">
-                {isMuted ? 'Unmute' : 'Mute'}
               </span>
             </button>
 
