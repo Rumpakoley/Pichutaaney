@@ -81,9 +81,9 @@ export const UniqueNavbar: React.FC<UniqueNavbarProps> = ({
       <div className="flex items-center space-x-2">
         <a
           href="#table-concierge"
-          className="px-4 sm:px-5 py-1.5 bg-[#28221D] hover:bg-[#B58D59] hover:text-[#1C1713] text-[#ECE5DA] rounded-full font-sans text-xs uppercase tracking-widest font-semibold transition-all duration-300 shadow-sm hover:shadow-md hover:scale-[1.03] active:scale-[0.98] inline-block"
+          className="px-4 sm:px-5 py-1.5 bg-[#28221D] hover:bg-[#B58D59] hover:text-[#1C1713] text-[#ECE5DA] rounded-full font-sans text-xs uppercase tracking-widest font-semibold transition-all duration-300 shadow-sm hover:shadow-md hover:scale-[1.03] active:scale-[0.98] inline-block whitespace-nowrap"
         >
-          Reserve Table
+          Reserve your seat/s
         </a>
 
         <button
