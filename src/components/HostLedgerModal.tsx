@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { WaitlistEntry, PrivateEventInquiry, ContactMessage, FormCustomQuestion, MenuVenueNotice, CuratorDialogueItem, DishImageItem, HearthVideoItem } from '../types';
-import { X, Download, Filter, Search, Check, Clock, Mail, Users, Calendar, Star, Copy, Sparkles, CheckCircle2, Sliders, Plus, Trash2, MessageSquareText, Image, Film, RotateCcw, Utensils, Lock, Unlock, Eye, EyeOff, ShieldCheck } from 'lucide-react';
+import { X, Download, Filter, Search, Check, Clock, Mail, Users, Calendar, Star, Copy, Sparkles, CheckCircle2, Sliders, Plus, Trash2, MessageSquareText, Image, Film, RotateCcw, Utensils, Lock, Unlock, Eye, EyeOff, ShieldCheck, UserPlus } from 'lucide-react';
 import { DEFAULT_DISH_COLLECTION } from './UniqueDishesGallery';
 import { DEFAULT_HEARTH_VIDEOS } from './UniqueKitchenHearthReels';
 import { DEFAULT_DIALOGUES } from './UniqueCuratorDialogues';
@@ -13,6 +13,8 @@ interface HostLedgerModalProps {
   messages: ContactMessage[];
   onUpdateWaitlistStatus: (id: string, status: WaitlistEntry['status']) => void;
   onUpdateInquiryStatus: (id: string, status: PrivateEventInquiry['status']) => void;
+  onAddWaitlist?: (entry: WaitlistEntry) => void;
+  onAddWaitlistBulk?: (entries: WaitlistEntry[]) => void;
   customQuestions?: FormCustomQuestion[];
   menuNotice?: MenuVenueNotice;
   dialogues?: CuratorDialogueItem[];
@@ -33,6 +35,8 @@ export const HostLedgerModal: React.FC<HostLedgerModalProps> = ({
   messages,
   onUpdateWaitlistStatus,
   onUpdateInquiryStatus,
+  onAddWaitlist,
+  onAddWaitlistBulk,
   customQuestions = [],
   menuNotice = { isActive: false, heading: '', note: '' },
   dialogues = [],
@@ -49,6 +53,87 @@ export const HostLedgerModal: React.FC<HostLedgerModalProps> = ({
   const [statusFilter, setStatusFilter] = useState<'all' | 'shortlisted' | 'pending' | 'invited' | 'confirmed'>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [copiedMessage, setCopiedMessage] = useState<string | null>(null);
+
+  // Add Existing Guest State
+  const [showAddGuestModal, setShowAddGuestModal] = useState(false);
+  const [addGuestMode, setAddGuestMode] = useState<'single' | 'bulk'>('single');
+  const [guestName, setGuestName] = useState('');
+  const [guestEmail, setGuestEmail] = useState('');
+  const [guestPhone, setGuestPhone] = useState('');
+  const [guestPartySize, setGuestPartySize] = useState(2);
+  const [guestDietary, setGuestDietary] = useState('Omnivore (Fish, Seafood & Veg)');
+  const [guestNotes, setGuestNotes] = useState('Existing waitlist guest added manually');
+  const [guestStatus, setGuestStatus] = useState<WaitlistEntry['status']>('pending');
+  const [bulkInput, setBulkInput] = useState('');
+  const [addGuestSuccessMsg, setAddGuestSuccessMsg] = useState<string | null>(null);
+
+  const handleCreateGuest = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!guestName.trim() || !guestEmail.trim()) return;
+
+    const newEntry: WaitlistEntry = {
+      id: `PCH-EX-${Date.now().toString().slice(-4)}`,
+      fullName: guestName.trim(),
+      email: guestEmail.trim(),
+      phone: guestPhone.trim() || undefined,
+      city: 'Toronto / GTA',
+      partySize: Number(guestPartySize) || 2,
+      dietaryPreferences: [guestDietary],
+      notes: guestNotes.trim() || undefined,
+      submittedAt: new Date().toISOString(),
+      status: guestStatus,
+    };
+
+    onAddWaitlist?.(newEntry);
+    setGuestName('');
+    setGuestEmail('');
+    setGuestPhone('');
+    setGuestNotes('Existing waitlist guest added manually');
+    setAddGuestSuccessMsg(`✓ Added ${newEntry.fullName} (${newEntry.email}) to waitlist!`);
+    setTimeout(() => setAddGuestSuccessMsg(null), 3500);
+  };
+
+  const handleBulkImport = () => {
+    if (!bulkInput.trim()) return;
+
+    const lines = bulkInput.split('\n').map(l => l.trim()).filter(Boolean);
+    const newEntries: WaitlistEntry[] = [];
+
+    lines.forEach((line, index) => {
+      const parts = line.split(/[,;\t]+/).map(p => p.trim());
+      if (parts.length >= 2) {
+        const name = parts[0];
+        const email = parts[1];
+        if (name && email && email.includes('@')) {
+          newEntries.push({
+            id: `PCH-EX-${(Date.now() + index).toString().slice(-4)}`,
+            fullName: name,
+            email: email,
+            phone: parts[2] || undefined,
+            city: 'Toronto / GTA',
+            partySize: 2,
+            dietaryPreferences: ['Omnivore (Fish, Seafood & Veg)'],
+            notes: 'Imported from existing waitlist',
+            submittedAt: new Date().toISOString(),
+            status: 'pending',
+          });
+        }
+      }
+    });
+
+    if (newEntries.length > 0) {
+      if (onAddWaitlistBulk) {
+        onAddWaitlistBulk(newEntries);
+      } else if (onAddWaitlist) {
+        newEntries.forEach(entry => onAddWaitlist(entry));
+      }
+      setBulkInput('');
+      setAddGuestSuccessMsg(`✓ Successfully imported ${newEntries.length} existing guests to waitlist!`);
+      setTimeout(() => setAddGuestSuccessMsg(null), 3500);
+    } else {
+      alert('Could not parse any valid "Name, Email" pairs. Please ensure format is: Name, Email (one per line).');
+    }
+  };
 
   // Authentication & Security State
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
@@ -343,6 +428,17 @@ export const HostLedgerModal: React.FC<HostLedgerModalProps> = ({
           </div>
 
           <div className="flex items-center space-x-2">
+            {activeTab === 'waitlist' && (
+              <button
+                onClick={() => setShowAddGuestModal(prev => !prev)}
+                className="px-3 py-1.5 rounded-full text-[11px] font-semibold bg-[#B58D59] hover:bg-[#C49E67] text-[#1C1713] flex items-center space-x-1.5 cursor-pointer shadow-xs transition-all font-sans"
+                title="Add existing guests or import names & emails"
+              >
+                <UserPlus className="w-3.5 h-3.5" />
+                <span>{showAddGuestModal ? 'Close Form' : '+ Add Existing Guest'}</span>
+              </button>
+            )}
+
             <button
               onClick={handleCopyShortlistedEmails}
               className="px-3 py-1.5 rounded-full text-[11px] font-semibold bg-[#28221D] text-[#ECE5DA] hover:bg-[#1C1713] flex items-center space-x-1.5 cursor-pointer shadow-xs transition-colors"
@@ -474,12 +570,223 @@ export const HostLedgerModal: React.FC<HostLedgerModalProps> = ({
         {/* Modal Body */}
         <div className="p-6 overflow-y-auto flex-1 text-xs">
           {activeTab === 'waitlist' && (
-            <div className="space-y-3">
+            <div className="space-y-4">
+              {/* Success Notification */}
+              {addGuestSuccessMsg && (
+                <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-300 text-emerald-800 text-xs font-medium flex items-center justify-between animate-in fade-in duration-150">
+                  <span>{addGuestSuccessMsg}</span>
+                  <button onClick={() => setAddGuestSuccessMsg(null)} className="text-emerald-700 hover:text-emerald-950 font-bold ml-2">✕</button>
+                </div>
+              )}
+
+              {/* Add Existing Guest Panel */}
+              {showAddGuestModal && (
+                <div className="p-5 rounded-2xl bg-[#ECE5DA] border border-[#B58D59]/40 shadow-sm space-y-4 animate-in fade-in duration-200">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 border-b border-[#D5CBBD] pb-3">
+                    <div>
+                      <h4 className="font-marcellus text-base text-[#28221D] flex items-center gap-2">
+                        <UserPlus className="w-4 h-4 text-[#B58D59]" />
+                        Add Existing Waitlist Person
+                      </h4>
+                      <p className="text-[11px] text-[#655B51] font-light">
+                        Add guests already on your roster individually or paste a bulk list of names & emails from spreadsheets.
+                      </p>
+                    </div>
+
+                    <div className="flex items-center gap-1 bg-[#F7F3EC] p-1 rounded-full border border-[#D5CBBD]">
+                      <button
+                        type="button"
+                        onClick={() => setAddGuestMode('single')}
+                        className={`px-3 py-1 text-[10.5px] rounded-full font-semibold transition-colors cursor-pointer ${
+                          addGuestMode === 'single'
+                            ? 'bg-[#28221D] text-[#ECE5DA]'
+                            : 'text-[#655B51] hover:text-[#28221D]'
+                        }`}
+                      >
+                        Single Contact
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setAddGuestMode('bulk')}
+                        className={`px-3 py-1 text-[10.5px] rounded-full font-semibold transition-colors cursor-pointer ${
+                          addGuestMode === 'bulk'
+                            ? 'bg-[#28221D] text-[#ECE5DA]'
+                            : 'text-[#655B51] hover:text-[#28221D]'
+                        }`}
+                      >
+                        Bulk Paste (Excel / Text)
+                      </button>
+                    </div>
+                  </div>
+
+                  {addGuestMode === 'single' ? (
+                    <form onSubmit={handleCreateGuest} className="space-y-3 font-sans">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+                        <div>
+                          <label className="block text-[10px] uppercase font-bold text-[#28221D] mb-1">
+                            Guest Name *
+                          </label>
+                          <input
+                            type="text"
+                            required
+                            placeholder="e.g. Priyo Sen"
+                            value={guestName}
+                            onChange={(e) => setGuestName(e.target.value)}
+                            className="w-full px-3 py-2 text-xs rounded-xl bg-[#F7F3EC] border border-[#D5CBBD] focus:outline-none focus:border-[#28221D] text-[#28221D]"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-[10px] uppercase font-bold text-[#28221D] mb-1">
+                            Email Address *
+                          </label>
+                          <input
+                            type="email"
+                            required
+                            placeholder="e.g. priyo@example.com"
+                            value={guestEmail}
+                            onChange={(e) => setGuestEmail(e.target.value)}
+                            className="w-full px-3 py-2 text-xs rounded-xl bg-[#F7F3EC] border border-[#D5CBBD] focus:outline-none focus:border-[#28221D] text-[#28221D]"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-[10px] uppercase font-bold text-[#28221D] mb-1">
+                            Phone (Optional)
+                          </label>
+                          <input
+                            type="text"
+                            placeholder="+1 (416) ..."
+                            value={guestPhone}
+                            onChange={(e) => setGuestPhone(e.target.value)}
+                            className="w-full px-3 py-2 text-xs rounded-xl bg-[#F7F3EC] border border-[#D5CBBD] focus:outline-none focus:border-[#28221D] text-[#28221D]"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-[10px] uppercase font-bold text-[#28221D] mb-1">
+                            Party Size
+                          </label>
+                          <input
+                            type="number"
+                            min="1"
+                            max="20"
+                            value={guestPartySize}
+                            onChange={(e) => setGuestPartySize(Number(e.target.value))}
+                            className="w-full px-3 py-2 text-xs rounded-xl bg-[#F7F3EC] border border-[#D5CBBD] focus:outline-none focus:border-[#28221D] text-[#28221D]"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-[10px] uppercase font-bold text-[#28221D] mb-1">
+                            Dietary Preference
+                          </label>
+                          <select
+                            value={guestDietary}
+                            onChange={(e) => setGuestDietary(e.target.value)}
+                            className="w-full px-3 py-2 text-xs rounded-xl bg-[#F7F3EC] border border-[#D5CBBD] focus:outline-none focus:border-[#28221D] text-[#28221D]"
+                          >
+                            <option value="Omnivore (Fish, Seafood & Veg)">Omnivore (Fish, Seafood & Veg)</option>
+                            <option value="Pescatarian">Pescatarian</option>
+                            <option value="Vegetarian">Vegetarian</option>
+                            <option value="No Shellfish">No Shellfish</option>
+                            <option value="Halal Friendly">Halal Friendly</option>
+                          </select>
+                        </div>
+
+                        <div>
+                          <label className="block text-[10px] uppercase font-bold text-[#28221D] mb-1">
+                            Initial Status
+                          </label>
+                          <select
+                            value={guestStatus}
+                            onChange={(e) => setGuestStatus(e.target.value as WaitlistEntry['status'])}
+                            className="w-full px-3 py-2 text-xs rounded-xl bg-[#F7F3EC] border border-[#D5CBBD] focus:outline-none focus:border-[#28221D] text-[#28221D]"
+                          >
+                            <option value="pending">Pending</option>
+                            <option value="shortlisted">⭐ Shortlisted</option>
+                            <option value="invited">Invited</option>
+                            <option value="confirmed">✓ Confirmed</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-[10px] uppercase font-bold text-[#28221D] mb-1">
+                          Private Host Note
+                        </label>
+                        <input
+                          type="text"
+                          placeholder="e.g. Existing waitlist from early Instagram DM / friend of curator"
+                          value={guestNotes}
+                          onChange={(e) => setGuestNotes(e.target.value)}
+                          className="w-full px-3 py-2 text-xs rounded-xl bg-[#F7F3EC] border border-[#D5CBBD] focus:outline-none focus:border-[#28221D] text-[#28221D]"
+                        />
+                      </div>
+
+                      <div className="flex items-center justify-end gap-2 pt-1">
+                        <button
+                          type="button"
+                          onClick={() => setShowAddGuestModal(false)}
+                          className="px-4 py-2 rounded-xl text-xs text-[#655B51] hover:text-[#28221D] hover:bg-[#F7F3EC] transition-colors"
+                        >
+                          Cancel
+                        </button>
+                        <button
+                          type="submit"
+                          className="px-5 py-2 rounded-xl text-xs font-semibold bg-[#28221D] text-[#ECE5DA] hover:bg-[#1C1713] transition-colors flex items-center gap-1.5 cursor-pointer shadow-xs"
+                        >
+                          <UserPlus className="w-3.5 h-3.5 text-[#B58D59]" />
+                          <span>Save to Waitlist</span>
+                        </button>
+                      </div>
+                    </form>
+                  ) : (
+                    <div className="space-y-3 font-sans">
+                      <div>
+                        <label className="block text-[10px] uppercase font-bold text-[#28221D] mb-1">
+                          Paste Lines (Format: Name, Email or Name [tab] Email)
+                        </label>
+                        <textarea
+                          rows={5}
+                          value={bulkInput}
+                          onChange={(e) => setBulkInput(e.target.value)}
+                          placeholder={`Ananya Roy, ananya@gmail.com&#10;Sourav Banerjee, sourav.b@outlook.com&#10;Debjani Mitra, debjani@gmail.com`}
+                          className="w-full p-3 text-xs font-mono rounded-xl bg-[#F7F3EC] border border-[#D5CBBD] focus:outline-none focus:border-[#28221D] text-[#28221D] placeholder:text-[#8C867D]"
+                        />
+                        <p className="text-[10px] text-[#655B51] mt-1">
+                          Tip: You can copy two columns directly from Excel or Google Sheets and paste them here. One contact per line.
+                        </p>
+                      </div>
+
+                      <div className="flex items-center justify-end gap-2 pt-1">
+                        <button
+                          type="button"
+                          onClick={() => setShowAddGuestModal(false)}
+                          className="px-4 py-2 rounded-xl text-xs text-[#655B51] hover:text-[#28221D] hover:bg-[#F7F3EC] transition-colors"
+                        >
+                          Cancel
+                        </button>
+                        <button
+                          type="button"
+                          onClick={handleBulkImport}
+                          disabled={!bulkInput.trim()}
+                          className="px-5 py-2 rounded-xl text-xs font-semibold bg-[#28221D] text-[#ECE5DA] hover:bg-[#1C1713] disabled:opacity-50 transition-colors flex items-center gap-1.5 cursor-pointer shadow-xs"
+                        >
+                          <Users className="w-3.5 h-3.5 text-[#B58D59]" />
+                          <span>Import All Guests</span>
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
+
               {filteredWaitlist.length === 0 ? (
                 <div className="p-10 rounded-2xl text-center text-[#655B51] bg-[#F7F3EC] border border-[#D5CBBD]">
                   <Users className="w-8 h-8 mx-auto text-[#28221D] mb-2 opacity-80" />
                   <p className="font-marcellus text-xl text-[#28221D]">No waitlist entries matching filter.</p>
-                  <p className="text-xs mt-1 font-sans font-light">Change filters or submit a new reservation request on the site.</p>
+                  <p className="text-xs mt-1 font-sans font-light">Change filters, add an existing guest above, or submit a new reservation request on the site.</p>
                 </div>
               ) : (
                 <div className="overflow-x-auto rounded-2xl border border-[#D5CBBD] bg-[#F7F3EC] shadow-xs">

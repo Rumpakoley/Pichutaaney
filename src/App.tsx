@@ -188,6 +188,10 @@ export default function App() {
     setWaitlist((prev) => [entry, ...prev]);
   };
 
+  const handleAddWaitlistBulk = (entries: WaitlistEntry[]) => {
+    setWaitlist((prev) => [...entries, ...prev]);
+  };
+
   const handleAddInquiry = (inquiry: PrivateEventInquiry) => {
     setInquiries((prev) => [inquiry, ...prev]);
   };
@@ -255,6 +259,8 @@ export default function App() {
         messages={messages}
         onUpdateWaitlistStatus={handleUpdateWaitlistStatus}
         onUpdateInquiryStatus={handleUpdateInquiryStatus}
+        onAddWaitlist={handleAddWaitlist}
+        onAddWaitlistBulk={handleAddWaitlistBulk}
         customQuestions={customQuestions}
         menuNotice={menuNotice}
         dialogues={dialogues}
