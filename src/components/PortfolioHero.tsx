@@ -15,7 +15,7 @@ const LOOKBOOK_ARCHETYPES: LookbookItem[] = [
   {
     id: 'arch-1',
     category: 'The Intuitive Cook',
-    title: 'Enakshi • West Bengal to the World',
+    title: 'Enakshi • Bengal to the World',
     description: 'Guided by sensory memory, raw touch, and recipes shaped by everywhere I have lived.',
     mediaType: 'video',
     mediaUrl: 'https://res.cloudinary.com/dpdtsaalf/video/upload/v1788549931/WhatsApp_Video_2026-09-05_at_12.42.00_AM_4_k3o720.mp4',

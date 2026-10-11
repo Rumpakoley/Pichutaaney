@@ -121,7 +121,7 @@ export const AboutMe: React.FC = () => {
                     “Travel has shaped me, but home is always the anchor.”
                   </p>
                   <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-[#EED485] mt-2 font-medium">
-                    Enakshi • West Bengal to the World
+                    Enakshi • Bengal to the World
                   </p>
                 </div>
               </div>

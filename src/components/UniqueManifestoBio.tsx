@@ -40,7 +40,7 @@ export const UniqueManifestoBio: React.FC = () => {
               <div className="flex items-center space-x-2">
                 <MapPin className="w-3.5 h-3.5 text-[#B58D59]" />
                 <span className="font-sans font-semibold uppercase tracking-wider text-[10.5px] text-[#28221D]">
-                  West Bengal to the World
+                  Bengal to the World
                 </span>
               </div>
             </div>
