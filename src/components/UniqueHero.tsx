@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Sparkles, Utensils, Compass, Flame, Play, ArrowUpRight, Volume2, VolumeX, ChevronRight, ChevronLeft, Film } from 'lucide-react';
+import { Sparkles, Utensils, Compass, Flame, Play, Pause, ArrowUpRight, Volume2, VolumeX, ChevronRight, ChevronLeft, Film } from 'lucide-react';
 import { HeroLookbookItem } from '../types';
 
 export const CHEF_ATELIER_LOOKBOOK: HeroLookbookItem[] = [
@@ -35,6 +35,15 @@ export const CHEF_ATELIER_LOOKBOOK: HeroLookbookItem[] = [
   },
 ];
 
+// Helper to generate phone-friendly compressed video streams and instant posters
+const getOptimizedVideoSources = (url: string) => {
+  const mp4Url = url.replace('/video/upload/', '/video/upload/q_auto,vc_h264/');
+  const webmUrl = url.replace('/video/upload/', '/video/upload/f_webm,q_auto/').replace(/\.mp4$/i, '.webm');
+  const posterUrl = url.replace('/video/upload/', '/video/upload/so_1,w_720,q_auto/').replace(/\.mp4$/i, '.jpg');
+  const thumbUrl = url.replace('/video/upload/', '/video/upload/so_1,w_120,h_120,c_fill,q_auto/').replace(/\.mp4$/i, '.jpg');
+  return { mp4Url, webmUrl, posterUrl, thumbUrl };
+};
+
 interface UniqueHeroProps {
   lookbookItems?: HeroLookbookItem[];
 }
@@ -47,7 +56,8 @@ export const UniqueHero: React.FC<UniqueHeroProps> = ({
 
   const [activeIdx, setActiveIdx] = useState(0);
   const [isMuted, setIsMuted] = useState(true);
-  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const currentItem = hasVideos ? activeLookbook[activeIdx % activeLookbook.length] : null;
 
   const handleNextVideo = () => {
@@ -60,28 +70,65 @@ export const UniqueHero: React.FC<UniqueHeroProps> = ({
     setActiveIdx((prev) => (prev - 1 + activeLookbook.length) % activeLookbook.length);
   };
 
+  const togglePlay = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (video.paused) {
+      video.play().then(() => setIsPlaying(true)).catch(() => {});
+    } else {
+      video.pause();
+      setIsPlaying(false);
+    }
+  };
+
+  const toggleMute = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    const nextMuted = !video.muted;
+    video.muted = nextMuted;
+    setIsMuted(nextMuted);
+  };
+
+  // Mobile-optimized playback management
   useEffect(() => {
-    if (!hasVideos) return;
-    videoRefs.current.forEach((video, idx) => {
-      if (video) {
-        if (idx === activeIdx) {
-          video.currentTime = 0;
-          video.play().catch(() => {});
-        } else {
-          video.pause();
-        }
+    const video = videoRef.current;
+    if (!video || !currentItem) return;
+
+    video.defaultMuted = isMuted;
+    video.muted = isMuted;
+
+    const startPlayback = () => {
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => setIsPlaying(true))
+          .catch(() => {
+            // Autoplay deferred or requires initial user interaction
+          });
       }
-    });
-  }, [activeIdx, hasVideos]);
+    };
+
+    if (video.readyState >= 2) {
+      startPlayback();
+    } else {
+      video.addEventListener('canplay', startPlayback, { once: true });
+      video.addEventListener('loadeddata', startPlayback, { once: true });
+    }
+
+    return () => {
+      video.removeEventListener('canplay', startPlayback);
+      video.removeEventListener('loadeddata', startPlayback);
+    };
+  }, [activeIdx, currentItem?.id]);
 
   useEffect(() => {
-    if (!hasVideos) return;
-    videoRefs.current.forEach((video) => {
-      if (video) {
-        video.muted = isMuted;
-      }
-    });
-  }, [isMuted, hasVideos]);
+    const video = videoRef.current;
+    if (video) {
+      video.muted = isMuted;
+    }
+  }, [isMuted]);
+
+  const currentSources = currentItem ? getOptimizedVideoSources(currentItem.url) : null;
 
   return (
     <section id="hero" className="relative min-h-[92vh] lg:min-h-screen bg-[#ECE5DA] text-[#28221D] pt-24 sm:pt-28 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden border-b border-[#D5CBBD]">
@@ -142,33 +189,45 @@ export const UniqueHero: React.FC<UniqueHeroProps> = ({
           </div>
         </div>
 
-        {/* Right Column: Video Lookbook Player or Ready Placeholder */}
+        {/* Right Column: Hardware-Accelerated Video Lookbook Player */}
         <div className="lg:col-span-6 relative">
-          <div className="relative rounded-3xl overflow-hidden bg-[#28221D] border-2 border-[#28221D] shadow-2xl group aspect-[4/4.8] sm:aspect-[4/4.2] flex items-center justify-center">
-            {hasVideos && currentItem ? (
+          <div className="relative rounded-3xl overflow-hidden bg-black border-2 border-[#28221D] shadow-2xl group aspect-[4/4.8] sm:aspect-[4/4.2] flex items-center justify-center select-none">
+            {hasVideos && currentItem && currentSources ? (
               <>
-                {/* Pre-buffered Stacked Video Container for Instantaneous Switch */}
-                <div className="w-full h-full relative">
-                  {activeLookbook.map((item, idx) => (
-                    <video
-                      key={item.id}
-                      ref={(el) => { videoRefs.current[idx] = el; }}
-                      src={item.url}
-                      muted={isMuted}
-                      playsInline
-                      preload="auto"
-                      onEnded={handleNextVideo}
-                      className={`absolute inset-0 w-full h-full object-cover filter contrast-[1.03] transition-opacity duration-200 ${
-                        idx === activeIdx ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
-                      }`}
-                    />
-                  ))}
-                </div>
+                {/* Instant Background Poster while decoding */}
+                <img
+                  src={currentSources.posterUrl}
+                  alt={currentItem.title}
+                  className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+                  loading="eager"
+                />
 
-                {/* Gradient Overlays */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-black/40 pointer-events-none z-20" />
+                {/* Single Hardware-Accelerated Mobile-Optimized Video Element */}
+                <video
+                  ref={videoRef}
+                  key={currentItem.id}
+                  poster={currentSources.posterUrl}
+                  autoPlay
+                  playsInline
+                  muted={isMuted}
+                  preload="auto"
+                  onEnded={handleNextVideo}
+                  onPlay={() => setIsPlaying(true)}
+                  onPause={() => setIsPlaying(false)}
+                  onClick={togglePlay}
+                  className="relative w-full h-full object-cover cursor-pointer z-10 transition-opacity duration-300"
+                >
+                  <source src={currentSources.webmUrl} type="video/webm" />
+                  <source src={currentSources.mp4Url} type="video/mp4" />
+                  <source src={currentItem.url} type="video/mp4" />
+                </video>
 
-                {/* Top Bar with Provenance & Auto-Progression Badge */}
+                {/* Subtle Ambient Vignette Overlay */}
+                <div
+                  className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-black/35 pointer-events-none z-20"
+                />
+
+                {/* Top Bar with Badge & Controls */}
                 <div className="absolute top-4 sm:top-6 left-4 sm:left-6 right-4 sm:right-6 flex items-center justify-between pointer-events-none z-30">
                   <div className="flex items-center space-x-2">
                     <span className="bg-[#1C1713]/85 backdrop-blur-md px-3.5 py-1.5 rounded-full text-[9.5px] font-mono tracking-widest uppercase border border-white/20 text-[#ECE5DA] font-bold">
@@ -182,52 +241,76 @@ export const UniqueHero: React.FC<UniqueHeroProps> = ({
 
                   <div className="flex items-center space-x-2 pointer-events-auto">
                     <button
-                      onClick={() => setIsMuted(!isMuted)}
-                      className="p-2 rounded-full bg-black/60 hover:bg-black text-white backdrop-blur-md border border-white/20 transition-all cursor-pointer"
+                      onClick={toggleMute}
+                      className="p-2 rounded-full bg-black/60 hover:bg-black text-white backdrop-blur-md border border-white/20 transition-all cursor-pointer shadow-md"
                       title={isMuted ? 'Unmute Sound' : 'Mute Sound'}
+                      aria-label={isMuted ? 'Unmute sound' : 'Mute sound'}
                     >
                       {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5 text-[#B58D59]" />}
                     </button>
                   </div>
                 </div>
 
+                {/* Paused Indicator Center Icon */}
+                {!isPlaying && (
+                  <div
+                    onClick={togglePlay}
+                    className="absolute inset-0 flex items-center justify-center z-30 cursor-pointer bg-black/30 backdrop-blur-[1px]"
+                  >
+                    <div className="w-14 h-14 rounded-full bg-[#1C1713]/85 border border-white/25 flex items-center justify-center text-[#B58D59] shadow-2xl">
+                      <Play className="w-6 h-6 fill-current translate-x-0.5" />
+                    </div>
+                  </div>
+                )}
+
                 {/* Side Navigation Arrow Overlays for Instant Switching */}
                 <button
                   onClick={handlePrevVideo}
-                  className="absolute left-3 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-black/60 hover:bg-black text-white backdrop-blur-sm border border-white/20 transition-all opacity-0 group-hover:opacity-100 cursor-pointer z-30"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-black/60 hover:bg-black text-white backdrop-blur-sm border border-white/20 transition-all opacity-80 sm:opacity-0 sm:group-hover:opacity-100 cursor-pointer z-30 shadow-lg"
                   title="Previous Video"
+                  aria-label="Previous video"
                 >
                   <ChevronLeft className="w-4 h-4" />
                 </button>
                 <button
                   onClick={handleNextVideo}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-black/60 hover:bg-black text-white backdrop-blur-sm border border-white/20 transition-all opacity-0 group-hover:opacity-100 cursor-pointer z-30"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-black/60 hover:bg-black text-white backdrop-blur-sm border border-white/20 transition-all opacity-80 sm:opacity-0 sm:group-hover:opacity-100 cursor-pointer z-30 shadow-lg"
                   title="Next Video"
+                  aria-label="Next video"
                 >
                   <ChevronRight className="w-4 h-4" />
                 </button>
 
-                {/* Bottom Lookbook Selector Switcher Bar */}
-                <div className="absolute bottom-20 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-black/80 backdrop-blur-md border border-white/20 p-1.5 rounded-full z-30 shadow-2xl max-w-[94%] overflow-x-auto">
-                  {activeLookbook.map((item, idx) => (
-                    <button
-                      key={item.id}
-                      onClick={() => setActiveIdx(idx)}
-                      className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full overflow-hidden border-2 transition-all shrink-0 relative cursor-pointer ${
-                        activeIdx === idx
-                          ? 'border-[#B58D59] scale-110 shadow-md ring-2 ring-[#B58D59]/60'
-                          : 'border-white/30 opacity-60 hover:opacity-100'
-                      }`}
-                      title={`${item.title} (Click to play instantly)`}
-                    >
-                      <video src={item.url} muted preload="metadata" className="w-full h-full object-cover" />
-                    </button>
-                  ))}
+                {/* Lightweight Image Thumbnails (Zero GPU Overhead) */}
+                <div className="absolute bottom-16 sm:bottom-20 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-black/80 backdrop-blur-md border border-white/20 p-1.5 rounded-full z-30 shadow-2xl max-w-[94%] overflow-x-auto">
+                  {activeLookbook.map((item, idx) => {
+                    const { thumbUrl } = getOptimizedVideoSources(item.url);
+                    return (
+                      <button
+                        key={item.id}
+                        onClick={() => setActiveIdx(idx)}
+                        className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full overflow-hidden border-2 transition-all shrink-0 relative cursor-pointer ${
+                          activeIdx === idx
+                            ? 'border-[#B58D59] scale-110 shadow-md ring-2 ring-[#B58D59]/60'
+                            : 'border-white/30 opacity-60 hover:opacity-100'
+                        }`}
+                        title={`${item.title} (Click to switch)`}
+                        aria-label={`Switch to ${item.title}`}
+                      >
+                        <img
+                          src={thumbUrl}
+                          alt={item.title}
+                          loading="lazy"
+                          className="w-full h-full object-cover"
+                        />
+                      </button>
+                    );
+                  })}
                 </div>
 
                 {/* Bottom Caption */}
                 <div className="absolute bottom-0 inset-x-0 p-5 sm:p-6 text-left text-white pt-10 pointer-events-none z-30">
-                  <h4 className="font-marcellus text-base sm:text-lg font-normal text-white">
+                  <h4 className="font-marcellus text-base sm:text-lg font-normal text-white drop-shadow-sm">
                     {currentItem.title}
                   </h4>
                 </div>
