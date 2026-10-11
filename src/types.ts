@@ -46,6 +46,7 @@ export interface HeroLookbookItem {
   subtitle: string;
   type: 'video';
   url: string;
+  poster?: string;
   badge: string;
   provenance: string;
 }

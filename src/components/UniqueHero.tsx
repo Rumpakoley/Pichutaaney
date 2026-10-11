@@ -9,7 +9,8 @@ export const CHEF_ATELIER_LOOKBOOK: HeroLookbookItem[] = [
     title: 'The Essence',
     subtitle: 'Wandering, sensory memory, and instinct-led cooking in full motion',
     type: 'video',
-    url: 'https://res.cloudinary.com/dpdtsaalf/video/upload/v1790520158/WhatsApp_Video_2026-09-27_at_7.56.53_PM_kry70z.mp4',
+    url: 'https://res.cloudinary.com/dpdtsaalf/video/upload/f_mp4,vc_h264/v1790520158/WhatsApp_Video_2026-09-27_at_7.56.53_PM_kry70z.mp4',
+    poster: 'https://res.cloudinary.com/dpdtsaalf/video/upload/so_2/v1790520158/WhatsApp_Video_2026-09-27_at_7.56.53_PM_kry70z.jpg',
     badge: 'REEL 01 • THE ESSENCE',
     provenance: 'Bengal Delta to Global Tables',
   },
@@ -19,7 +20,8 @@ export const CHEF_ATELIER_LOOKBOOK: HeroLookbookItem[] = [
     title: 'The Hearth',
     subtitle: 'Golden mustard oil heating to smoke point and the rhythm of the pan',
     type: 'video',
-    url: 'https://res.cloudinary.com/dpdtsaalf/video/upload/v1788549950/WhatsApp_Video_2026-09-05_at_12.47.22_AM_udyrd8.mp4',
+    url: 'https://res.cloudinary.com/dpdtsaalf/video/upload/f_mp4,vc_h264/v1788549950/WhatsApp_Video_2026-09-05_at_12.47.22_AM_udyrd8.mp4',
+    poster: 'https://res.cloudinary.com/dpdtsaalf/video/upload/so_3/v1788549950/WhatsApp_Video_2026-09-05_at_12.47.22_AM_udyrd8.jpg',
     badge: 'REEL 02 • THE HEARTH',
     provenance: 'Nadia District & River Silts',
   },
@@ -29,20 +31,12 @@ export const CHEF_ATELIER_LOOKBOOK: HeroLookbookItem[] = [
     title: 'The Invite',
     subtitle: 'A personal invitation to join our communal supper club table and taste memory in motion',
     type: 'video',
-    url: 'https://res.cloudinary.com/dpdtsaalf/video/upload/v1790433308/WhatsApp_Video_2026-09-26_at_12.59.54_AM_pikgxs.mp4',
+    url: 'https://res.cloudinary.com/dpdtsaalf/video/upload/f_mp4,vc_h264/v1790433308/WhatsApp_Video_2026-09-26_at_12.59.54_AM_pikgxs.mp4',
+    poster: 'https://res.cloudinary.com/dpdtsaalf/video/upload/so_1/v1790433308/WhatsApp_Video_2026-09-26_at_12.59.54_AM_pikgxs.jpg',
     badge: 'AAMONTRON • THE INVITE',
     provenance: 'Enakshi’s Table Invitation',
   },
 ];
-
-// Helper to generate phone-friendly compressed video streams and instant posters
-const getOptimizedVideoSources = (url: string) => {
-  const mp4Url = url.replace('/video/upload/', '/video/upload/q_auto,vc_h264/');
-  const webmUrl = url.replace('/video/upload/', '/video/upload/f_webm,q_auto/').replace(/\.mp4$/i, '.webm');
-  const posterUrl = url.replace('/video/upload/', '/video/upload/so_1,w_720,q_auto/').replace(/\.mp4$/i, '.jpg');
-  const thumbUrl = url.replace('/video/upload/', '/video/upload/so_1,w_120,h_120,c_fill,q_auto/').replace(/\.mp4$/i, '.jpg');
-  return { mp4Url, webmUrl, posterUrl, thumbUrl };
-};
 
 interface UniqueHeroProps {
   lookbookItems?: HeroLookbookItem[];
@@ -57,6 +51,7 @@ export const UniqueHero: React.FC<UniqueHeroProps> = ({
   const [activeIdx, setActiveIdx] = useState(0);
   const [isMuted, setIsMuted] = useState(true);
   const [isPlaying, setIsPlaying] = useState(true);
+  const [isBuffering, setIsBuffering] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const currentItem = hasVideos ? activeLookbook[activeIdx % activeLookbook.length] : null;
 
@@ -89,7 +84,7 @@ export const UniqueHero: React.FC<UniqueHeroProps> = ({
     setIsMuted(nextMuted);
   };
 
-  // Mobile-optimized playback management
+  // Persistent video element management (avoids mobile remount glitches & decoder resets)
   useEffect(() => {
     const video = videoRef.current;
     if (!video || !currentItem) return;
@@ -97,29 +92,41 @@ export const UniqueHero: React.FC<UniqueHeroProps> = ({
     video.defaultMuted = isMuted;
     video.muted = isMuted;
 
-    const startPlayback = () => {
+    // Only update and reload if source actually changed
+    if (video.src !== currentItem.url) {
+      setIsBuffering(true);
+      video.src = currentItem.url;
+      video.load();
+    }
+
+    const handleReady = () => {
+      setIsBuffering(false);
       const playPromise = video.play();
       if (playPromise !== undefined) {
-        playPromise
-          .then(() => setIsPlaying(true))
-          .catch(() => {
-            // Autoplay deferred or requires initial user interaction
-          });
+        playPromise.then(() => setIsPlaying(true)).catch(() => {});
       }
     };
 
+    const handleWaiting = () => setIsBuffering(true);
+    const handlePlaying = () => {
+      setIsBuffering(false);
+      setIsPlaying(true);
+    };
+
+    video.addEventListener('canplay', handleReady);
+    video.addEventListener('waiting', handleWaiting);
+    video.addEventListener('playing', handlePlaying);
+
     if (video.readyState >= 2) {
-      startPlayback();
-    } else {
-      video.addEventListener('canplay', startPlayback, { once: true });
-      video.addEventListener('loadeddata', startPlayback, { once: true });
+      handleReady();
     }
 
     return () => {
-      video.removeEventListener('canplay', startPlayback);
-      video.removeEventListener('loadeddata', startPlayback);
+      video.removeEventListener('canplay', handleReady);
+      video.removeEventListener('waiting', handleWaiting);
+      video.removeEventListener('playing', handlePlaying);
     };
-  }, [activeIdx, currentItem?.id]);
+  }, [activeIdx, currentItem?.url]);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -127,8 +134,6 @@ export const UniqueHero: React.FC<UniqueHeroProps> = ({
       video.muted = isMuted;
     }
   }, [isMuted]);
-
-  const currentSources = currentItem ? getOptimizedVideoSources(currentItem.url) : null;
 
   return (
     <section id="hero" className="relative min-h-[92vh] lg:min-h-screen bg-[#ECE5DA] text-[#28221D] pt-24 sm:pt-28 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden border-b border-[#D5CBBD]">
@@ -192,21 +197,21 @@ export const UniqueHero: React.FC<UniqueHeroProps> = ({
         {/* Right Column: Hardware-Accelerated Video Lookbook Player */}
         <div className="lg:col-span-6 relative">
           <div className="relative rounded-3xl overflow-hidden bg-black border-2 border-[#28221D] shadow-2xl group aspect-[4/4.8] sm:aspect-[4/4.2] flex items-center justify-center select-none">
-            {hasVideos && currentItem && currentSources ? (
+            {hasVideos && currentItem ? (
               <>
-                {/* Instant Background Poster while decoding */}
-                <img
-                  src={currentSources.posterUrl}
-                  alt={currentItem.title}
-                  className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-                  loading="eager"
-                />
+                {/* Instant Backdrop Poster Image - prevents black flashes during switching */}
+                {currentItem.poster && (
+                  <img
+                    src={currentItem.poster}
+                    alt={currentItem.title}
+                    className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+                    loading="eager"
+                  />
+                )}
 
-                {/* Single Hardware-Accelerated Mobile-Optimized Video Element */}
+                {/* Persistent Single Hardware-Accelerated Video Surface */}
                 <video
                   ref={videoRef}
-                  key={currentItem.id}
-                  poster={currentSources.posterUrl}
                   autoPlay
                   playsInline
                   muted={isMuted}
@@ -215,12 +220,8 @@ export const UniqueHero: React.FC<UniqueHeroProps> = ({
                   onPlay={() => setIsPlaying(true)}
                   onPause={() => setIsPlaying(false)}
                   onClick={togglePlay}
-                  className="relative w-full h-full object-cover cursor-pointer z-10 transition-opacity duration-300"
-                >
-                  <source src={currentSources.webmUrl} type="video/webm" />
-                  <source src={currentSources.mp4Url} type="video/mp4" />
-                  <source src={currentItem.url} type="video/mp4" />
-                </video>
+                  className="relative w-full h-full object-cover cursor-pointer z-10"
+                />
 
                 {/* Subtle Ambient Vignette Overlay */}
                 <div
@@ -281,31 +282,28 @@ export const UniqueHero: React.FC<UniqueHeroProps> = ({
                   <ChevronRight className="w-4 h-4" />
                 </button>
 
-                {/* Lightweight Image Thumbnails (Zero GPU Overhead) */}
+                {/* Clean Image Thumbnails with Vivid Posters */}
                 <div className="absolute bottom-16 sm:bottom-20 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-black/80 backdrop-blur-md border border-white/20 p-1.5 rounded-full z-30 shadow-2xl max-w-[94%] overflow-x-auto">
-                  {activeLookbook.map((item, idx) => {
-                    const { thumbUrl } = getOptimizedVideoSources(item.url);
-                    return (
-                      <button
-                        key={item.id}
-                        onClick={() => setActiveIdx(idx)}
-                        className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full overflow-hidden border-2 transition-all shrink-0 relative cursor-pointer ${
-                          activeIdx === idx
-                            ? 'border-[#B58D59] scale-110 shadow-md ring-2 ring-[#B58D59]/60'
-                            : 'border-white/30 opacity-60 hover:opacity-100'
-                        }`}
-                        title={`${item.title} (Click to switch)`}
-                        aria-label={`Switch to ${item.title}`}
-                      >
-                        <img
-                          src={thumbUrl}
-                          alt={item.title}
-                          loading="lazy"
-                          className="w-full h-full object-cover"
-                        />
-                      </button>
-                    );
-                  })}
+                  {activeLookbook.map((item, idx) => (
+                    <button
+                      key={item.id}
+                      onClick={() => setActiveIdx(idx)}
+                      className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full overflow-hidden border-2 transition-all shrink-0 relative cursor-pointer ${
+                        activeIdx === idx
+                          ? 'border-[#B58D59] scale-110 shadow-md ring-2 ring-[#B58D59]/60'
+                          : 'border-white/30 opacity-60 hover:opacity-100'
+                      }`}
+                      title={`${item.title} (Click to switch)`}
+                      aria-label={`Switch to ${item.title}`}
+                    >
+                      <img
+                        src={item.poster}
+                        alt={item.title}
+                        loading="lazy"
+                        className="w-full h-full object-cover"
+                      />
+                    </button>
+                  ))}
                 </div>
 
                 {/* Bottom Caption */}
