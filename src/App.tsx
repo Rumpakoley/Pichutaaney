@@ -18,10 +18,10 @@ import { useScrollReveal } from './hooks/useScrollReveal';
 
 const INITIAL_CUSTOM_QUESTIONS: FormCustomQuestion[] = [
   {
-    id: 'q-spice',
-    label: 'Spice Tolerance Preference',
-    type: 'dropdown',
-    options: ['Authentic Bengali (Bold & Pungent)', 'Balanced / Medium', 'Mild / Gentle'],
+    id: 'q-allergy',
+    label: 'Mention any other kind of allergy',
+    type: 'text',
+    placeholder: 'e.g. Mustard, shrimp, peanuts, dairy, gluten...',
     required: false,
     enabled: true,
   },
@@ -75,7 +75,24 @@ export default function App() {
   const [customQuestions, setCustomQuestions] = useState<FormCustomQuestion[]>(() => {
     try {
       const saved = localStorage.getItem('pichhutaaney_custom_questions');
-      return saved ? JSON.parse(saved) : INITIAL_CUSTOM_QUESTIONS;
+      if (saved) {
+        const parsed: FormCustomQuestion[] = JSON.parse(saved);
+        // Migrate old spice tolerance question if present
+        return parsed.map(q => {
+          if (q.id === 'q-spice' || q.label.toLowerCase().includes('spice tolerance')) {
+            return {
+              id: 'q-allergy',
+              label: 'Mention any other kind of allergy',
+              type: 'text',
+              placeholder: 'e.g. Mustard, shrimp, peanuts, dairy, gluten...',
+              required: false,
+              enabled: q.enabled ?? true,
+            };
+          }
+          return q;
+        });
+      }
+      return INITIAL_CUSTOM_QUESTIONS;
     } catch {
       return INITIAL_CUSTOM_QUESTIONS;
     }
