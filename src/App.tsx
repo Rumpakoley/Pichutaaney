@@ -35,7 +35,7 @@ const INITIAL_CUSTOM_QUESTIONS: FormCustomQuestion[] = [
 ];
 
 const INITIAL_MENU_NOTICE: MenuVenueNotice = {
-  isActive: true,
+  isActive: false,
   heading: 'Upcoming Supper Club & Intimate Batch Seating',
   note: 'Current Atelier Menu: 5-Course Heritage Fish & Heirloom Grains. BYOB welcome without corkage. Exact venue location dispatched upon confirmation.',
 };

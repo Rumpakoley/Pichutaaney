@@ -200,25 +200,6 @@ export const UniqueTableConcierge: React.FC<UniqueTableConciergeProps> = ({
                 </p>
               </div>
 
-              {/* Host Menu & Venue Announcement Notice */}
-              {menuNotice?.isActive && (menuNotice.heading || menuNotice.note) && (
-                <div className="bg-[#ECE5DA] border-l-4 border-[#B58D59] rounded-2xl p-4 sm:p-5 text-left space-y-1.5 shadow-2xs">
-                  {menuNotice.heading && (
-                    <div className="flex items-center space-x-2">
-                      <Sparkles className="w-4 h-4 text-[#B58D59] shrink-0" />
-                      <span className="font-sans font-bold text-xs uppercase tracking-wider text-[#28221D]">
-                        {menuNotice.heading}
-                      </span>
-                    </div>
-                  )}
-                  {menuNotice.note && (
-                    <p className="font-pt-serif italic text-xs sm:text-sm text-[#4A4138] leading-relaxed whitespace-pre-line">
-                      {menuNotice.note}
-                    </p>
-                  )}
-                </div>
-              )}
-
               {/* Name & Email */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1">
