@@ -118,7 +118,7 @@ export default function App() {
 
   const [dishes, setDishes] = useState<DishImageItem[]>(() => {
     try {
-      const saved = localStorage.getItem('pichhutaaney_dishes');
+      const saved = localStorage.getItem('pichhutaaney_dishes_v2');
       return saved ? JSON.parse(saved) : DEFAULT_DISH_COLLECTION;
     } catch {
       return DEFAULT_DISH_COLLECTION;
@@ -187,7 +187,7 @@ export default function App() {
 
   useEffect(() => {
     try {
-      localStorage.setItem('pichhutaaney_dishes', JSON.stringify(dishes));
+      localStorage.setItem('pichhutaaney_dishes_v2', JSON.stringify(dishes));
     } catch (e) {
       console.error(e);
     }
